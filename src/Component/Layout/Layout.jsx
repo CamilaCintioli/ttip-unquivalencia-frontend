@@ -9,6 +9,7 @@ import Nav from './Nav/Nav';
 import Footer from './Footer/Footer';
 import Logo from './logo.jpeg';
 import NewRequestPage from '../NewRequest/NewRequestPage'
+import RequestPage from '../Request/RequestPage'
 
 const Home = () => (
   <div className="row justify-content-md-center">
@@ -27,6 +28,7 @@ function Layout() {
             <Route path="/" exact component={Home} />
             <Route path="/expediente" component={File} />
             <Route path="/solicitud/new" component={NewRequestPage} />
+            <Route path="/solicitud/:solicitudId" component={RequestPage}/>
           </Switch>
         </div>
       </div>
