@@ -1,0 +1,9 @@
+.nav-logo {
+    height: 10vmin;
+    pointer-events: none;
+  }
+
+  .nav-pila{
+    background-color: #212529;
+    min-height: calc(100vh - 56px);
+  }
