@@ -20,6 +20,13 @@ function Nav() {
             </Link>
           </li>
         </ul>
+        <ul className="navbar-nav">
+          <li className="nav-item active">
+            <Link className="nav-link" to="/solicitud/new">
+              <h3>Cargar Solicitud</h3>
+            </Link>
+          </li>
+        </ul>
       </div>
     </nav>
   );

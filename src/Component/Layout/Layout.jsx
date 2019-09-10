@@ -8,6 +8,7 @@ import './Layout.css';
 import Nav from './Nav/Nav';
 import Footer from './Footer/Footer';
 import Logo from './logo.jpeg';
+import NewRequestPage from '../NewRequest/NewRequestPage'
 
 const Home = () => (
   <div className="row justify-content-md-center">
@@ -25,6 +26,7 @@ function Layout() {
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/expediente" component={File} />
+            <Route path="/solicitud/new" component={NewRequestPage} />
           </Switch>
         </div>
       </div>
