@@ -13,7 +13,7 @@ function File(props) {
       <th>{file.name}</th>
       <th>{file.surname}</th>
       <td className="fit">
-        <button className="btn btn-light" onClick={() => props.fatherFunction()(file.id)}>
+        <button className="btn btn-light" onClick={() => props.fatherFunction(file.id)}>
           <i className="fa fa-search" />
         </button>
       </td>

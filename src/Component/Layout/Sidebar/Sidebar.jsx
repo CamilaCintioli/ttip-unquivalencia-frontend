@@ -11,6 +11,9 @@ function Sidebar() {
         </span>
         <span className="title">Expediente</span>
       </Link>
+      <Link className="nav-link" to="/solicitud/new">
+        <h3>Cargar Solicitud</h3>
+      </Link>
     </nav>
   );
 }

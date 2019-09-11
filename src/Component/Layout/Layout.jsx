@@ -9,6 +9,8 @@ import Footer from './Footer/Footer';
 import Sidebar from './Sidebar/Sidebar';
 import ViewPrimary from '../ViewPrimary';
 import Logo from './logo.jpeg';
+import NewRequestPage from '../NewRequest/NewRequestPage';
+import RequestPage from '../Request/RequestPage';
 
 
 const Home = () => (
@@ -28,6 +30,8 @@ function Layout() {
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/expediente" component={ViewPrimary} />
+            <Route path="/solicitud/new" component={NewRequestPage} />
+            <Route path="/solicitud/:solicitudId" component={RequestPage} />
           </Switch>
         </div>
       </div>

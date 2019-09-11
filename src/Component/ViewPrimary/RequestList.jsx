@@ -3,17 +3,17 @@
 import React from 'react';
 import API from '../../service/FileService';
 
-function RequestList(props) {
+function RequestList({ history, fileId }) {
   const [data, setData] = React.useState([]);
   React.useEffect(
     () => {
-      API.getRequests(props.fileId).then(setData);
-    }, [props.fileId],
+      API.getRequests(fileId).then(setData);
+    }, [fileId],
 
   );
 
   const handleBootom = (id) => {
-    console.log(`cabiar la ruta con el ${id}`);
+    history.push(`/solicitud/${id}`);
   };
 
   const rows = data.map((request, key) => (

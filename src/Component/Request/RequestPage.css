@@ -1,0 +1,20 @@
+.universitySubjects{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly
+}
+
+.universitySubject{
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content:space-around;
+    width: 37.5rem
+  }

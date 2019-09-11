@@ -2,7 +2,7 @@ import React from 'react';
 import FileList from './ViewPrimary/FileList';
 import RequestList from './ViewPrimary/RequestList';
 
-function ViewPrimary() {
+function ViewPrimary({ history }) {
   const [viewRequest, setViewRequest] = React.useState(false);
   const [fileId, setFileId] = React.useState(undefined);
 
@@ -14,12 +14,12 @@ function ViewPrimary() {
   return (
     <div className="row justify-content-md-center">
       <div className="col col-lg-6">
-        <FileList fatherFunction={() => handleOnClick} />
+        <FileList fatherFunction={handleOnClick} />
       </div>
       {viewRequest
         ? (
           <div className="col col-lg-6">
-            <RequestList fileId={fileId} />
+            <RequestList fileId={fileId} history={history} />
           </div>
         )
         : null}
