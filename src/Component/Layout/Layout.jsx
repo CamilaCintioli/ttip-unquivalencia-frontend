@@ -18,20 +18,20 @@ const Home = () => (
 
 function Layout() {
   return (
-    <div>
-      <Nav />
-      <br />
-      <div className="row justify-content-md-center">
-        <div className="container">
+    // <div>
+    //   <Nav />
+    //   <br />
+    //   <div className="row justify-content-md-center">
+    //     <div className="container">
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/expediente" component={File} />
             <Route path="/solicitud/new" component={NewRequestPage} />
           </Switch>
-        </div>
-      </div>
-      <Footer />
-    </div>
+    //     </div>
+    //   </div>
+    //   <Footer />
+    // </div>
   );
 }
 
