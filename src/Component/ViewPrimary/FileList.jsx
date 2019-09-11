@@ -2,10 +2,20 @@
 /* eslint-disable react/button-has-type */
 import React from 'react';
 import API from '../../service/FileService';
-import usePromise from '../../hooks/usePromise';
 
 function File(props) {
-  const [data] = usePromise(() => API.getFiles(), [], []);
+  const [data, setData] = React.useState([]);
+
+  React.useEffect(() => {
+    let isSubscribed = true;
+    API.getFiles().then((bananas) => {
+      if (isSubscribed) {
+        setData(bananas);
+      }
+    });
+    return () => isSubscribed = false;
+  }, []);
+
 
   const rows = data.map((file, i) => (
     <tr key={i}>

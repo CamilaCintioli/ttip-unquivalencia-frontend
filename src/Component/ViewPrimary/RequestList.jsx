@@ -5,12 +5,16 @@ import API from '../../service/FileService';
 
 function RequestList({ history, fileId }) {
   const [data, setData] = React.useState([]);
-  React.useEffect(
-    () => {
-      API.getRequests(fileId).then(setData);
-    }, [fileId],
 
-  );
+  React.useEffect(() => {
+    let isSubscribed = true;
+    API.getRequests(fileId).then((request) => {
+      if (isSubscribed) {
+        setData(request);
+      }
+    });
+    return () => isSubscribed = false;
+  }, [fileId]);
 
   const handleBootom = (id) => {
     history.push(`/solicitud/${id}`);

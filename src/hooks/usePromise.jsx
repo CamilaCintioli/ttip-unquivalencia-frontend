@@ -12,8 +12,7 @@ const usePromise = (promiseOrFunction, defaultValue) => {
     promise
       .then((value) => (isSubscribed ? setState({ value, error: null, isPending: false }) : null))
       .catch((error) => (isSubscribed ? setState({ value: defaultValue, error, isPending: false }) : null));
-    // eslint-disable-next-line no-return-assign
-    return () => (isSubscribed = false);
+    return () => isSubscribed = false;
   }, [promiseOrFunction, defaultValue]);
 
   const { value, error, isPending } = state;
