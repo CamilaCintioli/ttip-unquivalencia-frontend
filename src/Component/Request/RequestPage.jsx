@@ -20,12 +20,13 @@ class RequestPage extends Component {
 
     this.giveEquivalence = this.giveEquivalence.bind(this);
     this.denyEquivalence = this.denyEquivalence.bind(this);
+    this.consultEquivalence = this.consultEquivalence.bind(this);
   }
 
   componentDidMount() {
-    axios.get(`//localhost:8000/api/v1/requests/${this.state.requestId}`)
+    axios.get(`//localhost:8000/api/v1/request/${this.state.requestId}`)
       .then((response) => {
-        this.setState({ request: response.data[0] });
+        this.setState({ request: response.data });
       })
       .catch((response) => {
         console.log(response);
@@ -35,9 +36,11 @@ class RequestPage extends Component {
   giveEquivalence() {
     axios.post(`//localhost:8000/api/v1/request/${this.state.request.id}`, { equivalence: 'APROBADA' })
       .then((response) => {
+        alert('Solicitud de equivalencia aprobada');
         console.log(response);
       })
       .catch((response) => {
+        alert('error');
         console.log(response);
       });
   }
@@ -45,9 +48,23 @@ class RequestPage extends Component {
   denyEquivalence() {
     axios.post(`//localhost:8000/api/v1/request/${this.state.request.id}`, { equivalence: 'NEGADA' })
       .then((response) => {
+        alert('Solicitud de equivalencia negada');
         console.log(response);
       })
       .catch((response) => {
+        alert('error');
+        console.log(response);
+      });
+  }
+
+  consultEquivalence() {
+    axios.post(`//localhost:8000/api/v1/request/${this.state.request.id}`, { equivalence: 'CONSULTADA' })
+      .then((response) => {
+        alert('Se envio consulta al profesor');
+        console.log(response);
+      })
+      .catch((response) => {
+        alert('error');
         console.log(response);
       });
   }
@@ -69,7 +86,7 @@ class RequestPage extends Component {
 
           <Button onClick={this.giveEquivalence}>DAR EQUIVALENCIA</Button>
           <Button onClick={this.denyEquivalence}>NEGAR EQUIVALENCIA</Button>
-          <Button>Consultar</Button>
+          <Button onClick={this.consultEquivalence}>Consultar</Button>
         </div>
       </>
     );
