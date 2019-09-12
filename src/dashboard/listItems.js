@@ -11,9 +11,34 @@ import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import { Link } from 'react-router-dom';
 
-export const mainListItems = (
-  <div>
+export const mainListItems = cerrar => (
+  <div onClick={() => cerrar()}>
+    <Link to="/">
+    <ListItem button>
+      <ListItemIcon>
+        <AssignmentIcon />
+      </ListItemIcon>
+      <ListItemText primary="Principal" />
+    </ListItem>
+    </Link>
     <Link to="/expediente">
+    <ListItem button>
+      <ListItemIcon>
+        <BarChartIcon />
+      </ListItemIcon>
+      <ListItemText primary="Expedientes" />
+    </ListItem>
+    </Link>
+    <Link to="/solicitud/new">
+    <ListItem button>
+      <ListItemIcon>
+        <LayersIcon />
+      </ListItemIcon>
+      <ListItemText primary="Crear solicitud" />
+    </ListItem>
+    </Link>
+
+    {/* <Link to="/expediente">
     <ListItem button>
       <ListItemIcon>
         <DashboardIcon />
@@ -46,13 +71,13 @@ export const mainListItems = (
         <LayersIcon />
       </ListItemIcon>
       <ListItemText primary="Integrations" />
-    </ListItem>
+    </ListItem> */}
   </div>
 );
 
 export const secondaryListItems = (
   <div>
-    <ListSubheader inset>Saved reports</ListSubheader>
+    {/* <ListSubheader inset>Saved reports</ListSubheader>
     <ListItem button>
       <ListItemIcon>
         <AssignmentIcon />
@@ -70,6 +95,6 @@ export const secondaryListItems = (
         <AssignmentIcon />
       </ListItemIcon>
       <ListItemText primary="Year-end sale" />
-    </ListItem>
+    </ListItem> */}
   </div>
 );

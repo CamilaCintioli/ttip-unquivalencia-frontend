@@ -2,31 +2,35 @@ import React from 'react';
 import {
   Route, Switch,
 } from 'react-router-dom';
-
-import File from '../File/File';
+import { Image } from 'react-bootstrap';
 import './Layout.css';
 import Nav from './Nav/Nav';
 import Footer from './Footer/Footer';
+import Sidebar from './Sidebar/Sidebar';
+import ViewPrimary from '../ViewPrimary';
 import Logo from './logo.jpeg';
-import NewRequestPage from '../NewRequest/NewRequestPage'
+import NewRequestPage from '../NewRequest/NewRequestPage';
+import RequestPage from '../Request/RequestPage';
 
 const Home = () => (
   <div className="row justify-content-md-center">
-    <img src={Logo} className="img-fluid" alt="Responsive image" />
+    <Image src={Logo} className=" img-fluid" alt="Responsive image" />
   </div>
 );
 
 function Layout() {
   return (
-    // <div>
+    // <div className="m-100 h-100">
     //   <Nav />
-    //   <br />
-    //   <div className="row justify-content-md-center">
-    //     <div className="container">
+    //   <div className="row m-75 h-75">
+    //     <Sidebar />
+    //     <div className="col-8 bg-white">
+    //       <br />
           <Switch>
             <Route path="/" exact component={Home} />
-            <Route path="/expediente" component={File} />
+            <Route path="/expediente" component={ViewPrimary} />
             <Route path="/solicitud/new" component={NewRequestPage} />
+            <Route path="/solicitud/:solicitudId" component={RequestPage} />
           </Switch>
     //     </div>
     //   </div>

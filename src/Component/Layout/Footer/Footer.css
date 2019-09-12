@@ -1,0 +1,7 @@
+#sticky-footer {
+    flex-shrink: none;
+  }
+
+.footer{
+  bottom: 0;
+}  

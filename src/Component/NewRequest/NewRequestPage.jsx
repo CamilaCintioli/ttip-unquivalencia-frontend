@@ -1,16 +1,17 @@
 import React from 'react';
 import StudentDataForm from './StudentDataForm';
 import UniversityDataForm from './UniversityDataForm';
-import axios from 'axios';
 import './NewRequest.css';
 import { Button } from 'react-bootstrap';
+import API from '../../service/FileService';
+import { BrowserRouter } from 'react-router-dom';
 
 const universityOptions = [{ label: 'UNLP', value: 'UNLP' }, { label: 'UBA', value: 'UBA' }];
 const subjectOptions = [{ label: 'Algortimos', value: 'Algoritmos' }, { label: 'Matematica', value: 'Matematica' }, { label: 'Base de datos', value: 'Base de datos' }];
 const unqOptions = [{ label: 'Sistemas Operativos', value: 'Sistemas Operativos' }, { label: 'Matematica II', value: 'Matematica II' }, { label: 'Estructura de datos', value: 'Estructura de datos' }];
 
 
-function NewRequestPage() {
+function NewRequestPage({ history }) {
   const [formValues, setFormValues] = React.useState({
     studentData: {},
     universityData: {},
@@ -43,13 +44,14 @@ function NewRequestPage() {
     const file = Object.assign(formValues.studentData, formValues.universityData);
     file.equivalence = 'SIN EVALUAR';
 
-    axios.post('//localhost:8000/api/v1/request', file)
+    API.newFile(file)
       .then((response) => {
         console.log(response);
       })
       .catch((response) => {
         console.log(response);
       });
+    history.push('/expediente');
   }
 
   return (
