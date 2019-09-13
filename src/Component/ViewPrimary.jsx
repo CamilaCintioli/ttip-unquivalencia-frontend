@@ -47,12 +47,12 @@ function ViewPrimary({ history }) {
   return (
     <Grid container spacing={3}>
       <Grid item xs={6}>
-        <List columns={columnsFile} rows={rowsFile} handleSearch={handleSearchRequests} />
+        <List key="file" title="Expedientes" columns={columnsFile} rows={rowsFile} handleSearch={handleSearchRequests} />
       </Grid>
       {viewRequest
         ? (
           <Grid item xs={6}>
-            <List columns={columnsRequest} rows={rowsRequest} handleSearch={handleSearchRequest} />
+            <List key="request" title="Solicitudes" columns={columnsRequest} rows={rowsRequest} handleSearch={handleSearchRequest} />
           </Grid>
         )
         : null}
