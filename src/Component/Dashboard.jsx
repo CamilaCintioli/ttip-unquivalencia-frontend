@@ -27,7 +27,7 @@ export default function Dashboard() {
       <SideBar classes={classes} handleDrawerClose={handleDrawerClose} open={open} />
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
+        <Container maxWidth="xl" className={classes.container}>
           <Layout />
         </Container>
         <Footer classes={classes} />
