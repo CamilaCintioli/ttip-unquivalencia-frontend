@@ -27,7 +27,7 @@ export default function FormDialog({ consultEquivalence }) {
         aria-label="primary button "
         onClick={handleClickOpen}
       >
-        Open form dialog
+        CONSULTAR
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Mensaje</DialogTitle>

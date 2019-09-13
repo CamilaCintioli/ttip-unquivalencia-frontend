@@ -1,9 +1,9 @@
 const columnsFile = [
-  { id: 'fileNumber', label: 'NºExpediente', minWidth: 100 },
-  { id: 'name', label: 'Nombre', minWidth: 200 },
-  { id: 'surname', label: 'Apellido', minWidth: 200 },
+  { id: 'fileNumber', label: 'Nº EXPEDIENTE', minWidth: 100 },
+  { id: 'name', label: 'NOMBRE', minWidth: 200 },
+  { id: 'surname', label: 'APELLIDO', minWidth: 200 },
   {
-    id: 'id', label: 'Accion', minWidth: 200, button: true,
+    id: 'id', label: 'ACCION', minWidth: 200, button: true,
   },
 ];
 

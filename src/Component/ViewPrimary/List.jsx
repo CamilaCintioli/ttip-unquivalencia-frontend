@@ -55,7 +55,7 @@ export default function List({
                 <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                   {columns.map((column) => {
                     const value = row[column.id];
-                    if (column.label === 'Accion') {
+                    if (column.label === 'ACCION') {
                       return (
                         <TableCell key={column.id} align={column.align}>
                           <IconButton className={classes.button} aria-label="search" onClick={() => handleSearch(row.id)}>
