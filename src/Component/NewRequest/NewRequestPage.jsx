@@ -46,12 +46,12 @@ function NewRequestPage({ history }) {
 
     API.newFile(file)
       .then((response) => {
-        console.log(response);
+        alert("La solicitud ha sido cargada exitosamente")
       })
       .catch((response) => {
         console.log(response);
       });
-    history.push('/expediente');
+    
   }
 
   return (
