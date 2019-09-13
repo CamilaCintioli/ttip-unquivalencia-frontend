@@ -1,5 +1,7 @@
 import React from 'react';
-import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
+import {
+  LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer,
+} from 'recharts';
 import Title from './Title';
 
 // Generate Sales Data
@@ -21,7 +23,7 @@ const data = [
 
 export default function Chart() {
   return (
-    <React.Fragment>
+    <>
       <Title>Today</Title>
       <ResponsiveContainer>
         <LineChart
@@ -42,6 +44,6 @@ export default function Chart() {
           <Line type="monotone" dataKey="amount" stroke="#556CD6" dot={false} />
         </LineChart>
       </ResponsiveContainer>
-    </React.Fragment>
+    </>
   );
 }

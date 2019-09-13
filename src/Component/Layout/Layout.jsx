@@ -4,9 +4,6 @@ import {
 } from 'react-router-dom';
 import { Image } from 'react-bootstrap';
 import './Layout.css';
-import Nav from './Nav/Nav';
-import Footer from './Footer/Footer';
-import Sidebar from './Sidebar/Sidebar';
 import ViewPrimary from '../ViewPrimary';
 import Logo from './logo.jpeg';
 import NewRequestPage from '../NewRequest/NewRequestPage';
@@ -20,22 +17,14 @@ const Home = () => (
 
 function Layout() {
   return (
-    // <div className="m-100 h-100">
-    //   <Nav />
-    //   <div className="row m-75 h-75">
-    //     <Sidebar />
-    //     <div className="col-8 bg-white">
-    //       <br />
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/expediente" component={ViewPrimary} />
-            <Route path="/solicitud/new" component={NewRequestPage} />
-            <Route path="/solicitud/:solicitudId" component={RequestPage} />
-          </Switch>
-    //     </div>
-    //   </div>
-    //   <Footer />
-    // </div>
+
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/expediente" component={ViewPrimary} />
+        <Route path="/solicitud/new" component={NewRequestPage} />
+        <Route path="/solicitud/:solicitudId" component={RequestPage} />
+      </Switch>
+
   );
 }
 

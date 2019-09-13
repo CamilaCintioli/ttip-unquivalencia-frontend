@@ -1,13 +1,12 @@
+/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import './App.css';
 import { BrowserRouter } from 'react-router-dom';
-import Layout from './Component/Layout/Layout';
-import Dashboard from './dashboard/Dashboard';
+import Dashboard from './Component/Dashboard';
 
 
 function App() {
   return (
-  // eslint-disable-next-line react/jsx-filename-extension
     <BrowserRouter>
       <Dashboard />
     </BrowserRouter>

@@ -12,7 +12,9 @@ import Title from './Title';
 
 // Generate Order Data
 function createData(id, date, name, shipTo, paymentMethod, amount) {
-  return { id, date, name, shipTo, paymentMethod, amount };
+  return {
+ id, date, name, shipTo, paymentMethod, amount 
+};
 }
 
 const rows = [
@@ -23,7 +25,7 @@ const rows = [
   createData(4, '15 Mar, 2019', 'Bruce Springsteen', 'Long Branch, NJ', 'VISA ⠀•••• 5919', 212.79),
 ];
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   seeMore: {
     marginTop: theme.spacing(3),
   },
@@ -32,7 +34,7 @@ const useStyles = makeStyles(theme => ({
 export default function Orders() {
   const classes = useStyles();
   return (
-    <React.Fragment>
+    <>
       <Title>Recent Orders</Title>
       <Table size="small">
         <TableHead>
@@ -61,6 +63,6 @@ export default function Orders() {
           See more orders
         </Link>
       </div>
-    </React.Fragment>
+    </>
   );
 }
