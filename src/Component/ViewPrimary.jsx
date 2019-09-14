@@ -14,24 +14,16 @@ function ViewPrimary({ history }) {
 
 
   React.useEffect(() => {
-    let isSubscribed = true;
     API.getFiles().then((files) => {
-      if (isSubscribed) {
-        setRowsFile(files);
-      }
+      setRowsFile(files);
     });
-    return () => isSubscribed = false;
   }, []);
 
 
   React.useEffect(() => {
-    let isSubscribed = true;
     API.getRequests(fileId).then((request) => {
-      if (isSubscribed) {
-        setRowsRequest(request);
-      }
+      setRowsRequest(request);
     });
-    return () => isSubscribed = false;
   }, [fileId]);
 
 
