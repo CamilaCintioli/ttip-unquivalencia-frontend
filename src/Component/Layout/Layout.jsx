@@ -18,12 +18,12 @@ const Home = () => (
 function Layout() {
   return (
 
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/expediente" component={ViewPrimary} />
-        <Route path="/solicitud/new" component={NewRequestPage} />
-        <Route path="/solicitud/:solicitudId" component={RequestPage} />
-      </Switch>
+    <Switch>
+      <Route path="/" exact component={Home} />
+      <Route path="/expediente" component={ViewPrimary} />
+      <Route path="/solicitud/new" component={NewRequestPage} />
+      <Route path="/solicitud/:solicitudId" component={RequestPage} />
+    </Switch>
 
   );
 }

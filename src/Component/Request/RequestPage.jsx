@@ -76,27 +76,35 @@ class RequestPage extends Component {
   render() {
     return (
       <Container maxWidth="lg">
-        <Grid container spacing={3}>
-          <Grid item xs={6}>
-            <UniversitySubjectData university={this.state.request.univesityOrigin} subject={this.state.request.subjectUnq} content={estructuras} />
+        <Container maxWidth="lg">
+          <Grid container>
+            <Grid item xs={6} spacing={3}>
+              <UniversitySubjectData
+                university={this.state.request.univesityOrigin}
+                subject={this.state.request.subjectUnq}
+                content={estructuras}
+              />
+            </Grid>
+            <Grid item xs={6} spacing={3}>
+              <UniversitySubjectData
+                university="Universidad Nacional de Quilmes"
+                subject={this.state.request.subjectOrigin}
+                content={algoritmos}
+              />
+            </Grid>
           </Grid>
-          <Grid item xs={6}>
-            <UniversitySubjectData university="Universidad Nacional de Quilmes" subject={this.state.request.subjectOrigin} content={algoritmos} />
-          </Grid>
-        </Grid>
-        <Grid item xs={12} md={6} spacing={10}>
-          <Grid container spacing={1} direction="column" alignItems="center">
-            <ButtonGroup
-              variant="contained"
-              color="primary"
-              aria-label="primary button "
-            >
-              <Button onClick={this.giveEquivalence}>DAR EQUIVALENCIA</Button>
-              <Button onClick={this.denyEquivalence}>NEGAR EQUIVALENCIA</Button>
-              <Dialogo consultEquivalence={this.consultEquivalence}>Consultar</Dialogo>
-            </ButtonGroup>
-          </Grid>
-        </Grid>
+        </Container>
+        <Container maxWidth="lg">
+          <ButtonGroup
+            variant="contained"
+            color="primary"
+            aria-label="primary button "
+          >
+            <Button onClick={this.giveEquivalence}>DAR EQUIVALENCIA</Button>
+            <Button onClick={this.denyEquivalence}>NEGAR EQUIVALENCIA</Button>
+            <Dialogo consultEquivalence={this.consultEquivalence}>Consultar</Dialogo>
+          </ButtonGroup>
+        </Container>
       </Container>
 
     );
