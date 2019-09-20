@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import './RequestPage.css';
-import { Button } from 'react-bootstrap';
 import axios from 'axios';
+import {
+  Button, ButtonGroup, Grid, Container,
+} from '@material-ui/core';
 import UniversitySubjectData from './UniversitySubjectData';
+import Dialogo from './dialogo';
 
-const algoritmos = ['CONTENIDOS MINIMOS DE LA MATERIA:', '1-Concepto de algoritmo', '2-Resolución de problemas', '3-Diseño del algoritmo',
+const algoritmos = ['1-Concepto de algoritmo', '2-Resolución de problemas', '3-Diseño del algoritmo',
   '4-Programación del algoritmo', '5-Representación de algoritmos'];
 
-const estructuras = ['CONTENIDOS MINIMOS DE LA MATERIA:', '1-Concepto de estructuras', '2-Listas', '3-Recursión sobre listas', '4-Arboles', '5-Recursion sobre árboles'];
+const estructuras = ['1-Concepto de estructuras', '2-Listas', '3-Recursión sobre listas', '4-Arboles', '5-Recursion sobre árboles'];
 
 
 class RequestPage extends Component {
@@ -16,6 +19,7 @@ class RequestPage extends Component {
     this.state = {
       requestId: props.match.params.solicitudId,
       request: {},
+      openDialogo: false,
     };
 
     this.giveEquivalence = this.giveEquivalence.bind(this);
@@ -57,10 +61,10 @@ class RequestPage extends Component {
       });
   }
 
-  consultEquivalence() {
+  consultEquivalence(email) {
     axios.post(`//localhost:8000/api/v1/request/${this.state.request.id}`, { equivalence: 'CONSULTADA' })
       .then((response) => {
-        alert('Se envio consulta al profesor');
+        alert('Se envio consulta al profesor, al mail');
         console.log(response);
       })
       .catch((response) => {
@@ -69,26 +73,40 @@ class RequestPage extends Component {
       });
   }
 
-
   render() {
     return (
-      <>
+      <Container maxWidth="lg">
+        <Container maxWidth="lg">
+          <Grid container>
+            <Grid item xs={6} spacing={3}>
+              <UniversitySubjectData
+                university={this.state.request.univesityOrigin}
+                subject={this.state.request.subjectUnq}
+                content={estructuras}
+              />
+            </Grid>
+            <Grid item xs={6} spacing={3}>
+              <UniversitySubjectData
+                university="Universidad Nacional de Quilmes"
+                subject={this.state.request.subjectOrigin}
+                content={algoritmos}
+              />
+            </Grid>
+          </Grid>
+        </Container>
+        <Container maxWidth="lg">
+          <ButtonGroup
+            variant="contained"
+            color="primary"
+            aria-label="primary button "
+          >
+            <Button onClick={this.giveEquivalence}>DAR EQUIVALENCIA</Button>
+            <Button onClick={this.denyEquivalence}>NEGAR EQUIVALENCIA</Button>
+            <Dialogo consultEquivalence={this.consultEquivalence}>Consultar</Dialogo>
+          </ButtonGroup>
+        </Container>
+      </Container>
 
-        <div className="universitySubjects">
-          <div className="universitySubject">
-            <UniversitySubjectData university="Universidad Nacional de Quilmes" subject={this.state.request.subjectUnq} content={estructuras} />
-          </div>
-          <div className="universitySubject">
-            <UniversitySubjectData university={this.state.request.univesityOrigin} subject={this.state.request.subjectOrigin} content={algoritmos} />
-          </div>
-        </div>
-        <div className="buttons">
-
-          <Button onClick={this.giveEquivalence}>DAR EQUIVALENCIA</Button>
-          <Button onClick={this.denyEquivalence}>NEGAR EQUIVALENCIA</Button>
-          <Button onClick={this.consultEquivalence}>Consultar</Button>
-        </div>
-      </>
     );
   }
 }

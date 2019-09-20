@@ -4,7 +4,7 @@ import UniversityDataForm from './UniversityDataForm';
 import './NewRequest.css';
 import { Button } from 'react-bootstrap';
 import API from '../../service/FileService';
-import { BrowserRouter } from 'react-router-dom';
+
 
 const universityOptions = [{ label: 'UNLP', value: 'UNLP' }, { label: 'UBA', value: 'UBA' }];
 const subjectOptions = [{ label: 'Algortimos', value: 'Algoritmos' }, { label: 'Matematica', value: 'Matematica' }, { label: 'Base de datos', value: 'Base de datos' }];
@@ -46,12 +46,12 @@ function NewRequestPage({ history }) {
 
     API.newFile(file)
       .then((response) => {
-        console.log(response);
+        alert("La solicitud ha sido cargada exitosamente")
       })
       .catch((response) => {
         console.log(response);
       });
-    history.push('/expediente');
+    
   }
 
   return (

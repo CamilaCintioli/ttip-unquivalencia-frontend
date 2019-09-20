@@ -9,8 +9,8 @@ const config = {
 };
 
 const API = {
-  getFiles: async () => axios.get(`${port}api/v1/files`, config).then((response) => response.data),
-  getRequests: async (id) => axios.get(`${port}api/v1/requests/${id}`, config).then((response) => response.data),
+  getFiles: () => axios.get(`${port}api/v1/files`, config).then((response) => response.data),
+  getRequests: (id) => axios.get(`${port}api/v1/requests/${id}`, config).then((response) => response.data),
   newFile: (file) => axios.post(`${port}api/v1/request`, file),
 
 };

@@ -1,30 +1,20 @@
-import React, { Fragment } from 'react';
+
+import React from 'react';
+import Typography from '@material-ui/core/Typography';
+import List from './List';
 
 
-function UniversitySubjectData(props) {
+export default function SimpleCard({ university, subject, content }) {
   return (
     <>
-      <h2>{props.university}</h2>
-      <h2>
-        Materia:
-        {' '}
-        {props.subject}
-      </h2>
-      {props.content.map((str) => (
-        <Fragment key={idContent()}>
-          <h3>{str}</h3>
-          <br />
-        </Fragment>
-      ))}
 
+      <Typography variant="h4" component="h4">
+        {university}
+      </Typography>
+      <Typography variant="h6" component="h6">
+        {subject}
+      </Typography>
+      <List materia={content} />
     </>
-
   );
 }
-
-let contentId = 0;
-function idContent() {
-  return contentId++;
-}
-
-export default UniversitySubjectData;

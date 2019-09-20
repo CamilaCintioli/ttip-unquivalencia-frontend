@@ -9,7 +9,7 @@ function StudentDataForm(props) {
     if (onChange) {
       onChange(values);
     }
-  }, [values]);
+  }, [onChange, values]);
 
   return (
     <>
