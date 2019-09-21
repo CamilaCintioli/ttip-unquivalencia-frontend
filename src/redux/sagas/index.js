@@ -4,5 +4,5 @@ import search from './search';
 import user from './user';
 
 export default function* rootSaga() {
-  yield all([search(), user()]);
+  yield all([user(), search()]);
 }

@@ -31,8 +31,8 @@ function Copyright() {
 export default function SignIn({ onLogin }) {
   const classes = useStyles();
   const [values, setValues] = useState({
-    userName: '',
-    pass: '',
+    email: '',
+    password: '',
   });
 
 
@@ -68,8 +68,8 @@ export default function SignIn({ onLogin }) {
               label="Email Address"
               name="email"
               autoComplete="email"
-              value={values.userName}
-              onChange={handleChange('userName')}
+              value={values.email}
+              onChange={handleChange('email')}
               autoFocus
             />
             <TextField
@@ -81,8 +81,8 @@ export default function SignIn({ onLogin }) {
               label="Password"
               type="password"
               id="password"
-              value={values.pass}
-              onChange={handleChange('pass')}
+              value={values.password}
+              onChange={handleChange('password')}
               autoComplete="current-password"
             />
             <FormControlLabel

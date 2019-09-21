@@ -1,18 +1,15 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
 import PropTypes from 'prop-types';
 import Dashboard from './Component/Dashboard';
 
 
-function App({ store }) {
+function App() {
   return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <Dashboard />
-      </BrowserRouter>
-    </Provider>
+    <BrowserRouter>
+      <Dashboard />
+    </BrowserRouter>
   );
 }
 
