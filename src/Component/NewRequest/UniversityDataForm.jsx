@@ -74,7 +74,7 @@ function UniversityDataForm(props) {
         if (onChange) {
             onChange(values);
         }
-    }, [onChange,values]);
+    }, [values]);
 
     const isExternal = props.university === "external"
     return (

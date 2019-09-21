@@ -30,6 +30,7 @@ function ViewPrimary({ history }) {
   };
 
   const handleSearchRequest = (id) => {
+    console.log(id);
     history.push(`/solicitud/${id}`);
   };
 
@@ -45,7 +46,9 @@ function ViewPrimary({ history }) {
         {renderFile()}
       </Grid>
       <Grid item xs={6}>
-        {renderRequest()}
+        {
+          renderRequest()
+        }
       </Grid>
     </Grid>
   );
