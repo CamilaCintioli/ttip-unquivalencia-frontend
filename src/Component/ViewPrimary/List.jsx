@@ -28,9 +28,8 @@ export default function List({
     setPage(0);
   };
 
-
   return (
-    <div className={classes.root}>
+    <div key={title} className={classes.root}>
       <Typography variant="h4" component="h5">
         {title}
       </Typography>
@@ -52,7 +51,7 @@ export default function List({
             </TableHead>
             <TableBody>
               {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                   {columns.map((column) => {
                     const value = row[column.id];
                     if (column.label === 'ACCION') {

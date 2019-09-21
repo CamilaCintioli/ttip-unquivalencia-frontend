@@ -11,11 +11,11 @@ export default function Dashboard() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
-    console.log('abre');
+    console.log('open SideBar');
     setOpen(true);
   };
   const handleDrawerClose = () => {
-    console.log('cierra');
+    console.log('close SideBar');
     setOpen(false);
   };
 

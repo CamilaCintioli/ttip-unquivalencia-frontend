@@ -1,30 +1,27 @@
 import React from 'react';
-import { Grid } from '@material-ui/core';
+import { Grid, CircularProgress } from '@material-ui/core';
+import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import List from './ViewPrimary/List';
-import API from '../service/FileService';
 import columnsRequest from './ViewPrimary/columnsRequest';
 import columnsFile from './ViewPrimary/columnsFile';
+import { searchFile, searchRequest } from '../redux/actions/search';
+import { fileResults, requestResult } from '../redux/selectors';
 
 function ViewPrimary({ history }) {
   const [viewRequest, setViewRequest] = React.useState(false);
+  const rowsFile = useSelector((state) => fileResults(state));
+  const rowsRequest = useSelector((state) => requestResult(state));
   const [fileId, setFileId] = React.useState(undefined);
-  const [rowsFile, setRowsFile] = React.useState([]);
-
-  const [rowsRequest, setRowsRequest] = React.useState([]);
-
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
-    API.getFiles().then((files) => {
-      setRowsFile(files);
-    });
-  }, []);
-
+    dispatch(searchFile());
+  }, [dispatch]);
 
   React.useEffect(() => {
-    API.getRequests(fileId).then((request) => {
-      setRowsRequest(request);
-    });
-  }, [fileId]);
+    dispatch(searchRequest({ fileId }));
+  }, [dispatch, fileId]);
 
 
   const handleSearchRequests = (id) => {
@@ -36,20 +33,27 @@ function ViewPrimary({ history }) {
     history.push(`/solicitud/${id}`);
   };
 
+  const renderFile = () => (rowsFile ? <List key="file" title="Expedientes" columns={columnsFile} rows={rowsFile} handleSearch={handleSearchRequests} />
+    : <CircularProgress size={100} color="primary" />);
+
+  const renderRequest = () => (viewRequest ? <List key="request" title="Solicitudes" columns={columnsRequest} rows={rowsRequest} handleSearch={handleSearchRequest} />
+    : null);
+
   return (
     <Grid container spacing={3}>
       <Grid item xs={6}>
-        <List key="file" title="Expedientes" columns={columnsFile} rows={rowsFile} handleSearch={handleSearchRequests} />
+        {renderFile()}
       </Grid>
-      {viewRequest
-        ? (
-          <Grid item xs={6}>
-            <List key="request" title="Solicitudes" columns={columnsRequest} rows={rowsRequest} handleSearch={handleSearchRequest} />
-          </Grid>
-        )
-        : null}
+      <Grid item xs={6}>
+        {renderRequest()}
+      </Grid>
     </Grid>
   );
 }
+
+ViewPrimary.propTypes = {
+  history: PropTypes.object.isRequired,
+};
+
 
 export default ViewPrimary;

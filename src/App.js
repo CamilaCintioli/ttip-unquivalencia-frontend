@@ -1,15 +1,24 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import './App.css';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import PropTypes from 'prop-types';
 import Dashboard from './Component/Dashboard';
 
 
-function App() {
+function App({ store }) {
   return (
-    <BrowserRouter>
-      <Dashboard />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Dashboard />
+      </BrowserRouter>
+    </Provider>
   );
 }
+
+
+App.propTypes = {
+  store: PropTypes.object.isRequired,
+};
+
 export default App;
