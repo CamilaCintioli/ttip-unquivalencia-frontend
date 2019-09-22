@@ -27,8 +27,8 @@ export function* searchRequest({ payload }) {
 
 export function* searchRequestById({ payload }) {
   try {
-    const movie = yield call(apiCall, `/${payload.movieId}`, null, null, 'GET');
-    yield put({ type: SEARCH_REQUEST_BY_ID_COMPLETE, movie });
+    const equivalenceRequest = yield call(apiCall, `/request/${payload.requestId}`, null, null, 'GET');
+    yield put({ type: SEARCH_REQUEST_BY_ID_COMPLETE, equivalenceRequest });
   } catch (error) {
     yield put({ type: SEARCH_REQUEST_BY_ID_ERROR, error });
   }
