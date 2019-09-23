@@ -2,14 +2,14 @@ import React from 'react';
 import {
   Button, ButtonGroup, Grid, Container,
 } from '@material-ui/core';
-import { shape, string } from 'prop-types';
+import { shape, string, func } from 'prop-types';
 import UniversitySubjectData from './UniversitySubjectData';
 import Dialogo from './dialogo';
 
 const subjectPdfSrcDestination = 'http://clp.web.unq.edu.ar/wp-content/uploads/sites/110/2019/09/apuntes.pdf';
 const subjectPdfSrcOrigin = 'http://clp.web.unq.edu.ar/wp-content/uploads/sites/110/2019/09/practica4y5.pdf';
 
-export default function RequestDisplay({ request }) {
+export default function RequestDisplay({ request, onEquivalenceGiven, onEquivalenceDenied }) {
   return (
     <>
       {request
@@ -39,8 +39,8 @@ export default function RequestDisplay({ request }) {
                         color="primary"
                         aria-label="primary button "
                       >
-                        <Button>DAR EQUIVALENCIA</Button>
-                        <Button>NEGAR EQUIVALENCIA</Button>
+                        <Button onClick={onEquivalenceGiven}>DAR EQUIVALENCIA</Button>
+                        <Button onClick={onEquivalenceDenied}>NEGAR EQUIVALENCIA</Button>
                         <Dialogo>Consultar</Dialogo>
                       </ButtonGroup>
                     </Container>
@@ -60,4 +60,7 @@ RequestDisplay.propTypes = {
       subjectUnq: string,
     },
   ),
+  onEquivalenceGiven: func.isRequired,
+  onEquivalenceDenied: func.isRequired,
+
 };
