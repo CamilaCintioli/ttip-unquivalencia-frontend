@@ -7,11 +7,8 @@ import {
 import UniversitySubjectData from './UniversitySubjectData';
 import Dialogo from './dialogo';
 
-const algoritmos = ['1-Concepto de algoritmo', '2-Resolución de problemas', '3-Diseño del algoritmo',
-  '4-Programación del algoritmo', '5-Representación de algoritmos'];
-
-const estructuras = ['1-Concepto de estructuras', '2-Listas', '3-Recursión sobre listas', '4-Arboles', '5-Recursion sobre árboles'];
-
+const subjectPdfSrcDestination = "http://clp.web.unq.edu.ar/wp-content/uploads/sites/110/2019/09/apuntes.pdf"
+const subjectPdfSrcOrigin = "http://clp.web.unq.edu.ar/wp-content/uploads/sites/110/2019/09/practica4y5.pdf"
 
 class RequestPage extends Component {
   constructor(props) {
@@ -81,15 +78,15 @@ class RequestPage extends Component {
             <Grid item xs={6} spacing={3}>
               <UniversitySubjectData
                 university={this.state.request.univesityOrigin}
-                subject={this.state.request.subjectUnq}
-                content={estructuras}
+                subject={this.state.request.subjectOrigin}
+                subjectPdfSrc={subjectPdfSrcOrigin}
               />
             </Grid>
             <Grid item xs={6} spacing={3}>
               <UniversitySubjectData
                 university="Universidad Nacional de Quilmes"
-                subject={this.state.request.subjectOrigin}
-                content={algoritmos}
+                subject={this.state.request.subjectUnq}
+                subjectPdfSrc={subjectPdfSrcDestination}
               />
             </Grid>
           </Grid>

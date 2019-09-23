@@ -1,10 +1,10 @@
 
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import List from './List';
+import PDFDisplay from './PDFDisplay';
 
 
-export default function SimpleCard({ university, subject, content }) {
+export default function UniversitySubjectData({ university, subject, subjectPdfSrc }) {
   return (
     <>
 
@@ -14,7 +14,9 @@ export default function SimpleCard({ university, subject, content }) {
       <Typography variant="h6" component="h6">
         {subject}
       </Typography>
-      <List materia={content} />
+      <div style={{display: "grid", height: "500px"}}>
+      <PDFDisplay src={subjectPdfSrc}/>
+        </div>
     </>
   );
 }
