@@ -19,13 +19,15 @@ class RequestPage extends Component {
       openDialogo: false,
     };
 
+    this.baseUrl = `${process.env.REACT_APP_BACKEND_URL}/api/v1`;
+
     this.giveEquivalence = this.giveEquivalence.bind(this);
     this.denyEquivalence = this.denyEquivalence.bind(this);
     this.consultEquivalence = this.consultEquivalence.bind(this);
   }
 
   componentDidMount() {
-    axios.get(`//localhost:8000/api/v1/request/${this.state.requestId}`)
+    axios.get(`${this.baseUrl}/request/${this.state.requestId}`)
       .then((response) => {
         this.setState({ request: response.data });
       })
@@ -35,7 +37,7 @@ class RequestPage extends Component {
   }
 
   giveEquivalence() {
-    axios.post(`//localhost:8000/api/v1/request/${this.state.request.id}`, { equivalence: 'APROBADA' })
+    axios.post(`${this.baseUrl}/request/${this.state.request.id}`, { equivalence: 'APROBADA' })
       .then((response) => {
         alert('Solicitud de equivalencia aprobada');
         console.log(response);
@@ -47,7 +49,7 @@ class RequestPage extends Component {
   }
 
   denyEquivalence() {
-    axios.post(`//localhost:8000/api/v1/request/${this.state.request.id}`, { equivalence: 'NEGADA' })
+    axios.post(`${this.baseUrl}/request/${this.state.request.id}`, { equivalence: 'NEGADA' })
       .then((response) => {
         alert('Solicitud de equivalencia negada');
         console.log(response);
@@ -59,7 +61,7 @@ class RequestPage extends Component {
   }
 
   consultEquivalence(email) {
-    axios.post(`//localhost:8000/api/v1/request/${this.state.request.id}`, { equivalence: 'CONSULTADA' })
+    axios.post(`${this.baseUrl}/request/${this.state.request.id}`, { equivalence: 'CONSULTADA' })
       .then((response) => {
         alert('Se envio consulta al profesor, al mail');
         console.log(response);
