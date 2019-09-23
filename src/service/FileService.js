@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const port = 'http://localhost:8000/';
+const port = `${process.env.REACT_APP_BACKEND_URL}/api/v1`;
 
 const config = {
   headers: {
@@ -9,9 +9,9 @@ const config = {
 };
 
 const API = {
-  getFiles: () => axios.get(`${port}api/v1/files`, config).then((response) => response.data),
-  getRequests: (id) => axios.get(`${port}api/v1/requests/${id}`, config).then((response) => response.data),
-  newFile: (file) => axios.post(`${port}api/v1/request`, file),
+  getFiles: () => axios.get(`${port}/files`, config).then((response) => response.data),
+  getRequests: (id) => axios.get(`${port}/requests/${id}`, config).then((response) => response.data),
+  newFile: (file) => axios.post(`${port}/request`, file),
 
 };
 
