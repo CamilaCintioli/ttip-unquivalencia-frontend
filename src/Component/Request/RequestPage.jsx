@@ -17,7 +17,7 @@ class RequestPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      requestId: props.match.params.solicitudId,
+      requestId: undefined, // props.match.params.solicitudId,
       request: {},
       openDialogo: false,
     };

@@ -35,7 +35,6 @@ export default function Dashboard() {
     dispatch(getUser(bodyUser));
   };
 
-
   const layour = () => (
     <div className={classes.root}>
       <CssBaseline />
@@ -44,10 +43,26 @@ export default function Dashboard() {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="xl" className={classes.container}>
-          <Route path="/home" component={Home} />
-          <Route path="/expediente" component={ViewPrimary} />
-          <Route path="/solicitud/new" component={NewRequestPage} />
-          <Route path="/solicitud/:solicitudId" component={RequestPage} />
+          <Route
+            exact
+            path="/home"
+            render={() => (isValid() ? <Home /> : <SinIn onLogin={singIn} />)}
+          />
+          <Route
+            exact
+            path="/expediente"
+            render={() => (isValid() ? <ViewPrimary /> : <SinIn onLogin={singIn} />)}
+          />
+          <Route
+            exact
+            path="/solicitud/:solicitudId"
+            render={() => (isValid() ? <RequestPage /> : <SinIn onLogin={singIn} />)}
+          />
+          <Route
+            exact
+            path="/new/solicitud"
+            render={() => (isValid() ? <NewRequestPage /> : <SinIn onLogin={singIn} />)}
+          />
           <Route
             exact
             path="/"
@@ -61,6 +76,26 @@ export default function Dashboard() {
 
   const welcom = () => (
     <div className={classes.root}>
+      <Route
+        exact
+        path="/home"
+        render={() => (isValid() ? <Home /> : <SinIn onLogin={singIn} />)}
+      />
+      <Route
+        exact
+        path="/expediente"
+        render={() => (isValid() ? <ViewPrimary /> : <SinIn onLogin={singIn} />)}
+      />
+      <Route
+        exact
+        path="/solicitud/:solicitudId"
+        render={() => (isValid() ? <RequestPage /> : <SinIn onLogin={singIn} />)}
+      />
+      <Route
+        exact
+        path="/new/solicitud"
+        render={() => (isValid() ? <NewRequestPage /> : <SinIn onLogin={singIn} />)}
+      />
       <Route
         exact
         path="/"

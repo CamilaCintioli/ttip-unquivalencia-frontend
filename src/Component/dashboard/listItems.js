@@ -25,7 +25,7 @@ export const mainListItems = (cerrar) => (
         <ListItemText primary="Expedientes" />
       </ListItem>
     </Link>
-    <Link to="/solicitud/new">
+    <Link to="/new/solicitud">
       <ListItem button>
         <ListItemIcon>
           <LayersIcon />
@@ -42,7 +42,7 @@ export const mainListItems = (cerrar) => (
       <ListItemText primary="Expedientes" />
     </ListItem>
     </Link>
-    <Link to="/solicitud/new">
+    <Link to="/new/solicitud">
     <ListItem button>
       <ListItemIcon>
         <ShoppingCartIcon />

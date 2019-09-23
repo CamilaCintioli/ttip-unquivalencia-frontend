@@ -36,9 +36,7 @@ export default function SignIn({ onLogin }) {
   });
 
 
-  const handleLogin = () => {
-    onLogin(values);
-  };
+  const handleLogin = () => onLogin(values);
 
   console.log(values);
 

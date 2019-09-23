@@ -2,8 +2,8 @@
 
 export const saveUser = (state) => {
   console.log('save');
-  return localStorage.setItem('userStore', JSON.stringify(state));
+  localStorage.setItem('userStore', JSON.stringify(state));
 };
-export const loadUser = () => JSON.parse(localStorage.getItem('userStore')) || { user: {} };
+export const loadUser = () => JSON.parse(localStorage.getItem('userStore'));
 
-export const isValid = () => localStorage.getItem('userStore') !== null;
+export const isValid = () => JSON.parse(localStorage.getItem('userStore')).email || false;
