@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 export const mainListItems = (cerrar) => (
   <div onClick={() => cerrar()}>
-    <Link to="/">
+    <Link to="/home">
       <ListItem button>
         <ListItemIcon>
           <AssignmentIcon />
