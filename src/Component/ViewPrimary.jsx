@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid, CircularProgress } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import List from './ViewPrimary/List';
 import columnsRequest from './ViewPrimary/columnsRequest';
 import columnsFile from './ViewPrimary/columnsFile';
@@ -59,4 +60,4 @@ ViewPrimary.propTypes = {
 };
 
 
-export default ViewPrimary;
+export default withRouter(ViewPrimary);

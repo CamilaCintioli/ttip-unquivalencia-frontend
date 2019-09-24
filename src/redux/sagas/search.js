@@ -7,7 +7,7 @@ import {
 
 import apiCall from '../api';
 
-export function* searchFile({ payload }) {
+export function* searchFile() {
   try {
     const results = yield call(apiCall, '/files', null, null, 'GET');
     yield put({ type: SEARCH_FILE_COMPLETE, results });

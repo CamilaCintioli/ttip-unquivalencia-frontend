@@ -38,8 +38,6 @@ export default function SignIn({ onLogin }) {
 
   const handleLogin = () => onLogin(values);
 
-  console.log(values);
-
   const handleChange = (name) => (event) => {
     setValues({ ...values, [name]: event.target.value });
   };
@@ -88,7 +86,6 @@ export default function SignIn({ onLogin }) {
               label="Remember me"
             />
             <Button
-              type="submit"
               fullWidth
               variant="contained"
               color="primary"
@@ -97,18 +94,6 @@ export default function SignIn({ onLogin }) {
             >
               Sign In
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
             <Box mt={5}>
               <Copyright />
             </Box>

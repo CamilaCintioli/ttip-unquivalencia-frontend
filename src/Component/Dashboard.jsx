@@ -18,12 +18,13 @@ import { isValid } from '../service/userService';
 import Home from './Home';
 
 
-export default function Dashboard() {
+export default function Dashboard({ history }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const user = useSelector((state) => userResult(state));
   const dispatch = useDispatch();
   console.log(`logeado is ${isValid()}`);
+  console.log(user);
 
   // console.log('----userstore-----');
   // console.log(userstore);
@@ -42,22 +43,23 @@ export default function Dashboard() {
     { path: '/new/solicitud', component: <NewRequestPage /> },
   ];
 
-  const RouteLoged = (path, component) => (
+  const RouteLoged = (path, component, i) => (
     <Route
+      key={i}
       path={path}
       render={() => (isValid() ? component : <SinIn onLogin={singIn} />)}
     />
   );
 
   const layour = () => (
-    <div className={classes.root}>
+    <>
       <CssBaseline />
       <Nav classes={classes} handleDrawerOpen={() => setOpen(true)} open={open} />
       <SideBar classes={classes} handleDrawerClose={() => setOpen(false)} open={open} />
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="xl" className={classes.container}>
-          {routes.map((route) => RouteLoged(route.path, route.component))}
+          {routes.map((route, i) => RouteLoged(route.path, route.component, i))}
           <Route
             exact
             path="/"
@@ -66,24 +68,26 @@ export default function Dashboard() {
         </Container>
         <Footer classes={classes} />
       </main>
-    </div>
+    </>
   );
 
   const welcom = () => (
-    <div className={classes.root}>
-      {routes.map((route) => RouteLoged(route.path, route.component))}
+    <>
+      {routes.map((route, i) => RouteLoged(route.path, route.component, i))}
       <Route
         exact
         path="/"
         render={() => (isValid() ? <Redirect to="/home" /> : <SinIn onLogin={singIn} />)}
       />
-    </div>
+    </>
   );
   const renderSwitch = () => (isValid() ? layour() : welcom());
 
   return (
-    <Switch>
-      {renderSwitch()}
-    </Switch>
+    <div className={classes.root}>
+      <Switch>
+        {renderSwitch()}
+      </Switch>
+    </div>
   );
 }

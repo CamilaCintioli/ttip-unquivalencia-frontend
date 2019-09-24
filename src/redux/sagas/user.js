@@ -7,7 +7,6 @@ import apiCall from '../api';
 
 export function* getUser({ payload }) {
   try {
-    console.log(payload);
     const results = yield call(apiCall, '/user/session', payload, null, 'POST');
     yield put({ type: GET_USER_COMPLETE, results });
   } catch (error) {
