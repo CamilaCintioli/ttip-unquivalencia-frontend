@@ -31,7 +31,7 @@ function ViewPrimary({ history }) {
 
   const handleSearchRequest = (id) => {
     console.log(id);
-    history.push(`/solicitud/${id}`);
+    window.location.pathname = `/solicitud/${id}`;
   };
 
   const renderFile = () => (rowsFile ? <List key="file" title="Expedientes" columns={columnsFile} rows={rowsFile} handleSearch={handleSearchRequests} />
