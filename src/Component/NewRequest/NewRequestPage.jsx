@@ -1,8 +1,9 @@
-import React from 'react';
-import StudentDataForm from './StudentDataForm';
-import UniversityDataForm from './UniversityDataForm';
-import './NewRequest.css';
+import React, { useState, useCallback } from 'react';
 import { Button } from 'react-bootstrap';
+import StudentDataForm from './StudentDataForm';
+import ExternalUniversityDataForm from './ExternalUniversityDataForm';
+import InternalUniversityDataForm from './InternalUniversityDataForm';
+import './NewRequest.css';
 import API from '../../service/FileService';
 
 
@@ -10,61 +11,53 @@ const universityOptions = [{ label: 'UNLP', value: 'UNLP' }, { label: 'UBA', val
 const subjectOptions = [{ label: 'Algortimos', value: 'Algoritmos' }, { label: 'Matematica', value: 'Matematica' }, { label: 'Base de datos', value: 'Base de datos' }];
 const unqOptions = [{ label: 'Sistemas Operativos', value: 'Sistemas Operativos' }, { label: 'Matematica II', value: 'Matematica II' }, { label: 'Estructura de datos', value: 'Estructura de datos' }];
 
+function NewRequestPage() {
+  const [studentData, setStudentData] = useState({});
+  const [externalUniversityData, setExternalUniversityData] = useState({});
+  const [internalUniversityData, setInternalUniversityData] = useState({});
 
-function NewRequestPage({ history }) {
-  const [formValues, setFormValues] = React.useState({
-    studentData: {},
-    universityData: {},
-    unqData: {},
-  });
+  const handleStudentDataFormChange = useCallback((values) => {
+    setStudentData(values);
+  }, [setStudentData]);
 
-  function handleStudentDataFormChange(values) {
-    setFormValues({
-      ...formValues,
-      studentData: values,
-    });
-  }
+  const handleExternalUniversityDataFormChange = useCallback((values) => {
+    setExternalUniversityData(values);
+  }, [setExternalUniversityData]);
 
-  function handleUniversityDataFormChange(values) {
-    setFormValues({
-      ...formValues,
-      universityData: values,
-    });
-  }
+  const handleInternalUniversityDataFormChange = useCallback((values) => {
+    setInternalUniversityData(values);
+  }, [setInternalUniversityData]);
 
-  function handleUnqDataFormChange(values) {
-    setFormValues({
-      ...formValues,
-      unqData: values,
-    });
-  }
 
   function handleSubmit() {
-    formValues.universityData.subjectUnq = formValues.unqData.subjectUnq;
-    const file = Object.assign(formValues.studentData, formValues.universityData);
+    const file = Object.assign(studentData, externalUniversityData, internalUniversityData);
     file.equivalence = 'SIN EVALUAR';
-
     API.newFile(file)
       .then((response) => {
-        alert("La solicitud ha sido cargada exitosamente")
+        alert('La solicitud ha sido cargada exitosamente');
       })
       .catch((response) => {
         console.log(response);
       });
-    
   }
 
   return (
     <>
       <div className="form">
         <StudentDataForm onChange={handleStudentDataFormChange} />
-
         <div className="universityForms">
           <div className="universityForm">
-            <UniversityDataForm onChange={handleUniversityDataFormChange} universityOptions={universityOptions} subjectOptions={subjectOptions} university="external" />
+            <ExternalUniversityDataForm
+              onChange={handleExternalUniversityDataFormChange}
+              universityOptions={universityOptions}
+              subjectOptions={subjectOptions}
+            />
           </div>
           <div className="universityForm">
-            <UniversityDataForm onChange={handleUnqDataFormChange} subjectOptions={unqOptions} university="inside" />
+            <InternalUniversityDataForm
+              onChange={handleInternalUniversityDataFormChange}
+              subjectOptions={unqOptions}
+            />
           </div>
         </div>
 
