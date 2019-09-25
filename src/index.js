@@ -7,6 +7,9 @@ import * as serviceWorker from './serviceWorker';
 import configureStore from './redux/store';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const store = configureStore();
 

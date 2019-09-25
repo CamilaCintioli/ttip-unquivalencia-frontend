@@ -7,20 +7,19 @@ import {
 import UniversitySubjectData from './UniversitySubjectData';
 import Dialogo from './dialogo';
 
-const algoritmos = ['1-Concepto de algoritmo', '2-Resolución de problemas', '3-Diseño del algoritmo',
-  '4-Programación del algoritmo', '5-Representación de algoritmos'];
-
-const estructuras = ['1-Concepto de estructuras', '2-Listas', '3-Recursión sobre listas', '4-Arboles', '5-Recursion sobre árboles'];
-
+const subjectPdfSrcDestination = 'http://clp.web.unq.edu.ar/wp-content/uploads/sites/110/2019/09/apuntes.pdf';
+const subjectPdfSrcOrigin = 'http://clp.web.unq.edu.ar/wp-content/uploads/sites/110/2019/09/practica4y5.pdf';
 
 class RequestPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      requestId: undefined, // props.match.params.solicitudId,
+      requestId: props.match.params.solicitudId,
       request: {},
       openDialogo: false,
     };
+
+    this.baseUrl = `${process.env.REACT_APP_BACKEND_URL}/api/v1`;
 
     this.giveEquivalence = this.giveEquivalence.bind(this);
     this.denyEquivalence = this.denyEquivalence.bind(this);
@@ -28,7 +27,7 @@ class RequestPage extends Component {
   }
 
   componentDidMount() {
-    axios.get(`//localhost:8000/api/v1/request/${this.state.requestId}`)
+    axios.get(`${this.baseUrl}/request/${this.state.requestId}`)
       .then((response) => {
         this.setState({ request: response.data });
       })
@@ -38,7 +37,7 @@ class RequestPage extends Component {
   }
 
   giveEquivalence() {
-    axios.post(`//localhost:8000/api/v1/request/${this.state.request.id}`, { equivalence: 'APROBADA' })
+    axios.post(`${this.baseUrl}/request/${this.state.request.id}`, { equivalence: 'APROBADA' })
       .then((response) => {
         alert('Solicitud de equivalencia aprobada');
         console.log(response);
@@ -50,7 +49,7 @@ class RequestPage extends Component {
   }
 
   denyEquivalence() {
-    axios.post(`//localhost:8000/api/v1/request/${this.state.request.id}`, { equivalence: 'NEGADA' })
+    axios.post(`${this.baseUrl}/request/${this.state.request.id}`, { equivalence: 'NEGADA' })
       .then((response) => {
         alert('Solicitud de equivalencia negada');
         console.log(response);
@@ -62,7 +61,7 @@ class RequestPage extends Component {
   }
 
   consultEquivalence(email) {
-    axios.post(`//localhost:8000/api/v1/request/${this.state.request.id}`, { equivalence: 'CONSULTADA' })
+    axios.post(`${this.baseUrl}/request/${this.state.request.id}`, { equivalence: 'CONSULTADA' })
       .then((response) => {
         alert('Se envio consulta al profesor, al mail');
         console.log(response);
@@ -81,15 +80,15 @@ class RequestPage extends Component {
             <Grid item xs={6} spacing={3}>
               <UniversitySubjectData
                 university={this.state.request.univesityOrigin}
-                subject={this.state.request.subjectUnq}
-                content={estructuras}
+                subject={this.state.request.subjectOrigin}
+                subjectPdfSrc={subjectPdfSrcOrigin}
               />
             </Grid>
             <Grid item xs={6} spacing={3}>
               <UniversitySubjectData
                 university="Universidad Nacional de Quilmes"
-                subject={this.state.request.subjectOrigin}
-                content={algoritmos}
+                subject={this.state.request.subjectUnq}
+                subjectPdfSrc={subjectPdfSrcDestination}
               />
             </Grid>
           </Grid>
