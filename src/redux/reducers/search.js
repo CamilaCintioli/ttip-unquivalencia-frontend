@@ -5,7 +5,7 @@ import {
   SEARCH_REQUEST_BY_ID_COMPLETE, SEARCH_REQUEST_BY_ID_ERROR,
 } from '../../consts/actionTypes';
 
-const initialState = {};
+const initialState = { request:{} };
 
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -22,11 +22,11 @@ export default function (state = initialState, action) {
     case SEARCH_REQUEST_ERROR:
       return { ...state, isLoadingRequest: false, request: null };
     case SEARCH_REQUEST_BY_ID_START:
-      return { ...state, isLoading: true, requestResult: null };
+      return { ...state, isLoading: true };
     case SEARCH_REQUEST_BY_ID_COMPLETE:
-      return { ...state, isLoading: false, movieResult: get(action, 'results.data') };
+      return { ...state, isLoading: false, request: get(action, 'equivalenceRequest.data') };
     case SEARCH_REQUEST_BY_ID_ERROR:
-      return { ...state, isLoading: false, movieResult: null };
+      return { ...state, isLoading: false };
     default:
       return { ...state };
   }
