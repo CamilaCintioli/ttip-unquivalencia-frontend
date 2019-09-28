@@ -6,7 +6,7 @@ import { Image } from 'react-bootstrap';
 import './Layout.css';
 import ViewPrimary from '../ViewPrimary';
 import Logo from './logo.jpeg';
-import NewRequestPage from '../NewRequest/NewRequestPage';
+import NewFilePage from '../NewRequest/NewFilePage';
 import RequestPage from '../Request/RequestPage';
 
 const Home = () => (
@@ -21,7 +21,7 @@ function Layout() {
     <Switch>
       <Route path="/" exact component={Home} />
       <Route path="/expediente" component={ViewPrimary} />
-      <Route path="/solicitud/new" component={NewRequestPage} />
+      <Route path="/solicitud/new" component={NewFilePage} />
       <Route path="/solicitud/:solicitudId" component={RequestPage} />
     </Switch>
 

@@ -19,6 +19,8 @@ function StudentDataForm({ values, handleChange, onChange }) {
         <input name="surname" value={values.surname} onChange={handleChange} />
         <label>Email:</label>
         <input name="mail" value={values.mail} onChange={handleChange} />
+        <label>DNI:</label>
+        <input name="dni" value={values.dni} onChange={handleChange} />
       </div>
     </>
   );
@@ -30,6 +32,7 @@ export default withFormik({
     surname: '',
     fileNumber: '',
     mail: '',
+    dni: '',
   }),
 })(StudentDataForm);
 
