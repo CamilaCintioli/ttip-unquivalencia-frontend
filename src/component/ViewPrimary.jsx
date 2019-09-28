@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid, CircularProgress } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import List from './ViewPrimary/List';
 import columnsRequest from './ViewPrimary/columnsRequest';
 import columnsFile from './ViewPrimary/columnsFile';
@@ -21,9 +22,7 @@ function ViewPrimary({ history }) {
     dispatch(searchRequest({ fileId: id }));
   }, [searchRequest]);
 
-  const handleSearchRequest = (id) => {
-    history.push(`/solicitud/${id}`);
-  };
+  const handleSearchRequest = (id) => window.location.pathname = `/solicitud/${id}`;
 
   return (
     <Grid container spacing={3}>
@@ -54,4 +53,4 @@ ViewPrimary.propTypes = {
 };
 
 
-export default ViewPrimary;
+export default withRouter(ViewPrimary);

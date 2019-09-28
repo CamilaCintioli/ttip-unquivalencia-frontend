@@ -6,9 +6,11 @@ import {
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import Menu from './Menu';
 
-
-export default function Nav({ classes, handleDrawerOpen, open }) {
+export default function Nav({
+  classes, handleDrawerOpen, open, clouseSession,
+}) {
   return (
     <div>
       <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
@@ -30,6 +32,7 @@ export default function Nav({ classes, handleDrawerOpen, open }) {
               <NotificationsIcon />
             </Badge>
           </IconButton>
+          <Menu logout={clouseSession} />
         </Toolbar>
       </AppBar>
     </div>

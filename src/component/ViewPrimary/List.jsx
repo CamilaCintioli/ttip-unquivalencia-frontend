@@ -9,6 +9,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import SearchIcon from '@material-ui/icons/Search';
+import { map, slice, size } from 'lodash';
 import useStyles from './style';
 
 
@@ -38,7 +39,7 @@ export default function List({
           <Table stickyHeader>
             <TableHead>
               <TableRow>
-                {columns.map((column) => (
+                {map(columns, (column) => (
                   <TableCell
                     key={column.id}
                     align={column.align}
@@ -50,9 +51,9 @@ export default function List({
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
+              {slice(rows, page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
                 <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
-                  {columns.map((column) => {
+                  {map(columns, (column) => {
                     const value = row[column.id];
                     if (column.label === 'ACCION') {
                       return (
@@ -77,7 +78,7 @@ export default function List({
         <TablePagination
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
-          count={rows.length}
+          count={size(rows)}
           rowsPerPage={rowsPerPage}
           page={page}
           backIconButtonProps={{

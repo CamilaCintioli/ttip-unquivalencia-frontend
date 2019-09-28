@@ -14,9 +14,9 @@ export default function UniversitySubjectData({ university, subject, subjectPdfS
       <Typography variant="h6" component="h6">
         {subject}
       </Typography>
-      <div style={{display: "grid", height: "500px"}}>
-      <PDFDisplay src={subjectPdfSrc}/>
-        </div>
+      <div style={{ display: 'grid', height: '500px' }}>
+        <PDFDisplay src={subjectPdfSrc} />
+      </div>
     </>
   );
 }
