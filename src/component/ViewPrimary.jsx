@@ -9,7 +9,7 @@ import columnsFile from './ViewPrimary/columnsFile';
 import { searchFile, searchRequest } from '../redux/actions/search';
 import { fileResults, requestResult } from '../redux/selectors';
 
-function ViewPrimary({ history }) {
+function ViewPrimary() {
   const rowsFile = useSelector((state) => fileResults(state));
   const rowsRequest = useSelector((state) => requestResult(state));
   const dispatch = useDispatch();

@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 import React from 'react';
 import ViewPrimary from '../ViewPrimary';
-import NewRequestPage from '../NewRequest/NewRequestPage';
+import NewFilePage from '../NewRequest/NewFilePage';
 import RequestPage from '../Request/RequestPage';
 import Home from '../Home';
 import SignIn from '../SignIn';
@@ -12,7 +12,7 @@ const routes = [
   { path: '/home', _component: Home },
   { path: '/expediente', _component: ViewPrimary },
   { path: '/solicitud/:solicitudId', _component: RequestPage },
-  { path: '/new/solicitud', _component: NewRequestPage },
+  { path: '/new/solicitud', _component: NewFilePage },
 ];
 
 
