@@ -13,50 +13,40 @@ import { userResult } from '../redux/selectors/index';
 import { isAuthenticated, logout } from '../service/userService';
 import AppRoute from './Router/AppRoute';
 
-export default function Dashboard({ history }) {
+export default function Dashboard() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const user = useSelector((state) => userResult(state));
   const dispatch = useDispatch();
+  const isValid = isAuthenticated(user);
   console.log('logeado is');
-  console.log(isAuthenticated(user));
+  console.log(isValid);
 
-  const singIn = (bodyUser) => {
-    dispatch(getUser(bodyUser));
-  };
 
-  const clouseSession = () => {
-    logout();
-  };
+  const singIn = (bodyUser) => dispatch(getUser(bodyUser));
 
-  const getClass = (classs) => (isAuthenticated(user) ? classs : null);
+  const getClass = (classs) => (isValid ? classs : null);
 
-  const layour = () => (
-    <>
+  return (
+    <div className={classes.root}>
       <CssBaseline />
-      {isAuthenticated(user)
-        ? <Nav classes={classes} handleDrawerOpen={() => setOpen(true)} open={open} clouseSession={clouseSession} />
+      {isValid
+        ? <Nav classes={classes} handleDrawerOpen={() => setOpen(true)} open={open} clouseSession={logout} />
         : null}
-      {isAuthenticated(user)
+      {isValid
         ? <SideBar classes={classes} handleDrawerClose={() => setOpen(false)} open={open} />
         : null}
       <main className={classes.content}>
         <div className={getClass(classes.appBarSpacer)} />
         <Container maxWidth="xl" className={getClass(classes.container)}>
           <Switch>
-            <AppRoute isAuthenticated={isAuthenticated(user)} onLogin={singIn} />
+            <AppRoute isAuthenticated={isValid} onLogin={singIn} />
           </Switch>
         </Container>
-        {isAuthenticated(user)
+        {isValid
           ? <Footer classes={classes} />
           : null}
       </main>
-    </>
-  );
-
-  return (
-    <div className={classes.root}>
-      {layour()}
     </div>
   );
 }

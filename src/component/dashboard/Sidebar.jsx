@@ -1,5 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
+import PropTypes from 'prop-types';
 import {
   IconButton, Drawer, List, Divider,
 } from '@material-ui/core';
@@ -26,3 +27,11 @@ export default function SideBar({ classes, handleDrawerClose, open }) {
     </Drawer>
   );
 }
+
+
+SideBar.propTypes = {
+  classes: PropTypes.object.isRequired,
+  handleDrawerClose: PropTypes.func.isRequired,
+  open: PropTypes.bool.isRequired,
+
+};

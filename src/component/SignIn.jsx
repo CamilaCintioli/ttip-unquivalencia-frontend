@@ -36,9 +36,7 @@ export default function SignIn({ onLogin }) {
 
   const handleLogin = () => onLogin(values);
 
-  const handleChange = (name) => (event) => {
-    setValues({ ...values, [name]: event.target.value });
-  };
+  const handleChange = (name) => (event) => setValues({ ...values, [name]: event.target.value });
 
   return (
     <Container component="main" maxWidth="xs">
