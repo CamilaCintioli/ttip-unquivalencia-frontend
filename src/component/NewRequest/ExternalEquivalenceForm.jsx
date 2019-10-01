@@ -141,7 +141,7 @@ function ExternalEquivalenceForm({
         <label>
                           Materia solicitada:
           <FormDataSelector
-            field="unqSubject"
+            field="subjectUnq"
             setFieldValue={setFieldValue}
             options={unqOptions}
             placeholder="Selecciona una materia"
@@ -205,7 +205,7 @@ export default withFormik({
     subjectOriginTotalHours: '',
     yearOfApproval: '',
     universityCareer: '',
-    unqSubject: '',
+    subjectUnq: '',
     unqSubjectWeeklyHours: '',
     unqSubjectTotalHours: '',
     subjectCore: '',
