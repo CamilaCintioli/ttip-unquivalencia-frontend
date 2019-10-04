@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import MaterialTable from 'material-table';
 import columns from './User/colums';
-import { getUsers } from '../redux/actions/user';
+import { registerUser, getUsers } from '../redux/actions/user';
 import { usersResults } from '../redux/selectors';
 
 function User() {
   const users = useSelector((state) => usersResults(state));
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(getUsers());
+  }, [dispatch]);
+
+  const createUser = useCallback((newData) => {
+    dispatch(registerUser(newData));
   }, [dispatch]);
 
   return (
@@ -19,7 +23,7 @@ function User() {
       columns={columns}
       data={users}
       editable={{
-        // onRowAdd: (newData) => createUser(newData),
+        onRowAdd: (newData) => createUser(newData),
         // onRowUpdate: (newData, oldData) => new Promise((resolve) => {
         //   setTimeout(() => {
         //     resolve();
