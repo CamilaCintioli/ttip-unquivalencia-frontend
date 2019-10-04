@@ -1,22 +1,19 @@
-import React, { useEffect, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { shape, string } from 'prop-types';
+import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import RequestDisplay from './RequestDisplay';
-import { searchRequestById } from '../../redux/actions/search';
 import { approveEquivalence, rejectEquivalence } from '../../redux/actions/updateEquivalence';
 
-export default function RequestPage(props) {
+export default function RequestPage({ request }) {
   const dispatch = useDispatch();
-  const request = useSelector((state) => state.search.request);
+
   const giveEquivalence = useCallback(() => {
-    dispatch(approveEquivalence({ requestId: props.match.params.solicitudId }));
+    dispatch(approveEquivalence({ requestId: request.id }));
   }, [dispatch]);
   const denyEquivalence = useCallback(() => {
-    dispatch(rejectEquivalence({ requestId: props.match.params.solicitudId }));
+    dispatch(rejectEquivalence({ requestId: request.id }));
   }, [dispatch]);
-  useEffect(() => {
-    dispatch(searchRequestById({ requestId: props.match.params.solicitudId }));
-  }, [dispatch]);
+
+
   return (
     <RequestDisplay
       request={request}
@@ -26,10 +23,10 @@ export default function RequestPage(props) {
   );
 }
 
-RequestPage.propTypes = {
-  match: shape({
-    params: shape({
-      solicitudId: string.isRequired,
-    }),
-  }).isRequired,
-};
+// RequestPage.propTypes = {
+//   match: shape({
+//     params: shape({
+//       solicitudId: string.isRequired,
+//     }),
+//   }).isRequired,
+// };
