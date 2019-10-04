@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import MaterialTable from 'material-table';
 import columns from './User/colums';
-// import logo from './logo.jpeg';
 import { getUsers } from '../redux/actions/user';
 import { usersResults } from '../redux/selectors';
 
@@ -10,36 +9,9 @@ function User() {
   const users = useSelector((state) => usersResults(state));
   const dispatch = useDispatch();
 
-  console.log('ussss', users);
-
   React.useEffect(() => {
     dispatch(getUsers());
   }, [dispatch]);
-  // const [state, setState] = React.useState({
-  //   data: [
-  //     {
-  //       url: logo,
-  //       name: 'Gabriela',
-  //       surname: 'Arevalo',
-  //       email: 'gabriela.b.arevalo@gmail.com ',
-  //       role: 'Admin',
-  //     },
-  //     {
-  //       url: logo,
-  //       name: 'Evangelina Pérez',
-  //       surname: 'Sobrero',
-  //       email: 'eperezsobrero@gmail.com',
-  //       role: 'User',
-  //     },
-  //     {
-  //       url: logo,
-  //       name: 'Susana',
-  //       surname: 'Rosito',
-  //       email: 'rosito.susana@gmail.com',
-  //       role: 'Docente',
-  //     },
-  //   ],
-  // });
 
   return (
     <MaterialTable
@@ -47,14 +19,7 @@ function User() {
       columns={columns}
       data={users}
       editable={{
-        // onRowAdd: (newData) => new Promise((resolve) => {
-        //   setTimeout(() => {
-        //     resolve();
-        //     const data = [...state.data];
-        //     data.push(newData);
-        //     setState({ ...state, data });
-        //   }, 600);
-        // }),
+        // onRowAdd: (newData) => createUser(newData),
         // onRowUpdate: (newData, oldData) => new Promise((resolve) => {
         //   setTimeout(() => {
         //     resolve();
