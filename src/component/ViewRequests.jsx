@@ -13,11 +13,9 @@ function ViewRequest(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(searchRequest({ fileId: props.match.params.solicitudId }));
-  }, [dispatch, props.match.params.solicitudId]);
+    dispatch(searchRequest({ fileId: props.match.params.fileId }));
+  }, [dispatch, props.match.params.fileId]);
 
-  console.log(requests);
-  console.log(size(requests));
 
   return (
     <>
