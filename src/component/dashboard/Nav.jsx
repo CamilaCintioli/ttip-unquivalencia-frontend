@@ -1,11 +1,10 @@
 import React from 'react';
 import clsx from 'clsx';
-
+import PropTypes from 'prop-types';
 import {
-  IconButton, AppBar, Toolbar, Typography, Badge,
+  IconButton, AppBar, Toolbar, Typography,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import Menu from './Menu';
 
 export default function Nav({
@@ -27,14 +26,17 @@ export default function Nav({
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                 UNQuivalencias
           </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={2} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
           <Menu logout={clouseSession} />
         </Toolbar>
       </AppBar>
     </div>
   );
 }
+
+Nav.propTypes = {
+  classes: PropTypes.object.isRequired,
+  handleDrawerOpen: PropTypes.func.isRequired,
+  open: PropTypes.bool.isRequired,
+  clouseSession: PropTypes.func.isRequired,
+
+};

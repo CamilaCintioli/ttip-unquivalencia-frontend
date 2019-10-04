@@ -1,6 +1,6 @@
 const columnsRequest = [
   { id: 'fileNumber', label: 'Nº EXPEDIENTE', minWidth: 100 },
-  { id: 'univesityOrigin', label: 'UNIVERSIDAD', minWidth: 100 },
+  { id: 'universityOrigin', label: 'UNIVERSIDAD', minWidth: 100 },
   { id: 'subjectOrigin', label: 'MATERIA ORIGEN', minWidth: 100 },
   {
     id: 'subjectUnq', label: 'MATERIA UNQ', minWidth: 100,

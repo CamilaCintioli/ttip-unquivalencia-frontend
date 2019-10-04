@@ -2,6 +2,8 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import PropTypes from 'prop-types';
+import Avatar from '@material-ui/core/Avatar';
 
 export default function SimpleMenu({ logout }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -17,7 +19,9 @@ export default function SimpleMenu({ logout }) {
   return (
     <div>
       <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-        MENU
+        <Avatar
+          src="https://icon-library.net/images/user-icon-image/user-icon-image-20.jpg"
+        />
       </Button>
       <Menu
         id="simple-menu"
@@ -31,3 +35,8 @@ export default function SimpleMenu({ logout }) {
     </div>
   );
 }
+
+
+SimpleMenu.propTypes = {
+  logout: PropTypes.func.isRequired,
+};

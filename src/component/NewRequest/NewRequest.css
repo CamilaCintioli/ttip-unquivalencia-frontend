@@ -14,8 +14,7 @@
   .studentForm {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    width: 35rem
+    width: 50%;
   }
 
   .form {

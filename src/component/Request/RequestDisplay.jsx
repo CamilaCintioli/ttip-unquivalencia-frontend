@@ -19,7 +19,7 @@ export default function RequestDisplay({ request, onEquivalenceGiven, onEquivale
                       <Grid container>
                         <Grid item xs={6}>
                           <UniversitySubjectData
-                            university={request.univesityOrigin}
+                            university={request.universityOrigin}
                             subject={request.subjectOrigin}
                             subjectPdfSrc={subjectPdfSrcOrigin}
                           />
@@ -55,7 +55,7 @@ RequestDisplay.defaultProps = { request: undefined };
 RequestDisplay.propTypes = {
   request: shape(
     {
-      univesityOrigin: string,
+      universityOrigin: string,
       subjectOrigin: string,
       subjectUnq: string,
     },
