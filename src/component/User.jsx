@@ -1,20 +1,24 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import MaterialTable from 'material-table';
+import { size } from 'lodash';
 import columns from './User/colums';
 import { registerUser, getUsers } from '../redux/actions/user';
 import { usersResults } from '../redux/selectors';
 
 function User() {
   const users = useSelector((state) => usersResults(state));
+  const _size = size(users);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getUsers());
-  }, [dispatch]);
+  }, [dispatch, _size]);
 
   const createUser = useCallback((newData) => {
     dispatch(registerUser(newData));
+    dispatch(getUsers());
   }, [dispatch]);
 
   return (
@@ -23,12 +27,7 @@ function User() {
       columns={columns}
       data={users}
       editable={{
-        onRowAdd: (newData) => new Promise((resolve) => {
-          setTimeout(() => {
-            resolve();
-            createUser(newData);
-          }, 600);
-        }),
+        onRowAdd: (newData) => new Promise((resolve) => resolve(createUser(newData))),
         onRowUpdate: (newData, oldData) => new Promise((resolve) => {
           setTimeout(() => {
             resolve();
