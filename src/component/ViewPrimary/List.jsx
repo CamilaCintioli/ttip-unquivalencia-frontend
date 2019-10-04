@@ -14,7 +14,7 @@ import useStyles from './style';
 
 
 export default function List({
-  title, columns, rows, handleSearch,
+  title, columns, rows, handleSearch, type,
 }) {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
@@ -58,7 +58,7 @@ export default function List({
                     if (column.label === 'ACCION') {
                       return (
                         <TableCell key={column.id} align={column.align}>
-                          <IconButton className={classes.button} aria-label="search" onClick={() => handleSearch(row.id)}>
+                          <IconButton className={classes.button} aria-label="search" onClick={() => (type === 'file' ? handleSearch(row.id) : handleSearch(row.fk_fileid, row.id))}>
                             <SearchIcon />
                           </IconButton>
                         </TableCell>

@@ -21,13 +21,13 @@ function ViewPrimary() {
     dispatch(searchRequest({ fileId: id }));
   }, [searchRequest]);
 
-  const handleSearchRequest = (id) => window.location.pathname = `/solicitud/${id}`;
+  const handleSearchRequest = (idFile, idRequest) => window.location.pathname = `file/${idFile}/solicitud/${idRequest}`;
 
   return (
     <Grid container spacing={3}>
       <Grid item xs={6}>
         {rowsFile
-          ? <List key="file" title="Expedientes" columns={columnsFile} rows={rowsFile} handleSearch={handleSearchRequests} />
+          ? <List key="file" title="Expedientes" columns={columnsFile} rows={rowsFile} handleSearch={handleSearchRequests} type="file" />
           : <CircularProgress size={100} color="primary" />}
       </Grid>
       <Grid item xs={6}>
@@ -39,6 +39,7 @@ function ViewPrimary() {
             columns={columnsRequest}
             rows={rowsRequest}
             handleSearch={handleSearchRequest}
+            type="request"
           />
           )
         }
