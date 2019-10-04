@@ -23,23 +23,22 @@ function User() {
       columns={columns}
       data={users}
       editable={{
-        onRowAdd: (newData) => createUser(newData),
-        // onRowUpdate: (newData, oldData) => new Promise((resolve) => {
-        //   setTimeout(() => {
-        //     resolve();
-        //     const data = [...state.data];
-        //     data[data.indexOf(oldData)] = newData;
-        //     setState({ ...state, data });
-        //   }, 600);
-        // }),
-        // onRowDelete: (oldData) => new Promise((resolve) => {
-        //   setTimeout(() => {
-        //     resolve();
-        //     const data = [...state.data];
-        //     data.splice(data.indexOf(oldData), 1);
-        //     setState({ ...state, data });
-        //   }, 600);
-        // }),
+        onRowAdd: (newData) => new Promise((resolve) => {
+          setTimeout(() => {
+            resolve();
+            createUser(newData);
+          }, 600);
+        }),
+        onRowUpdate: (newData, oldData) => new Promise((resolve) => {
+          setTimeout(() => {
+            resolve();
+          }, 600);
+        }),
+        onRowDelete: (oldData) => new Promise((resolve) => {
+          setTimeout(() => {
+            resolve();
+          }, 600);
+        }),
       }}
     />
   );
