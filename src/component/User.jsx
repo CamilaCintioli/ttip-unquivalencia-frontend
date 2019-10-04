@@ -10,6 +10,8 @@ function User() {
   const users = useSelector((state) => usersResults(state));
   const dispatch = useDispatch();
 
+  console.log('ussss', users);
+
   React.useEffect(() => {
     dispatch(getUsers());
   }, [dispatch]);

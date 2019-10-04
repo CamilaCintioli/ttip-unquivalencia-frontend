@@ -16,11 +16,11 @@ export default function (state = { userResult: loadUser() }, action) {
     case GET_USER_ERROR:
       return { ...state, isLoading: false, user: null };
     case GET_USERS_START:
-      return { ...state, isLoading: true, users: null };
+      return { ...state, isLoading: true };
     case GET_USERS_COMPLETE:
-      return { ...state, isLoading: false, users: get(action, 'results.data') };
+      return { ...state, isLoading: false, users: get(action, 'results.data.users') };
     case GET_USERS_ERROR:
-      return { ...state, isLoading: false, users: null };
+      return { ...state, isLoading: false };
     default:
       return { ...state };
   }

@@ -2,17 +2,27 @@
 import React from 'react';
 import { Avatar } from '@material-ui/core';
 
+import logo from '../logo.jpeg';
+
 const columns = [
   {
-    field: 'url',
+    field: 'id',
     title: 'Avatar',
-    render: (rowData) => <Avatar src={rowData.url} />,
+    render: () => <Avatar src={logo} />,
   },
   { title: 'Nombre', field: 'name' },
-  { title: 'Apellido', field: 'surname' },
+  { title: 'Apellido', field: 'lastName' },
   { title: 'Email', field: 'email' },
   { title: 'Role', field: 'role', initialEditValue: 'User' },
 
 ];
 
 export default columns;
+
+//     {
+//       url: logo,
+//       name: 'Evangelina Pérez',
+//       surname: 'Sobrero',
+//       email: 'eperezsobrero@gmail.com',
+//       role: 'User',
+//     },
