@@ -17,7 +17,6 @@ export default function (state = { userResult: loadUser(), users: [] }, action) 
     case GET_USER_ERROR:
       return { ...state, isLoading: false, user: null };
     case GET_USERS_START:
-      console.log('acaaaaaa', action)
       return { ...state, isLoading: true, users: get(action, 'payload') };
     case GET_USERS_COMPLETE:
       return { ...state, isLoading: false, users: get(action, 'results.data.users') };

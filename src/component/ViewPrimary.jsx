@@ -1,3 +1,5 @@
+/* eslint-disable no-return-assign */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import { Grid, CircularProgress } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';

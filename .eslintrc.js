@@ -20,7 +20,9 @@ module.exports = {
   },
   plugins: [
     'react',
+    'react-hooks',
   ],
   rules: {
-  },
+    "react-hooks/exhaustive-deps": 'warn' // <--- THIS IS THE NEW RULE
+  }
 };

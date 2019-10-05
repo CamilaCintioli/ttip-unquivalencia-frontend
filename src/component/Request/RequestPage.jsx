@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import RequestDisplay from './RequestDisplay';
