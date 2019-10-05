@@ -7,7 +7,7 @@ import {
 import { loadUser, saveUser } from '../../service/userService';
 
 
-export default function (state = { userResult: loadUser() }, action) {
+export default function (state = { userResult: loadUser(), users: [] }, action) {
   switch (action.type) {
     case GET_USER_START:
       return { ...state, isLoading: true, user: null };
@@ -17,7 +17,8 @@ export default function (state = { userResult: loadUser() }, action) {
     case GET_USER_ERROR:
       return { ...state, isLoading: false, user: null };
     case GET_USERS_START:
-      return { ...state, isLoading: true };
+      console.log('acaaaaaa', action)
+      return { ...state, isLoading: true, users: get(action, 'payload') };
     case GET_USERS_COMPLETE:
       return { ...state, isLoading: false, users: get(action, 'results.data.users') };
     case GET_USERS_ERROR:

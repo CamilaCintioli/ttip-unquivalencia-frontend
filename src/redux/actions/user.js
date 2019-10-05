@@ -8,7 +8,7 @@ export const getUser = (payload) => ({
   payload,
 });
 
-export const getUsers = (payload) => ({
+export const setUsers = (payload) => ({
   type: GET_USERS_START,
   payload,
 });
