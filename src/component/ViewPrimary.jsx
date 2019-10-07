@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import { Grid, CircularProgress } from '@material-ui/core';
-import { useSelector, useDispatch } from 'react-redux';
+import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import List from './ViewPrimary/List';
 import columnsRequest from './ViewPrimary/columnsRequest';
@@ -11,13 +11,13 @@ import { searchFile, searchRequest } from '../redux/actions/search';
 import { fileResults, requestResult } from '../redux/selectors';
 
 function ViewPrimary() {
-  const rowsFile = useSelector((state) => fileResults(state));
-  const rowsRequest = useSelector((state) => requestResult(state));
+  const rowsFile = useSelector((state) => fileResults(state), shallowEqual);
+  const rowsRequest = useSelector((state) => requestResult(state), shallowEqual);
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     dispatch(searchFile());
-  }, [dispatch]);
+  }, [dispatch, rowsRequest]);
 
   const handleSearchRequests = React.useCallback((id) => {
     dispatch(searchRequest({ fileId: id }));

@@ -5,7 +5,7 @@ import {
   SEARCH_REQUEST_BY_ID_COMPLETE, SEARCH_REQUEST_BY_ID_ERROR,
 } from '../../consts/actionTypes';
 
-const initialState = { request:{} };
+const initialState = { request: {} };
 
 export default function (state = initialState, action) {
   switch (action.type) {
