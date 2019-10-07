@@ -1,8 +1,8 @@
 import { put, call, takeLatest } from 'redux-saga/effects';
 import {
   GET_USER_START, GET_USER_ERROR, GET_USER_COMPLETE,
-  GET_USERS_COMPLETE, GET_USERS_ERROR, GET_USERS_START,
-  CREATE_USER_START, CREATE_USER_COMPLETE, CREATE_USER_ERROR,
+  GET_USERS_COMPLETE, GET_USERS_ERROR,
+  CREATE_USER_COMPLETE, CREATE_USER_ERROR,
 } from '../../consts/actionTypes';
 
 import apiCall from '../api';
@@ -36,6 +36,6 @@ export function* createUser({ payload }) {
 
 export default function* user() {
   yield takeLatest(GET_USER_START, getUser);
-  yield takeLatest(GET_USERS_START, getUsers);
-  yield takeLatest(CREATE_USER_START, createUser);
+  // yield takeLatest(GET_USERS_START, getUsers);
+  // yield takeLatest(CREATE_USER_START, createUser);
 }

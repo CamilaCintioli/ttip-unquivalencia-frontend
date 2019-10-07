@@ -1,46 +1,68 @@
-/* eslint-disable no-underscore-dangle */
-import React, { useEffect, useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+/* eslint-disable no-param-reassign */
+/* eslint-disable react/prop-types */
+/* eslint-disable react/destructuring-assignment */
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import MaterialTable from 'material-table';
-import { size } from 'lodash';
 import columns from './User/colums';
-import { registerUser, getUsers } from '../redux/actions/user';
-import { usersResults } from '../redux/selectors';
+import { setUsers } from '../redux/actions/user';
+import API from '../service/FileService';
 
-function User() {
-  const users = useSelector((state) => usersResults(state));
-  const _size = size(users);
-  const dispatch = useDispatch();
+class User extends Component {
+  componentDidMount() {
+    return this.updateUser();
+  }
 
-  useEffect(() => {
-    dispatch(getUsers());
-  }, [dispatch, _size]);
+  updateUser() {
+    return API.getUsersAxios()
+      .then((users) => {
+        this.props.setUsers(users);
+      })
+      .catch((err) => console.log(err));
+  }
 
-  const createUser = useCallback((newData) => {
-    dispatch(registerUser(newData));
-    dispatch(getUsers());
-  }, [dispatch]);
+  addUser(user) {
+    console.log('userrrrrrrr ', user);
+    return API.addUserAxios(user)
+      .then(() => this.updateUser())
+      .catch((err) => console.log(err));
+  }
 
-  return (
-    <MaterialTable
-      title="Usuarios"
-      columns={columns}
-      data={users}
-      editable={{
-        onRowAdd: (newData) => new Promise((resolve) => resolve(createUser(newData))),
-        onRowUpdate: (newData, oldData) => new Promise((resolve) => {
-          setTimeout(() => {
-            resolve();
-          }, 600);
-        }),
-        onRowDelete: (oldData) => new Promise((resolve) => {
-          setTimeout(() => {
-            resolve();
-          }, 600);
-        }),
-      }}
-    />
-  );
+  render() {
+    const { users } = this.props;
+
+    return (
+      <MaterialTable
+        title="Usuarios"
+        columns={columns}
+        data={users}
+        editable={{
+          onRowAdd: (newData) => this.addUser(newData),
+          onRowUpdate: (newData, oldData) => new Promise((resolve) => {
+            setTimeout(() => {
+              resolve();
+            }, 600);
+          }),
+          onRowDelete: (oldData) => new Promise((resolve) => {
+            setTimeout(() => {
+              resolve();
+            }, 600);
+          }),
+        }}
+      />
+    );
+  }
 }
 
-export default User;
+const mapStateToProps = (state) => ({
+  users: state.user.users,
+});
+
+const mapDispatchToProps = {
+  setUsers,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(User);
