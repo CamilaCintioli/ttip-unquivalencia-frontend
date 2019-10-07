@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
@@ -21,6 +22,7 @@ class User extends Component {
   }
 
   addUser(user) {
+    console.log('userrrrrrrr ', user);
     return API.addUserAxios(user)
       .then(() => this.updateUser())
       .catch((err) => console.log(err));
