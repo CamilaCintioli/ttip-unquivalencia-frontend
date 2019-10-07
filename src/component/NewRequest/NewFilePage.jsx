@@ -12,29 +12,30 @@ import API from '../../service/FileService';
 const emptyExternalRequest = {
   universityOrigin: '',
   careerOrigin: '',
-  originYear: '',
+  yearPlanOrigin: '',
   subjectOrigin: '',
   courseMode: '',
   subjectOriginWeeklyHours: '',
   subjectOriginTotalHours: '',
-  yearOfApproval: '',
-  universityCareer: '',
+  yearOfEquivalence: '',
+  careerUnq: '',
   subjectUnq: '',
-  unqSubjectWeeklyHours: '',
-  unqSubjectTotalHours: '',
-  subjectCore: '',
+  subjectWeeklyHoursUnq: '',
+  subjectTotalHoursUnq: '',
+  subjectCoreUnq: '',
   credits: '',
 };
 
 const emptyInternalRequest = {
   universityOrigin: 'Universidad Nacional de Quilmes',
   careerOrigin: '',
-  yearPlan: '',
+  yearPlanOrigin: '',
   subjectOrigin: '',
   yearOfApproval: '',
-  universityCareer: '',
+  careerUnq: '',
   subjectUnq: '',
 };
+
 
 export default function NewFilePage() {
   return (
@@ -52,7 +53,9 @@ export default function NewFilePage() {
       }}
       onSubmit={
           (values) => {
-            const file = Object.assign(values.student, values.requests[0]);
+            const file = Object.assign(values.student);
+            file.universityOrigin = values.requests[0].universityOrigin;
+            file.requests = values.requests;
             API.newFile(file)
               .then(() => { alert('Las solicitudes han sido cargadas exitosamente'); })
               .catch((response) => console.log(response));
@@ -122,15 +125,16 @@ Solicitud
   );
 }
 
+
 function InternalRequestField({ field: { name, value }, form: { setFieldValue } }) {
   return (
     <div className="studentForm">
       <Field name={`${name}.universityOrigin`} component={TextField} label="Universidad de origen" />
       <Field name={`${name}.careerOrigin`} component={TextField} label="Carrera de origen" />
-      <Field name={`${name}.yearPlan`} component={TextField} label="Año de plan" />
+      <Field name={`${name}.yearPlanOrigin`} component={TextField} label="Año de plan" />
       <Field name={`${name}.subjectOrigin`} component={TextField} label="Materia de origen" />
       <Field name={`${name}.yearOfApproval`} component={TextField} label="Año de aprobación" />
-      <Field name={`${name}.universityCareer`} component={TextField} label="Carrera UNQ" />
+      <Field name={`${name}.careerUnq`} component={TextField} label="Carrera UNQ" />
       <Field name={`${name}.subjectUnq`} component={TextField} label="Materia UNQ" />
     </div>
   );
@@ -142,17 +146,17 @@ function ExternalRequestField({ field: { name, value }, form: { setFieldValue } 
       <div className="studentForm">
         <Field name={`${name}.universityOrigin`} component={TextField} label="Universidad de origen" />
         <Field name={`${name}.careerOrigin`} component={TextField} label="Carrera de origen" />
-        <Field name={`${name}.originYear`} component={TextField} label="Año origen" />
+        <Field name={`${name}.yearPlanOrigin`} component={TextField} label="Año origen" />
         <Field name={`${name}.subjectOrigin`} component={TextField} label="Materia de origen" />
         <Field name={`${name}.courseMode`} component={TextField} label="Modalidad del curso" />
         <Field name={`${name}.subjectOriginWeeklyHours`} component={TextField} label="Horas semanales de la materia" />
         <Field name={`${name}.subjectOriginTotalHours`} component={TextField} label="Horas totales de la materia" />
-        <Field name={`${name}.yearOfApproval`} component={TextField} label="Año de aprobación" />
-        <Field name={`${name}.universityCareer`} component={TextField} label="Carrera UNQ" />
+        <Field name={`${name}.yearOfEquivalence`} component={TextField} label="Año de aprobación" />
+        <Field name={`${name}.careerUnq`} component={TextField} label="Carrera UNQ" />
         <Field name={`${name}.subjectUnq`} component={TextField} label="Materia UNQ" />
         <Field name={`${name}.unqSubjectWeeklyHours`} component={TextField} label="Horas semanales de materia UNQ" />
         <Field name={`${name}.unqSubjectTotalHours`} component={TextField} label="Horas totales de materia UNQ" />
-        <Field name={`${name}.subjectCore`} component={TextField} label="Nucleo de la materia" />
+        <Field name={`${name}.subjectCoreUnq`} component={TextField} label="Nucleo de la materia" />
         <Field name={`${name}.credits`} component={TextField} label="Creditos" />
 
       </div>
