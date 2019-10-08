@@ -1,3 +1,4 @@
+/* eslint-disable no-new */
 /* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback } from 'react';
@@ -7,12 +8,17 @@ import { approveEquivalence, rejectEquivalence } from '../../redux/actions/updat
 
 export default function RequestPage({ request }) {
   const dispatch = useDispatch();
-
   const giveEquivalence = useCallback(() => {
-    dispatch(approveEquivalence({ requestId: request.id }));
+    dispatch(approveEquivalence({
+      requestId: request.id,
+      fileId: request.fk_fileid,
+    }));
   }, [dispatch]);
   const denyEquivalence = useCallback(() => {
-    dispatch(rejectEquivalence({ requestId: request.id }));
+    dispatch(rejectEquivalence({
+      requestId: request.id,
+      fileId: request.fk_fileid,
+    }));
   }, [dispatch]);
 
 
