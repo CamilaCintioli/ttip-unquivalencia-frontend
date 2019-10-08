@@ -14,6 +14,7 @@ export default function RequestPage({ request }) {
       fileId: request.fk_fileid,
     }));
   }, [dispatch]);
+
   const denyEquivalence = useCallback(() => {
     dispatch(rejectEquivalence({
       requestId: request.id,

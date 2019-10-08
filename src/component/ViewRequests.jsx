@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { size } from 'lodash';
-import Steapper from './Request/Stepper';
+import Steapper from './Request/Stepper2';
 import RequestPage from './Request/RequestPage';
 import { searchRequest } from '../redux/actions/search';
 import { requestResult } from '../redux/selectors';
@@ -20,7 +19,7 @@ function ViewRequest(props) {
   return (
     <>
       <div className="row justify-content-md-center">
-        <Steapper activeStep={activeStep} setActiveStep={setActiveStep} size={size(requests)} />
+        <Steapper activeStep={activeStep} setActiveStep={setActiveStep} requests={requests} />
       </div>
       {requests ? <RequestPage request={requests[activeStep]} /> : null}
 
