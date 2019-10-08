@@ -1,11 +1,12 @@
 import React from 'react';
 import {
-  Formik, Form, Field, FieldArray, getIn,
+  Formik, Form, Field, FieldArray, getIn, ErrorMessage,
 } from 'formik';
 import TextFieldUI from '@material-ui/core/TextField';
 import './NewRequest.css';
 import Button from '@material-ui/core/Button';
 import Select from 'react-select';
+import * as Yup from 'yup';
 import API from '../../service/FileService';
 
 
@@ -36,6 +37,19 @@ const emptyInternalRequest = {
   subjectUnq: '',
 };
 
+const validateSchema = Yup.object().shape({
+  student: Yup.object().shape({
+    fileNumber: Yup.string()
+      .min(3, 'Too short')
+      .max(20, 'Too long')
+      .required('Required'),
+    name: Yup.string().required('Required'),
+    surname: Yup.string().required('Required'),
+    mail: Yup.string().email('Should be a valid email'),
+    dni: Yup.string().matches(/(0|1|2|3|4|5|6|7|8|9)/, { message: 'Numbers only', excludeEmptyString: true }),
+  }),
+});
+
 
 export default function NewFilePage() {
   return (
@@ -60,8 +74,8 @@ export default function NewFilePage() {
               .then(() => { alert('Las solicitudes han sido cargadas exitosamente'); })
               .catch((response) => console.log(response));
           }
-
-      }
+}
+      validationSchema={validateSchema}
     >
       {({ setFieldValue, values }) => (
         <Form>
@@ -169,10 +183,15 @@ function StudentField({ field: { name, value }, form: { setFieldValue } }) {
     <>
       <div className="studentForm">
         <Field name={`${name}.fileNumber`} component={TextField} label="Nro de expediente" />
+        <ErrorMessage name={`${name}.fileNumber`} />
         <Field name={`${name}.name`} component={TextField} label="Nombre" />
+        <ErrorMessage name={`${name}.name`} />
         <Field name={`${name}.surname`} component={TextField} label="Apellido" />
+        <ErrorMessage name={`${name}.surname`} />
         <Field name={`${name}.mail`} component={TextField} label="Mail" />
+        <ErrorMessage name={`${name}.mail`} />
         <Field name={`${name}.dni`} component={TextField} label="DNI" />
+        <ErrorMessage name={`${name}.dni`} />
       </div>
     </>
   );
