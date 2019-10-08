@@ -1,98 +1,103 @@
-import React, { useState } from 'react';
-import Avatar from '@material-ui/core/Avatar';
+import React from 'react';
+import {
+  Formik, Form, Field, ErrorMessage,
+} from 'formik';
+import TextFieldUI from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Avatar from '@material-ui/core/Avatar';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import * as Yup from 'yup';
+import { useSelector } from 'react-redux';
 import useStyles from './SingIn/style';
+import { userError } from '../redux/selectors';
 
-function Copyright() {
+
+const validateSignUp = Yup.object().shape({
+  email: Yup.string()
+    .email('Should be a valid email')
+    .required('Required'),
+  password: Yup.string()
+    .min(8, 'Password must have al least 8 characters')
+    .required('Required'),
+});
+
+
+export default function SignIn({ onLogin }) {
+  const loginErrors = useSelector((state) => userError(state));
+  const classes = useStyles();
+
+  const showMailErrorMessages = () => (
+    <div>
+      {(loginErrors.length !== 0 && loginErrors[0].includes('inexistente'))
+         && <Typography variant="body2">Incorrect email</Typography>}
+      <ErrorMessage name="email" />
+    </div>
+  );
+
+  const showPasswordErrorMessages = () => (
+    <div>
+      {(loginErrors.length !== 0 && loginErrors[0].includes('Password'))
+         && <Typography variant="body2">Incorrect password</Typography>}
+      <ErrorMessage name="password" />
+    </div>
+  );
+
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>
-      {' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
+    <Formik
+      initialValues={{ email: '', password: '' }}
+      onSubmit={(values) => {
+        onLogin(values);
+      }}
+      validationSchema={validateSignUp}
+    >
+      {({ setFieldValue, values, errors }) => (
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <div className={classes.paper}>
+            <Avatar className={classes.avatar}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+            Sign in
+            </Typography>
+            <Form className={classes.form} noValidate>
+              <Field name="email" component={TextField} label="Email" variant="outlined" fullWidth margin="normal" />
+              {showMailErrorMessages()}
+              <Field name="password" component={TextField} label="Password" variant="outlined" type="password" fullWidth margin="normal" />
+              {showPasswordErrorMessages()}
+              <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                type="submit"
+              >
+              Sign In
+              </Button>
+            </Form>
+          </div>
+        </Container>
+      )}
+
+    </Formik>
   );
 }
 
-export default function SignIn({ onLogin }) {
-  const classes = useStyles();
-  const [values, setValues] = useState({
-    email: '',
-    password: '',
-  });
-
-
-  const handleLogin = () => onLogin(values);
-
-  const handleChange = (name) => (event) => setValues({ ...values, [name]: event.target.value });
-
+function TextField({
+  form: { handleFocus, handleChange, handleBlur },
+  field: { name, value }, ...props
+}) {
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <form className={classes.form} noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            value={values.email}
-            onChange={handleChange('email')}
-            autoFocus
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            value={values.password}
-            onChange={handleChange('password')}
-            autoComplete="current-password"
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          <Button
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            onClick={handleLogin}
-          >
-              Sign In
-          </Button>
-        </form>
-      </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
-    </Container>
+    <TextFieldUI
+      {...props}
+      name={name}
+      value={value}
+      onChange={handleChange}
+      onBlur={handleBlur}
+      onFocus={handleFocus}
+    />
   );
 }
