@@ -12,7 +12,8 @@ export function* getUser({ payload }) {
     const results = yield call(apiCall, '/user/session', payload, null, 'POST');
     yield put({ type: GET_USER_COMPLETE, results });
   } catch (error) {
-    yield put({ type: GET_USER_ERROR, error });
+    const errors = error.response.data;
+    yield put({ type: GET_USER_ERROR, errors });
   }
 }
 
