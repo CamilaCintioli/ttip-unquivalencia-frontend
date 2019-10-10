@@ -57,8 +57,7 @@ export default function NewFilePage() {
             file.universityOrigin = values.requests[0].universityOrigin;
             file.requests = values.requests;
             API.newFile(file)
-              .then(() => { alert('Las solicitudes han sido cargadas exitosamente'); })
-              .catch((response) => console.log(response));
+              .then(() => { alert('Las solicitudes han sido cargadas exitosamente'); });
           }
 
       }
