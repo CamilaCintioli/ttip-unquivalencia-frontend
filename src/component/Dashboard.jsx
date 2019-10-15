@@ -13,6 +13,7 @@ import { getUser } from '../redux/actions/user';
 import { userResult } from '../redux/selectors/index';
 import { isAuthenticated, logout } from '../service/userService';
 import AppRoute from './Router/AppRoute';
+import apiCall from '../redux/api';
 
 export default function Dashboard() {
   const classes = useStyles();
@@ -28,11 +29,13 @@ export default function Dashboard() {
 
   const getClass = (classs) => (isValid ? classs : null);
 
+  const signOut = () => apiCall('/user/invalidate/all/sessions', null, null, 'POST').then(() => logout());
+
   return (
     <div className={classes.root}>
       <CssBaseline />
       {isValid
-        ? <Nav classes={classes} handleDrawerOpen={() => setOpen(true)} open={open} clouseSession={logout} />
+        ? <Nav classes={classes} handleDrawerOpen={() => setOpen(true)} open={open} clouseSession={signOut} />
         : null}
       {isValid
         ? <SideBar classes={classes} handleDrawerClose={() => setOpen(false)} open={open} />

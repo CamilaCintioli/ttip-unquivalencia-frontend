@@ -101,8 +101,7 @@ export default function NewFilePage() {
               file.requests = values.externalRequests;
             }
             API.newFile(file)
-              .then(() => { alert('Las solicitudes han sido cargadas exitosamente'); })
-              .catch((response) => console.log(response));
+              .then(() => { alert('Las solicitudes han sido cargadas exitosamente'); });
           }
 }
       validationSchema={validateSchema}

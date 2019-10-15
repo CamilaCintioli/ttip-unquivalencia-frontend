@@ -17,15 +17,12 @@ class User extends Component {
     return API.getUsersAxios()
       .then((users) => {
         this.props.setUsers(users);
-      })
-      .catch((err) => console.log(err));
+      });
   }
 
   addUser(user) {
-    console.log('userrrrrrrr ', user);
     return API.addUserAxios(user)
-      .then(() => this.updateUser())
-      .catch((err) => console.log(err));
+      .then(() => this.updateUser());
   }
 
   render() {

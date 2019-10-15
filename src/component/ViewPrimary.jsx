@@ -4,6 +4,7 @@ import React from 'react';
 import { Grid, CircularProgress } from '@material-ui/core';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { findIndex } from 'lodash';
 import List from './ViewPrimary/List';
 import columnsRequest from './ViewPrimary/columnsRequest';
 import columnsFile from './ViewPrimary/columnsFile';
@@ -23,7 +24,10 @@ function ViewPrimary() {
     dispatch(searchRequest({ fileId: id }));
   }, [searchRequest]);
 
-  const handleSearchRequest = (idFile, idRequest) => window.location.pathname = `file/${idFile}/solicitud/${idRequest}`;
+  const handleSearchRequest = (idFile, idRequest) => {
+    const index = findIndex(rowsRequest, (request) => request.id === idRequest);
+    window.location.pathname = `file/${idFile}/solicitud/${index}`;
+  };
 
   return (
     <Grid container spacing={3}>

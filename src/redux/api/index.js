@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { get } from 'lodash';
-import { loadUser } from '../../service/userService';
+import { loadUser, logout } from '../../service/userService';
 
 const baseUrl = `${process.env.REACT_APP_BACKEND_URL}/api/v1`;
 
@@ -14,6 +14,9 @@ const apiCall = (url, data, headers, method) => axios({
     ...headers,
     Authorization: `Bearer ${get(loadUser(), 'token', '')}`,
   },
+}).catch((error) => {
+  console.log('entro', error.response.status);
+  return (error.response.status === 450 ? logout() : error);
 });
 
 export default apiCall;
