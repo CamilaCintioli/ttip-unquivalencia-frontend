@@ -1,47 +1,60 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import MobileStepper from '@material-ui/core/MobileStepper';
-import Button from '@material-ui/core/Button';
-import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
-import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import { makeStyles } from '@material-ui/core/styles';
+import Stepper from '@material-ui/core/Stepper';
+import Step from '@material-ui/core/Step';
+import StepButton from '@material-ui/core/StepButton';
+import { map } from 'lodash';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import CloseIcon from '@material-ui/icons/Close';
+import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 
-const useStyles = makeStyles({
+
+const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 400,
-    flexGrow: 1,
+    width: '90%',
   },
-});
+  button: {
+    marginRight: theme.spacing(1),
+  },
+  completed: {
+    display: 'inline-block',
+  },
+  instructions: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+  },
+}));
 
-export default function Stepper({ activeStep, setActiveStep, size }) {
+
+export default function HorizontalNonLinearStepper({ activeStep, changeStep, requests }) {
   const classes = useStyles();
-  const theme = useTheme();
+  const getIcon = (state) => {
+    switch (state) {
+      case 'APROBADA':
+        return <CheckCircleIcon color="primary" />;
+      case 'NEGADA':
+        return <CloseIcon color="error" />;
+      case 'CONSULTA':
+        return <SupervisedUserCircleIcon color="secondary" />;
+      default:
+        return <CheckBoxOutlineBlankIcon color="primary" />;
+    }
+  };
 
-
-  const handleNext = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
-
-
-  const handleBack = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
-
+  const handleStep = (step) => () => changeStep(step);
 
   return (
-    <MobileStepper
-      variant="dots"
-      steps={size}
-      position="static"
-      activeStep={activeStep}
-      className={classes.root}
-      nextButton={(
-        <Button size="small" onClick={handleNext} disabled={activeStep === size - 1}>
-          Next
-          {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
-        </Button>
-)}
-      backButton={(
-        <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-          {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-          Back
-        </Button>
-)}
-    />
+    <div className={classes.root}>
+      <Stepper nonLinear activeStep={activeStep}>
+        {map(requests, (request, index) => (
+          <Step key={request.id}>
+            <StepButton onClick={handleStep(index)} completed icon={getIcon(request.equivalence)}>
+              {request.subjectOrigin}
+            </StepButton>
+          </Step>
+        ))}
+      </Stepper>
+    </div>
   );
 }

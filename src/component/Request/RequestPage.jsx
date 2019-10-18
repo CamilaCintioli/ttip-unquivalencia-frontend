@@ -24,18 +24,12 @@ export default function RequestPage({ request }) {
 
 
   return (
-    <RequestDisplay
-      request={request}
-      onEquivalenceGiven={giveEquivalence}
-      onEquivalenceDenied={denyEquivalence}
-    />
+    <>
+      <RequestDisplay
+        request={request}
+        onEquivalenceGiven={giveEquivalence}
+        onEquivalenceDenied={denyEquivalence}
+      />
+    </>
   );
 }
-
-// RequestPage.propTypes = {
-//   match: shape({
-//     params: shape({
-//       solicitudId: string.isRequired,
-//     }),
-//   }).isRequired,
-// };
