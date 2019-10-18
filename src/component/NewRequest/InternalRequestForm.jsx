@@ -2,10 +2,10 @@ import React from 'react';
 import {
   Formik, Form, Field, ErrorMessage,
 } from 'formik';
-import TextFieldUI from '@material-ui/core/TextField';
 import './NewRequest.css';
 import Button from '@material-ui/core/Button';
 import * as Yup from 'yup';
+import TextField from './TextField';
 
 const validateInternalRequest = Yup.object().shape({
   subjectOrigin: Yup.string().required('Required'),
@@ -49,18 +49,5 @@ function InternalRequestField({ field: { name, value }, form: { setFieldValue } 
       <Field name="subjectUnq" component={TextField} label="Materia UNQ" />
       <ErrorMessage name="subjectUnq" />
     </div>
-  );
-}
-
-function TextField({ form: { handleFocus, handleChange, handleBlur }, field: { name, value }, ...props }) {
-  return (
-    <TextFieldUI
-      {...props}
-      name={name}
-      value={value}
-      onChange={handleChange}
-      onBlur={handleBlur}
-      onFocus={handleFocus}
-    />
   );
 }

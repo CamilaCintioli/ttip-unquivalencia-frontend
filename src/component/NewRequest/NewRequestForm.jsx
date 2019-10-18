@@ -8,6 +8,7 @@ import { searchFileByFileNumber } from '../../redux/actions/search';
 import { createRequest } from '../../redux/actions/createRequest';
 import { fileResult } from '../../redux/selectors';
 import InternalRequestForm from './InternalRequestForm';
+import ExternalRequestForm from './ExternalRequestForm'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,7 +51,7 @@ export default function NewRequestForm(props) {
       />
       )}
       {isInternal && <InternalRequestForm onSubmit={submitRequest} />}
-      {!isInternal && <ExternalRequestForm />}
+      {!isInternal && <ExternalRequestForm onSubmit={submitRequest} />}
     </>
   );
 }
@@ -99,6 +100,4 @@ function StudentDataDisplay({
   );
 }
 
-function ExternalRequestForm() {
-  return (<h1>Externa</h1>);
-}
+
