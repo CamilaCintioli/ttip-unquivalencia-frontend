@@ -1,9 +1,9 @@
 /* eslint-disable no-return-assign */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React from 'react';
-import { Grid, CircularProgress } from '@material-ui/core';
+import React, { useState } from 'react';
+import { Grid, CircularProgress, Button } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import List from './ViewPrimary/List';
 import columnsRequest from './ViewPrimary/columnsRequest';
 import columnsFile from './ViewPrimary/columnsFile';
@@ -14,14 +14,16 @@ function ViewPrimary() {
   const rowsFile = useSelector((state) => fileResults(state));
   const rowsRequest = useSelector((state) => requestResult(state));
   const dispatch = useDispatch();
+  const [fileNumber, setFileNumber] = useState(undefined);
 
   React.useEffect(() => {
     dispatch(searchFile());
   }, [dispatch]);
 
-  const handleSearchRequests = React.useCallback((id) => {
+  const handleSearchRequests = React.useCallback((id, fileNumber) => {
     dispatch(searchRequest({ fileId: id }));
-  }, [searchRequest]);
+    setFileNumber(fileNumber);
+  }, [searchRequest, setFileNumber]);
 
   const handleSearchRequest = (idFile, idRequest) => window.location.pathname = `file/${idFile}/solicitud/${idRequest}`;
 
@@ -35,14 +37,19 @@ function ViewPrimary() {
       <Grid item xs={6}>
         {
           rowsRequest && (
-          <List
-            key="request"
-            title="Solicitudes"
-            columns={columnsRequest}
-            rows={rowsRequest}
-            handleSearch={handleSearchRequest}
-            type="request"
-          />
+            <>
+              <List
+                key="request"
+                title="Solicitudes"
+                columns={columnsRequest}
+                rows={rowsRequest}
+                handleSearch={handleSearchRequest}
+                type="request"
+              />
+              <Link to={`file/${fileNumber}/request/new`}>
+                <Button color="primary" variant="contained">Cargar solicitud</Button>
+              </Link>
+            </>
           )
         }
       </Grid>
