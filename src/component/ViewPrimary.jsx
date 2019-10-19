@@ -1,9 +1,9 @@
 /* eslint-disable no-return-assign */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React from 'react';
-import { Grid, CircularProgress } from '@material-ui/core';
+import React, { useState } from 'react';
+import { Grid, CircularProgress, Button } from '@material-ui/core';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { findIndex } from 'lodash';
 import List from './ViewPrimary/List';
 import columnsRequest from './ViewPrimary/columnsRequest';
@@ -21,9 +21,9 @@ function ViewPrimary() {
     dispatch(searchFile());
   }, [dispatch, rowsRequest]);
 
-  const handleSearchRequests = React.useCallback((id, fileNum) => {
+  const handleSearchRequests = React.useCallback((id, fileNumber) => {
     dispatch(searchRequest({ fileId: id }));
-    setFileNumber(fileNum);
+    setFileNumber(fileNumber);
   }, [searchRequest, setFileNumber]);
 
   const handleSearchRequest = (idFile, idRequest) => {
