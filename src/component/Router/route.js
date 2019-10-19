@@ -3,7 +3,7 @@ import NewFilePage from '../NewRequest/NewFilePage';
 import VieweRequests from '../ViewRequests';
 import Home from '../Home';
 import User from '../User';
-import NewRequestForm from '../NewRequest/NewRequestForm';
+import NewRequestPage from '../NewRequest/NewRequestPage';
 
 
 const routes = [
@@ -12,7 +12,7 @@ const routes = [
   { path: '/file/:fileId/solicitud/:solicitudId', _component: VieweRequests },
   { path: '/new/solicitud', _component: NewFilePage },
   { path: '/usuarios', _component: User },
-  { path: '/file/:fileId/request/new', _component: NewRequestForm }
+  { path: '/file/:fileId/request/new', _component: NewRequestPage }
 ];
 
 export default routes;
