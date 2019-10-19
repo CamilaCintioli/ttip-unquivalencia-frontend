@@ -28,7 +28,7 @@ function ViewPrimary() {
 
   const handleSearchRequest = (idFile, idRequest) => {
     const index = findIndex(rowsRequest, (request) => request.id === idRequest);
-    window.location.pathname = `file/${idFile}/solicitud/${index}`;
+    window.location.pathname = `file/${idFile}/solicitud/${idRequest}/${index}`;
   };
 
   return (

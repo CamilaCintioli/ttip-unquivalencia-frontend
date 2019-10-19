@@ -11,4 +11,6 @@ export const userResult = (state) => get(state, 'user.userResult');
 export const userState = (state) => get(state, 'user.userResult');
 export const isLoadingUser = (state) => get(state, 'user.isLoading');
 export const usersResults = (state) => get(state, 'user.users');
-export const userError = (state)=> get(state,'user.userError');
+export const userError = (state) => get(state, 'user.userError');
+
+export const matchs = (state) => get(state, 'match.matchResult');
