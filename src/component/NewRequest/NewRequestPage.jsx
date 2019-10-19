@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NewRequestForm(props) {
+export default function NewRequestPage(props) {
   const file = useSelector((state) => fileResult(state));
   const dispatch = useDispatch();
   const isInternal = file ? file.universityOrigin === 'UNQ' : false;

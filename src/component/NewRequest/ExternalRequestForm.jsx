@@ -6,6 +6,8 @@ import './NewRequest.css';
 import Button from '@material-ui/core/Button';
 import * as Yup from 'yup';
 import TextField from './TextField';
+import FormDataSelector from './FormDataSelector';
+import Selector from './Selector';
 
 const validateExternalRequest = Yup.object().shape({
   subjectOrigin: Yup.string().required('Required'),
@@ -24,7 +26,7 @@ export default function ExternalRequestForm({ onSubmit }) {
         subjectOriginWeeklyHours: '',
         subjectOriginTotalHours: '',
         yearOfEquivalence: '',
-        careerUnq: '',
+        careerUnq: 'TPI',
         subjectUnq: '',
         subjectWeeklyHoursUnq: '',
         subjectTotalHoursUnq: '',
@@ -55,9 +57,9 @@ function ExternalRequestField({ field: { name, value }, form: { setFieldValue } 
         <Field name="subjectOriginWeeklyHours" component={TextField} label="Horas semanales de la materia" />
         <Field name="subjectOriginTotalHours" component={TextField} label="Horas totales de la materia" />
         <Field name="yearOfEquivalence" component={TextField} label="Año de aprobación" />
-        <Field name="careerUnq" component={TextField} label="Carrera UNQ" />
+        <Selector placeholder="careerUnq" field="careerUnq" setFieldValue={setFieldValue} />
         <ErrorMessage name="careerUnq" />
-        <Field name="subjectUnq" component={TextField} label="Materia UNQ" />
+        <FormDataSelector options={unqSubjects} placeholder="Selecciona una materia de la UNQ" field="subjectUnq" setFieldValue={setFieldValue} />
         <ErrorMessage name="subjectUnq" />
         <Field name="unqSubjectWeeklyHours" component={TextField} label="Horas semanales de materia UNQ" />
         <Field name="unqSubjectTotalHours" component={TextField} label="Horas totales de materia UNQ" />
@@ -69,3 +71,24 @@ function ExternalRequestField({ field: { name, value }, form: { setFieldValue } 
   );
 }
 
+
+const unqSubjects = [
+  { label: 'Introducción a la progamación', value: 'Introduccion a la programacion' },
+  { label: 'Organización de Computadoras', value: 'Organización de Computadoras' },
+  { label: 'Matemática', value: 'Matemática' },
+  { label: 'Programación con Objetos I', value: 'Programación con Objetos I' },
+  { label: 'Bases de datos', value: 'Bases de datos' },
+  { label: 'Estructuras de datos', value: 'Estructuras de datos' },
+  { label: 'Programación con Objetos II', value: 'Programación con Objetos II' },
+  { label: 'Redes de computadoras', value: 'Redes de computadoras' },
+  { label: 'Sistemas operativos', value: 'Sistemas operativos' },
+  { label: 'Programación concurrente', value: 'Programación concurrente' },
+  { label: 'Matemática II', value: 'Matemática II' },
+  { label: 'Elementos de Ingeniería de Software', value: 'Elementos de Ingeniería de Software' },
+  { label: 'Construcción de Interfaces de Usuario', value: 'Construcción de Interfaces de Usuario' },
+  { label: 'Estrategias de Persistencia', value: 'Estrategias de Persistencia' },
+  { label: 'Programación funcional', value: 'Programación funcional' },
+  { label: 'Desarrollo de aplicaciones', value: 'Desarrollo de aplicaciones' },
+  { label: 'Seguridad Informática', value: 'Seguridad Informática' },
+
+];
