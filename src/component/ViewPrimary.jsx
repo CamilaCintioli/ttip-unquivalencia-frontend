@@ -1,9 +1,10 @@
 /* eslint-disable no-return-assign */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState } from 'react';
-import { Grid, CircularProgress, Button } from '@material-ui/core';
-import { useSelector, useDispatch } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
+import React from 'react';
+import { Grid, CircularProgress } from '@material-ui/core';
+import { shallowEqual, useSelector, useDispatch } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { findIndex } from 'lodash';
 import List from './ViewPrimary/List';
 import columnsRequest from './ViewPrimary/columnsRequest';
 import columnsFile from './ViewPrimary/columnsFile';
@@ -11,21 +12,24 @@ import { searchFile, searchRequest } from '../redux/actions/search';
 import { fileResults, requestResult } from '../redux/selectors';
 
 function ViewPrimary() {
-  const rowsFile = useSelector((state) => fileResults(state));
-  const rowsRequest = useSelector((state) => requestResult(state));
+  const rowsFile = useSelector((state) => fileResults(state), shallowEqual);
+  const rowsRequest = useSelector((state) => requestResult(state), shallowEqual);
   const dispatch = useDispatch();
   const [fileNumber, setFileNumber] = useState(undefined);
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     dispatch(searchFile());
-  }, [dispatch]);
+  }, [dispatch, rowsRequest]);
 
-  const handleSearchRequests = React.useCallback((id, fileNumber) => {
+  const handleSearchRequests = React.useCallback((id, fileNum) => {
     dispatch(searchRequest({ fileId: id }));
-    setFileNumber(fileNumber);
+    setFileNumber(fileNum);
   }, [searchRequest, setFileNumber]);
 
-  const handleSearchRequest = (idFile, idRequest) => window.location.pathname = `file/${idFile}/solicitud/${idRequest}`;
+  const handleSearchRequest = (idFile, idRequest) => {
+    const index = findIndex(rowsRequest, (request) => request.id === idRequest);
+    window.location.pathname = `file/${idFile}/solicitud/${index}`;
+  };
 
   return (
     <Grid container spacing={3}>
