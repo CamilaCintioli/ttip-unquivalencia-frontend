@@ -22,7 +22,7 @@ export default function NewRequestPage(props) {
   const isInternal = file ? file.universityOrigin === 'UNQ' : false;
 
   useEffect(() => {
-    dispatch(searchFileByFileNumber({ fileNumber: props.match.params.fileId }));
+    dispatch(searchFileByFileNumber({ fileNumber: props.match.params.fileId.replace('-', '/') }));
   }, [dispatch, props.match.params.fileId]);
 
   const submitRequest = useCallback((request) => {

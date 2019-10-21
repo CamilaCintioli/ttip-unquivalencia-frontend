@@ -21,9 +21,9 @@ function ViewPrimary() {
     dispatch(searchFile());
   }, [dispatch, rowsRequest]);
 
-  const handleSearchRequests = React.useCallback((id, fileNumber) => {
+  const handleSearchRequests = React.useCallback((id, fileNum) => {
     dispatch(searchRequest({ fileId: id }));
-    setFileNumber(fileNumber);
+    setFileNumber(fileNum.replace('/', '-'));
   }, [searchRequest, setFileNumber]);
 
   const handleSearchRequest = (idFile, idRequest) => {
