@@ -41,7 +41,7 @@ export default function RequestDisplay({ request, onEquivalenceGiven, onEquivale
                       >
                         <Button onClick={onEquivalenceGiven}>DAR EQUIVALENCIA</Button>
                         <Button onClick={onEquivalenceDenied}>NEGAR EQUIVALENCIA</Button>
-                        <Dialogo>Consultar</Dialogo>
+                        <Dialogo consultEquivalence={(values)=> console.log(values)}>Consultar</Dialogo>
                       </ButtonGroup>
                     </Container>
                   </Container>
