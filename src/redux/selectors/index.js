@@ -14,3 +14,5 @@ export const usersResults = (state) => get(state, 'user.users');
 export const userError = (state) => get(state, 'user.userError');
 
 export const matchs = (state) => get(state, 'match.matchResult');
+
+export const stepper = (state) => get(state, 'stepper.stepperResult');

@@ -12,7 +12,6 @@ import { requestResult, matchs } from '../redux/selectors';
 import Match from './Request/Match';
 import ListMatch from './Request/Match/ListMatch';
 
-
 function ViewRequest(props) {
   const { fileId, index, requestId } = props.match.params;
   const requests = useSelector((state) => requestResult(state));
@@ -20,7 +19,6 @@ function ViewRequest(props) {
   const [activeStep, setActiveStep] = useState(Number.parseInt(index));
   const dispatch = useDispatch();
   const history = useHistory();
-
 
   const match = useCallback((requestId) => {
     dispatch(getMatch({ requestId }));
