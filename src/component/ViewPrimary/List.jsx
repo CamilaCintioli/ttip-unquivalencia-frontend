@@ -58,7 +58,7 @@ export default function List({
                     if (column.label === 'ACCION') {
                       return (
                         <TableCell key={column.id} align={column.align}>
-                          <IconButton className={classes.button} aria-label="search" onClick={() => (type === 'file' ? handleSearch(row.id, row.fileNumber) : handleSearch(row.fk_fileid, row.id))}>
+                          <IconButton className={classes.button} aria-label="search" onClick={() => (type === 'file' ? handleSearch(row.id, row.fileNumber) : handleSearch(row.id))}>
                             <SearchIcon />
                           </IconButton>
                         </TableCell>

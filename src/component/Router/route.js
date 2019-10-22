@@ -5,14 +5,14 @@ import Home from '../Home';
 import User from '../User';
 import NewRequestPage from '../NewRequest/NewRequestPage';
 
-
 const routes = [
   { path: '/home', _component: Home },
   { path: '/expediente', _component: ViewPrimary },
-  { path: '/file/:fileId/solicitud/:requestId/conjunto/:sets/paso/:steap', _component: VieweRequests },
+  { path: '/solicitud/:requestId', _component: VieweRequests },
   { path: '/new/solicitud', _component: NewFilePage },
   { path: '/usuarios', _component: User },
   { path: '/file/:fileId/request/new', _component: NewRequestPage },
+
 ];
 
 export default routes;

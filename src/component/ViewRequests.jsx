@@ -1,42 +1,46 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable radix */
 import React, { useState, useEffect } from 'react';
-import { withRouter, useHistory } from 'react-router-dom';
+import {
+  withRouter, useHistory, useParams,
+} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-
 import Requests from './Request/Requests';
 
 import getMatch from '../redux/actions/match';
-import { matchs } from '../redux/selectors';
+import { matchs, matchsError } from '../redux/selectors';
+import Error401 from './Error/Error401';
 
-function ViewRequest(props) {
-  const {
-    fileId, sets, steap, requestId,
-  } = props.match.params;
+
+function ViewRequest() {
+  const { requestId } = useParams();
   const data = useSelector((state) => matchs(state));
-  const [activeStepSets, setActiveStepSets] = useState(Number.parseInt(sets));
-  const [activeStep, setActiveStep] = useState(Number.parseInt(steap));
+  const isAuthorized = useSelector((state) => matchsError(state));
+  const [activeStepSets, setActiveStepSets] = useState(0);
+  const [activeStep, setActiveStep] = useState(0);
   const dispatch = useDispatch();
   const history = useHistory();
 
   useEffect(() => {
     dispatch(getMatch({ requestId }));
-  }, [dispatch, fileId, requestId]);
+  }, [dispatch, requestId]);
 
 
   const changeStep = (id, step) => {
     setActiveStep(step);
-    history.push(`/file/${fileId}/solicitud/${id}/conjunto/${activeStepSets}/paso/${activeStep}`);
+    history.push(`/solicitud/${id}`);
   };
 
   const changeStepSets = (id, step) => {
     setActiveStepSets(step);
     setActiveStep(0);
-    history.push(`/file/${fileId}/solicitud/${id}/conjunto/${activeStepSets}/paso/${activeStep}`);
+    history.push(`/solicitud/${id}`);
   };
+
 
   return (
     <>
+      {isAuthorized ? <Error401 history={history} /> : null}
       {data ? (
         <Requests
           activeStepSets={activeStepSets}

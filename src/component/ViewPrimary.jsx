@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { withRouter, useHistory, Link } from 'react-router-dom';
 import { Grid, CircularProgress, Button } from '@material-ui/core';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
-import { findIndex } from 'lodash';
 import List from './ViewPrimary/List';
 import columnsRequest from './ViewPrimary/columnsRequest';
 import columnsFile from './ViewPrimary/columnsFile';
@@ -15,8 +14,6 @@ function ViewPrimary() {
   const dispatch = useDispatch();
   const [fileNumber, setFileNumber] = useState(undefined);
   const history = useHistory();
-  console.log('location');
-  console.log(history);
 
   React.useLayoutEffect(() => {
     dispatch(searchFile());
@@ -27,9 +24,8 @@ function ViewPrimary() {
     setFileNumber(fileNumber);
   }, [dispatch]);
 
-  const handleSearchRequest = (idFile, idRequest) => {
-    const index = findIndex(rowsRequest, (request) => request.id === idRequest);
-    history.push(`/file/${idFile}/solicitud/${idRequest}/conjunto/${index}/paso/0`);
+  const handleSearchRequest = (idRequest) => {
+    history.push(`/solicitud/${idRequest}`);
   };
   return (
     <Grid container spacing={3}>
