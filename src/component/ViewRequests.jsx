@@ -1,56 +1,54 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable radix */
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { withRouter, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import Steapper from './Request/Stepper';
-import RequestPage from './Request/RequestPage';
-import { searchRequest } from '../redux/actions/search';
+import Requests from './Request/Requests';
+
 import getMatch from '../redux/actions/match';
-import { requestResult, matchs } from '../redux/selectors';
-import Match from './Request/Match';
-import ListMatch from './Request/Match/ListMatch';
+import { matchs } from '../redux/selectors';
 
 function ViewRequest(props) {
-  const { fileId, index, requestId } = props.match.params;
-  const requests = useSelector((state) => requestResult(state));
-  const requestsMatch = useSelector((state) => matchs(state));
-  const [activeStep, setActiveStep] = useState(Number.parseInt(index));
+  const {
+    fileId, sets, steap, requestId,
+  } = props.match.params;
+  const data = useSelector((state) => matchs(state));
+  const [activeStepSets, setActiveStepSets] = useState(Number.parseInt(sets));
+  const [activeStep, setActiveStep] = useState(Number.parseInt(steap));
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const match = useCallback((requestId) => {
-    dispatch(getMatch({ requestId }));
-  }, [dispatch]);
-
-
   useEffect(() => {
-    dispatch(searchRequest({ fileId }));
-    match(requestId);
-  }, [dispatch, fileId, match, requestId]);
+    dispatch(getMatch({ requestId }));
+  }, [dispatch, fileId, requestId]);
 
 
-  const changeStep = (_index) => {
-    const _requestId = requests[_index].id;
-    setActiveStep(_index);
-    history.push(`/file/${fileId}/solicitud/${_requestId}/${_index}`);
+  const changeStep = (id, step) => {
+    setActiveStep(step);
+    history.push(`/file/${fileId}/solicitud/${id}/conjunto/${activeStepSets}/paso/${activeStep}`);
   };
 
-  console.log(requestsMatch);
+  const changeStepSets = (id, step) => {
+    setActiveStepSets(step);
+    setActiveStep(0);
+    history.push(`/file/${fileId}/solicitud/${id}/conjunto/${activeStepSets}/paso/${activeStep}`);
+  };
 
   return (
     <>
-      <div className="row justify-content-md-center">
-        <Steapper activeStep={activeStep} changeStep={changeStep} requests={requests} />
-      </div>
-      {requestsMatch ? <Match requestMatch={requestsMatch} /> : null}
-      {requestsMatch ? (
-        <div className="row justify-content-md-center col 1">
-          <ListMatch requests={requestsMatch} />
-        </div>
+      {data ? (
+        <Requests
+          activeStepSets={activeStepSets}
+          changeStepSets={changeStepSets}
+          activeStep={activeStep}
+          changeStep={changeStep}
+          requestsStepper={data.requestsStepper}
+          sets={data.sets}
+          request={data.request}
+          requestsMatch={data.match}
+        />
       ) : null}
-      {requests ? <RequestPage request={requests[activeStep]} /> : null}
     </>
   );
 }

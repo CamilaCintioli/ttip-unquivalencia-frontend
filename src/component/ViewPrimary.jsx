@@ -1,9 +1,7 @@
-/* eslint-disable no-return-assign */
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from 'react';
+import { withRouter, useHistory, Link } from 'react-router-dom';
 import { Grid, CircularProgress, Button } from '@material-ui/core';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
 import { findIndex } from 'lodash';
 import List from './ViewPrimary/List';
 import columnsRequest from './ViewPrimary/columnsRequest';
@@ -16,6 +14,9 @@ function ViewPrimary() {
   const rowsRequest = useSelector((state) => requestResult(state), shallowEqual);
   const dispatch = useDispatch();
   const [fileNumber, setFileNumber] = useState(undefined);
+  const history = useHistory();
+  console.log('location');
+  console.log(history);
 
   React.useLayoutEffect(() => {
     dispatch(searchFile());
@@ -24,13 +25,12 @@ function ViewPrimary() {
   const handleSearchRequests = React.useCallback((id, fileNumber) => {
     dispatch(searchRequest({ fileId: id }));
     setFileNumber(fileNumber);
-  }, [searchRequest, setFileNumber]);
+  }, [dispatch]);
 
   const handleSearchRequest = (idFile, idRequest) => {
     const index = findIndex(rowsRequest, (request) => request.id === idRequest);
-    window.location.pathname = `file/${idFile}/solicitud/${idRequest}/${index}`;
+    history.push(`/file/${idFile}/solicitud/${idRequest}/conjunto/${index}/paso/0`);
   };
-
   return (
     <Grid container spacing={3}>
       <Grid item xs={6}>
