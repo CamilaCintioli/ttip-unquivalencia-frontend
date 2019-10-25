@@ -29,7 +29,8 @@ export function* rejectEquivalence({ payload }) {
 
 export function* consultEquivalence({ payload }) {
   try {
-    const results = yield call(apiCall, `/consult/requests/${payload.requestId}`, { payload }, null, 'POST');
+    const { requestId, ...rest } = payload;
+    const results = yield call(apiCall, `/consult/requests/${requestId}`, rest, null, 'POST');
     yield put({ type: CONSULT_EQUIVALENCE_COMPLETE, results });
     yield put({ type: SEARCH_REQUEST_START, payload });
   } catch (error) {

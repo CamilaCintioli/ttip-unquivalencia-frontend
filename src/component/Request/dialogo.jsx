@@ -36,7 +36,7 @@ export default function FormDialog({ consultEquivalence }) {
   const classes = useStyles();
   const handleOpen = useCallback(() => setOpen(true), [setOpen]);
   const handleClose = useCallback(() => setOpen(false), [setOpen]);
-  const handleSend = useCallback((values) => console.log(values));
+  const handleSend = useCallback((email, message) => {consultEquivalence(email, message); handleClose(); alert("La consulta ha sido enviada")});
 
   return (
     <div>
@@ -67,14 +67,14 @@ function ConsultForm({ handleSubmit, handleClose }) {
   const classes = useStyles();
   return (
     <Formik
-      initialValues={{ email: '', comment: '' }}
-      onSubmit={(values) => handleSubmit(values)}
+      initialValues={{ email: '', message: '' }}
+      onSubmit={({ email, message }) => handleSubmit(email, message)}
       validationSchema={validateForm}
     >
       <Form className={classes.container}>
         <Field name="email" component={TextField} label="Ingrese el mail" />
         <ErrorMessage name="email" />
-        <Field name="comment" component={TextField} label="Comentario" variant="outlined" multiline rows="5" className={classes.dense} />
+        <Field name="message" component={TextField} label="Comentario" variant="outlined" multiline rows="5" className={classes.dense} />
         <div className={classes.buttonGroup}>
           <Button type="submit" color="primary" className={classes.button}>Enviar</Button>
           <Button color="primary" onClick={handleClose} className={classes.button}>Cancelar</Button>
