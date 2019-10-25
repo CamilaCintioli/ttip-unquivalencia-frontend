@@ -8,6 +8,8 @@ import './NewRequest.css';
 import Button from '@material-ui/core/Button';
 import * as Yup from 'yup';
 import API from '../../service/FileService';
+import FeedbackBar from '../FeedbackBar';
+import { openSnackbar } from '../FeedbackBar';
 
 
 const validateFile = Yup.object().shape({
@@ -29,8 +31,8 @@ const validateFile = Yup.object().shape({
 export default function NewFilePage() {
   const submitFile = useCallback((file) => {
     API.newFile(file)
-      .then(() => { alert('El expediente ha sido cargado con exito'); })
-      .catch((response) => console.log(response));
+      .then(() => { openSnackbar("El expediente ha sido cargado con exito", "success" ); })
+      .catch((response) => openSnackbar("Hubo un problema. Intente cargar el expediente de nuevo", 'error'));
   });
 
   return (
@@ -48,13 +50,15 @@ export default function NewFilePage() {
         },
       }}
       onSubmit={({ file }) => submitFile(file)}
-      validationSchema={validateFile}
+     
     >
 
       <Form>
         <Typography variant="h4">Nuevo expediente</Typography>
         <Field name="file" component={StudentField} />
         <Button color="primary" variant="contained" type="submit">Crear expediente</Button>
+        
+        <FeedbackBar />
       </Form>
 
 
