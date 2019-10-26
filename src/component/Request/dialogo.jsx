@@ -36,7 +36,7 @@ export default function FormDialog({ consultEquivalence }) {
   const classes = useStyles();
   const handleOpen = useCallback(() => setOpen(true), [setOpen]);
   const handleClose = useCallback(() => setOpen(false), [setOpen]);
-  const handleSend = useCallback((email, message) => {consultEquivalence(email, message); handleClose(); alert("La consulta ha sido enviada")});
+  const handleSend = useCallback((email, message) => { consultEquivalence(email, message); handleClose(); });
 
   return (
     <div>

@@ -6,13 +6,16 @@ import {
 } from '../../consts/actionTypes';
 
 import apiCall from '../api';
+import { openSnackbar } from '../../component/FeedbackBar';
 
 export function* approveEquivalence({ payload }) {
   try {
     const results = yield call(apiCall, `/request/${payload.requestId}`, { equivalence: 'APROBADA' }, null, 'POST');
+    openSnackbar('La solicitud ha sido aprobada', 'success');
     yield put({ type: APPROVE_EQUIVALENCE_COMPLETE, results });
     yield put({ type: SEARCH_REQUEST_START, payload });
   } catch (error) {
+    openSnackbar('Hubo un problema. Intentelo más tarde.', 'error');
     yield put({ type: APPROVE_EQUIVALENCE_ERROR, error });
   }
 }
@@ -20,9 +23,11 @@ export function* approveEquivalence({ payload }) {
 export function* rejectEquivalence({ payload }) {
   try {
     const results = yield call(apiCall, `/request/${payload.requestId}`, { equivalence: 'NEGADA' }, null, 'POST');
+    openSnackbar('La solicitud ha sido rechazada', 'success');
     yield put({ type: REJECT_EQUIVALENCE_COMPLETE, results });
     yield put({ type: SEARCH_REQUEST_START, payload });
   } catch (error) {
+    openSnackbar('Hubo un problema. Intentelo más tarde.', 'error');
     yield put({ type: REJECT_EQUIVALENCE_ERROR, error });
   }
 }
@@ -31,9 +36,11 @@ export function* consultEquivalence({ payload }) {
   try {
     const { requestId, ...rest } = payload;
     const results = yield call(apiCall, `/consult/requests/${requestId}`, rest, null, 'POST');
+    openSnackbar(`La consulta ha sido enviada a ${rest.email}`, 'success');
     yield put({ type: CONSULT_EQUIVALENCE_COMPLETE, results });
     yield put({ type: SEARCH_REQUEST_START, payload });
   } catch (error) {
+    openSnackbar('Hubo un problema. Intentelo más tarde', 'error');
     yield put({ type: CONSULT_EQUIVALENCE_ERROR, error });
   }
 }
