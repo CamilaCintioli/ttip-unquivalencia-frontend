@@ -32,7 +32,7 @@ export default function NewFilePage() {
   const submitFile = useCallback((file) => {
     API.newFile(file)
       .then(() => { openSnackbar("El expediente ha sido cargado con exito", "success" ); })
-      .catch((response) => openSnackbar("Hubo un problema. Intente cargar el expediente de nuevo", 'error'));
+      .catch(() => openSnackbar("Hubo un problema. Intente cargar el expediente de nuevo", "error"));
   });
 
   return (
@@ -50,18 +50,15 @@ export default function NewFilePage() {
         },
       }}
       onSubmit={({ file }) => submitFile(file)}
-     
+      validationSchema={validateFile}
     >
 
       <Form>
         <Typography variant="h4">Nuevo expediente</Typography>
         <Field name="file" component={StudentField} />
-        <Button color="primary" variant="contained" type="submit">Crear expediente</Button>
-        
+        <Button color="primary" variant="contained" type="submit">Crear expediente</Button>      
         <FeedbackBar />
       </Form>
-
-
     </Formik>
   );
 }

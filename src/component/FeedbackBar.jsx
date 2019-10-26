@@ -13,7 +13,7 @@ import SnackbarContent from '@material-ui/core/SnackbarContent';
 import WarningIcon from '@material-ui/icons/Warning';
 import { makeStyles } from '@material-ui/core/styles';
 
-let pepita;
+let openFeedbackBarFn;
 
 const variantIcon = {
   success: CheckCircleIcon,
@@ -51,8 +51,8 @@ const useStyles1 = makeStyles((theme) => ({
 function MySnackbarContentWrapper(props) {
   const classes = useStyles1();
   const {
- className, message, onClose, variant, ...other 
-} = props;
+    className, message, onClose, variant, ...other
+  } = props;
   const Icon = variantIcon[variant];
 
   return (
@@ -91,16 +91,16 @@ const useStyles2 = makeStyles((theme) => ({
 export default function FeedbackBar({ messageSuccess }) {
   const classes = useStyles2();
   const [open, setOpen] = React.useState(false);
-  const [message, setMessage] = React.useState("");
-  const [type, setType] = React.useState("success");
+  const [message, setMessage] = React.useState('');
+  const [type, setType] = React.useState('success');
 
-  const handleClick = (message, type) => {
+  const handleClick = (message, variant) => {
+    setType(variant);
     setOpen(true);
     setMessage(message);
-    setType(type);
   };
 
-  useEffect(() => { pepita = handleClick; });
+  useEffect(() => { openFeedbackBarFn = handleClick; });
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -131,7 +131,6 @@ export default function FeedbackBar({ messageSuccess }) {
   );
 }
 
-export function openSnackbar(message, type) {
-  console.log(type);
-  pepita(message, type);
+export function openSnackbar(message, variant) {
+  openFeedbackBarFn(message, variant);
 }
