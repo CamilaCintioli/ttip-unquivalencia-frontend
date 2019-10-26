@@ -4,7 +4,7 @@
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import RequestDisplay from './RequestDisplay';
-import { approveEquivalence, rejectEquivalence } from '../../redux/actions/updateEquivalence';
+import { approveEquivalence, rejectEquivalence, sendConsult } from '../../redux/actions/updateEquivalence';
 
 export default function RequestPage({ request }) {
   const dispatch = useDispatch();
@@ -22,6 +22,13 @@ export default function RequestPage({ request }) {
     }));
   }, [dispatch]);
 
+  const consultEquivalenceRequest = useCallback((email, message) => {
+    dispatch(sendConsult({
+      requestId: request.id,
+      email,
+      message,
+    }));
+  }, [dispatch]);
 
   return (
     <>
@@ -29,6 +36,7 @@ export default function RequestPage({ request }) {
         request={request}
         onEquivalenceGiven={giveEquivalence}
         onEquivalenceDenied={denyEquivalence}
+        onEquivalenceConsulted={consultEquivalenceRequest}
       />
     </>
   );
