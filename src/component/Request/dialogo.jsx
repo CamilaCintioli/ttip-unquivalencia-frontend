@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function FormDialog({ consultEquivalence }) {
+export default function FormDialog({ consultEquivalence, showConsultButton }) {
   const [open, setOpen] = useState(false);
   const classes = useStyles();
   const handleOpen = useCallback(() => setOpen(true), [setOpen]);
@@ -40,14 +40,18 @@ export default function FormDialog({ consultEquivalence }) {
 
   return (
     <div>
+      { showConsultButton
+      && (
       <Button
         variant="contained"
         color="primary"
         aria-label="primary button "
         onClick={handleOpen}
       >
-        CONSULTAR
+      CONSULTAR
       </Button>
+      )}
+
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" fullWidth maxWidth="md">
         <DialogTitle id="form-dialog-title">Consulta de equivalencia</DialogTitle>
         <DialogContent className={classes.menu}>

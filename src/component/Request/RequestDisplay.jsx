@@ -9,7 +9,7 @@ import Dialogo from './dialogo';
 const subjectPdfSrcDestination = 'http://clp.web.unq.edu.ar/wp-content/uploads/sites/110/2019/09/apuntes.pdf';
 const subjectPdfSrcOrigin = 'http://clp.web.unq.edu.ar/wp-content/uploads/sites/110/2019/09/practica4y5.pdf';
 
-export default function RequestDisplay({ request, onEquivalenceGiven, onEquivalenceDenied, onEquivalenceConsulted }) {
+export default function RequestDisplay({ request, onEquivalenceGiven, onEquivalenceDenied, onEquivalenceConsulted, showConsultButton }) {
   return (
     <>
       {request
@@ -41,7 +41,7 @@ export default function RequestDisplay({ request, onEquivalenceGiven, onEquivale
                       >
                         <Button onClick={onEquivalenceGiven}>DAR EQUIVALENCIA</Button>
                         <Button onClick={onEquivalenceDenied}>NEGAR EQUIVALENCIA</Button>
-                        <Dialogo consultEquivalence={onEquivalenceConsulted}>Consultar</Dialogo>
+                        <Dialogo consultEquivalence={onEquivalenceConsulted} showConsultButton={showConsultButton}>Consultar</Dialogo>
                       </ButtonGroup>
                     </Container>
                   </Container>
