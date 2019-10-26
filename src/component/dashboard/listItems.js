@@ -8,7 +8,7 @@ import AttachFileIcon from '@material-ui/icons/AttachFile';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import { Link } from 'react-router-dom';
 
-export const mainListItems = (cerrar) => (
+export const mainListItems = (cerrar, user) => (
   <div onClick={() => cerrar()}>
     <Link to="/home">
       <ListItem button>
@@ -26,6 +26,8 @@ export const mainListItems = (cerrar) => (
         <ListItemText primary="Expedientes" />
       </ListItem>
     </Link>
+    { user === 'admin' &&
+    <>
     <Link to="/new/solicitud">
       <ListItem button>
         <ListItemIcon>
@@ -42,5 +44,6 @@ export const mainListItems = (cerrar) => (
         <ListItemText primary="Usuarios" />
       </ListItem>
     </Link>
+    </>}
   </div>
 );
