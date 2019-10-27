@@ -28,6 +28,9 @@ const useStyles = makeStyles((theme) => ({
   button: {
     justifyContent: 'flex-end',
   },
+  consultButton: {
+    marginRight: theme.spacing(2),
+  },
 }));
 
 
@@ -45,6 +48,7 @@ export default function FormDialog({ consultEquivalence }) {
         color="primary"
         aria-label="primary button "
         onClick={handleOpen}
+        className={classes.consultButton}
       >
         CONSULTAR
       </Button>
