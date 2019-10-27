@@ -88,11 +88,11 @@ const useStyles2 = makeStyles((theme) => ({
   },
 }));
 
-export default function FeedbackBar({ messageSuccess }) {
+export default function FeedbackBar({ showNotification }) {
   const classes = useStyles2();
-  const [open, setOpen] = React.useState(false);
-  const [message, setMessage] = React.useState('');
-  const [type, setType] = React.useState('success');
+  const [open, setOpen] = React.useState(showNotification);
+  const [message, setMessage] = React.useState(showNotification ? showNotification.message : '');
+  const [type, setType] = React.useState(showNotification ? showNotification.variant : 'success');
 
   const handleClick = (message, variant) => {
     setType(variant);
@@ -104,9 +104,11 @@ export default function FeedbackBar({ messageSuccess }) {
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
+      localStorage.removeItem('notification');
       return;
     }
 
+    localStorage.removeItem('notification');
     setOpen(false);
   };
 

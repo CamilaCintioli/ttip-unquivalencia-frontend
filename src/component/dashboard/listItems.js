@@ -31,7 +31,7 @@ export const mainListItems = (cerrar) => (
         <ListItemIcon>
           <AttachFileIcon />
         </ListItemIcon>
-        <ListItemText primary="Crear solicitud" />
+        <ListItemText primary="Crear Expediente" />
       </ListItem>
     </Link>
     <Link to="/usuarios">
