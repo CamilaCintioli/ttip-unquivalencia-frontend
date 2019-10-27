@@ -4,14 +4,16 @@ import {
 } from '@material-ui/core';
 import { shape, string, func } from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
+import Menu from '@material-ui/core/Menu';
 import UniversitySubjectData from './UniversitySubjectData';
 import Dialogo from './dialogo';
+import MenuItem from '@material-ui/core/MenuItem';
 
 const subjectPdfSrcDestination = 'http://clp.web.unq.edu.ar/wp-content/uploads/sites/110/2019/09/apuntes.pdf';
 const subjectPdfSrcOrigin = 'http://clp.web.unq.edu.ar/wp-content/uploads/sites/110/2019/09/practica4y5.pdf';
 
 export default function RequestDisplay({
- request, onEquivalenceGiven, onEquivalenceDenied, onEquivalenceConsulted 
+  request, onEquivalenceGiven, onEquivalenceDenied, onEquivalenceConsulted,
 }) {
   const classes = useStyles();
   return (
@@ -42,7 +44,7 @@ export default function RequestDisplay({
                         <Button className={classes.button} color="primary" variant="contained" onClick={onEquivalenceGiven}>DAR EQUIVALENCIA</Button>
                         <Button className={classes.button} color="primary" variant="contained" onClick={onEquivalenceDenied}>NEGAR EQUIVALENCIA</Button>
                         <Dialogo consultEquivalence={onEquivalenceConsulted}>Consultar</Dialogo>
-                        <Button className={classes.button} color="primary" variant="contained"> Delegar</Button>
+                        <SimpleMenu />
                       </div>
                     </Container>
                   </Container>
@@ -74,3 +76,33 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
 }));
+
+function SimpleMenu() {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  return (
+    <div>
+      <Button aria-controls="simple-menu" variant="contained" color="primary" aria-haspopup="true" onClick={handleClick}>
+       Delegar
+      </Button>
+      <Menu
+        id="simple-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        <MenuItem onClick={handleClose}>Idiomas</MenuItem>
+        <MenuItem onClick={handleClose}>Sociales</MenuItem>
+      </Menu>
+    </div>
+  );
+}
