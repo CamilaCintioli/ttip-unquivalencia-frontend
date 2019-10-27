@@ -10,6 +10,7 @@ import columnsRequest from './ViewPrimary/columnsRequest';
 import columnsFile from './ViewPrimary/columnsFile';
 import { searchFile, searchRequest } from '../redux/actions/search';
 import { fileResults, requestResult, userRole } from '../redux/selectors';
+import isAdmin from './User/isAdmin';
 
 function ViewPrimary() {
   const rowsFile = useSelector((state) => fileResults(state), shallowEqual);
@@ -51,7 +52,7 @@ function ViewPrimary() {
                 handleSearch={handleSearchRequest}
                 type="request"
               />
-              {user === 'admin'
+              {isAdmin(user)
                 && (
                 <Link to={`file/${fileNumber}/request/new`}>
                   <Button color="primary" variant="contained">Cargar solicitud</Button>

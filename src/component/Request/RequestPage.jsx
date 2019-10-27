@@ -7,6 +7,7 @@ import RequestDisplay from './RequestDisplay';
 import { approveEquivalence, rejectEquivalence, sendConsult } from '../../redux/actions/updateEquivalence';
 import FeedbackBar from '../FeedbackBar';
 import { userRole } from '../../redux/selectors';
+import isAdmin from '../User/isAdmin';
 
 export default function RequestPage({ request }) {
   const dispatch = useDispatch();
@@ -41,7 +42,7 @@ export default function RequestPage({ request }) {
         onEquivalenceGiven={giveEquivalence}
         onEquivalenceDenied={denyEquivalence}
         onEquivalenceConsulted={consultEquivalenceRequest}
-        showConsultButton={user === 'admin'}
+        showConsultButton={isAdmin(user)}
       />
       <FeedbackBar />
     </>
