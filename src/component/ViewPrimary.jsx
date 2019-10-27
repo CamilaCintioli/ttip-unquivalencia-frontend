@@ -10,7 +10,7 @@ import columnsRequest from './ViewPrimary/columnsRequest';
 import columnsFile from './ViewPrimary/columnsFile';
 import { searchFile, searchRequest } from '../redux/actions/search';
 import { fileResults, requestResult, userRole } from '../redux/selectors';
-import isAdmin from './User/isAdmin';
+import { isAdmin } from './User/userRole';
 
 function ViewPrimary() {
   const rowsFile = useSelector((state) => fileResults(state), shallowEqual);

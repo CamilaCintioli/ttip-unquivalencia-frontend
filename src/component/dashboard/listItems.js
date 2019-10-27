@@ -7,7 +7,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import { Link } from 'react-router-dom';
-import isAdmin from '../User/isAdmin';
+import { isAdmin } from '../User/userRole';
 
 export const mainListItems = (cerrar, userRole) => (
   <div onClick={() => cerrar()}>
