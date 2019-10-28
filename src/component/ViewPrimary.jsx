@@ -9,7 +9,8 @@ import List from './ViewPrimary/List';
 import columnsRequest from './ViewPrimary/columnsRequest';
 import columnsFile from './ViewPrimary/columnsFile';
 import { searchFile, searchRequest } from '../redux/actions/search';
-import { fileResults, requestResult } from '../redux/selectors';
+import { fileResults, requestResult, userRole } from '../redux/selectors';
+import { isAdmin } from './User/userRole';
 import FeedbackBar from './FeedbackBar';
 
 function ViewPrimary() {
@@ -17,6 +18,7 @@ function ViewPrimary() {
   const rowsRequest = useSelector((state) => requestResult(state), shallowEqual);
   const dispatch = useDispatch();
   const [fileNumber, setFileNumber] = useState(undefined);
+  const user = useSelector((state) => userRole(state));
 
   React.useLayoutEffect(() => {
     dispatch(searchFile());
@@ -52,9 +54,13 @@ function ViewPrimary() {
                 handleSearch={handleSearchRequest}
                 type="request"
               />
-              <Link to={`file/${fileNumber}/request/new`}>
-                <Button color="primary" variant="contained">Cargar solicitud</Button>
-              </Link>
+              {isAdmin(user)
+                && (
+                <Link to={`file/${fileNumber}/request/new`}>
+                  <Button color="primary" variant="contained">Cargar solicitud</Button>
+                </Link>
+                )}
+
             </>
           )
         }
