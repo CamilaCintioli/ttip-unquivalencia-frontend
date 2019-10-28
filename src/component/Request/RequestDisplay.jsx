@@ -13,42 +13,58 @@ const subjectPdfSrcDestination = 'http://clp.web.unq.edu.ar/wp-content/uploads/s
 const subjectPdfSrcOrigin = 'http://clp.web.unq.edu.ar/wp-content/uploads/sites/110/2019/09/practica4y5.pdf';
 
 export default function RequestDisplay({
-  request, onEquivalenceGiven, onEquivalenceDenied, onEquivalenceConsulted, onEquivalenceDelegated
+  request, onEquivalenceGiven, onEquivalenceDenied, onEquivalenceConsulted, showConsultAndDelegateButton, showActionButtons, onEquivalenceDelegated
 }) {
   const classes = useStyles();
   return (
     <>
       {request
-                  && (
-                  <Container maxWidth="lg">
-                    <Container maxWidth="lg">
-                      <Grid container>
-                        <Grid item xs={6}>
-                          <UniversitySubjectData
-                            university={request.universityOrigin}
-                            subject={request.subjectOrigin}
-                            subjectPdfSrc={subjectPdfSrcOrigin}
-                          />
-                        </Grid>
-                        <Grid item xs={6}>
-                          <UniversitySubjectData
-                            university="Universidad Nacional de Quilmes"
-                            subject={request.subjectUnq}
-                            subjectPdfSrc={subjectPdfSrcDestination}
-                          />
-                        </Grid>
-                      </Grid>
-                    </Container>
+        && (
+          <Container maxWidth="lg">
+            <Container maxWidth="lg">
+              <Grid container>
+                <Grid item xs={6}>
+                  <UniversitySubjectData
+                    university={request.universityOrigin}
+                    subject={request.subjectOrigin}
+                    subjectPdfSrc={subjectPdfSrcOrigin}
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <UniversitySubjectData
+                    university="Universidad Nacional de Quilmes"
+                    subject={request.subjectUnq}
+                    subjectPdfSrc={subjectPdfSrcDestination}
+                  />
+                </Grid>
+              </Grid>
+            </Container>
+            <Container maxWidth="lg">
+              {showActionButtons
+                && (
+                  <>
                     <Container maxWidth="lg">
                       <div className={classes.buttonGroup}>
                         <Button className={classes.button} color="primary" variant="contained" onClick={onEquivalenceGiven}>DAR EQUIVALENCIA</Button>
                         <Button className={classes.button} color="primary" variant="contained" onClick={onEquivalenceDenied}>NEGAR EQUIVALENCIA</Button>
-                        <Dialogo consultEquivalence={onEquivalenceConsulted}>Consultar</Dialogo>
-                        <DelegateButton delegateEquivalence={onEquivalenceDelegated}/>
+                        {showConsultAndDelegateButton
+                          && (
+                            <>
+                              <Dialogo
+                                consultEquivalence={onEquivalenceConsulted}
+                              >
+                              Consultar
+                              </Dialogo>
+                              <DelegateButton delegateEquivalence={onEquivalenceDelegated}/>
+                            </>
+                          )}
                       </div>
                     </Container>
-                  </Container>
-                  )}
+                  </>
+                )}
+            </Container>
+          </Container>
+        )}
 
     </>
   );
@@ -96,7 +112,7 @@ function DelegateButton({ delegateEquivalence }) {
   return (
     <div>
       <Button aria-controls="simple-menu" variant="contained" color="primary" aria-haspopup="true" onClick={handleClick}>
-       Delegar
+        Delegar
       </Button>
       <Menu
         id="simple-menu"

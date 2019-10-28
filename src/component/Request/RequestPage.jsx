@@ -2,10 +2,12 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import RequestDisplay from './RequestDisplay';
 import { approveEquivalence, rejectEquivalence, sendConsult, delegateEquivalence } from '../../redux/actions/updateEquivalence';
 import FeedbackBar from '../FeedbackBar';
+import { userRole } from '../../redux/selectors';
+import { isAdmin, isProfessor } from '../User/userRole';
 
 export default function RequestPage({ request }) {
   const dispatch = useDispatch();
@@ -38,6 +40,8 @@ export default function RequestPage({ request }) {
     }));
   }, [dispatch]);
 
+  const user = useSelector((state) => userRole(state));
+
   return (
     <>
       <RequestDisplay
@@ -46,6 +50,8 @@ export default function RequestPage({ request }) {
         onEquivalenceDenied={denyEquivalence}
         onEquivalenceConsulted={consultEquivalenceRequest}
         onEquivalenceDelegated={delegateEquivalenceRequest}
+        showConsultAndDelegateButton={isAdmin(user)}
+        showActionButtons={isAdmin(user) || isProfessor(user)}
       />
       <FeedbackBar />
     </>

@@ -50,7 +50,7 @@ export default function FormDialog({ consultEquivalence }) {
         onClick={handleOpen}
         className={classes.consultButton}
       >
-        CONSULTAR
+      CONSULTAR
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" fullWidth maxWidth="md">
         <DialogTitle id="form-dialog-title">Consulta de equivalencia</DialogTitle>
