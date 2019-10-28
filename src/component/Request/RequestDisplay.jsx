@@ -101,7 +101,7 @@ function SimpleMenu() {
         onClose={handleClose}
       >
         <MenuItem onClick={handleClose}>Idiomas</MenuItem>
-        <MenuItem onClick={handleClose}>Sociales</MenuItem>
+        <MenuItem onClick={handleClose}>Matemáticas</MenuItem>
       </Menu>
     </div>
   );
