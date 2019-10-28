@@ -5,6 +5,7 @@ import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import RequestDisplay from './RequestDisplay';
 import { approveEquivalence, rejectEquivalence, sendConsult } from '../../redux/actions/updateEquivalence';
+import FeedbackBar from '../FeedbackBar';
 
 export default function RequestPage({ request }) {
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ export default function RequestPage({ request }) {
         onEquivalenceDenied={denyEquivalence}
         onEquivalenceConsulted={consultEquivalenceRequest}
       />
+      <FeedbackBar />
     </>
   );
 }

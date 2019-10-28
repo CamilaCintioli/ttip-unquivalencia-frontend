@@ -10,6 +10,7 @@ import columnsRequest from './ViewPrimary/columnsRequest';
 import columnsFile from './ViewPrimary/columnsFile';
 import { searchFile, searchRequest } from '../redux/actions/search';
 import { fileResults, requestResult } from '../redux/selectors';
+import FeedbackBar from './FeedbackBar';
 
 function ViewPrimary() {
   const rowsFile = useSelector((state) => fileResults(state), shallowEqual);
@@ -33,6 +34,7 @@ function ViewPrimary() {
 
   return (
     <Grid container spacing={3}>
+      <FeedbackBar showNotification={JSON.parse(localStorage.getItem('notification'))} />
       <Grid item xs={6}>
         {rowsFile
           ? <List key="file" title="Expedientes" columns={columnsFile} rows={rowsFile} handleSearch={handleSearchRequests} type="file" />
