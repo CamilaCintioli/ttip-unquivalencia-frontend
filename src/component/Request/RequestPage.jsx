@@ -4,7 +4,7 @@
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import RequestDisplay from './RequestDisplay';
-import { approveEquivalence, rejectEquivalence, sendConsult } from '../../redux/actions/updateEquivalence';
+import { approveEquivalence, rejectEquivalence, sendConsult, delegateEquivalence } from '../../redux/actions/updateEquivalence';
 import FeedbackBar from '../FeedbackBar';
 
 export default function RequestPage({ request }) {
@@ -31,6 +31,13 @@ export default function RequestPage({ request }) {
     }));
   }, [dispatch]);
 
+  const delegateEquivalenceRequest = useCallback((department) => {
+    dispatch(delegateEquivalence({
+      requestId: request.id,
+      department,
+    }));
+  }, [dispatch]);
+
   return (
     <>
       <RequestDisplay
@@ -38,6 +45,7 @@ export default function RequestPage({ request }) {
         onEquivalenceGiven={giveEquivalence}
         onEquivalenceDenied={denyEquivalence}
         onEquivalenceConsulted={consultEquivalenceRequest}
+        onEquivalenceDelegated={delegateEquivalenceRequest}
       />
       <FeedbackBar />
     </>

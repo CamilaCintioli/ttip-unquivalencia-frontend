@@ -1,19 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
-  Button, ButtonGroup, Grid, Container,
+  Button, Grid, Container,
 } from '@material-ui/core';
 import { shape, string, func } from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import UniversitySubjectData from './UniversitySubjectData';
 import Dialogo from './dialogo';
-import MenuItem from '@material-ui/core/MenuItem';
 
 const subjectPdfSrcDestination = 'http://clp.web.unq.edu.ar/wp-content/uploads/sites/110/2019/09/apuntes.pdf';
 const subjectPdfSrcOrigin = 'http://clp.web.unq.edu.ar/wp-content/uploads/sites/110/2019/09/practica4y5.pdf';
 
 export default function RequestDisplay({
-  request, onEquivalenceGiven, onEquivalenceDenied, onEquivalenceConsulted,
+  request, onEquivalenceGiven, onEquivalenceDenied, onEquivalenceConsulted, onEquivalenceDelegated
 }) {
   const classes = useStyles();
   return (
@@ -44,7 +44,7 @@ export default function RequestDisplay({
                         <Button className={classes.button} color="primary" variant="contained" onClick={onEquivalenceGiven}>DAR EQUIVALENCIA</Button>
                         <Button className={classes.button} color="primary" variant="contained" onClick={onEquivalenceDenied}>NEGAR EQUIVALENCIA</Button>
                         <Dialogo consultEquivalence={onEquivalenceConsulted}>Consultar</Dialogo>
-                        <SimpleMenu />
+                        <DelegateButton delegateEquivalence={onEquivalenceDelegated}/>
                       </div>
                     </Container>
                   </Container>
@@ -77,8 +77,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SimpleMenu() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+function DelegateButton({ delegateEquivalence }) {
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -86,6 +86,11 @@ function SimpleMenu() {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleClickItem = (item) => {
+    delegateEquivalence(item);
+    handleClose();
   };
 
   return (
@@ -100,8 +105,10 @@ function SimpleMenu() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Idiomas</MenuItem>
-        <MenuItem onClick={handleClose}>Matemáticas</MenuItem>
+        <MenuItem onClick={() => handleClickItem('Idiomas')}>Idiomas</MenuItem>
+        <MenuItem onClick={() => handleClickItem('Matemáticas')}> Matemáticas</MenuItem>
+        <MenuItem onClick={() => handleClickItem('Sociales')}> Sociales</MenuItem>
+
       </Menu>
     </div>
   );
