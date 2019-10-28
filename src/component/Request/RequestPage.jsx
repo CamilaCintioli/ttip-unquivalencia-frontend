@@ -42,7 +42,7 @@ export default function RequestPage({ request }) {
         onEquivalenceGiven={giveEquivalence}
         onEquivalenceDenied={denyEquivalence}
         onEquivalenceConsulted={consultEquivalenceRequest}
-        showConsultButton={isAdmin(user)}
+        showConsultAndDelegateButton={isAdmin(user)}
         showActionButtons={isAdmin(user) || isProfessor(user)}
       />
       <FeedbackBar />

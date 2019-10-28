@@ -13,7 +13,7 @@ const subjectPdfSrcDestination = 'http://clp.web.unq.edu.ar/wp-content/uploads/s
 const subjectPdfSrcOrigin = 'http://clp.web.unq.edu.ar/wp-content/uploads/sites/110/2019/09/practica4y5.pdf';
 
 export default function RequestDisplay({
-  request, onEquivalenceGiven, onEquivalenceDenied, onEquivalenceConsulted, showConsultButton, showActionButtons,
+  request, onEquivalenceGiven, onEquivalenceDenied, onEquivalenceConsulted, showConsultAndDelegateButton, showActionButtons,
 }) {
   const classes = useStyles();
   return (
@@ -47,7 +47,7 @@ export default function RequestDisplay({
                       <div className={classes.buttonGroup}>
                         <Button className={classes.button} color="primary" variant="contained" onClick={onEquivalenceGiven}>DAR EQUIVALENCIA</Button>
                         <Button className={classes.button} color="primary" variant="contained" onClick={onEquivalenceDenied}>NEGAR EQUIVALENCIA</Button>
-                        {showConsultButton
+                        {showConsultAndDelegateButton
                           && (
                             <>
                               <Dialogo
