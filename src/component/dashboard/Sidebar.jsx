@@ -5,10 +5,14 @@ import {
   IconButton, Drawer, List, Divider,
 } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import { useSelector } from 'react-redux';
 import { mainListItems } from './listItems';
+import { userRole } from '../../redux/selectors';
 
 
 export default function SideBar({ classes, handleDrawerClose, open }) {
+  const user = useSelector((state) => userRole(state));
+
   return (
     <Drawer
       variant="permanent"
@@ -23,7 +27,7 @@ export default function SideBar({ classes, handleDrawerClose, open }) {
         </IconButton>
       </div>
       <Divider />
-      <List>{mainListItems(handleDrawerClose)}</List>
+      <List>{mainListItems(handleDrawerClose, user)}</List>
     </Drawer>
   );
 }

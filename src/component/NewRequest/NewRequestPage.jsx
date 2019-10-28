@@ -8,7 +8,8 @@ import { searchFileByFileNumber } from '../../redux/actions/search';
 import { createRequest } from '../../redux/actions/createRequest';
 import { fileResult } from '../../redux/selectors';
 import InternalRequestForm from './InternalRequestForm';
-import ExternalRequestForm from './ExternalRequestForm'
+import ExternalRequestForm from './ExternalRequestForm';
+import FeedbackBar from '../FeedbackBar';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,7 +23,7 @@ export default function NewRequestPage(props) {
   const isInternal = file ? file.universityOrigin === 'UNQ' : false;
 
   useEffect(() => {
-    dispatch(searchFileByFileNumber({ fileNumber: props.match.params.fileId }));
+    dispatch(searchFileByFileNumber({ fileNumber: props.match.params.fileId.replace('-', '/') }));
   }, [dispatch, props.match.params.fileId]);
 
   const submitRequest = useCallback((request) => {
@@ -32,7 +33,7 @@ export default function NewRequestPage(props) {
       requests: [request],
     };
     dispatch(createRequest(requests));
-    window.location = '/expediente';
+    //window.location = '/expediente';
   }, [dispatch, file]);
 
   return (
@@ -52,6 +53,7 @@ export default function NewRequestPage(props) {
       )}
       {isInternal && <InternalRequestForm onSubmit={submitRequest} />}
       {!isInternal && <ExternalRequestForm onSubmit={submitRequest} />}
+      <FeedbackBar />
     </>
   );
 }

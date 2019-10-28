@@ -15,9 +15,9 @@ const getConfig = () => ({
 const API = {
   getFiles: () => axios.get(`${port}/files`, getConfig()).then((response) => response.data).catch((error) => (error.response.status === 450 ? logout() : console.log(error))),
   getRequests: (id) => axios.get(`${port}/requests/${id}`, getConfig()).then((response) => response.data).catch((error) => (error.response.status === 450 ? logout() : console.log(error))),
-  newFile: (file) => axios.post(`${port}/request`, file, getConfig()).catch((error) => (error.response.status === 450 ? logout() : console.log(error))),
+  newFile: (file) => axios.post(`${port}/request`, file, getConfig()).catch((error) => { if (error.response.status === 450) { logout(); } throw error; }),
   getUsersAxios: () => axios.get(`${port}/users`, getConfig()).then((response) => response.data.users).catch((error) => (error.response.status === 450 ? logout() : console.log(error))),
-  addUserAxios: (user) => axios.post(`${port}/new/user`, user, getConfig()).catch((error) => (error.response.status === 450 ? logout() : console.log(error))),
+  addUserAxios: (user) => axios.post(`${port}/new/user`, user, getConfig()).catch((error) => { if (error.response.status === 450) { logout(); } throw error; }),
 };
 
 export default API;

@@ -6,7 +6,9 @@ import List from './ViewPrimary/List';
 import columnsRequest from './ViewPrimary/columnsRequest';
 import columnsFile from './ViewPrimary/columnsFile';
 import { searchFile, searchRequest } from '../redux/actions/search';
-import { fileResults, requestResult } from '../redux/selectors';
+import { fileResults, requestResult, userRole } from '../redux/selectors';
+import { isAdmin } from './User/userRole';
+import FeedbackBar from './FeedbackBar';
 
 function ViewPrimary() {
   const rowsFile = useSelector((state) => fileResults(state), shallowEqual);
@@ -14,21 +16,23 @@ function ViewPrimary() {
   const dispatch = useDispatch();
   const [fileNumber, setFileNumber] = useState(undefined);
   const history = useHistory();
+  const user = useSelector((state) => userRole(state));
 
   React.useLayoutEffect(() => {
     dispatch(searchFile());
   }, [dispatch, rowsRequest]);
 
-  const handleSearchRequests = React.useCallback((id, fileNumber) => {
+  const handleSearchRequests = React.useCallback((id, fileNum) => {
     dispatch(searchRequest({ fileId: id }));
-    setFileNumber(fileNumber);
-  }, [dispatch]);
+    setFileNumber(fileNum.replace('/', '-'));
+  }, [searchRequest, setFileNumber]);
 
   const handleSearchRequest = (idRequest) => {
     history.push(`/solicitud/${idRequest}`);
   };
   return (
     <Grid container spacing={3}>
+      <FeedbackBar showNotification={JSON.parse(localStorage.getItem('notification'))} />
       <Grid item xs={6}>
         {rowsFile
           ? <List key="file" title="Expedientes" columns={columnsFile} rows={rowsFile} handleSearch={handleSearchRequests} type="file" />
@@ -46,9 +50,13 @@ function ViewPrimary() {
                 handleSearch={handleSearchRequest}
                 type="request"
               />
-              <Link to={`file/${fileNumber}/request/new`}>
-                <Button color="primary" variant="contained">Cargar solicitud</Button>
-              </Link>
+              {isAdmin(user)
+                && (
+                <Link to={`file/${fileNumber}/request/new`}>
+                  <Button color="primary" variant="contained">Cargar solicitud</Button>
+                </Link>
+                )}
+
             </>
           )
         }
