@@ -2,7 +2,7 @@
 import React from 'react';
 import { Container, CssBaseline } from '@material-ui/core';
 import {
-  Switch,
+  Switch, useHistory,
 } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Footer from './dashboard/Footer';
@@ -20,12 +20,14 @@ export default function Dashboard() {
   const [open, setOpen] = React.useState(false);
   const user = useSelector((state) => userResult(state));
   const dispatch = useDispatch();
-  const isValid = isAuthenticated(user);
+  const history = useHistory();
+  const isValid = isAuthenticated(user, history);
   console.log('logeado is');
   console.log(isValid);
 
 
-  const singIn = (bodyUser) => dispatch(getUser(bodyUser));
+  const singIn = (bodyUser) => dispatch(getUser({ bodyUser, history }));
+
 
   const getClass = (classs) => (isValid ? classs : null);
 

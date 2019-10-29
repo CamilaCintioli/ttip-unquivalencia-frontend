@@ -25,7 +25,7 @@ export default function Match({ requestMatch }) {
   const requestsMatchGroupBy = groupBy(requestsMatch, (request) => request.fileNumber);
   const requests = isEmpty(requestsTotalMatchApproved) ? requestsMatchWithoutYearPlanApproved : requestsTotalMatchApproved;
 
-  console.log('requestMatch');
+  console.log('objects');
   console.log(requestMatch);
   console.log('requestsMatchGroupBy');
   console.log(requestsMatchGroupBy);

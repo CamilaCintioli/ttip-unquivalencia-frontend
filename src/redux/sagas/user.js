@@ -9,8 +9,9 @@ import apiCall from '../api';
 
 export function* getUser({ payload }) {
   try {
-    const results = yield call(apiCall, '/user/session', payload, null, 'POST');
+    const results = yield call(apiCall, '/user/session', payload.bodyUser, null, 'POST');
     yield put({ type: GET_USER_COMPLETE, results });
+    yield payload.history.push(localStorage.location);
   } catch (error) {
     const errors = error.response.data;
     yield put({ type: GET_USER_ERROR, errors });

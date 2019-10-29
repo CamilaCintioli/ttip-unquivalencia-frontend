@@ -15,6 +15,7 @@ const apiCall = (url, data, headers, method) => axios({
 }).catch((error) => {
   if (error.response.status === 450) {
     logout();
+    return;
   }
   throw error;
 });

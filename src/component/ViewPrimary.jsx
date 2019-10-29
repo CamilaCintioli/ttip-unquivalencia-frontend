@@ -1,10 +1,7 @@
-/* eslint-disable no-return-assign */
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from 'react';
+import { withRouter, useHistory, Link } from 'react-router-dom';
 import { Grid, CircularProgress, Button } from '@material-ui/core';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
-import { findIndex } from 'lodash';
 import List from './ViewPrimary/List';
 import columnsRequest from './ViewPrimary/columnsRequest';
 import columnsFile from './ViewPrimary/columnsFile';
@@ -18,6 +15,7 @@ function ViewPrimary() {
   const rowsRequest = useSelector((state) => requestResult(state), shallowEqual);
   const dispatch = useDispatch();
   const [fileNumber, setFileNumber] = useState(undefined);
+  const history = useHistory();
   const user = useSelector((state) => userRole(state));
 
   React.useLayoutEffect(() => {
@@ -29,11 +27,9 @@ function ViewPrimary() {
     setFileNumber(fileNum.replace('/', '-'));
   }, [searchRequest, setFileNumber]);
 
-  const handleSearchRequest = (idFile, idRequest) => {
-    const index = findIndex(rowsRequest, (request) => request.id === idRequest);
-    window.location.pathname = `file/${idFile}/solicitud/${idRequest}/${index}`;
+  const handleSearchRequest = (idRequest) => {
+    history.push(`/solicitud/${idRequest}`);
   };
-
   return (
     <Grid container spacing={3}>
       <FeedbackBar showNotification={JSON.parse(localStorage.getItem('notification'))} />

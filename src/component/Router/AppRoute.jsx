@@ -5,7 +5,6 @@ import PrivateRoute from './PriavateRoute';
 import PublicRoute from './PublicRoute';
 import routes from './route';
 
-
 const privates = (isAuthenticated) => (
   routes.map(({ path, _component }, i) => (
     <PrivateRoute
@@ -29,5 +28,6 @@ const AppRoute = ({ isAuthenticated, onLogin }) => (
     ) : null}
   </>
 );
+
 
 export default AppRoute;
