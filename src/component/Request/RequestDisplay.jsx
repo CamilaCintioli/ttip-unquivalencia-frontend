@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
-  Button, ButtonGroup, Grid, Container,
+  Button, Grid, Container,
 } from '@material-ui/core';
 import { shape, string, func } from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
@@ -13,7 +13,7 @@ const subjectPdfSrcDestination = 'http://clp.web.unq.edu.ar/wp-content/uploads/s
 const subjectPdfSrcOrigin = 'http://clp.web.unq.edu.ar/wp-content/uploads/sites/110/2019/09/practica4y5.pdf';
 
 export default function RequestDisplay({
-  request, onEquivalenceGiven, onEquivalenceDenied, onEquivalenceConsulted, showConsultAndDelegateButton, showActionButtons,
+  request, onEquivalenceGiven, onEquivalenceDenied, onEquivalenceConsulted, showConsultAndDelegateButton, showActionButtons, onEquivalenceDelegated
 }) {
   const classes = useStyles();
   return (
@@ -55,7 +55,7 @@ export default function RequestDisplay({
                               >
                               Consultar
                               </Dialogo>
-                              <DelegateButton />
+                              <DelegateButton delegateEquivalence={onEquivalenceDelegated}/>
                             </>
                           )}
                       </div>
@@ -93,8 +93,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function DelegateButton({ showButton }) {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+function DelegateButton({ delegateEquivalence }) {
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -102,6 +102,11 @@ function DelegateButton({ showButton }) {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleClickItem = (item) => {
+    delegateEquivalence(item);
+    handleClose();
   };
 
   return (
@@ -116,8 +121,10 @@ function DelegateButton({ showButton }) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Idiomas</MenuItem>
-        <MenuItem onClick={handleClose}>Matemáticas</MenuItem>
+        <MenuItem onClick={() => handleClickItem('Idiomas')}>Idiomas</MenuItem>
+        <MenuItem onClick={() => handleClickItem('Matemáticas')}> Matemáticas</MenuItem>
+        <MenuItem onClick={() => handleClickItem('Sociales')}> Sociales</MenuItem>
+
       </Menu>
     </div>
   );

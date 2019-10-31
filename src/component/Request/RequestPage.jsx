@@ -4,7 +4,7 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import RequestDisplay from './RequestDisplay';
-import { approveEquivalence, rejectEquivalence, sendConsult } from '../../redux/actions/updateEquivalence';
+import { approveEquivalence, rejectEquivalence, sendConsult, delegateEquivalence } from '../../redux/actions/updateEquivalence';
 import FeedbackBar from '../FeedbackBar';
 import { userRole } from '../../redux/selectors';
 import { isAdmin, isProfessor } from '../User/userRole';
@@ -33,6 +33,13 @@ export default function RequestPage({ request }) {
     }));
   }, [dispatch]);
 
+  const delegateEquivalenceRequest = useCallback((department) => {
+    dispatch(delegateEquivalence({
+      requestId: request.id,
+      department,
+    }));
+  }, [dispatch]);
+
   const user = useSelector((state) => userRole(state));
 
   return (
@@ -42,6 +49,7 @@ export default function RequestPage({ request }) {
         onEquivalenceGiven={giveEquivalence}
         onEquivalenceDenied={denyEquivalence}
         onEquivalenceConsulted={consultEquivalenceRequest}
+        onEquivalenceDelegated={delegateEquivalenceRequest}
         showConsultAndDelegateButton={isAdmin(user)}
         showActionButtons={isAdmin(user) || isProfessor(user)}
       />
