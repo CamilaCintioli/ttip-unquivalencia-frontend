@@ -19,7 +19,7 @@ export default function (state = { userResult: loadUser(), users: [], userError:
         ...state, isLoading: false, user: null, userError: get(action, 'errors'),
       };
     case GET_USERS_START:
-      return { ...state, isLoading: true, users: get(action, 'payload') };
+      return { ...state, isLoading: true };
     case GET_USERS_COMPLETE:
       return { ...state, isLoading: false, users: get(action, 'results.data.users') };
     case GET_USERS_ERROR:
