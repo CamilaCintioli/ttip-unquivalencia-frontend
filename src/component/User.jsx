@@ -27,8 +27,8 @@ function User() {
     dispatch(registerUser(newData));
   }, [dispatch]);
 
-  const update = useCallback((newData, oldData) => {
-    dispatch(updateUser(newData, oldData));
+  const update = useCallback((newData) => {
+    dispatch(updateUser(newData));
   }, [dispatch]);
 
   const remove = useCallback((oldData) => {
