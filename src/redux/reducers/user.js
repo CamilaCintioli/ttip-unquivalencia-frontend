@@ -3,6 +3,8 @@ import {
   GET_USER_START, GET_USER_ERROR, GET_USER_COMPLETE,
   GET_USERS_COMPLETE, GET_USERS_ERROR, GET_USERS_START,
   CREATE_USER_START, CREATE_USER_COMPLETE, CREATE_USER_ERROR,
+  UPDATE_USER_START, UPDATE_USER_COMPLETE, UPDATE_USER_ERROR,
+  DELETE_USER_START, DELETE_USER_COMPLETE, DELETE_USER_ERROR,
 } from '../../consts/actionTypes';
 import { loadUser, saveUser } from '../../service/userService';
 
@@ -19,7 +21,7 @@ export default function (state = { userResult: loadUser(), users: [], userError:
         ...state, isLoading: false, user: null, userError: get(action, 'errors'),
       };
     case GET_USERS_START:
-      return { ...state, isLoading: true, users: get(action, 'payload') };
+      return { ...state, isLoading: true };
     case GET_USERS_COMPLETE:
       return { ...state, isLoading: false, users: get(action, 'results.data.users') };
     case GET_USERS_ERROR:
@@ -29,6 +31,18 @@ export default function (state = { userResult: loadUser(), users: [], userError:
     case CREATE_USER_COMPLETE:
       return { ...state, isLoading: false };
     case CREATE_USER_ERROR:
+      return { ...state, isLoading: false };
+    case UPDATE_USER_START:
+      return { ...state, isLoading: true };
+    case UPDATE_USER_COMPLETE:
+      return { ...state, isLoading: false };
+    case UPDATE_USER_ERROR:
+      return { ...state, isLoading: false };
+    case DELETE_USER_START:
+      return { ...state, isLoading: true };
+    case DELETE_USER_COMPLETE:
+      return { ...state, isLoading: false };
+    case DELETE_USER_ERROR:
       return { ...state, isLoading: false };
     default:
       return { ...state };

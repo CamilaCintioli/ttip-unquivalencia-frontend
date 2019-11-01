@@ -9,8 +9,8 @@ import './NewRequest.css';
 import Button from '@material-ui/core/Button';
 import * as Yup from 'yup';
 import API from '../../service/FileService';
-import { openSnackbar } from '../FeedbackBar';
-import FeedbackBar from '../FeedbackBar';
+import FeedbackBar, { openSnackbar } from '../FeedbackBar';
+
 
 const validateFile = Yup.object().shape({
   file: Yup.object().shape({

@@ -1,9 +1,7 @@
 /* eslint-disable max-len */
 import React from 'react';
 import { Container, CssBaseline } from '@material-ui/core';
-import {
-  Switch, useHistory,
-} from 'react-router-dom';
+import { Switch, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Footer from './dashboard/Footer';
 import Nav from './dashboard/Nav';
