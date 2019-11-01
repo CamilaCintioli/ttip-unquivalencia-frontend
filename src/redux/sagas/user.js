@@ -4,6 +4,9 @@ import {
   GET_USERS_COMPLETE, GET_USERS_ERROR,
   CREATE_USER_COMPLETE, CREATE_USER_ERROR,
   GET_USERS_START, CREATE_USER_START,
+  UPDATE_USER_START, DELETE_USER_START,
+  UPDATE_USER_COMPLETE, DELETE_USER_COMPLETE,
+  UPDATE_USER_ERROR, DELETE_USER_ERROR,
 } from '../../consts/actionTypes';
 import { openSnackbar } from '../../component/FeedbackBar';
 
@@ -58,8 +61,34 @@ export function* createUser({ payload }) {
   }
 }
 
+export function* updateUser({ payload }) {
+  try {
+    const results = yield call(apiCall, '/update/user', payload, null, 'POST');
+    yield put({ type: UPDATE_USER_COMPLETE, results });
+    openSnackbar('El usuario ha sido actualizado', 'success');
+    yield put({ type: GET_USERS_START, results });
+  } catch (error) {
+    yield put({ type: UPDATE_USER_ERROR, error });
+    openSnackbar('Se ha podido al actualizar al usuario', 'error');
+  }
+}
+
+export function* deleteUser({ payload }) {
+  try {
+    const results = yield call(apiCall, `/delete/user/${payload.id}`, null, null, 'DELETE');
+    yield put({ type: DELETE_USER_COMPLETE, results });
+    openSnackbar('El usuario ha sido eliminado', 'success');
+    yield put({ type: GET_USERS_START, results });
+  } catch (error) {
+    yield put({ type: DELETE_USER_ERROR, error });
+    openSnackbar('Se ha podido al eliminar al usuario', 'error');
+  }
+}
+
 export default function* user() {
   yield takeLatest(GET_USER_START, getUser);
   yield takeLatest(GET_USERS_START, getUsers);
   yield takeLatest(CREATE_USER_START, createUser);
+  yield takeLatest(UPDATE_USER_START, updateUser);
+  yield takeLatest(DELETE_USER_START, deleteUser);
 }

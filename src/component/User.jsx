@@ -8,7 +8,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import MaterialTable from 'material-table';
 import { size } from 'lodash';
 import columns from './User/colums';
-import { registerUser, getUsers } from '../redux/actions/user';
+import {
+  registerUser, getUsers, updateUser, deleteUser,
+} from '../redux/actions/user';
 import { usersResults } from '../redux/selectors';
 import FeedbackBar from './FeedbackBar';
 
@@ -21,8 +23,16 @@ function User() {
     dispatch(getUsers());
   }, [dispatch, _size]);
 
-  const createUser = useCallback((newData) => {
+  const create = useCallback((newData) => {
     dispatch(registerUser(newData));
+  }, [dispatch]);
+
+  const update = useCallback((newData, oldData) => {
+    dispatch(updateUser(newData, oldData));
+  }, [dispatch]);
+
+  const remove = useCallback((oldData) => {
+    dispatch(deleteUser(oldData));
   }, [dispatch]);
 
   return (
@@ -32,17 +42,13 @@ function User() {
         columns={columns}
         data={users}
         editable={{
-          onRowAdd: (newData) => new Promise((resolve) => resolve(createUser(newData))),
-          onRowUpdate: (newData, oldData) => new Promise((resolve) => {
-            setTimeout(() => {
-              resolve();
-            }, 600);
-          }),
-          onRowDelete: (oldData) => new Promise((resolve) => {
-            setTimeout(() => {
-              resolve();
-            }, 600);
-          }),
+          onRowAdd: (newData) => new Promise((resolve) => resolve(create(newData))),
+          onRowUpdate: (newData) => new Promise((resolve) => resolve(update(newData))),
+          onRowDelete: (oldData) => new Promise((resolve) => resolve(remove(oldData))),
+        }}
+        options={{
+          filtering: true,
+          pageSize: 10,
         }}
       />
       <FeedbackBar />
