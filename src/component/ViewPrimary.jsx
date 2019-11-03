@@ -9,6 +9,7 @@ import { searchFile, searchRequest } from '../redux/actions/search';
 import { fileResults, requestResult, userRole } from '../redux/selectors';
 import { isAdmin } from './User/userRole';
 import FeedbackBar from './FeedbackBar';
+import ListRequest from './ViewPrimary/ListRequest';
 
 function ViewPrimary() {
   const rowsFile = useSelector((state) => fileResults(state), shallowEqual);
@@ -25,11 +26,13 @@ function ViewPrimary() {
   const handleSearchRequests = React.useCallback((id, fileNum) => {
     dispatch(searchRequest({ fileId: id }));
     setFileNumber(fileNum.replace('/', '-'));
-  }, [searchRequest, setFileNumber]);
+  }, [dispatch]);
 
   const handleSearchRequest = (idRequest) => {
     history.push(`/solicitud/${idRequest}`);
   };
+  console.log('asdasd');
+  console.log(rowsRequest);
   return (
     <Grid container spacing={3}>
       <FeedbackBar showNotification={JSON.parse(localStorage.getItem('notification'))} />
@@ -42,14 +45,7 @@ function ViewPrimary() {
         {
           rowsRequest && (
             <>
-              <List
-                key="request"
-                title="Solicitudes"
-                columns={columnsRequest}
-                rows={rowsRequest}
-                handleSearch={handleSearchRequest}
-                type="request"
-              />
+              <ListRequest requests={rowsRequest} handleSearchRequest={handleSearchRequest} />
               {isAdmin(user)
                 && (
                 <Link to={`file/${fileNumber}/request/new`}>
