@@ -8,6 +8,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import UniversitySubjectData from './UniversitySubjectData';
 import Dialogo from './dialogo';
+import RejectDialog from './RejectDialog';
 
 const subjectPdfSrcDestination = 'http://clp.web.unq.edu.ar/wp-content/uploads/sites/110/2019/09/apuntes.pdf';
 const subjectPdfSrcOrigin = 'http://clp.web.unq.edu.ar/wp-content/uploads/sites/110/2019/09/practica4y5.pdf';
@@ -46,7 +47,7 @@ export default function RequestDisplay({
                     <Container maxWidth="lg">
                       <div className={classes.buttonGroup}>
                         <Button className={classes.button} color="primary" variant="contained" onClick={onEquivalenceGiven}>DAR EQUIVALENCIA</Button>
-                        <Button className={classes.button} color="primary" variant="contained" onClick={onEquivalenceDenied}>NEGAR EQUIVALENCIA</Button>
+                        <RejectDialog denyEquivalence={onEquivalenceDenied} />
                         {showConsultAndDelegateButton
                           && (
                             <>
@@ -55,7 +56,7 @@ export default function RequestDisplay({
                               >
                               Consultar
                               </Dialogo>
-                              <DelegateButton delegateEquivalence={onEquivalenceDelegated}/>
+                              <DelegateButton delegateEquivalence={onEquivalenceDelegated} />
                             </>
                           )}
                       </div>
