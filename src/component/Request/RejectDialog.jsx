@@ -14,14 +14,12 @@ import * as Yup from 'yup';
 import TextField from '../NewRequest/TextField';
 
 const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(3),
-  },
   otherField: {
     display: 'flex',
   },
-  form: {
+  fieldError: {
     display: 'flex',
+    color: 'red',
     flexDirection: 'column',
     alignSelf: 'flex-start',
   },
@@ -51,7 +49,7 @@ function RadioButtonsGroup({ close, deny }) {
 
   return (
     <Formik onSubmit={handleSubmit} initialValues={{ reason: 'Contenidos minimos insuficientes', detail: '' }} validationSchema={validationSchema}>
-      <Form className={classes.form}>
+      <Form>
         <Field name="reason" component={ReasonSelector} />
         <div className={classes.buttonGroup}>
           <Button color="primary" type="submit">Negar</Button>
@@ -66,9 +64,9 @@ function ReasonDetailField({ form: { values, errors }, field: { name } }) {
   const classes = useStyles();
   return getIn(values, 'reason') === 'otro'
   && (
-    <div className={classes.form}>
-      <Field name={name} component={TextField} />
-      <ErrorMessage name="detail" className={classes.error} />
+    <div className={classes.fieldError}>
+      <Field name={name} component={TextField} error={errors.detail} />
+      <ErrorMessage name="detail" />
     </div>
   );
 }
@@ -80,7 +78,7 @@ function ReasonSelector({ form: { setFieldValue }, field: { name, value } }) {
   const classes = useStyles();
 
   return (
-    <FormControl className={classes.formControl}>
+    <FormControl>
       <FormLabel component="legend" focused>Seleccione un motivo de rechazo</FormLabel>
       <FormControlLabel
         value="Contenidos minimos insuficientes"
