@@ -5,11 +5,12 @@ import './NewRequest.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { searchFileByFileNumber } from '../../redux/actions/search';
-import { createRequest } from '../../redux/actions/createRequest';
+import { createRequest, createSubject } from '../../redux/actions/create';
 import { fileResult } from '../../redux/selectors';
 import InternalRequestForm from './InternalRequestForm';
 import ExternalRequestForm from './ExternalRequestForm';
 import FeedbackBar from '../FeedbackBar';
+import CreateSubjectDialog from './CreateSubjectDialog';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,8 +34,12 @@ export default function NewRequestPage(props) {
       requests: [request],
     };
     dispatch(createRequest(requests));
-    //window.location = '/expediente';
+    // window.location = '/expediente';
   }, [dispatch, file]);
+
+  const submitSubject = useCallback((subject) => {
+    dispatch(createSubject(subject));
+  }, [dispatch]);
 
   return (
     <>
@@ -51,8 +56,18 @@ export default function NewRequestPage(props) {
         yearNote={file.yearNote}
       />
       )}
-      {isInternal && <InternalRequestForm onSubmit={submitRequest} />}
-      {!isInternal && <ExternalRequestForm onSubmit={submitRequest} />}
+      {isInternal && (
+        <>
+          <InternalRequestForm onSubmit={submitRequest} />
+          <CreateSubjectDialog />
+        </>
+      )}
+      {!isInternal && (
+        <>
+          <ExternalRequestForm onSubmit={submitRequest} />
+          <CreateSubjectDialog onSubmit={submitSubject} />
+        </>
+      )}
       <FeedbackBar />
     </>
   );
@@ -101,5 +116,3 @@ function StudentDataDisplay({
     </>
   );
 }
-
-
