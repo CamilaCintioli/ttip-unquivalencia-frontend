@@ -3,15 +3,18 @@
 import React from 'react';
 import MaterialTable from 'material-table';
 import { map } from 'lodash';
+import Search from '@material-ui/icons/Search';
+import Fab from '@material-ui/core/Fab';
 import columnsRequest from './columnsRequest';
 
-const TableSecondary = ({ row }) => (
+const TableSecondary = ({ row, handleSearchRequest }) => (
   <div className="row justify-content-md-center">
     <div className="col-8">
       <span><b>Materias de origen</b></span>
       <table className="table table-sm">
         <thead className="thead-dark">
           <tr>
+            <th scope="col">Actions</th>
             <th scope="col">Nombre</th>
             <th scope="col">Universidad</th>
             <th scope="col">carrera</th>
@@ -21,6 +24,11 @@ const TableSecondary = ({ row }) => (
         <tbody>
           {map(row.originSubjects, (materia) => (
             <tr>
+              <td>
+                <Fab size="small" color="primary" aria-label="add">
+                  <Search onClick={() => handleSearchRequest(row.id, materia.id)} />
+                </Fab>
+              </td>
               <td>{materia.subject}</td>
               <td>{materia.university}</td>
               <td>{materia.career}</td>
@@ -45,13 +53,7 @@ const ListRequest = ({ requests, handleSearchRequest, checkAdmin }) => (
       pageSize: 10,
     }}
     actions={[
-      {
-        icon: 'search',
-        tooltip: 'buscador',
-        onClick: (event, rowData) => {
-          handleSearchRequest(rowData.id);
-        },
-      },
+
       (rowData) => ({
         icon: 'delete',
         tooltip: 'Delete User',
@@ -60,7 +62,7 @@ const ListRequest = ({ requests, handleSearchRequest, checkAdmin }) => (
       }),
     ]}
     detailPanel={(rowData) => (
-      <TableSecondary row={rowData} />
+      <TableSecondary row={rowData} handleSearchRequest={handleSearchRequest} />
     )}
   />
 

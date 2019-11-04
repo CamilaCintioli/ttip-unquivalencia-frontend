@@ -26,7 +26,7 @@ function ViewPrimary() {
     setFileNumber(fileNum.replace('/', '-'));
   }, [dispatch]);
 
-  const handleSearchRequest = (idRequest) => history.push(`/solicitud/${idRequest}`);
+  const handleSearchRequest = (requestId, subjectId) => history.push(`/solicitud/${requestId}/materia/${subjectId}`);
 
 
   const addRequest = () => history.push(`file/${fileNumber}/request/new`);
