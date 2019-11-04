@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
-import { withRouter, useHistory, Link } from 'react-router-dom';
-import { Grid, CircularProgress, Button } from '@material-ui/core';
+import { withRouter, useHistory } from 'react-router-dom';
+import { Grid, CircularProgress } from '@material-ui/core';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
-import List from './ViewPrimary/List';
-import columnsRequest from './ViewPrimary/columnsRequest';
-import columnsFile from './ViewPrimary/columnsFile';
 import { searchFile, searchRequest } from '../redux/actions/search';
 import { fileResults, requestResult, userRole } from '../redux/selectors';
-import { isAdmin } from './User/userRole';
+import { isAdmin, isAdminOrUser } from './User/userRole';
 import FeedbackBar from './FeedbackBar';
 import ListRequest from './ViewPrimary/ListRequest';
+import ListFile from './ViewPrimary/ListFile';
 
 function ViewPrimary() {
   const rowsFile = useSelector((state) => fileResults(state), shallowEqual);
@@ -28,31 +26,28 @@ function ViewPrimary() {
     setFileNumber(fileNum.replace('/', '-'));
   }, [dispatch]);
 
-  const handleSearchRequest = (idRequest) => {
-    history.push(`/solicitud/${idRequest}`);
-  };
-  console.log('asdasd');
-  console.log(rowsRequest);
+  const handleSearchRequest = (idRequest) => history.push(`/solicitud/${idRequest}`);
+
+
+  const addRequest = () => history.push(`file/${fileNumber}/request/new`);
+
+  const checkAdmin = isAdmin(user);
+
+  const checkLetter = (status) => isAdminOrUser(user) && status === 0;
+
   return (
     <Grid container spacing={3}>
       <FeedbackBar showNotification={JSON.parse(localStorage.getItem('notification'))} />
       <Grid item xs={6}>
         {rowsFile
-          ? <List key="file" title="Expedientes" columns={columnsFile} rows={rowsFile} handleSearch={handleSearchRequests} type="file" />
+          ? <ListFile files={rowsFile} handleSearch={handleSearchRequests} addRequest={addRequest} checkAdmin={checkAdmin} checkLetter={checkLetter} />
           : <CircularProgress size={100} color="primary" />}
       </Grid>
       <Grid item xs={6}>
         {
           rowsRequest && (
             <>
-              <ListRequest requests={rowsRequest} handleSearchRequest={handleSearchRequest} />
-              {isAdmin(user)
-                && (
-                <Link to={`file/${fileNumber}/request/new`}>
-                  <Button color="primary" variant="contained">Cargar solicitud</Button>
-                </Link>
-                )}
-
+              <ListRequest requests={rowsRequest} handleSearchRequest={handleSearchRequest} checkAdmin={checkAdmin} />
             </>
           )
         }
