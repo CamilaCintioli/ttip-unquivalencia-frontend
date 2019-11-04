@@ -7,14 +7,14 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import Requests from './Request/Requests';
 
-import getMatch from '../redux/actions/match';
-import { matchs, matchsError } from '../redux/selectors';
+import getStepper from '../redux/actions/stepper';
+import { stepper, matchsError } from '../redux/selectors';
 import Error401 from './Error/Error401';
 
 
 function ViewRequest() {
-  const { requestId } = useParams();
-  const data = useSelector((state) => matchs(state));
+  const { requestId, subjectId } = useParams();
+  const data = useSelector((state) => state);
   const isAuthorized = useSelector((state) => matchsError(state));
   const [activeStepSets, setActiveStepSets] = useState(0);
   const [activeStep, setActiveStep] = useState(0);
@@ -22,8 +22,8 @@ function ViewRequest() {
   const history = useHistory();
 
   useEffect(() => {
-    dispatch(getMatch({ requestId }));
-  }, [dispatch, requestId]);
+    dispatch(getStepper({ requestId, subjectId }));
+  }, [dispatch, requestId, subjectId]);
 
 
   const changeStep = (id, step) => {
@@ -36,22 +36,29 @@ function ViewRequest() {
     setActiveStep(0);
     history.push(`/solicitud/${id}`);
   };
+  console.log('mira aca');
+
+  console.log(data);
 
 
   return (
     <>
       {isAuthorized ? <Error401 history={history} /> : null}
       {data ? (
-        <Requests
-          activeStepSets={activeStepSets}
-          changeStepSets={changeStepSets}
-          activeStep={activeStep}
-          changeStep={changeStep}
-          requestsStepper={data.requestsStepper}
-          sets={data.sets}
-          request={data.request}
-          requestsMatch={data.match}
-        />
+        <h1>
+1
+
+        </h1>
+      // <Requests
+      //   activeStepSets={activeStepSets}
+      //   changeStepSets={changeStepSets}
+      //   activeStep={activeStep}
+      //   changeStep={changeStep}
+      //   requestsStepper={data.requestsStepper}
+      //   sets={data.sets}
+      //   request={data.request}
+      //   requestsMatch={data.match}
+      // />
       ) : null}
     </>
   );

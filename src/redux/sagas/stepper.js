@@ -9,7 +9,7 @@ import apiCall from '../api';
 
 export function* getStepper({ payload }) {
   try {
-    const results = yield call(apiCall, `/stepper/requests/${payload.requestId}`, null, null, 'GET');
+    const results = yield call(apiCall, `/stepper/requests/${payload.requestId}/subject/${payload.subjectId}`, null, null, 'GET');
     yield put({ type: GET_STEPPER_COMPLETE, results });
   } catch (error) {
     yield put({ type: GET_STEPPER_ERROR, error });

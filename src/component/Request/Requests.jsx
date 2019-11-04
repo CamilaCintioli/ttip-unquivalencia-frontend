@@ -24,12 +24,12 @@ const Requests = ({
         />
       )
       : null}
-    {requestsMatch ? <Match requestMatch={requestsMatch} /> : null}
+    {/* {requestsMatch ? <Match requestMatch={requestsMatch} /> : null}
     {requestsMatch ? (
       <div className="row justify-content-md-center col 1">
         <ListMatch requests={requestsMatch} />
       </div>
-    ) : null}
+    ) : null} */}
     {request ? <RequestPage request={request} /> : null}
   </>
 );
