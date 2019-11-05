@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Typography } from '@material-ui/core';
 import './NewRequest.css';
@@ -10,6 +10,7 @@ import { fileResult } from '../../redux/selectors';
 import InternalRequestForm from './InternalRequestForm';
 import ExternalRequestForm from './ExternalRequestForm';
 import FeedbackBar from '../FeedbackBar';
+import Selector from './Selector';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,21 +21,26 @@ const useStyles = makeStyles((theme) => ({
 export default function NewRequestPage(props) {
   const file = useSelector((state) => fileResult(state));
   const dispatch = useDispatch();
-  const isInternal = file ? file.universityOrigin === 'UNQ' : false;
+  const [isInternal, setIsInternal] = useState(false);
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     dispatch(searchFileByFileNumber({ fileNumber: props.match.params.fileId.replace('-', '/') }));
   }, [dispatch, props.match.params.fileId]);
 
-  const submitRequest = useCallback((request) => {
-    const requests = {
+  const submitRequest = useCallback((subjectOriginId, subjectUnqId) => {
+    const request = {
       fileNumber: file.fileNumber,
-      universityOrigin: file.universityOrigin,
-      requests: [request],
+      subjectOriginIds: [subjectOriginId],
+      subjectUnqId,
     };
-    dispatch(createRequest(requests));
-    //window.location = '/expediente';
+    dispatch(createRequest(request));
   }, [dispatch, file]);
+
+  const setEquivalenceMode = useCallback((equivalenceMode) => {
+    setIsInternal(equivalenceMode);
+    setShowForm(true);
+  }, [setShowForm, setIsInternal]);
 
   return (
     <>
@@ -47,12 +53,19 @@ export default function NewRequestPage(props) {
         surname={file.surname}
         mail={file.mail}
         dni={file.dni}
-        universityOrigin={file.universityOrigin}
         yearNote={file.yearNote}
       />
       )}
-      {isInternal && <InternalRequestForm onSubmit={submitRequest} />}
-      {!isInternal && <ExternalRequestForm onSubmit={submitRequest} />}
+
+      <Selector
+        options={[{ label: 'Interna', value: true }, { label: 'Externa', value: false }]}
+        placeholder="Seleccione una forma de equivalencia"
+        onChange={setEquivalenceMode}
+      />
+
+      {showForm
+      && (isInternal ? <InternalRequestForm onSubmit={submitRequest} />
+        : <ExternalRequestForm onSubmit={submitRequest} />)}
       <FeedbackBar />
     </>
   );
@@ -101,5 +114,3 @@ function StudentDataDisplay({
     </>
   );
 }
-
-
