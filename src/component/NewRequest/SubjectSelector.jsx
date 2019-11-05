@@ -1,14 +1,9 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import {
-  Formik, Form, Field, ErrorMessage, getIn,
+  ErrorMessage, getIn,
 } from 'formik';
 import './NewRequest.css';
-import Button from '@material-ui/core/Button';
-import * as Yup from 'yup';
-import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from './TextField';
-import FormDataSelector from './FormDataSelector';
 import Selector from './Selector';
 import API from '../../service/SearchService';
 

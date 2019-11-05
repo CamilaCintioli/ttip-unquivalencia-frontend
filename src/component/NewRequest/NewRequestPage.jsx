@@ -16,9 +16,14 @@ const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(3, 2),
   },
+  studentData: {
+    marginBottom: theme.spacing(5),
+  },
+
 }));
 
 export default function NewRequestPage(props) {
+  const classes = useStyles();
   const file = useSelector((state) => fileResult(state));
   const dispatch = useDispatch();
   const [isInternal, setIsInternal] = useState(false);
@@ -44,7 +49,8 @@ export default function NewRequestPage(props) {
 
   return (
     <>
-      {file
+      <div className={classes.studentData}>
+        {file
 
       && (
       <StudentDataDisplay
@@ -56,13 +62,14 @@ export default function NewRequestPage(props) {
         yearNote={file.yearNote}
       />
       )}
-
-      <Selector
-        options={[{ label: 'Interna', value: true }, { label: 'Externa', value: false }]}
-        placeholder="Seleccione una forma de equivalencia"
-        onChange={setEquivalenceMode}
-      />
-
+      </div>
+      <div className={classes.studentData}>
+        <Selector
+          options={[{ label: 'Interna', value: true }, { label: 'Externa', value: false }]}
+          placeholder="Seleccione una forma de equivalencia"
+          onChange={setEquivalenceMode}
+        />
+      </div>
       {showForm
       && (isInternal ? <InternalRequestForm onSubmit={submitRequest} />
         : <ExternalRequestForm onSubmit={submitRequest} />)}
