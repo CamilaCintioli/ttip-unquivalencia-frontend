@@ -4,9 +4,8 @@ import {
 } from 'formik';
 import './NewRequest.css';
 import { makeStyles } from '@material-ui/core/styles';
-import Selector from './Selector';
+import { MultiSelector, Selector } from './Selector';
 import API from '../../service/SearchService';
-
 
 function createSubjectOptions(subjects) {
   return subjects.map((subject) => (
@@ -42,6 +41,7 @@ export default function SubjectSelector({
 }) {
   const classes = useStyles();
   const isUnq = useCallback(() => name.includes('Unq'), [name]);
+  const isOrigin = useCallback(() => name.includes('Origin'), [name]);
   const [universities, setUniversities] = useState([]);
   const [careers, setCareers] = useState([]);
   const [planYears, setPlanYears] = useState([]);
@@ -72,40 +72,28 @@ export default function SubjectSelector({
       .then((response) => setSubjects(response.data.subjects));
   }, [universitySelected, values]);
 
-  const selectSubject = useCallback((idSubject) => {
-    setFieldValue(name, idSubject);
+  const selectSubject = useCallback((idsSubject) => {
+    setFieldValue(name, idsSubject);
   });
 
 
   return (
-    <>
+
+    <div className={classes.container}>
       {isUnq()
-        ? (
-          <div className={classes.container}>
-            <Selector options={[]} onChange={fetchCareers} placeholder="Seleccione una universidad" defaultOption={{ label: 'UNQ', value: 'UNQ' }} disable className={classes.selector} />
-            <Selector options={createOptions(careers)} onChange={fetchYears} placeholder="Seleccione una carrera" />
-            <Selector options={createOptions(planYears)} onChange={fetchSubjects} placeholder="Seleccione el año del plan" />
-            <Selector options={createSubjectOptions(subjects)} onChange={selectSubject} placeholder="Seleccione una materia" />
-            <div className={classes.error}>
-              <ErrorMessage name={name} />
-            </div>
-          </div>
-        )
-        : (
-          <div className={classes.container}>
+        ? <Selector options={[]} onChange={fetchCareers} placeholder="Seleccione una universidad" defaultOption={{ label: 'UNQ', value: 'UNQ' }} disable className={classes.selector} />
+        : <Selector options={createOptions(universities)} onChange={fetchCareers} placeholder="Seleccione una universidad" />}
 
-            <Selector options={createOptions(universities)} onChange={fetchCareers} placeholder="Seleccione una universidad" />
-            <Selector options={createOptions(careers)} onChange={fetchYears} placeholder="Seleccione una carrera" />
-            <Selector options={createOptions(planYears)} onChange={fetchSubjects} placeholder="Seleccione el año del plan" />
-            <Selector options={createSubjectOptions(subjects)} onChange={selectSubject} placeholder="Seleccione una materia" />
-            <div className={classes.error}>
-              <ErrorMessage name={name} />
-            </div>
-          </div>
-        )}
+      <Selector options={createOptions(careers)} onChange={fetchYears} placeholder="Seleccione una carrera" />
+      <Selector options={createOptions(planYears)} onChange={fetchSubjects} placeholder="Seleccione el año del plan" />
 
-
-    </>
+      {isOrigin()
+        ? <MultiSelector options={createSubjectOptions(subjects)} onChange={selectSubject} placeholder="Seleccione una materia" />
+        : <Selector options={createSubjectOptions(subjects)} onChange={selectSubject} placeholder="Seleccione una materia" />}
+      <div className={classes.error}>
+        <ErrorMessage name={name} />
+      </div>
+    </div>
 
   );
 }

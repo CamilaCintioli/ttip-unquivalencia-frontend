@@ -3,7 +3,9 @@ import React from 'react';
 import Select from 'react-select';
 import PropTypes from 'prop-types';
 
-export default function Selector({ placeholder, onChange, options, defaultOption, disable, isMulti }) {
+export function Selector({
+ placeholder, onChange, options, defaultOption, disable,
+}) {
   return (
     <Select
       className="basic-single"
@@ -12,7 +14,6 @@ export default function Selector({ placeholder, onChange, options, defaultOption
       placeholder={placeholder}
       onChange={(value) => onChange(value.value)}
       defaultValue={defaultOption}
-      isMulti={isMulti}
       isDisabled={disable}
     />
   );
@@ -31,4 +32,28 @@ Selector.defaultProps = {
   options: [],
   defaultOption: undefined,
   disable: false,
+};
+
+export function MultiSelector({ placeholder, onChange, options }) {
+  return (
+    <Select
+      className="basic-single"
+      isSearchable
+      options={options}
+      placeholder={placeholder}
+      onChange={(value) => onChange(value.map((option) => option.value))}
+      isMulti
+    />
+  );
+}
+
+MultiSelector.propTypes = {
+  placeholder: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  options: PropTypes.array,
+};
+
+MultiSelector.defaultProps = {
+  placeholder: 'Selecciona una opcion',
+  options: [],
 };

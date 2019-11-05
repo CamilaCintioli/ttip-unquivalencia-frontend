@@ -10,7 +10,7 @@ import { fileResult } from '../../redux/selectors';
 import InternalRequestForm from './InternalRequestForm';
 import ExternalRequestForm from './ExternalRequestForm';
 import FeedbackBar from '../FeedbackBar';
-import Selector from './Selector';
+import {Selector} from './Selector';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,7 +36,7 @@ export default function NewRequestPage(props) {
   const submitRequest = useCallback((subjectOriginId, subjectUnqId) => {
     const request = {
       fileNumber: file.fileNumber,
-      subjectOriginIds: [subjectOriginId],
+      subjectOriginIds: subjectOriginId,
       subjectUnqId,
     };
     dispatch(createRequest(request));
