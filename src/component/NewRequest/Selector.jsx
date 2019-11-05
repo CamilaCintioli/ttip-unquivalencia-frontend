@@ -3,7 +3,7 @@ import React from 'react';
 import Select from 'react-select';
 import PropTypes from 'prop-types';
 
-export default function Selector({ placeholder, onChange, options, defaultOption, disable }) {
+export default function Selector({ placeholder, onChange, options, defaultOption, disable, isMulti }) {
   return (
     <Select
       className="basic-single"
@@ -12,6 +12,7 @@ export default function Selector({ placeholder, onChange, options, defaultOption
       placeholder={placeholder}
       onChange={(value) => onChange(value.value)}
       defaultValue={defaultOption}
+      isMulti={isMulti}
       isDisabled={disable}
     />
   );
