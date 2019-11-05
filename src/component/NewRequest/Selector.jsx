@@ -1,21 +1,27 @@
 import React from 'react';
 import Select from 'react-select';
+import PropTypes from 'prop-types';
 
-const options = [
-  { label: 'TPI', value: 'TPI' },
-  { label: 'LIC', value: 'LIC' },
-];
-
-export default function Selector({ placeholder, setFieldValue, field }) {
+export default function Selector({ placeholder, onChange, options }) {
   return (
     <Select
       className="basic-single"
-      classNamePrefix="select"
-      defaultValue={options[0]}
       isSearchable
       options={options}
       placeholder={placeholder}
-      onChange={(value) => setFieldValue(field, value.value)}
+      onChange={(value) => onChange(value.value)}
     />
   );
 }
+
+Selector.propTypes = {
+  placeholder: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  options: PropTypes.array,
+};
+
+Selector.defaultProps = {
+  placeholder: 'Selecciona una opcion',
+  options: [],
+};
