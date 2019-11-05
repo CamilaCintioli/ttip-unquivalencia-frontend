@@ -72,7 +72,7 @@ export default function NewRequestPage(props) {
 }
 
 function StudentDataDisplay({
-  fileNumber, name, surname, mail, dni, universityOrigin, yearNote,
+  fileNumber, name, surname, mail, dni, yearNote,
 }) {
   const classes = useStyles();
   return (
@@ -102,10 +102,6 @@ function StudentDataDisplay({
           {dni}
         </Typography>
         )}
-        <Typography variant="h6" gutterBottom>
-                    Universidad de origen:
-          {universityOrigin}
-        </Typography>
         <Typography variant="h6" gutterBottom>
                     Año de nota:
           {yearNote}
