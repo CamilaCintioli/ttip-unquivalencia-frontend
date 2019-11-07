@@ -9,7 +9,7 @@ import ListMatch from './Match/ListMatch';
 
 const Requests = ({
   activeStepSets, changeStepSets,
-  activeStep, changeStep, requestsStepper, request, requestsMatch, sets,
+  changeStep, requestsStepper, request, requestsMatch, sets,
 }) => (
   <>
     {sets && requestsStepper
@@ -18,18 +18,17 @@ const Requests = ({
           activeStepSets={activeStepSets}
           changeStepSets={changeStepSets}
           sets={sets}
-          activeStep={activeStep}
           changeStep={changeStep}
           requestsStepper={requestsStepper}
         />
       )
       : null}
-    {requestsMatch ? <Match requestMatch={requestsMatch} /> : null}
+    {/* {requestsMatch ? <Match requestMatch={requestsMatch} /> : null}
     {requestsMatch ? (
       <div className="row justify-content-md-center col 1">
         <ListMatch requests={requestsMatch} />
       </div>
-    ) : null}
+    ) : null} */}
     {request ? <RequestPage request={request} /> : null}
   </>
 );
