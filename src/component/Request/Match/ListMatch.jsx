@@ -6,10 +6,13 @@ import React from 'react';
 import MaterialTable from 'material-table';
 import { isEmpty } from 'lodash';
 
+
+
 const ListMatch = ({ requests }) => (
 
-  isEmpty(requests.requestsMatch) ? null
+  isEmpty(requests) ? null
     : (
+      <ListRequest title='Historial Negativo' isSearch={false} requests={requests} handleSearchRequest={handleSearchRequest} checkAdmin={checkAdmin} />
       <MaterialTable
         title="Historial Negativo"
         columns={[
@@ -23,7 +26,7 @@ const ListMatch = ({ requests }) => (
           { title: 'Asignada', field: 'subjectOriginTotalHours' },
 
         ]}
-        data={requests.requestsMatch}
+        data={requests}
         options={{
           grouping: true,
         }}

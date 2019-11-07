@@ -9,13 +9,15 @@ import { find } from 'lodash';
 import Requests from './Request/Requests';
 
 import getStepper from '../redux/actions/stepper';
-import { stepper, matchsError } from '../redux/selectors';
+import getMatch from '../redux/actions/match';
+import { stepper, matchsError, matchs } from '../redux/selectors';
 import Error401 from './Error/Error401';
 
 
 function ViewRequest() {
   const { requestId, subjectId } = useParams();
   const data = useSelector((state) => stepper(state));
+  const requestsMatch = useSelector((state) => matchs(state));
   const isAuthorized = useSelector((state) => matchsError(state));
   const [activeStepSets, setActiveStepSets] = useState(requestId);
   const dispatch = useDispatch();
@@ -23,6 +25,7 @@ function ViewRequest() {
 
   useEffect(() => {
     dispatch(getStepper({ requestId, subjectId }));
+    dispatch(getMatch({ requestId, subjectId }));
   }, [dispatch, requestId, subjectId]);
 
 
@@ -37,6 +40,7 @@ function ViewRequest() {
     history.push(`/solicitud/${_requestId}/materia/${request.firstSubject}`);
   };
 
+
   return (
     <>
       {isAuthorized ? <Error401 history={history} /> : null}
@@ -48,7 +52,7 @@ function ViewRequest() {
           requestsStepper={data.requestsStepper}
           sets={data.sets}
           request={data.request}
-          requestsMatch={data.match}
+          requestsMatch={requestsMatch}
         />
       ) : null}
     </>

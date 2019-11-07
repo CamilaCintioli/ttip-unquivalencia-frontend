@@ -2,10 +2,11 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
+import { isEmpty } from 'lodash';
 import Steappers from './Steppers';
 import RequestPage from './RequestPage';
 import Match from './Match';
-import ListMatch from './Match/ListMatch';
+import ListRequest from '../ViewPrimary/ListRequest';
 
 const Requests = ({
   activeStepSets, changeStepSets,
@@ -23,12 +24,27 @@ const Requests = ({
         />
       )
       : null}
-    {/* {requestsMatch ? <Match requestMatch={requestsMatch} /> : null}
     {requestsMatch ? (
       <div className="row justify-content-md-center col 1">
-        <ListMatch requests={requestsMatch} />
+        { isEmpty(requestsMatch.requestsMatch) ? <Match requestMatch={requestsMatch} />
+          : (
+            <>
+              <p>
+                <a className="btn btn-primary btn-lg" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Historial</a>
+              </p>
+              <div className="row">
+                <div className="col">
+                  <div className="collapse multi-collapse" id="multiCollapseExample1">
+                    <div className="card card-body">
+                      <ListRequest title="Historial Negativo" isSearch={0} requests={requestsMatch.requestsMatch} handleSearchRequest={null} checkAdmin={!false} pageSize={5} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
       </div>
-    ) : null} */}
+    ) : null}
     {request ? <RequestPage request={request} /> : null}
   </>
 );

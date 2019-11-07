@@ -47,7 +47,7 @@ function ViewPrimary() {
         {
           rowsRequest && (
             <>
-              <ListRequest requests={rowsRequest} handleSearchRequest={handleSearchRequest} checkAdmin={checkAdmin} />
+              <ListRequest title="Solicitudes" isSearch={1} requests={rowsRequest} handleSearchRequest={handleSearchRequest} checkAdmin={checkAdmin} pageSize={10} />
             </>
           )
         }

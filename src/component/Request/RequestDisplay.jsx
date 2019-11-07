@@ -21,30 +21,29 @@ export default function RequestDisplay({
     <>
       {request
         && (
-          <Container maxWidth="lg">
-            <Container maxWidth="lg">
-              <Grid container>
-                <Grid item xs={6}>
-                  <UniversitySubjectData
-                    university={originSubject.university}
-                    subject={originSubject.subject}
-                    subjectPdfSrc={subjectPdfSrcOrigin}
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <UniversitySubjectData
-                    university={unqSubject.university}
-                    subject={unqSubject.subject}
-                    subjectPdfSrc={subjectPdfSrcDestination}
-                  />
-                </Grid>
-              </Grid>
-            </Container>
-            <Container maxWidth="lg">
-              {showActionButtons
+          <div className="container">
+            <div className="col-12">
+              <UniversitySubjectData
+                university={originSubject.university}
+                subject={originSubject.subject}
+                subjectPdfSrc={subjectPdfSrcOrigin}
+              />
+            </div>
+            <div className="col-12 ">
+              <UniversitySubjectData
+                university={unqSubject.university}
+                subject={unqSubject.subject}
+                subjectPdfSrc={subjectPdfSrcDestination}
+              />
+            </div>
+          </div>
+        )}
+      <br />
+      <div className="container-small">
+        {showActionButtons
                 && (
                   <>
-                    <Container maxWidth="lg">
+                    <div className="row justify-content-md-center">
                       <div className={classes.buttonGroup}>
                         <Button className={classes.button} color="primary" variant="contained" onClick={onEquivalenceGiven}>DAR EQUIVALENCIA</Button>
                         <Button className={classes.button} color="primary" variant="contained" onClick={onEquivalenceDenied}>NEGAR EQUIVALENCIA</Button>
@@ -60,13 +59,10 @@ export default function RequestDisplay({
                             </>
                           )}
                       </div>
-                    </Container>
+                    </div>
                   </>
                 )}
-            </Container>
-          </Container>
-        )}
-
+      </div>
     </>
   );
 }
@@ -130,3 +126,30 @@ function DelegateButton({ delegateEquivalence }) {
     </div>
   );
 }
+
+
+{ /* <br />
+            <Container maxWidth="lg">
+              {showActionButtons
+                && (
+                  <>
+                    <Container maxWidth="lg">
+                      <div className={classes.buttonGroup}>
+                        <Button className={classes.button} color="primary" variant="contained" onClick={onEquivalenceGiven}>DAR EQUIVALENCIA</Button>
+                        <Button className={classes.button} color="primary" variant="contained" onClick={onEquivalenceDenied}>NEGAR EQUIVALENCIA</Button>
+                        {showConsultAndDelegateButton
+                          && (
+                            <>
+                              <Dialogo
+                                consultEquivalence={onEquivalenceConsulted}
+                              >
+                              Consultar
+                              </Dialogo>
+                              <DelegateButton delegateEquivalence={onEquivalenceDelegated} />
+                            </>
+                          )}
+                      </div>
+                    </Container>
+                  </>
+                )}
+            </Container> */ }
