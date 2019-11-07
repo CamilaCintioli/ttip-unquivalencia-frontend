@@ -5,38 +5,37 @@ import {
   withRouter, useHistory, useParams,
 } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { find } from 'lodash';
 import Requests from './Request/Requests';
 
-import getMatch from '../redux/actions/match';
-import { matchs, matchsError } from '../redux/selectors';
+import getStepper from '../redux/actions/stepper';
+import { stepper, matchsError } from '../redux/selectors';
 import Error401 from './Error/Error401';
 
 
 function ViewRequest() {
-  const { requestId } = useParams();
-  const data = useSelector((state) => matchs(state));
+  const { requestId, subjectId } = useParams();
+  const data = useSelector((state) => stepper(state));
   const isAuthorized = useSelector((state) => matchsError(state));
-  const [activeStepSets, setActiveStepSets] = useState(0);
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStepSets, setActiveStepSets] = useState(requestId);
   const dispatch = useDispatch();
   const history = useHistory();
 
   useEffect(() => {
-    dispatch(getMatch({ requestId }));
-  }, [dispatch, requestId]);
+    dispatch(getStepper({ requestId, subjectId }));
+  }, [dispatch, requestId, subjectId]);
 
 
-  const changeStep = (id, step) => {
-    setActiveStep(step);
-    history.push(`/solicitud/${id}`);
+  const changeStep = (_subjectId) => {
+    const request = find(data.requestsStepper, ((r) => r.subjectId === _subjectId));
+    history.push(`/solicitud/${activeStepSets}/materia/${request.subjectId}`);
   };
 
-  const changeStepSets = (id, step) => {
-    setActiveStepSets(step);
-    setActiveStep(0);
-    history.push(`/solicitud/${id}`);
+  const changeStepSets = (_requestId) => {
+    setActiveStepSets(_requestId);
+    const request = find(data.sets, ((r) => r.requestId === _requestId));
+    history.push(`/solicitud/${_requestId}/materia/${request.firstSubject}`);
   };
-
 
   return (
     <>
@@ -45,7 +44,6 @@ function ViewRequest() {
         <Requests
           activeStepSets={activeStepSets}
           changeStepSets={changeStepSets}
-          activeStep={activeStep}
           changeStep={changeStep}
           requestsStepper={data.requestsStepper}
           sets={data.sets}

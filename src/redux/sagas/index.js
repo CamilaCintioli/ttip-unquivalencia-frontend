@@ -4,7 +4,8 @@ import search from './search';
 import user from './user';
 import create from './create';
 import match from './match';
+import stepper from './stepper';
 
 export default function* rootSaga() {
-  yield all([user(), search(), updateEquivalence(), create(), match()]);
+  yield all([user(), search(), updateEquivalence(), create(), stepper(), match()]);
 }

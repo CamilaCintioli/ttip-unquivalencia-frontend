@@ -8,7 +8,7 @@ import NewRequestPage from '../NewRequest/NewRequestPage';
 const routes = [
   { path: '/home', _component: Home },
   { path: '/expediente', _component: ViewPrimary },
-  { path: '/solicitud/:requestId', _component: VieweRequests },
+  { path: '/solicitud/:requestId/materia/:subjectId', _component: VieweRequests },
   { path: '/new/solicitud', _component: NewFilePage },
   { path: '/usuarios', _component: User },
   { path: '/file/:fileId/request/new', _component: NewRequestPage },

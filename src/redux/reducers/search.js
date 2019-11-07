@@ -14,7 +14,7 @@ export default function (state = initialState, action) {
     case SEARCH_FILE_START:
       return { ...state, isLoading: true, file: null };
     case SEARCH_FILE_COMPLETE:
-      return { ...state, isLoading: false, fileResult: get(action, 'results.data') };
+      return { ...state, isLoading: false, fileResult: get(action, 'results.data.files') };
     case SEARCH_FILE_ERROR:
       return { ...state, isLoading: false, file: null };
     case SEARCH_REQUEST_START:

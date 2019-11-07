@@ -4,6 +4,7 @@ import updateEquivalence from './updateEquivalence';
 import user from './user';
 import create from './create';
 import match from './match';
+import stepper from './stepper';
 
 const rootReducer = combineReducers({
   user,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   updateEquivalence,
   create,
   match,
+  stepper,
 });
 
 export default rootReducer;

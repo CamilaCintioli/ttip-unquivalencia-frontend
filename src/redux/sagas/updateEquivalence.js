@@ -24,7 +24,7 @@ export function* approveEquivalence({ payload }) {
 
 export function* rejectEquivalence({ payload }) {
   try {
-    const results = yield call(apiCall, `/request/${payload.requestId}`, { equivalence: 'NEGADA' }, null, 'POST');
+    const results = yield call(apiCall, `/request/${payload.requestId}`, { equivalence: 'NEGADA', motive: payload.motive }, null, 'POST');
     openSnackbar('La solicitud ha sido rechazada', 'success');
     yield put({ type: REJECT_EQUIVALENCE_COMPLETE, results });
     yield put({ type: SEARCH_REQUEST_START, payload });

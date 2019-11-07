@@ -45,8 +45,8 @@ export default function CreateSubjectDialog({ onSubmit }) {
   return (
     <div>
       <Button
-        variant="contained"
-        color="primary"
+        variant="outlined"
+        color="secondary"
         aria-label="primary button "
         onClick={handleOpen}
         className={classes.consultButton}

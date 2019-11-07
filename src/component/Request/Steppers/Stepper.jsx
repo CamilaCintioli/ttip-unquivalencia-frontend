@@ -43,18 +43,17 @@ export default function HorizontalNonLinearStepper({
         return <CheckBoxOutlineBlankIcon color="primary" />;
     }
   };
-  const handleStep = (step) => () => {
-    changeStep(requests[step].requestId, step);
-  };
+  const handleStep = (id) => () => changeStep(id);
 
   const getName = (request) => (level === 1 ? request.subjectUnq : request.subjectOrigin);
+  const getId = (request) => (level === 1 ? request.requestId : request.subjectId);
 
   return (
     <div className={classes.root}>
       <Stepper nonLinear activeStep={activeStep}>
         {map(requests, (request, index) => (
           <Step key={index}>
-            <StepButton onClick={handleStep(index)} completed icon={getIcon(request.equivalence)}>
+            <StepButton onClick={handleStep(getId(request))} completed icon={getIcon(request.equivalence)}>
               {getName(request)}
             </StepButton>
           </Step>

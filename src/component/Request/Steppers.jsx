@@ -18,6 +18,7 @@ const Steppers = ({
         level={1}
       />
     </div>
+    <br />
     <div className="row align-items-center justify-content-md-center">
       <div className="col col-lg-6">
         <Steapper
