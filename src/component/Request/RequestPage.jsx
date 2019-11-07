@@ -4,7 +4,9 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import RequestDisplay from './RequestDisplay';
-import { approveEquivalence, rejectEquivalence, sendConsult, delegateEquivalence } from '../../redux/actions/updateEquivalence';
+import {
+ approveEquivalence, rejectEquivalence, sendConsult, delegateEquivalence 
+} from '../../redux/actions/updateEquivalence';
 import FeedbackBar from '../FeedbackBar';
 import { userRole } from '../../redux/selectors';
 import { isAdmin, isProfessor } from '../User/userRole';
@@ -18,10 +20,11 @@ export default function RequestPage({ request }) {
     }));
   }, [dispatch]);
 
-  const denyEquivalence = useCallback(() => {
+  const denyEquivalence = useCallback((reason) => {
     dispatch(rejectEquivalence({
       requestId: request.id,
       fileId: request.fk_fileid,
+      motive: reason,
     }));
   }, [dispatch]);
 
