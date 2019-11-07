@@ -9,7 +9,7 @@ import ListMatch from './Match/ListMatch';
 
 const Requests = ({
   activeStepSets, changeStepSets,
-  activeStep, changeStep, requestsStepper, request, requestsMatch, sets,
+  changeStep, requestsStepper, request, requestsMatch, sets,
 }) => (
   <>
     {sets && requestsStepper
@@ -18,7 +18,6 @@ const Requests = ({
           activeStepSets={activeStepSets}
           changeStepSets={changeStepSets}
           sets={sets}
-          activeStep={activeStep}
           changeStep={changeStep}
           requestsStepper={requestsStepper}
         />

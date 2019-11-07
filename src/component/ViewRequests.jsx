@@ -5,6 +5,7 @@ import {
   withRouter, useHistory, useParams,
 } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { find } from 'lodash';
 import Requests from './Request/Requests';
 
 import getStepper from '../redux/actions/stepper';
@@ -14,10 +15,9 @@ import Error401 from './Error/Error401';
 
 function ViewRequest() {
   const { requestId, subjectId } = useParams();
-  const data = useSelector((state) => state);
+  const data = useSelector((state) => stepper(state));
   const isAuthorized = useSelector((state) => matchsError(state));
-  const [activeStepSets, setActiveStepSets] = useState(0);
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStepSets, setActiveStepSets] = useState(requestId);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -26,39 +26,30 @@ function ViewRequest() {
   }, [dispatch, requestId, subjectId]);
 
 
-  const changeStep = (id, step) => {
-    setActiveStep(step);
-    history.push(`/solicitud/${id}`);
+  const changeStep = (_subjectId) => {
+    const request = find(data.requestsStepper, ((r) => r.subjectId === _subjectId));
+    history.push(`/solicitud/${activeStepSets}/materia/${request.subjectId}`);
   };
 
-  const changeStepSets = (id, step) => {
-    setActiveStepSets(step);
-    setActiveStep(0);
-    history.push(`/solicitud/${id}`);
+  const changeStepSets = (_requestId) => {
+    setActiveStepSets(_requestId);
+    const request = find(data.sets, ((r) => r.requestId === _requestId));
+    history.push(`/solicitud/${_requestId}/materia/${request.firstSubject}`);
   };
-  console.log('mira aca');
-
-  console.log(data);
-
 
   return (
     <>
       {isAuthorized ? <Error401 history={history} /> : null}
       {data ? (
-        <h1>
-1
-
-        </h1>
-      // <Requests
-      //   activeStepSets={activeStepSets}
-      //   changeStepSets={changeStepSets}
-      //   activeStep={activeStep}
-      //   changeStep={changeStep}
-      //   requestsStepper={data.requestsStepper}
-      //   sets={data.sets}
-      //   request={data.request}
-      //   requestsMatch={data.match}
-      // />
+        <Requests
+          activeStepSets={activeStepSets}
+          changeStepSets={changeStepSets}
+          changeStep={changeStep}
+          requestsStepper={data.requestsStepper}
+          sets={data.sets}
+          request={data.request}
+          requestsMatch={data.match}
+        />
       ) : null}
     </>
   );

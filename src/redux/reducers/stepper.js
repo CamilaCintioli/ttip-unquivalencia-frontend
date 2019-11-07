@@ -12,8 +12,6 @@ export default function (state = initialState, action) {
     case GET_STEPPER_START:
       return { ...state, isLoading: true, stepper: null };
     case GET_STEPPER_COMPLETE:
-      console.log('actioncaca');
-      console.log(action);
       return { ...state, isLoading: false, stepperResult: get(action, 'results.data') };
     case GET_STEPPER_ERROR:
       return { ...state, isLoading: false, stepper: null };
