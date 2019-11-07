@@ -36,8 +36,8 @@ export function* rejectEquivalence({ payload }) {
 
 export function* consultEquivalence({ payload }) {
   try {
-    const { requestId, ...rest } = payload;
-    const results = yield call(apiCall, `/consult/requests/${requestId}`, rest, null, 'POST');
+    const { requestId, fileId, ...rest } = payload;
+    const results = yield call(apiCall, `/consult/requests/${fileId}/subject/${requestId}`, rest, null, 'POST');
     openSnackbar(`La consulta ha sido enviada a ${rest.email}`, 'success');
     yield put({ type: CONSULT_EQUIVALENCE_COMPLETE, results });
     yield put({ type: SEARCH_REQUEST_START, payload });

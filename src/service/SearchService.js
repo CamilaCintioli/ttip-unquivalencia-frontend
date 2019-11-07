@@ -2,7 +2,6 @@
 import axios from 'axios';
 import { get } from 'lodash';
 import { loadUser, logout } from './userService';
-import apiCall from '../redux/api';
 
 const port = `${process.env.REACT_APP_BACKEND_URL}/api/v1`;
 
@@ -21,6 +20,8 @@ const API = {
   searchPlanYears: (university, career) => axios.get(`${port}/plan/years?university=${university}&career=${career}`, getConfig())
     .catch((error) => { if (error.response.status === 450) { logout(); } throw error; }),
   searchSubjectsByUniversityCareerAndPlan: (university, career, yearPlan) => axios.get(`${port}/subjects?university=${university}&career=${career}&yearPlan=${yearPlan}`, getConfig())
+    .catch((error) => { if (error.response.status === 450) { logout(); } throw error; }),
+  searchMailsFromUsers: () => axios.get(`${port}/mails`, getConfig())
     .catch((error) => { if (error.response.status === 450) { logout(); } throw error; }),
 };
 
