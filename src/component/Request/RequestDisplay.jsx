@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-indent-props */
 import React, { useState } from 'react';
 import {
   Button, Grid, Container,
@@ -9,6 +10,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import UniversitySubjectData from './UniversitySubjectData';
 import Dialogo from './dialogo';
 import RejectDialog from './RejectDialog';
+import SubjectInformationDisplay from './SubjectInformationDisplay';
 
 const subjectPdfSrcDestination = 'http://clp.web.unq.edu.ar/wp-content/uploads/sites/110/2019/09/apuntes.pdf';
 const subjectPdfSrcOrigin = 'http://clp.web.unq.edu.ar/wp-content/uploads/sites/110/2019/09/practica4y5.pdf';
@@ -31,6 +33,7 @@ export default function RequestDisplay({
                     subject={originSubject.subject}
                     subjectPdfSrc={subjectPdfSrcOrigin}
                   />
+                  <SubjectInformationDisplay subject={originSubject} />
                 </Grid>
                 <Grid item xs={6}>
                   <UniversitySubjectData
@@ -38,6 +41,7 @@ export default function RequestDisplay({
                     subject={unqSubject.subject}
                     subjectPdfSrc={subjectPdfSrcDestination}
                   />
+                  <SubjectInformationDisplay subject={unqSubject} />
                 </Grid>
               </Grid>
             </Container>
