@@ -31,11 +31,12 @@ export default function Dashboard() {
 
   const signOut = () => apiCall('/user/invalidate/all/sessions', null, null, 'POST').then(() => logout());
 
+  const changePassword = () => history.push('/password');
   return (
     <div className={classes.root}>
       <CssBaseline />
       {isValid
-        ? <Nav classes={classes} handleDrawerOpen={() => setOpen(true)} open={open} clouseSession={signOut} />
+        ? <Nav classes={classes} handleDrawerOpen={() => setOpen(true)} open={open} clouseSession={signOut} changePassword={changePassword}/>
         : null}
       {isValid
         ? <SideBar classes={classes} handleDrawerClose={() => setOpen(false)} open={open} />
