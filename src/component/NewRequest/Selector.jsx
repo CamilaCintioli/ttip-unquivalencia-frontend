@@ -2,13 +2,14 @@
 import React from 'react';
 import Select from 'react-select';
 import PropTypes from 'prop-types';
+import './selector.css';
 
 export function Selector({
  placeholder, onChange, options, defaultOption, disable,
 }) {
   return (
     <Select
-      className="basic-single"
+      className="selector"
       isSearchable
       options={options}
       placeholder={placeholder}
@@ -37,7 +38,7 @@ Selector.defaultProps = {
 export function MultiSelector({ placeholder, onChange, options }) {
   return (
     <Select
-      className="basic-single"
+      className="selector"
       isSearchable
       options={options}
       placeholder={placeholder}
@@ -57,3 +58,12 @@ MultiSelector.defaultProps = {
   placeholder: 'Selecciona una opcion',
   options: [],
 };
+
+export function createOptions(list) {
+  return list.map((str) => (
+    {
+      label: str,
+      value: str,
+    }
+  ));
+}

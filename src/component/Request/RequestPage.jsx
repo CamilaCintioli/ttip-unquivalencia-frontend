@@ -33,6 +33,7 @@ export default function RequestPage({ request }) {
       requestId: request.id,
       email,
       message,
+      fileId: request.fk_fileid,
     }));
   }, [dispatch]);
 
