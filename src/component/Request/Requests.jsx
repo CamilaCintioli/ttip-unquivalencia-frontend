@@ -10,7 +10,7 @@ import ListRequest from '../ViewPrimary/ListRequest';
 
 const Requests = ({
   activeStepSets, changeStepSets,
-  changeStep, requestsStepper, request, requestsMatch, sets,
+  changeStep, requestsStepper, request, requestsMatch, sets, checkProfessor,
 }) => (
   <>
     {sets && requestsStepper
@@ -45,6 +45,26 @@ const Requests = ({
           )}
       </div>
     ) : null}
+    {checkProfessor && request.commentsToProfessor
+      ? (
+        <div className="row justify-content-md-center col 1">
+          <p>
+            <a className="btn btn-primary btn-lg" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Comentario</a>
+          </p>
+          <div className="row">
+            <div className="col">
+              <div className="collapse multi-collapse" id="multiCollapseExample1">
+                <div className="card border-dark mb-3">
+                  <div className="card-body text-dark">
+                    <p className="card-text">{request.commentsToProfessor}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
+
     {request ? <RequestPage request={request} /> : null}
   </>
 );

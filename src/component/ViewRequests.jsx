@@ -10,7 +10,10 @@ import Requests from './Request/Requests';
 
 import getStepper from '../redux/actions/stepper';
 import getMatch from '../redux/actions/match';
-import { stepper, matchsError, matchs } from '../redux/selectors';
+import {
+  stepper, matchsError, matchs, userRole,
+} from '../redux/selectors';
+import { isProfessor } from './User/userRole';
 import Error401 from './Error/Error401';
 
 
@@ -22,6 +25,7 @@ function ViewRequest() {
   const [activeStepSets, setActiveStepSets] = useState(requestId);
   const dispatch = useDispatch();
   const history = useHistory();
+  const user = useSelector((state) => userRole(state));
 
   useEffect(() => {
     dispatch(getStepper({ requestId, subjectId }));
@@ -40,6 +44,7 @@ function ViewRequest() {
     history.push(`/solicitud/${_requestId}/materia/${request.firstSubject}`);
   };
 
+  const checkProfessor = isProfessor(user);
 
   return (
     <>
@@ -53,6 +58,8 @@ function ViewRequest() {
           sets={data.sets}
           request={data.request}
           requestsMatch={requestsMatch}
+          checkProfessor={checkProfessor}
+
         />
       ) : null}
     </>
