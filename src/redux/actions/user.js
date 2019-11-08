@@ -2,6 +2,7 @@ import {
   GET_USER_START, GET_USERS_START,
   CREATE_USER_START, UPDATE_USER_START,
   DELETE_USER_START,
+  CHANGE_PASSWORD_START,
 } from '../../consts/actionTypes';
 
 export const getUser = (payload) => ({
@@ -26,5 +27,10 @@ export const updateUser = (payload) => ({
 
 export const deleteUser = (payload) => ({
   type: DELETE_USER_START,
+  payload,
+});
+
+export const changePassword = (payload) => ({
+  type: CHANGE_PASSWORD_START,
   payload,
 });
