@@ -9,7 +9,7 @@ export default function Error401({ history }) {
       <h1>401</h1>
       <h2>unauthorized</h2>
       <p>sorry come</p>
-      <button type="button" className="btn btn-primary" onClick={() => history.goBack()}>HOME</button>
+      <button type="button" className="btn btn-primary" onClick={() => history.push('/home')}>HOME</button>
     </div>
 
   );

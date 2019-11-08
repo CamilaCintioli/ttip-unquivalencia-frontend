@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-indent-props */
 import React, { useState } from 'react';
 import {
   Button, Grid, Container,
@@ -8,6 +9,8 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import UniversitySubjectData from './UniversitySubjectData';
 import Dialogo from './dialogo';
+import RejectDialog from './RejectDialog';
+import SubjectInformationDisplay from './SubjectInformationDisplay';
 
 const subjectPdfSrcDestination = 'http://clp.web.unq.edu.ar/wp-content/uploads/sites/110/2019/09/apuntes.pdf';
 const subjectPdfSrcOrigin = 'http://clp.web.unq.edu.ar/wp-content/uploads/sites/110/2019/09/practica4y5.pdf';
@@ -46,7 +49,7 @@ export default function RequestDisplay({
                     <div className="row justify-content-md-center">
                       <div className={classes.buttonGroup}>
                         <Button className={classes.button} color="primary" variant="contained" onClick={onEquivalenceGiven}>DAR EQUIVALENCIA</Button>
-                        <Button className={classes.button} color="primary" variant="contained" onClick={onEquivalenceDenied}>NEGAR EQUIVALENCIA</Button>
+                        <RejectDialog denyEquivalence={onEquivalenceDenied} />
                         {showConsultAndDelegateButton
                           && (
                             <>
@@ -126,30 +129,3 @@ function DelegateButton({ delegateEquivalence }) {
     </div>
   );
 }
-
-
-{ /* <br />
-            <Container maxWidth="lg">
-              {showActionButtons
-                && (
-                  <>
-                    <Container maxWidth="lg">
-                      <div className={classes.buttonGroup}>
-                        <Button className={classes.button} color="primary" variant="contained" onClick={onEquivalenceGiven}>DAR EQUIVALENCIA</Button>
-                        <Button className={classes.button} color="primary" variant="contained" onClick={onEquivalenceDenied}>NEGAR EQUIVALENCIA</Button>
-                        {showConsultAndDelegateButton
-                          && (
-                            <>
-                              <Dialogo
-                                consultEquivalence={onEquivalenceConsulted}
-                              >
-                              Consultar
-                              </Dialogo>
-                              <DelegateButton delegateEquivalence={onEquivalenceDelegated} />
-                            </>
-                          )}
-                      </div>
-                    </Container>
-                  </>
-                )}
-            </Container> */ }

@@ -13,7 +13,6 @@ function ViewPrimary() {
   const rowsFile = useSelector((state) => fileResults(state), shallowEqual);
   const rowsRequest = useSelector((state) => requestResult(state), shallowEqual);
   const dispatch = useDispatch();
-  const [fileNumber, setFileNumber] = useState(undefined);
   const history = useHistory();
   const user = useSelector((state) => userRole(state));
 
@@ -21,15 +20,14 @@ function ViewPrimary() {
     dispatch(searchFile());
   }, [dispatch, rowsRequest]);
 
-  const handleSearchRequests = React.useCallback((id, fileNum) => {
+  const handleSearchRequests = React.useCallback((id) => {
     dispatch(searchRequest({ fileId: id }));
-    setFileNumber(fileNum.replace('/', '-'));
   }, [dispatch]);
 
   const handleSearchRequest = (requestId, subjectId) => history.push(`/solicitud/${requestId}/materia/${subjectId}`);
 
 
-  const addRequest = () => history.push(`file/${fileNumber}/request/new`);
+  const addRequest = (file) => { history.push(`file/${file.replace('/', '-')}/request/new`); };
 
   const checkAdmin = isAdmin(user);
 

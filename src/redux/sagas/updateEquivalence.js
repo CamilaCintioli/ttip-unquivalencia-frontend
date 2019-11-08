@@ -24,7 +24,7 @@ export function* approveEquivalence({ payload }) {
 
 export function* rejectEquivalence({ payload }) {
   try {
-    const results = yield call(apiCall, `/request/${payload.requestId}`, { equivalence: 'NEGADA' }, null, 'POST');
+    const results = yield call(apiCall, `/request/${payload.requestId}`, { equivalence: 'NEGADA', motive: payload.motive }, null, 'POST');
     openSnackbar('La solicitud ha sido rechazada', 'success');
     yield put({ type: REJECT_EQUIVALENCE_COMPLETE, results });
     yield put({ type: SEARCH_REQUEST_START, payload });
@@ -36,8 +36,8 @@ export function* rejectEquivalence({ payload }) {
 
 export function* consultEquivalence({ payload }) {
   try {
-    const { requestId, ...rest } = payload;
-    const results = yield call(apiCall, `/consult/requests/${requestId}`, rest, null, 'POST');
+    const { requestId, subjectId, ...rest } = payload;
+    const results = yield call(apiCall, `/consult/requests/${requestId}/subject/${subjectId}`, rest, null, 'POST');
     openSnackbar(`La consulta ha sido enviada a ${rest.email}`, 'success');
     yield put({ type: CONSULT_EQUIVALENCE_COMPLETE, results });
     yield put({ type: SEARCH_REQUEST_START, payload });
