@@ -4,10 +4,10 @@ import {
   Formik, Form, Field, ErrorMessage,
 } from 'formik';
 import Typography from '@material-ui/core/Typography';
-import TextFieldUI from '@material-ui/core/TextField';
 import './NewRequest.css';
 import Button from '@material-ui/core/Button';
 import * as Yup from 'yup';
+import TextField from '../Fields/TextField';
 import API from '../../service/FileService';
 import FeedbackBar, { openSnackbar } from '../FeedbackBar';
 
@@ -87,19 +87,5 @@ function StudentField({ field: { name, value }, form: { setFieldValue } }) {
         <ErrorMessage name={`${name}.yearNote`} />
       </div>
     </>
-  );
-}
-
-
-function TextField({ form: { handleFocus, handleChange, handleBlur }, field: { name, value }, ...props }) {
-  return (
-    <TextFieldUI
-      {...props}
-      name={name}
-      value={value}
-      onChange={handleChange}
-      onBlur={handleBlur}
-      onFocus={handleFocus}
-    />
   );
 }
