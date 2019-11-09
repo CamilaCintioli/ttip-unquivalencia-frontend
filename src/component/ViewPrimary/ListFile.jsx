@@ -30,7 +30,7 @@ const ListFile = ({
         hidden: !checkAdmin,
         tooltip: 'agregar solicitud',
         onClick: (event, rowData) => {
-          addRequest(rowData.id);
+          addRequest(rowData.fileNumber);
         },
       },
       {

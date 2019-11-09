@@ -5,12 +5,13 @@ import './NewRequest.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { searchFileByFileNumber } from '../../redux/actions/search';
-import { createRequest } from '../../redux/actions/createRequest';
+import { createRequest, createSubject } from '../../redux/actions/create';
 import { fileResult } from '../../redux/selectors';
 import InternalRequestForm from './InternalRequestForm';
 import ExternalRequestForm from './ExternalRequestForm';
 import FeedbackBar from '../FeedbackBar';
-import {Selector} from './Selector';
+import CreateSubjectDialog from './CreateSubjectDialog';
+import { Selector } from './Selector';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
   studentData: {
     marginBottom: theme.spacing(5),
   },
-
 }));
 
 export default function NewRequestPage(props) {
@@ -47,6 +47,10 @@ export default function NewRequestPage(props) {
     setShowForm(true);
   }, [setShowForm, setIsInternal]);
 
+  const submitSubject = useCallback((subject) => {
+    dispatch(createSubject(subject));
+  }, [dispatch]);
+
   return (
     <>
       <div className={classes.studentData}>
@@ -70,13 +74,20 @@ export default function NewRequestPage(props) {
           onChange={setEquivalenceMode}
         />
       </div>
-      {showForm
-      && (isInternal ? <InternalRequestForm onSubmit={submitRequest} />
-        : <ExternalRequestForm onSubmit={submitRequest} />)}
+
+      { showForm
+      && (
+        <>
+          {isInternal ? <InternalRequestForm onSubmit={submitRequest} /> : <ExternalRequestForm onSubmit={submitRequest} />}
+          <CreateSubjectDialog onSubmit={submitSubject} />
+        </>
+      )}
+
       <FeedbackBar />
     </>
   );
 }
+
 
 function StudentDataDisplay({
   fileNumber, name, surname, mail, dni, yearNote,

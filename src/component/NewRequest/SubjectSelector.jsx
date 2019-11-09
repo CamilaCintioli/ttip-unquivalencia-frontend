@@ -4,7 +4,7 @@ import {
 } from 'formik';
 import './NewRequest.css';
 import { makeStyles } from '@material-ui/core/styles';
-import { MultiSelector, Selector } from './Selector';
+import { MultiSelector, Selector, createOptions } from './Selector';
 import API from '../../service/SearchService';
 
 function createSubjectOptions(subjects) {
@@ -12,15 +12,6 @@ function createSubjectOptions(subjects) {
     {
       label: subject.subject,
       value: subject.id,
-    }
-  ));
-}
-
-function createOptions(list) {
-  return list.map((str) => (
-    {
-      label: str,
-      value: str,
     }
   ));
 }
