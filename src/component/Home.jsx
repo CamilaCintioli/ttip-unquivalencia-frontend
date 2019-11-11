@@ -289,9 +289,123 @@ const generateLetter = () => {
   amMVr1zuxrXf3Lx5/YarjoeWXb9ypqELzjt5J9Mq9ZK8zMkUg2KMgxhPzpjyeaoaAAAA53PavBMAAAC4KGxBBwAAQAl0JwAAAEqgOwEAAFAC3QkAAIAS6E4AAACUQHcCAACgBLoTAAAAJdCdAAAAKIHuBAAAQA
   l0JwAAAEqgOwEAAFAC3QkAAIAS/gAMThrjnicIIgAAAABJRU5ErkJggg==`;
 
+  pdf.setFontSize(14);
+
   pdf.autoTable({
     body: [{
       id: 1,
+      universityOrigin: 'UTN-FRLP',
+      subjectOrigin: 'Programación 1',
+      yearNote: '2015',
+      subjectUnq: 'Elementos de Programación y Lógica',
+      semanal: '5',
+      total: '90',
+      core: 'Obligatorio',
+      credits: '10',
+      email: 'f.n.autalan@gmail.com',
+      signature: 'Gira a la Coordinación del CI.',
+      observations: 'Gira a la Coordinación del CI.',
+    },
+    {
+      id: 2,
+      universityOrigin: 'UTN-FRLP',
+      subjectOrigin: 'Programación 1',
+      yearNote: '2015',
+      subjectUnq: 'Elementos de Programación y Lógica',
+      semanal: '5',
+      total: '90',
+      core: 'Obligatorio',
+      credits: '10',
+      email: 'f.n.autalan@gmail.com',
+      signature: 'Gira a la Coordinación del CI.',
+      observations: 'Gira a la Coordinación del CI.',
+    },
+    {
+      id: 2,
+      universityOrigin: 'UTN-FRLP',
+      subjectOrigin: 'Programación 1',
+      yearNote: '2015',
+      subjectUnq: 'Elementos de Programación y Lógica',
+      semanal: '5',
+      total: '90',
+      core: 'Obligatorio',
+      credits: '10',
+      email: 'f.n.autalan@gmail.com',
+      signature: 'Gira a la Coordinación del CI.',
+      observations: 'Gira a la Coordinación del CI.',
+    },
+    {
+      id: 2,
+      universityOrigin: 'UTN-FRLP',
+      subjectOrigin: 'Programación 1',
+      yearNote: '2015',
+      subjectUnq: 'Elementos de Programación y Lógica',
+      semanal: '5',
+      total: '90',
+      core: 'Obligatorio',
+      credits: '10',
+      email: 'f.n.autalan@gmail.com',
+      signature: 'Gira a la Coordinación del CI.',
+      observations: 'Gira a la Coordinación del CI.',
+    },
+    {
+      id: 2,
+      universityOrigin: 'UTN-FRLP',
+      subjectOrigin: 'Programación 1',
+      yearNote: '2015',
+      subjectUnq: 'Elementos de Programación y Lógica',
+      semanal: '5',
+      total: '90',
+      core: 'Obligatorio',
+      credits: '10',
+      email: 'f.n.autalan@gmail.com',
+      signature: 'Gira a la Coordinación del CI.',
+      observations: 'Gira a la Coordinación del CI.',
+    },
+    {
+      id: 2,
+      universityOrigin: 'UTN-FRLP',
+      subjectOrigin: 'Programación 1',
+      yearNote: '2015',
+      subjectUnq: 'Elementos de Programación y Lógica',
+      semanal: '5',
+      total: '90',
+      core: 'Obligatorio',
+      credits: '10',
+      email: 'f.n.autalan@gmail.com',
+      signature: 'Gira a la Coordinación del CI.',
+      observations: 'Gira a la Coordinación del CI.',
+    },
+    {
+      id: 2,
+      universityOrigin: 'UTN-FRLP',
+      subjectOrigin: 'Programación 1',
+      yearNote: '2015',
+      subjectUnq: 'Elementos de Programación y Lógica',
+      semanal: '5',
+      total: '90',
+      core: 'Obligatorio',
+      credits: '10',
+      email: 'f.n.autalan@gmail.com',
+      signature: 'Gira a la Coordinación del CI.',
+      observations: 'Gira a la Coordinación del CI.',
+    },
+    {
+      id: 2,
+      universityOrigin: 'UTN-FRLP',
+      subjectOrigin: 'Programación 1',
+      yearNote: '2015',
+      subjectUnq: 'Elementos de Programación y Lógica',
+      semanal: '5',
+      total: '90',
+      core: 'Obligatorio',
+      credits: '10',
+      email: 'f.n.autalan@gmail.com',
+      signature: 'Gira a la Coordinación del CI.',
+      observations: 'Gira a la Coordinación del CI.',
+    },
+    {
+      id: 2,
       universityOrigin: 'UTN-FRLP',
       subjectOrigin: 'Programación 1',
       yearNote: '2015',
@@ -511,17 +625,34 @@ const generateLetter = () => {
       { header: 'mail', dataKey: 'email' },
       { header: 'Resolución del Director', dataKey: 'signature' },
       { header: 'Observación', dataKey: 'observations' }],
-    startY: 310,
-    margin: { top: 150 },
-    beforePageContent: (data) => {
+    startY: 350,
+    margin: { top: 110 },
+    showHead: 'firstPage',
+    rowPageBreak: 'avoid',
+    lineHeightProportion: 10,
+    didDrawPage: (data) => {
       pdf.addImage(dataImgHeader, 'png', 40, 20, 500, 0);
       if (parseInt(data.pageNumber) === 1) {
-        pdf.text('Hello world!', 10, 10);
+        pdf.text('Bernal, 17 de julio de 2019', 370, 118);
+        pdf.text(`
+        Al Director de la 
+        Dirección de Alumnos de la
+        Universidad Nacional de Quilmes,
+        Sr. Germán Córdoba
+        
+          Me dirijo a usted por la presente en relación al expediente de equivalencias
+          número 827-1156/19,
+          solicitud del estudiante Rodolfo Nicolas Germone, 
+          legajo 48366. 
+          Es resolución de esta Dirección otorgar o rechazar las equivalencias de las 
+          materias del área según el cuadro anexo al final del documento.  
+          Sin ningún otro particular, me despido de usted atentamente.
+        `, 18, 128);
       }
     },
   });
 
-  return pdf.save('test.pdf');
+  return pdf.save('test.odt');
 };
 
 const Home = () => (
