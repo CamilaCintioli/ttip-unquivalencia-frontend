@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Formik, Form, Field, ErrorMessage,
 } from 'formik';
-import TextFieldUI from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -11,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import * as Yup from 'yup';
 import { useSelector } from 'react-redux';
+import TextField from './Fields/TextField';
 import useStyles from './SingIn/style';
 import { userError } from '../redux/selectors';
 
@@ -83,21 +83,5 @@ export default function SignIn({ onLogin }) {
       )}
 
     </Formik>
-  );
-}
-
-function TextField({
-  form: { handleFocus, handleChange, handleBlur },
-  field: { name, value }, ...props
-}) {
-  return (
-    <TextFieldUI
-      {...props}
-      name={name}
-      value={value}
-      onChange={handleChange}
-      onBlur={handleBlur}
-      onFocus={handleFocus}
-    />
   );
 }

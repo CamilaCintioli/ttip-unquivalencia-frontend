@@ -6,7 +6,7 @@ import {
   GET_USERS_START, CREATE_USER_START,
   UPDATE_USER_START, DELETE_USER_START,
   UPDATE_USER_COMPLETE, DELETE_USER_COMPLETE,
-  UPDATE_USER_ERROR, DELETE_USER_ERROR,
+  UPDATE_USER_ERROR, DELETE_USER_ERROR, CHANGE_PASSWORD_START, CHANGE_PASSWORD_ERROR, CHANGE_PASSWORD_COMPLETE,
 } from '../../consts/actionTypes';
 import { openSnackbar } from '../../component/FeedbackBar';
 
@@ -85,10 +85,26 @@ export function* deleteUser({ payload }) {
   }
 }
 
+export function* changePassword({ payload }) {
+  try {
+    const results = yield call(apiCall, '/password/new', payload, null, 'POST');
+    yield put({ type: CHANGE_PASSWORD_COMPLETE, results });
+    openSnackbar('La contraseña ha sido cambiada exitosamente', 'success');
+  } catch (error) {
+    const errors = error.response.data;
+    yield put({ type: CHANGE_PASSWORD_ERROR, errors });
+    if (!errors.includes('Password incorrecto')) {
+      openSnackbar('Hubo un problema. Intente cambiar su contraseña más tarde', 'error');
+    }
+  }
+}
+
+
 export default function* user() {
   yield takeLatest(GET_USER_START, getUser);
   yield takeLatest(GET_USERS_START, getUsers);
   yield takeLatest(CREATE_USER_START, createUser);
   yield takeLatest(UPDATE_USER_START, updateUser);
   yield takeLatest(DELETE_USER_START, deleteUser);
+  yield takeLatest(CHANGE_PASSWORD_START, changePassword);
 }

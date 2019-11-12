@@ -11,7 +11,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import FormLabel from '@material-ui/core/FormLabel';
 import * as Yup from 'yup';
-import TextField from '../NewRequest/TextField';
+import TextField from '../Fields/TextField';
 
 const useStyles = makeStyles((theme) => ({
   otherField: {

@@ -21,3 +21,5 @@ export const matchsError = (state) => {
 
 export const stepper = (state) => get(state, 'stepper.stepperResult');
 export const userRole = (state) => get(state, 'user.userResult.user.role');
+
+export const passwordError = (state) => get(state, 'user.passwordError');

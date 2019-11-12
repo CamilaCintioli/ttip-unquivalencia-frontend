@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
 
-export default function SimpleMenu({ logout }) {
+export default function SimpleMenu({ logout, changePassword }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -15,6 +15,11 @@ export default function SimpleMenu({ logout }) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const updatePassword = useCallback(() => {
+    changePassword();
+    handleClose();
+  }, [changePassword]);
 
   return (
     <div>
@@ -31,6 +36,7 @@ export default function SimpleMenu({ logout }) {
         onClose={handleClose}
       >
         <MenuItem onClick={logout}>Logout</MenuItem>
+        <MenuItem onClick={updatePassword}>Cambiar contraseña</MenuItem>
       </Menu>
     </div>
   );
@@ -39,4 +45,5 @@ export default function SimpleMenu({ logout }) {
 
 SimpleMenu.propTypes = {
   logout: PropTypes.func.isRequired,
+  changePassword: PropTypes.func.isRequired,
 };
