@@ -303,7 +303,7 @@ const generateLetter = () => {
       core: 'Obligatorio',
       credits: '10',
       email: 'f.n.autalan@gmail.com',
-      signature: 'Gira a la Coordinación del CI.',
+      equivalence: 'Corresponde otorgar la equivalencia.',
       observations: 'Gira a la Coordinación del CI.',
     },
     {
@@ -317,7 +317,7 @@ const generateLetter = () => {
       core: 'Obligatorio',
       credits: '10',
       email: 'f.n.autalan@gmail.com',
-      signature: 'Gira a la Coordinación del CI.',
+      equivalence: 'No se otorga la equivalencia.',
       observations: 'Gira a la Coordinación del CI.',
     },
     {
@@ -331,7 +331,7 @@ const generateLetter = () => {
       core: 'Obligatorio',
       credits: '10',
       email: 'f.n.autalan@gmail.com',
-      signature: 'Gira a la Coordinación del CI.',
+      equivalence: 'Gira a la Coordinación del CI.',
       observations: 'Gira a la Coordinación del CI.',
     },
     {
@@ -345,7 +345,7 @@ const generateLetter = () => {
       core: 'Obligatorio',
       credits: '10',
       email: 'f.n.autalan@gmail.com',
-      signature: 'Gira a la Coordinación del CI.',
+      equivalence: 'Corresponde otorgar la equivalencia.',
       observations: 'Gira a la Coordinación del CI.',
     },
     {
@@ -359,7 +359,7 @@ const generateLetter = () => {
       core: 'Obligatorio',
       credits: '10',
       email: 'f.n.autalan@gmail.com',
-      signature: 'Gira a la Coordinación del CI.',
+      equivalence: 'Corresponde otorgar la equivalencia.',
       observations: 'Gira a la Coordinación del CI.',
     },
     {
@@ -373,7 +373,7 @@ const generateLetter = () => {
       core: 'Obligatorio',
       credits: '10',
       email: 'f.n.autalan@gmail.com',
-      signature: 'Gira a la Coordinación del CI.',
+      equivalence: 'Corresponde otorgar la equivalencia.',
       observations: 'Gira a la Coordinación del CI.',
     },
     {
@@ -387,7 +387,7 @@ const generateLetter = () => {
       core: 'Obligatorio',
       credits: '10',
       email: 'f.n.autalan@gmail.com',
-      signature: 'Gira a la Coordinación del CI.',
+      equivalence: 'Corresponde otorgar la equivalencia.',
       observations: 'Gira a la Coordinación del CI.',
     },
     {
@@ -401,7 +401,7 @@ const generateLetter = () => {
       core: 'Obligatorio',
       credits: '10',
       email: 'f.n.autalan@gmail.com',
-      signature: 'Gira a la Coordinación del CI.',
+      equivalence: 'Corresponde otorgar la equivalencia.',
       observations: 'Gira a la Coordinación del CI.',
     },
     {
@@ -415,7 +415,7 @@ const generateLetter = () => {
       core: 'Obligatorio',
       credits: '10',
       email: 'f.n.autalan@gmail.com',
-      signature: 'Gira a la Coordinación del CI.',
+      equivalence: 'Corresponde otorgar la equivalencia.',
       observations: 'Gira a la Coordinación del CI.',
     },
     {
@@ -429,7 +429,7 @@ const generateLetter = () => {
       core: 'Obligatorio',
       credits: '10',
       email: 'f.n.autalan@gmail.com',
-      signature: 'Gira a la Coordinación del CI.',
+      equivalence: 'Corresponde otorgar la equivalencia.',
       observations: 'Gira a la Coordinación del CI.',
     },
     {
@@ -443,7 +443,7 @@ const generateLetter = () => {
       core: 'Obligatorio',
       credits: '10',
       email: 'f.n.autalan@gmail.com',
-      signature: 'Gira a la Coordinación del CI.',
+      equivalence: 'Corresponde otorgar la equivalencia.',
       observations: 'Gira a la Coordinación del CI.',
     },
     {
@@ -457,7 +457,7 @@ const generateLetter = () => {
       core: 'Obligatorio',
       credits: '10',
       email: 'f.n.autalan@gmail.com',
-      signature: 'Gira a la Coordinación del CI.',
+      equivalence: 'Corresponde otorgar la equivalencia.',
       observations: 'Gira a la Coordinación del CI.',
     },
     {
@@ -471,7 +471,7 @@ const generateLetter = () => {
       core: 'Obligatorio',
       credits: '10',
       email: 'f.n.autalan@gmail.com',
-      signature: 'Gira a la Coordinación del CI.',
+      equivalence: 'Corresponde otorgar la equivalencia.',
       observations: 'Gira a la Coordinación del CI.',
     },
     {
@@ -485,7 +485,7 @@ const generateLetter = () => {
       core: 'Obligatorio',
       credits: '10',
       email: 'f.n.autalan@gmail.com',
-      signature: 'Gira a la Coordinación del CI.',
+      equivalence: 'Corresponde otorgar la equivalencia.',
       observations: 'Gira a la Coordinación del CI.',
     },
     {
@@ -499,7 +499,7 @@ const generateLetter = () => {
       core: 'Obligatorio',
       credits: '10',
       email: 'f.n.autalan@gmail.com',
-      signature: 'Gira a la Coordinación del CI.',
+      equivalence: 'Corresponde otorgar la equivalencia.',
       observations: 'Gira a la Coordinación del CI.',
     },
     {
@@ -513,7 +513,7 @@ const generateLetter = () => {
       core: 'Obligatorio',
       credits: '10',
       email: 'f.n.autalan@gmail.com',
-      signature: 'Gira a la Coordinación del CI.',
+      equivalence: 'Corresponde otorgar la equivalencia.',
       observations: 'Gira a la Coordinación del CI.',
     },
     {
@@ -527,7 +527,7 @@ const generateLetter = () => {
       core: 'Obligatorio',
       credits: '10',
       email: 'f.n.autalan@gmail.com',
-      signature: 'Gira a la Coordinación del CI.',
+      equivalence: 'Corresponde otorgar la equivalencia.',
       observations: 'Gira a la Coordinación del CI.',
     },
     {
@@ -541,7 +541,7 @@ const generateLetter = () => {
       core: 'Obligatorio',
       credits: '10',
       email: 'f.n.autalan@gmail.com',
-      signature: 'Gira a la Coordinación del CI.',
+      equivalence: 'Corresponde otorgar la equivalencia.',
       observations: 'Gira a la Coordinación del CI.',
     },
     {
@@ -555,7 +555,7 @@ const generateLetter = () => {
       core: 'Obligatorio',
       credits: '10',
       email: 'f.n.autalan@gmail.com',
-      signature: 'Gira a la Coordinación del CI.',
+      equivalence: 'Corresponde otorgar la equivalencia.',
       observations: 'Gira a la Coordinación del CI.',
     },
     {
@@ -569,7 +569,7 @@ const generateLetter = () => {
       core: 'Obligatorio',
       credits: '10',
       email: 'f.n.autalan@gmail.com',
-      signature: 'Gira a la Coordinación del CI.',
+      equivalence: 'Corresponde otorgar la equivalencia.',
       observations: 'Gira a la Coordinación del CI.',
     },
     {
@@ -583,7 +583,7 @@ const generateLetter = () => {
       core: 'Obligatorio',
       credits: '10',
       email: 'f.n.autalan@gmail.com',
-      signature: 'Gira a la Coordinación del CI.',
+      equivalence: 'Corresponde otorgar la equivalencia.',
       observations: 'Gira a la Coordinación del CI.',
     },
     {
@@ -597,7 +597,7 @@ const generateLetter = () => {
       core: 'Obligatorio',
       credits: '10',
       email: 'f.n.autalan@gmail.com',
-      signature: 'Gira a la Coordinación del CI.',
+      equivalence: 'Corresponde otorgar la equivalencia.',
       observations: 'Gira a la Coordinación del CI.',
     },
     {
@@ -611,7 +611,7 @@ const generateLetter = () => {
       core: 'Obligatorio',
       credits: '10',
       email: 'f.n.autalan@gmail.com',
-      signature: 'Gira a la Coordinación del CI.',
+      equivalence: 'Corresponde otorgar la equivalencia.',
       observations: 'Gira a la Coordinación del CI.',
     }],
     columns: [{ header: 'Institución de origen', dataKey: 'universityOrigin' },
@@ -623,7 +623,7 @@ const generateLetter = () => {
       { header: 'Núcleo al que pertenece', dataKey: 'core' },
       { header: 'Créditos ', dataKey: 'credits' },
       { header: 'mail', dataKey: 'email' },
-      { header: 'Resolución del Director', dataKey: 'signature' },
+      { header: 'Resolución del Director', dataKey: 'equivalence' },
       { header: 'Observación', dataKey: 'observations' }],
     startY: 350,
     margin: { top: 110 },
@@ -652,7 +652,7 @@ const generateLetter = () => {
     },
   });
 
-  return pdf.save('test.odt');
+  return pdf.save('test.pdf');
 };
 
 const Home = () => (
