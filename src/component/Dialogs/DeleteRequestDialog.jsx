@@ -7,21 +7,22 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import API from '../../service/FileService';
-import { searchFile } from '../../redux/actions/search';
+import { searchRequest } from '../../redux/actions/search';
 import { openSnackbar } from '../Dashboard/FeedbackBar';
 
-export default function DeleteFileDialog({ file, onClose, isOpen }) {
+export default function DeleteRequestDialog({
+  request, onClose, isOpen, fileId,
+}) {
   const dispatch = useDispatch();
-  const handleAccept = useCallback((fileId) => {
-    API.deleteFile(fileId)
+  const handleAccept = useCallback((requestId) => {
+    API.deleteRequest(requestId)
       .then(() => {
-        openSnackbar('El expediente ha sido borrado exitosamente', 'success');
-        dispatch(searchFile());
+        openSnackbar('La solicitud ha sido borrada exitosamente', 'success');
+        dispatch(searchRequest({ fileId }));
       })
-      .catch(() => openSnackbar('Hubo un problema. Intente borrar el expediente más tarde', 'error'));
-
+      .catch(() => openSnackbar('Hubo un problema. Intente borrar la solicitud más tarde', 'error'));
     onClose();
-  }, [dispatch, onClose]);
+  }, [dispatch, fileId, onClose]);
 
   return (
     <div>
@@ -31,17 +32,14 @@ export default function DeleteFileDialog({ file, onClose, isOpen }) {
       >
         <DialogContent>
           <DialogContentText>
-                ¿Está seguro que desea borrar el expediente
-            {' '}
-            {file ? file.fileNumber : null}
-?
+                ¿Está seguro que desea borrar la solicitud?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={onClose} color="primary">
               Cancelar
           </Button>
-          <Button onClick={() => handleAccept(file.id)} color="primary" autoFocus>
+          <Button onClick={() => handleAccept(request.id)} color="primary" autoFocus>
               Aceptar
           </Button>
         </DialogActions>
@@ -50,13 +48,14 @@ export default function DeleteFileDialog({ file, onClose, isOpen }) {
   );
 }
 
-DeleteFileDialog.propTypes = {
+DeleteRequestDialog.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  file: PropTypes.object,
+  request: PropTypes.object,
   onClose: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
+  fileId: PropTypes.number.isRequired,
 };
 
-DeleteFileDialog.defaultProps = {
-  file: null,
+DeleteRequestDialog.defaultProps = {
+  request: null,
 };

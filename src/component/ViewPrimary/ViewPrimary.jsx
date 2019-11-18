@@ -15,14 +15,16 @@ function ViewPrimary() {
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector((state) => userRole(state));
+  const [fileIdSelected, setFileIdSelected] = useState();
 
   React.useLayoutEffect(() => {
     dispatch(searchFile());
   }, [dispatch, rowsRequest]);
 
   const handleSearchRequests = React.useCallback((id) => {
+    setFileIdSelected(id);
     dispatch(searchRequest({ fileId: id }));
-  }, [dispatch]);
+  }, [dispatch, setFileIdSelected]);
 
   const handleSearchRequest = (requestId, subjectId) => history.push(`/solicitud/${requestId}/materia/${subjectId}`);
 
@@ -45,7 +47,15 @@ function ViewPrimary() {
         {
           rowsRequest && (
             <>
-              <ListRequest title="Solicitudes" isSearch={1} requests={rowsRequest} handleSearchRequest={handleSearchRequest} checkAdmin={checkAdmin} pageSize={10} />
+              <ListRequest
+                title="Solicitudes"
+                isSearch={1}
+                requests={rowsRequest}
+                handleSearchRequest={handleSearchRequest}
+                checkAdmin={checkAdmin}
+                pageSize={10}
+                fileSelected={fileIdSelected}
+              />
             </>
           )
         }
