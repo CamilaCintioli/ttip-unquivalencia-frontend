@@ -14,6 +14,7 @@ const getConfig = () => ({
 
 const API = {
   newFile: (file) => axios.post(`${port}/request`, file, getConfig()).catch((error) => { if (error.response.status === 450) { logout(); } throw error; }),
+  deleteFile: (fileId) => axios.delete(`${port}/file/${fileId}`, getConfig(), null).catch((error) => { if (error.response.status === 450) { logout(); } throw error; }),
 };
 
 export default API;
