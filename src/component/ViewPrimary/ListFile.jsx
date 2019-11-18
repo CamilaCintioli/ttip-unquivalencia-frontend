@@ -4,6 +4,7 @@ import React, { useCallback, useState } from 'react';
 import MaterialTable from 'material-table';
 import columnsFile from './columnsFile';
 import DeleteFileDialog from '../Dialogs/DeleteFileDialog';
+import DuplicateFileDialog from '../Dialogs/DuplicateFileDialog';
 
 const ListFile = ({
   files, handleSearch, addRequest, checkAdmin, checkLetter,
@@ -18,9 +19,20 @@ const ListFile = ({
     setDeletingFile(null);
   }, []);
 
+  const [duplicatingFile, setDuplicatingFile] = useState();
+
+  const openDuplicateDialog = useCallback((_, file) => {
+    setDuplicatingFile(file);
+  }, []);
+
+  const onCloseDuplicateDialog = useCallback(() => {
+    setDuplicatingFile(null);
+  }, []);
+
   return (
     <>
       <DeleteFileDialog file={deletingFile} isOpen={!!deletingFile} onClose={onClose} />
+      <DuplicateFileDialog file={duplicatingFile} isOpen={!!duplicatingFile} onClose={onCloseDuplicateDialog} />
       <MaterialTable
         title="Expedientes"
         columns={columnsFile}
@@ -46,12 +58,12 @@ const ListFile = ({
               addRequest(rowData.fileNumber);
             },
           },
-          {
+          (rowData) => ({
             icon: 'file_copy',
             hidden: !checkAdmin,
             tooltip: 'Duplicar expediente',
-            onClick: (event, rowData) => { },
-          },
+            onClick: openDuplicateDialog,
+          }),
           (rowData) => ({
             icon: 'send',
             hidden: !checkLetter(rowData.status),
