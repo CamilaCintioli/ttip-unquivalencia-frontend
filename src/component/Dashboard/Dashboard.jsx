@@ -3,15 +3,15 @@ import React from 'react';
 import { Container, CssBaseline } from '@material-ui/core';
 import { Switch, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import Footer from './dashboard/Footer';
-import Nav from './dashboard/Nav';
-import SideBar from './dashboard/Sidebar';
-import useStyles from './dashboard/style';
-import { getUser } from '../redux/actions/user';
-import { userResult } from '../redux/selectors/index';
-import { isAuthenticated, logout } from '../service/userService';
-import AppRoute from './Router/AppRoute';
-import apiCall from '../redux/api';
+import Footer from './Footer';
+import Nav from './Navbar/Nav';
+import SideBar from './Sidebar/Sidebar';
+import useStyles from './Styles/style';
+import { getUser } from '../../redux/actions/user';
+import { userResult } from '../../redux/selectors/index';
+import { isAuthenticated, logout } from '../../service/userService';
+import AppRoute from '../Router/AppRoute';
+import apiCall from '../../redux/api';
 
 export default function Dashboard() {
   const classes = useStyles();
@@ -20,8 +20,6 @@ export default function Dashboard() {
   const dispatch = useDispatch();
   const history = useHistory();
   const isValid = isAuthenticated(user, history);
-  console.log('logeado is');
-  console.log(isValid);
 
 
   const singIn = (bodyUser) => dispatch(getUser({ bodyUser, history }));
@@ -36,7 +34,7 @@ export default function Dashboard() {
     <div className={classes.root}>
       <CssBaseline />
       {isValid
-        ? <Nav classes={classes} handleDrawerOpen={() => setOpen(true)} open={open} clouseSession={signOut} changePassword={changePassword}/>
+        ? <Nav classes={classes} handleDrawerOpen={() => setOpen(true)} open={open} clouseSession={signOut} changePassword={changePassword} />
         : null}
       {isValid
         ? <SideBar classes={classes} handleDrawerClose={() => setOpen(false)} open={open} />

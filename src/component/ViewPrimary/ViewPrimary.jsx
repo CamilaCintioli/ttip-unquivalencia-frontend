@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { withRouter, useHistory } from 'react-router-dom';
 import { Grid, CircularProgress } from '@material-ui/core';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
-import { searchFile, searchRequest } from '../redux/actions/search';
-import { fileResults, requestResult, userRole } from '../redux/selectors';
-import { isAdmin, isAdminOrUser } from './User/userRole';
-import FeedbackBar from './FeedbackBar';
-import ListRequest from './ViewPrimary/ListRequest';
-import ListFile from './ViewPrimary/ListFile';
+import { searchFile, searchRequest } from '../../redux/actions/search';
+import { fileResults, requestResult, userRole } from '../../redux/selectors';
+import { isAdmin, isAdminOrUser } from '../UserView/userRole';
+import FeedbackBar from '../Dashboard/FeedbackBar';
+import ListRequest from './ListRequest';
+import ListFile from './ListFile';
 
 function ViewPrimary() {
   const rowsFile = useSelector((state) => fileResults(state), shallowEqual);

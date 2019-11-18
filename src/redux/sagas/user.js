@@ -8,7 +8,7 @@ import {
   UPDATE_USER_COMPLETE, DELETE_USER_COMPLETE,
   UPDATE_USER_ERROR, DELETE_USER_ERROR, CHANGE_PASSWORD_START, CHANGE_PASSWORD_ERROR, CHANGE_PASSWORD_COMPLETE,
 } from '../../consts/actionTypes';
-import { openSnackbar } from '../../component/FeedbackBar';
+import { openSnackbar } from '../../component/Dashboard/FeedbackBar';
 
 import apiCall from '../api';
 

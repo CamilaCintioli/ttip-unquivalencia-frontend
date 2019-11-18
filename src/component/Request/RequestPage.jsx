@@ -8,9 +8,9 @@ import RequestDisplay from './RequestDisplay';
 import {
   approveEquivalence, rejectEquivalence, sendConsult, delegateEquivalence,
 } from '../../redux/actions/updateEquivalence';
-import FeedbackBar from '../FeedbackBar';
+import FeedbackBar from '../Dashboard/FeedbackBar';
 import { userRole } from '../../redux/selectors';
-import { isAdmin, isProfessor } from '../User/userRole';
+import { isAdmin, isProfessor } from '../UserView/userRole';
 
 export default function RequestPage({ request }) {
   const { requestId, subjectId } = useParams();

@@ -1,10 +1,10 @@
-import ViewPrimary from '../ViewPrimary';
+import ViewPrimary from '../ViewPrimary/ViewPrimary';
 import NewFilePage from '../NewRequest/NewFilePage';
-import VieweRequests from '../ViewRequests';
-import Home from '../Home';
-import User from '../User';
+import VieweRequests from '../Request/ViewRequests';
+import Home from '../Home/Home';
+import User from '../UserView/User';
 import NewRequestPage from '../NewRequest/NewRequestPage';
-import UpdatePasswordForm from '../UpdatePasswordForm';
+import UpdatePasswordForm from '../Dashboard/Navbar/UpdatePasswordForm';
 
 const routes = [
   { path: '/home', _component: Home },

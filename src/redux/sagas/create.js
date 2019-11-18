@@ -4,7 +4,7 @@ import {
 } from '../../consts/actionTypes';
 
 import apiCall from '../api';
-import { openSnackbar } from '../../component/FeedbackBar';
+import { openSnackbar } from '../../component/Dashboard/FeedbackBar';
 
 export function* createRequest({ payload }) {
   try {

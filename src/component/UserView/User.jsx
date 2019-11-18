@@ -7,12 +7,12 @@ import React, { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import MaterialTable from 'material-table';
 import { size } from 'lodash';
-import columns from './User/colums';
+import columns from './colums';
 import {
   registerUser, getUsers, updateUser, deleteUser,
-} from '../redux/actions/user';
-import { usersResults } from '../redux/selectors';
-import FeedbackBar from './FeedbackBar';
+} from '../../redux/actions/user';
+import { usersResults } from '../../redux/selectors';
+import FeedbackBar from '../Dashboard/FeedbackBar';
 
 function User() {
   const users = useSelector((state) => usersResults(state));

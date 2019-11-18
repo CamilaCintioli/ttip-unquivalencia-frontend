@@ -6,15 +6,15 @@ import {
 } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { find } from 'lodash';
-import Requests from './Request/Requests';
+import Requests from './Requests';
 
-import getStepper from '../redux/actions/stepper';
-import getMatch from '../redux/actions/match';
+import getStepper from '../../redux/actions/stepper';
+import getMatch from '../../redux/actions/match';
 import {
   stepper, matchsError, matchs, userRole,
-} from '../redux/selectors';
-import { isProfessor } from './User/userRole';
-import Error401 from './Error/Error401';
+} from '../../redux/selectors';
+import { isProfessor } from '../UserView/userRole';
+import Error401 from '../Error/Error401';
 
 
 function ViewRequest() {

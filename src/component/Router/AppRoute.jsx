@@ -1,6 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
 import React from 'react';
-import SignIn from '../SignIn';
+import SignIn from '../SingIn/SignIn';
 import PrivateRoute from './PriavateRoute';
 import PublicRoute from './PublicRoute';
 import routes from './route';
