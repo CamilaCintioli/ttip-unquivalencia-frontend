@@ -8,7 +8,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Menu from './Menu';
 
 export default function Nav({
-  classes, handleDrawerOpen, open, clouseSession,
+  classes, handleDrawerOpen, open, clouseSession, changePassword
 }) {
   return (
     <div>
@@ -26,7 +26,7 @@ export default function Nav({
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                 UNQuivalencias
           </Typography>
-          <Menu logout={clouseSession} />
+          <Menu logout={clouseSession} changePassword={changePassword}/>
         </Toolbar>
       </AppBar>
     </div>

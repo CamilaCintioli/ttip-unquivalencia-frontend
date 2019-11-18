@@ -1,65 +1,59 @@
+/* eslint-disable import/no-duplicates */
 /* eslint-disable no-param-reassign */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+/* eslint-disable no-underscore-dangle */
+import React, { useEffect, useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import MaterialTable from 'material-table';
+import { size } from 'lodash';
 import columns from './User/colums';
-import { setUsers } from '../redux/actions/user';
-import API from '../service/FileService';
+import {
+  registerUser, getUsers, updateUser, deleteUser,
+} from '../redux/actions/user';
+import { usersResults } from '../redux/selectors';
+import FeedbackBar from './FeedbackBar';
 
-class User extends Component {
-  componentDidMount() {
-    return this.updateUser();
-  }
+function User() {
+  const users = useSelector((state) => usersResults(state));
+  const _size = size(users);
+  const dispatch = useDispatch();
 
-  updateUser() {
-    return API.getUsersAxios()
-      .then((users) => {
-        this.props.setUsers(users);
-      });
-  }
+  useEffect(() => {
+    dispatch(getUsers());
+  }, [dispatch, _size]);
 
-  addUser(user) {
-    return API.addUserAxios(user)
-      .then(() => this.updateUser());
-  }
+  const create = useCallback((newData) => {
+    dispatch(registerUser(newData));
+  }, [dispatch]);
 
-  render() {
-    const { users } = this.props;
+  const update = useCallback((newData) => {
+    dispatch(updateUser(newData));
+  }, [dispatch]);
 
-    return (
+  const remove = useCallback((oldData) => {
+    dispatch(deleteUser(oldData));
+  }, [dispatch]);
+
+  return (
+    <>
       <MaterialTable
         title="Usuarios"
         columns={columns}
         data={users}
         editable={{
-          onRowAdd: (newData) => this.addUser(newData),
-          onRowUpdate: (newData, oldData) => new Promise((resolve) => {
-            setTimeout(() => {
-              resolve();
-            }, 600);
-          }),
-          onRowDelete: (oldData) => new Promise((resolve) => {
-            setTimeout(() => {
-              resolve();
-            }, 600);
-          }),
+          onRowAdd: (newData) => new Promise((resolve) => resolve(create(newData))),
+          onRowUpdate: (newData) => new Promise((resolve) => resolve(update(newData))),
+          onRowDelete: (oldData) => new Promise((resolve) => resolve(remove(oldData))),
+        }}
+        options={{
+          filtering: true,
+          pageSize: 10,
         }}
       />
-    );
-  }
+      <FeedbackBar />
+    </>
+  );
 }
 
-const mapStateToProps = (state) => ({
-  users: state.user.users,
-});
-
-const mapDispatchToProps = {
-  setUsers,
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(User);
+export default User;

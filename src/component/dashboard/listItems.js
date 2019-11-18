@@ -7,8 +7,9 @@ import HomeIcon from '@material-ui/icons/Home';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import { Link } from 'react-router-dom';
+import { isAdmin } from '../User/userRole';
 
-export const mainListItems = (cerrar) => (
+export const mainListItems = (cerrar, userRole) => (
   <div onClick={() => cerrar()}>
     <Link to="/home">
       <ListItem button>
@@ -26,12 +27,14 @@ export const mainListItems = (cerrar) => (
         <ListItemText primary="Expedientes" />
       </ListItem>
     </Link>
+    { isAdmin(userRole) &&
+    <>
     <Link to="/new/solicitud">
       <ListItem button>
         <ListItemIcon>
           <AttachFileIcon />
         </ListItemIcon>
-        <ListItemText primary="Crear solicitud" />
+        <ListItemText primary="Crear Expediente" />
       </ListItem>
     </Link>
     <Link to="/usuarios">
@@ -42,5 +45,6 @@ export const mainListItems = (cerrar) => (
         <ListItemText primary="Usuarios" />
       </ListItem>
     </Link>
+    </>}
   </div>
 );

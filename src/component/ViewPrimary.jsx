@@ -1,58 +1,51 @@
-/* eslint-disable no-return-assign */
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from 'react';
-import { Grid, CircularProgress, Button } from '@material-ui/core';
+import { withRouter, useHistory } from 'react-router-dom';
+import { Grid, CircularProgress } from '@material-ui/core';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
-import { findIndex } from 'lodash';
-import List from './ViewPrimary/List';
-import columnsRequest from './ViewPrimary/columnsRequest';
-import columnsFile from './ViewPrimary/columnsFile';
 import { searchFile, searchRequest } from '../redux/actions/search';
-import { fileResults, requestResult } from '../redux/selectors';
+import { fileResults, requestResult, userRole } from '../redux/selectors';
+import { isAdmin, isAdminOrUser } from './User/userRole';
+import FeedbackBar from './FeedbackBar';
+import ListRequest from './ViewPrimary/ListRequest';
+import ListFile from './ViewPrimary/ListFile';
 
 function ViewPrimary() {
   const rowsFile = useSelector((state) => fileResults(state), shallowEqual);
   const rowsRequest = useSelector((state) => requestResult(state), shallowEqual);
   const dispatch = useDispatch();
-  const [fileNumber, setFileNumber] = useState(undefined);
+  const history = useHistory();
+  const user = useSelector((state) => userRole(state));
 
   React.useLayoutEffect(() => {
     dispatch(searchFile());
   }, [dispatch, rowsRequest]);
 
-  const handleSearchRequests = React.useCallback((id, fileNumber) => {
+  const handleSearchRequests = React.useCallback((id) => {
     dispatch(searchRequest({ fileId: id }));
-    setFileNumber(fileNumber);
-  }, [searchRequest, setFileNumber]);
+  }, [dispatch]);
 
-  const handleSearchRequest = (idFile, idRequest) => {
-    const index = findIndex(rowsRequest, (request) => request.id === idRequest);
-    window.location.pathname = `file/${idFile}/solicitud/${idRequest}/${index}`;
-  };
+  const handleSearchRequest = (requestId, subjectId) => history.push(`/solicitud/${requestId}/materia/${subjectId}`);
+
+
+  const addRequest = (file) => { history.push(`file/${file.replace('/', '-')}/request/new`); };
+
+  const checkAdmin = isAdmin(user);
+
+  const checkLetter = (status) => isAdminOrUser(user) && status === 0;
 
   return (
     <Grid container spacing={3}>
+      <FeedbackBar showNotification={JSON.parse(localStorage.getItem('notification'))} />
       <Grid item xs={6}>
         {rowsFile
-          ? <List key="file" title="Expedientes" columns={columnsFile} rows={rowsFile} handleSearch={handleSearchRequests} type="file" />
+          ? <ListFile files={rowsFile} handleSearch={handleSearchRequests} addRequest={addRequest} checkAdmin={checkAdmin} checkLetter={checkLetter} />
           : <CircularProgress size={100} color="primary" />}
       </Grid>
       <Grid item xs={6}>
         {
           rowsRequest && (
             <>
-              <List
-                key="request"
-                title="Solicitudes"
-                columns={columnsRequest}
-                rows={rowsRequest}
-                handleSearch={handleSearchRequest}
-                type="request"
-              />
-              <Link to={`file/${fileNumber}/request/new`}>
-                <Button color="primary" variant="contained">Cargar solicitud</Button>
-              </Link>
+              <ListRequest title="Solicitudes" isSearch={1} requests={rowsRequest} handleSearchRequest={handleSearchRequest} checkAdmin={checkAdmin} pageSize={10} />
             </>
           )
         }

@@ -1,22 +1,25 @@
 
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
-import PDFDisplay from './PDFDisplay';
-
 
 export default function UniversitySubjectData({ university, subject, subjectPdfSrc }) {
   return (
-    <>
 
-      <Typography variant="h4" component="h4">
-        {university}
-      </Typography>
-      <Typography variant="h6" component="h6">
-        {subject}
-      </Typography>
-      <div style={{ display: 'grid', height: '500px' }}>
-        <PDFDisplay src={subjectPdfSrc} />
+    <div className="card">
+      <div className="card-body text-white bg-dark mb-3">
+        <blockquote className="blockquote text-center">
+          <p className="h3">
+            <b>
+              {university}
+              -
+              {subject}
+            </b>
+
+          </p>
+        </blockquote>
       </div>
-    </>
+      <embed src={subjectPdfSrc} width="100%" height="500px" />
+    </div>
+
+
   );
 }

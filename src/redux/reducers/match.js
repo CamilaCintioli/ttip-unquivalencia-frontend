@@ -14,7 +14,9 @@ export default function (state = initialState, action) {
     case GET_MATCH_COMPLETE:
       return { ...state, isLoading: false, matchResult: get(action, 'results.data') };
     case GET_MATCH_ERROR:
-      return { ...state, isLoading: false, match: null };
+      return {
+        ...state, isLoading: false, match: null, error: get(action, 'error.response'),
+      };
     default:
       return { ...state };
   }

@@ -1,58 +1,67 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable radix */
-import React, { useState, useEffect, useCallback } from 'react';
-import { withRouter, useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import {
+  withRouter, useHistory, useParams,
+} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { find } from 'lodash';
+import Requests from './Request/Requests';
 
-import Steapper from './Request/Stepper';
-import RequestPage from './Request/RequestPage';
-import { searchRequest } from '../redux/actions/search';
+import getStepper from '../redux/actions/stepper';
 import getMatch from '../redux/actions/match';
-import { requestResult, matchs } from '../redux/selectors';
-import Match from './Request/Match';
-import ListMatch from './Request/Match/ListMatch';
+import {
+  stepper, matchsError, matchs, userRole,
+} from '../redux/selectors';
+import { isProfessor } from './User/userRole';
+import Error401 from './Error/Error401';
 
 
-function ViewRequest(props) {
-  const { fileId, index, requestId } = props.match.params;
-  const requests = useSelector((state) => requestResult(state));
+function ViewRequest() {
+  const { requestId, subjectId } = useParams();
+  const data = useSelector((state) => stepper(state));
   const requestsMatch = useSelector((state) => matchs(state));
-  const [activeStep, setActiveStep] = useState(Number.parseInt(index));
+  const isAuthorized = useSelector((state) => matchsError(state));
+  const [activeStepSets, setActiveStepSets] = useState(requestId);
   const dispatch = useDispatch();
   const history = useHistory();
-
-
-  const match = useCallback((requestId) => {
-    dispatch(getMatch({ requestId }));
-  }, [dispatch]);
-
+  const user = useSelector((state) => userRole(state));
 
   useEffect(() => {
-    dispatch(searchRequest({ fileId }));
-    match(requestId);
-  }, [dispatch, fileId, match, requestId]);
+    dispatch(getStepper({ requestId, subjectId }));
+    dispatch(getMatch({ requestId, subjectId }));
+  }, [dispatch, requestId, subjectId]);
 
 
-  const changeStep = (_index) => {
-    const _requestId = requests[_index].id;
-    setActiveStep(_index);
-    history.push(`/file/${fileId}/solicitud/${_requestId}/${_index}`);
+  const changeStep = (_subjectId) => {
+    const request = find(data.requestsStepper, ((r) => r.subjectId === _subjectId));
+    history.push(`/solicitud/${activeStepSets}/materia/${request.subjectId}`);
   };
 
-  console.log(requestsMatch);
+  const changeStepSets = (_requestId) => {
+    setActiveStepSets(_requestId);
+    const request = find(data.sets, ((r) => r.requestId === _requestId));
+    history.push(`/solicitud/${_requestId}/materia/${request.firstSubject}`);
+  };
+
+  const checkProfessor = isProfessor(user);
 
   return (
     <>
-      <div className="row justify-content-md-center">
-        <Steapper activeStep={activeStep} changeStep={changeStep} requests={requests} />
-      </div>
-      {requestsMatch ? <Match requestMatch={requestsMatch} /> : null}
-      {requestsMatch ? (
-        <div className="row justify-content-md-center col 1">
-          <ListMatch requests={requestsMatch} />
-        </div>
+      {!isAuthorized ? <Error401 history={history} /> : null}
+      {data ? (
+        <Requests
+          activeStepSets={activeStepSets}
+          changeStepSets={changeStepSets}
+          changeStep={changeStep}
+          requestsStepper={data.requestsStepper}
+          sets={data.sets}
+          request={data.request}
+          requestsMatch={requestsMatch}
+          checkProfessor={checkProfessor}
+
+        />
       ) : null}
-      {requests ? <RequestPage request={requests[activeStep]} /> : null}
     </>
   );
 }

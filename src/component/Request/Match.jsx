@@ -22,23 +22,13 @@ export default function Match({ requestMatch }) {
 
   } = requestMatch;
   const getClass = () => (isEmpty(requestsTotalMatchApproved) ? 'col-3  card text-white bg-warning mb-3' : 'col-3 card text-white bg-info mb-3');
-  const requestsMatchGroupBy = groupBy(requestsMatch, (request) => request.fileNumber);
   const requests = isEmpty(requestsTotalMatchApproved) ? requestsMatchWithoutYearPlanApproved : requestsTotalMatchApproved;
-
-  console.log('requestMatch');
-  console.log(requestMatch);
-  console.log('requestsMatchGroupBy');
-  console.log(requestsMatchGroupBy);
-  console.log('requests');
-  console.log(requests);
 
   return (
     isEmpty(requestsTotalMatchApproved) && isEmpty(requestsMatchWithoutYearPlanApproved) ? null
       : (
         <div className="row justify-content-md-center">
-          <button type="button" onClick={handleOpen}>
-        Historial
-          </button>
+          <button type="button" className="btn btn-primary btn-lg" onClick={handleOpen}>Historial</button>
           <Modal
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"
