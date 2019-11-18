@@ -16,7 +16,7 @@ export const userError = (state) => get(state, 'user.userError');
 export const matchs = (state) => get(state, 'match.matchResult');
 export const matchsError = (state) => {
   const error = get(state, 'match.error');
-  return (has(error, 'status') && error.status === 401);
+  return !(has(error, 'status') && error.status === 401);
 };
 
 export const stepper = (state) => get(state, 'stepper.stepperResult');

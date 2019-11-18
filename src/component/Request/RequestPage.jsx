@@ -48,6 +48,9 @@ export default function RequestPage({ request }) {
 
   const user = useSelector((state) => userRole(state));
 
+  console.log('caca');
+  console.log(request);
+
   return (
     <>
       <RequestDisplay

@@ -9,7 +9,7 @@ import apiCall from '../api';
 
 export function* searchFile({ payload }) {
   try {
-    const results = yield call(apiCall, `/matchs/requests/${payload.requestId}`, null, null, 'GET');
+    const results = yield call(apiCall, `/matchs/requests/${payload.requestId}/subject/${payload.subjectId}`, null, null, 'GET');
     yield put({ type: GET_MATCH_COMPLETE, results });
   } catch (error) {
     yield put({ type: GET_MATCH_ERROR, error });

@@ -24,32 +24,29 @@ export default function RequestDisplay({
     <>
       {request
         && (
-          <Container maxWidth="lg">
-            <Container maxWidth="lg">
-              <Grid container>
-                <Grid item xs={6}>
-                  <UniversitySubjectData
-                    university={originSubject.university}
-                    subject={originSubject.subject}
-                    subjectPdfSrc={subjectPdfSrcOrigin}
-                  />
-                  <SubjectInformationDisplay subject={originSubject} />
-                </Grid>
-                <Grid item xs={6}>
-                  <UniversitySubjectData
-                    university={unqSubject.university}
-                    subject={unqSubject.subject}
-                    subjectPdfSrc={subjectPdfSrcDestination}
-                  />
-                  <SubjectInformationDisplay subject={unqSubject} />
-                </Grid>
-              </Grid>
-            </Container>
-            <Container maxWidth="lg">
-              {showActionButtons
+          <div className="container">
+            <div className="col-12">
+              <UniversitySubjectData
+                university={originSubject.university}
+                subject={originSubject.subject}
+                subjectPdfSrc={subjectPdfSrcOrigin}
+              />
+            </div>
+            <div className="col-12 ">
+              <UniversitySubjectData
+                university={unqSubject.university}
+                subject={unqSubject.subject}
+                subjectPdfSrc={subjectPdfSrcDestination}
+              />
+            </div>
+          </div>
+        )}
+      <br />
+      <div className="container-small">
+        {showActionButtons
                 && (
                   <>
-                    <Container maxWidth="lg">
+                    <div className="row justify-content-md-center">
                       <div className={classes.buttonGroup}>
                         <Button className={classes.button} color="primary" variant="contained" onClick={onEquivalenceGiven}>DAR EQUIVALENCIA</Button>
                         <RejectDialog denyEquivalence={onEquivalenceDenied} />
@@ -65,13 +62,10 @@ export default function RequestDisplay({
                             </>
                           )}
                       </div>
-                    </Container>
+                    </div>
                   </>
                 )}
-            </Container>
-          </Container>
-        )}
-
+      </div>
     </>
   );
 }

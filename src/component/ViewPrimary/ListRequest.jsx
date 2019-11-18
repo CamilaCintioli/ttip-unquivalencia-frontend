@@ -7,14 +7,14 @@ import Search from '@material-ui/icons/Search';
 import Fab from '@material-ui/core/Fab';
 import columnsRequest from './columnsRequest';
 
-const TableSecondary = ({ row, handleSearchRequest }) => (
+const TableSecondary = ({ isSearch, row, handleSearchRequest }) => (
   <div className="row justify-content-md-center">
     <div className="col-8">
       <span><b>Materias de origen</b></span>
       <table className="table table-sm">
         <thead className="thead-dark">
           <tr>
-            <th scope="col">Actions</th>
+            {isSearch ? <th scope="col">Actions</th> : null}
             <th scope="col">Nombre</th>
             <th scope="col">Universidad</th>
             <th scope="col">carrera</th>
@@ -24,11 +24,15 @@ const TableSecondary = ({ row, handleSearchRequest }) => (
         <tbody>
           {map(row.originSubjects, (materia) => (
             <tr>
-              <td>
-                <Fab size="small" color="primary" aria-label="add">
-                  <Search onClick={() => handleSearchRequest(row.id, materia.id)} />
-                </Fab>
-              </td>
+              {isSearch
+                ? (
+                  <td>
+                    <Fab size="small" color="primary" aria-label="add">
+                      <Search onClick={() => handleSearchRequest(row.id, materia.id)} />
+                    </Fab>
+                  </td>
+                )
+                : null}
               <td>{materia.subject}</td>
               <td>{materia.university}</td>
               <td>{materia.career}</td>
@@ -42,27 +46,28 @@ const TableSecondary = ({ row, handleSearchRequest }) => (
 );
 
 
-const ListRequest = ({ requests, handleSearchRequest, checkAdmin }) => (
+const ListRequest = ({
+  title, requests, handleSearchRequest, checkAdmin, isSearch, pageSize,
+}) => (
 
   <MaterialTable
-    title="Solicitudes"
+    title={title}
     columns={columnsRequest}
     data={requests}
     options={{
       search: true,
-      pageSize: 10,
+      pageSize,
     }}
     actions={[
-
       (rowData) => ({
         icon: 'delete',
         tooltip: 'Delete User',
         onClick: (event, rowData) => alert(`You want to delete ${rowData.name}`),
-        hidden: !checkAdmin,
+        hidden: isSearch && !checkAdmin,
       }),
     ]}
     detailPanel={(rowData) => (
-      <TableSecondary row={rowData} handleSearchRequest={handleSearchRequest} />
+      <TableSecondary isSearch={isSearch} row={rowData} handleSearchRequest={handleSearchRequest} />
     )}
   />
 

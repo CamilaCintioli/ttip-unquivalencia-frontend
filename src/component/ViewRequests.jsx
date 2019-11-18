@@ -9,20 +9,27 @@ import { find } from 'lodash';
 import Requests from './Request/Requests';
 
 import getStepper from '../redux/actions/stepper';
-import { stepper, matchsError } from '../redux/selectors';
+import getMatch from '../redux/actions/match';
+import {
+  stepper, matchsError, matchs, userRole,
+} from '../redux/selectors';
+import { isProfessor } from './User/userRole';
 import Error401 from './Error/Error401';
 
 
 function ViewRequest() {
   const { requestId, subjectId } = useParams();
   const data = useSelector((state) => stepper(state));
+  const requestsMatch = useSelector((state) => matchs(state));
   const isAuthorized = useSelector((state) => matchsError(state));
   const [activeStepSets, setActiveStepSets] = useState(requestId);
   const dispatch = useDispatch();
   const history = useHistory();
+  const user = useSelector((state) => userRole(state));
 
   useEffect(() => {
     dispatch(getStepper({ requestId, subjectId }));
+    dispatch(getMatch({ requestId, subjectId }));
   }, [dispatch, requestId, subjectId]);
 
 
@@ -37,9 +44,11 @@ function ViewRequest() {
     history.push(`/solicitud/${_requestId}/materia/${request.firstSubject}`);
   };
 
+  const checkProfessor = isProfessor(user);
+
   return (
     <>
-      {isAuthorized ? <Error401 history={history} /> : null}
+      {!isAuthorized ? <Error401 history={history} /> : null}
       {data ? (
         <Requests
           activeStepSets={activeStepSets}
@@ -48,7 +57,9 @@ function ViewRequest() {
           requestsStepper={data.requestsStepper}
           sets={data.sets}
           request={data.request}
-          requestsMatch={data.match}
+          requestsMatch={requestsMatch}
+          checkProfessor={checkProfessor}
+
         />
       ) : null}
     </>
