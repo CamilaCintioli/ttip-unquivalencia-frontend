@@ -6,10 +6,10 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
-import { passwordError } from '../redux/selectors';
-import { changePassword } from '../redux/actions/user';
-import FeedbackBar from './FeedbackBar';
-import PasswordField from './Fields/PasswordField';
+import { passwordError } from '../../../redux/selectors';
+import { changePassword } from '../../../redux/actions/user';
+import FeedbackBar from '../FeedbackBar';
+import PasswordField from '../../Fields/PasswordField';
 
 function validateForm(form) {
   const errors = {};

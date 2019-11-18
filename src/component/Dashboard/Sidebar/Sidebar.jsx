@@ -7,7 +7,7 @@ import {
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { useSelector } from 'react-redux';
 import { mainListItems } from './listItems';
-import { userRole } from '../../redux/selectors';
+import { userRole } from '../../../redux/selectors';
 
 
 export default function SideBar({ classes, handleDrawerClose, open }) {

@@ -10,9 +10,9 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import * as Yup from 'yup';
 import { useSelector } from 'react-redux';
-import TextField from './Fields/TextField';
-import useStyles from './SingIn/style';
-import { userError } from '../redux/selectors';
+import TextField from '../Fields/TextField';
+import useStyles from './style';
+import { userError } from '../../redux/selectors';
 
 
 const validateSignUp = Yup.object().shape({

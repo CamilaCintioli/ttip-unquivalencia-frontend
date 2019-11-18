@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button';
 import * as Yup from 'yup';
 import TextField from '../Fields/TextField';
 import API from '../../service/FileService';
-import FeedbackBar, { openSnackbar } from '../FeedbackBar';
+import FeedbackBar, { openSnackbar } from '../Dashboard/FeedbackBar';
 
 
 const validateFile = Yup.object().shape({

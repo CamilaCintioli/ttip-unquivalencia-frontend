@@ -9,7 +9,7 @@ import { createRequest, createSubject } from '../../redux/actions/create';
 import { fileResult } from '../../redux/selectors';
 import InternalRequestForm from './InternalRequestForm';
 import ExternalRequestForm from './ExternalRequestForm';
-import FeedbackBar from '../FeedbackBar';
+import FeedbackBar from '../Dashboard/FeedbackBar';
 import CreateSubjectDialog from './CreateSubjectDialog';
 import { Selector } from './Selector';
 
