@@ -37,23 +37,23 @@ export const mainListItems = (cerrar, userRole) => (
     </Link>
     { isAdmin(userRole)
     && (
-          <>
-  <Link to="/new/solicitud">
-        <ListItem button>
-        <ListItemIcon>
-          <AttachFileIcon />
-        </ListItemIcon>
-        <ListItemText primary="Crear Expediente" />
-      </ListItem>
-      </Link>
-  <Link to="/usuarios">
-        <ListItem button>
-        <ListItemIcon>
-          <AssignmentIndIcon />
-        </ListItemIcon>
-        <ListItemText primary="Usuarios" />
-      </ListItem>
-      </Link>
+      <>
+        <Link to="/new/solicitud">
+          <ListItem button>
+            <ListItemIcon>
+              <AttachFileIcon />
+            </ListItemIcon>
+            <ListItemText primary="Crear Expediente" />
+          </ListItem>
+        </Link>
+        <Link to="/usuarios">
+          <ListItem button>
+            <ListItemIcon>
+              <AssignmentIndIcon />
+            </ListItemIcon>
+            <ListItemText primary="Usuarios" />
+          </ListItem>
+        </Link>
       </>
     )}
   </div>

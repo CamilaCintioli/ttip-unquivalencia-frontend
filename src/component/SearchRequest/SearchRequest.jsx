@@ -12,10 +12,12 @@ import api from '../../redux/api/index';
 function SearchRequest() {
   const history = useHistory();
   const [rowsRequest, setRowsRequest] = useState([]);
+
   const [controlPage, setControlPage] = useState({
-    total_pages: 0,
+    total_pages: 3,
     offset: '',
   });
+
   const [search, setSearch] = useState({
     universityOrigin: '',
     careerOrigin: '',
@@ -25,7 +27,7 @@ function SearchRequest() {
     subjectUnq: '',
     type: '',
     page: 1,
-    limit: 10,
+    limit: 5,
 
   });
 
@@ -33,16 +35,14 @@ function SearchRequest() {
     const data = { ...pickBy(search, (x) => !isEmpty(x) || isNumber(x)), ...query };
     api('/requests', null, null, 'GET', data).then(({ data: { requests, total_pages } }) => {
       setRowsRequest(requests);
-      setControlPage({ ...controlPage, total_pages });
+      const offset = (search.page - 1) * search.limit;
+      setControlPage({ ...controlPage, total_pages, offset });
       return data;
     });
   }, [controlPage, search]);
 
   const handleChange = ({ target: { name, value } }) => {
-    console.log(`value:${value}`);
     setSearch({ ...search, [name]: value });
-    console.log('search');
-    console.log(search);
     return handleSearchRequests();
   };
   const handleSearchRequest = (requestId, subjectId) => history.push(`/solicitud/${requestId}/materia/${subjectId}`);
@@ -74,15 +74,15 @@ function SearchRequest() {
           requests={rowsRequest}
           handleSearchRequests={handleSearchRequests}
           handleSearchRequest={handleSearchRequest}
-          pageSize={10}
+          pageSize={5}
         />
         <hr />
-        <Pagination
+        {/* <Pagination
           limit={search.limit}
           total={controlPage.total_pages}
           offset={controlPage.offset}
           onClick={(e, props, offset) => handleClick(offset)}
-        />
+        /> */}
       </div>
     </div>
   );
