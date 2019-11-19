@@ -47,7 +47,7 @@ export default function Dashboard() {
           </Switch>
         </Container>
         {isValid
-          ? <Footer classes={classes} />
+          ? <Footer />
           : null}
       </main>
     </div>

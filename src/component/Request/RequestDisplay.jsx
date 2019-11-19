@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-indent-props */
 import React, { useState } from 'react';
 import {
-  Button, Grid, Container,
+  Button,
 } from '@material-ui/core';
 import { shape, string, func } from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';

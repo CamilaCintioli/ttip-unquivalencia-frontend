@@ -13,7 +13,7 @@ import { userRole } from '../../redux/selectors';
 import { isAdmin, isProfessor } from '../UserView/userRole';
 
 export default function RequestPage({ request }) {
-  const { requestId, subjectId } = useParams();
+  const { subjectId } = useParams();
   const dispatch = useDispatch();
   const giveEquivalence = useCallback(() => {
     dispatch(approveEquivalence({
@@ -47,9 +47,6 @@ export default function RequestPage({ request }) {
   }, [dispatch]);
 
   const user = useSelector((state) => userRole(state));
-
-  console.log('caca');
-  console.log(request);
 
   return (
     <>

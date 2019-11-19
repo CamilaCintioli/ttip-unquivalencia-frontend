@@ -1,9 +1,10 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-nested-ternary */
 import React from 'react';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import { isEmpty, groupBy } from 'lodash';
+import { isEmpty } from 'lodash';
 import CardRequest from './Match/CardRequest';
 import Resolution from './Match/Resolution';
 import useStyles from './Match/style';
@@ -18,7 +19,6 @@ export default function Match({ requestMatch }) {
     requestsTotalMatchApproved,
     requestsMatchWithoutYearPlanApproved,
     subjectsToApprove,
-    requestsMatch,
 
   } = requestMatch;
   const getClass = () => (isEmpty(requestsTotalMatchApproved) ? 'col-3  card text-white bg-warning mb-3' : 'col-3 card text-white bg-info mb-3');

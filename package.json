@@ -13,7 +13,7 @@
     "dotenv": "^8.2.0",
     "eslint-utils": "^1.4.2",
     "font-awesome": "^4.7.0",
-    "formik": "^1.5.8",
+    "formik": "^2.0.4",
     "jquery": "^3.4.1",
     "lodash": "^4.17.15",
     "material-table": "^1.52.0",
@@ -31,6 +31,8 @@
     "redux": "^4.0.4",
     "redux-logger": "^3.0.6",
     "redux-saga": "^1.0.5",
+    "semantic-ui-react": "^0.88.1",
+    "semantic-ui-react-button-pagination": "^1.0.3",
     "yup": "^0.27.0"
   },
   "scripts": {
