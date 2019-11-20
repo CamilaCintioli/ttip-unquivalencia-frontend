@@ -5,6 +5,7 @@ import user from './user';
 import create from './create';
 import match from './match';
 import stepper from './stepper';
+import subject from './subject';
 
 const rootReducer = combineReducers({
   user,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   create,
   match,
   stepper,
+  subject,
 });
 
 export default rootReducer;

@@ -4,7 +4,7 @@ import {
   Formik, Form, Field, ErrorMessage,
 } from 'formik';
 import Typography from '@material-ui/core/Typography';
-import './NewRequest.css';
+import './NewRequest/NewRequest.css';
 import Button from '@material-ui/core/Button';
 import * as Yup from 'yup';
 import { useHistory } from 'react-router-dom';

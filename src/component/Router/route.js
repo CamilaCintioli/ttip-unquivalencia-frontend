@@ -3,7 +3,7 @@ import NewFilePage from '../NewRequest/NewFilePage';
 import VieweRequests from '../Request/ViewRequests';
 import Home from '../Home/Home';
 import User from '../UserView/User';
-import NewRequestPage from '../NewRequest/NewRequestPage';
+import NewRequestPage from '../NewRequest/NewRequest/NewRequestPage';
 import UpdatePasswordForm from '../Dashboard/Navbar/UpdatePasswordForm';
 
 const routes = [

@@ -16,10 +16,20 @@ export const userError = (state) => get(state, 'user.userError');
 export const matchs = (state) => get(state, 'match.matchResult');
 export const matchsError = (state) => {
   const error = get(state, 'match.error');
-  return !(has(error, 'status') && error.status === 401);
+  return (has(error, 'status') && error.status === 401);
 };
 
 export const stepper = (state) => get(state, 'stepper.stepperResult');
 export const userRole = (state) => get(state, 'user.userResult.user.role');
 
 export const passwordError = (state) => get(state, 'user.passwordError');
+
+export const universities = (state) => get(state, 'subject.universities');
+export const careers = (state) => get(state, 'subject.careers');
+export const yearPlans = (state) => get(state, 'subject.yearsPlan');
+
+export const subjects = (state, university, career, year) => {
+  const subjectsState = Object.values(get(state, 'subject.subjects'));
+  return subjectsState.filter((subject) => subject.university === university && subject.career === career
+  && subject.yearPlan === year);
+};

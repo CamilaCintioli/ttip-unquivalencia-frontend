@@ -4,14 +4,14 @@ import { Typography } from '@material-ui/core';
 import './NewRequest.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import { searchFileByFileNumber } from '../../redux/actions/search';
-import { createRequest, createSubject } from '../../redux/actions/create';
-import { fileResult } from '../../redux/selectors';
+import { searchFileByFileNumber } from '../../../redux/actions/search';
+import { createRequest, createSubject } from '../../../redux/actions/create';
+import { fileResult } from '../../../redux/selectors';
 import InternalRequestForm from './InternalRequestForm';
 import ExternalRequestForm from './ExternalRequestForm';
-import FeedbackBar from '../Dashboard/FeedbackBar';
-import CreateSubjectDialog from './CreateSubjectDialog';
-import { Selector } from './Selector';
+import FeedbackBar from '../../Dashboard/FeedbackBar';
+import CreateSubjectDialog from '../CreateSubjectDialog';
+import { Selector } from '../Selectors/Selector';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,9 +38,11 @@ export default function NewRequestPage(props) {
       fileNumber: file.fileNumber,
       subjectOriginIds: subjectOriginId,
       subjectUnqId,
+      type: isInternal ? 'interna' : 'externa',
+      yearOfApprovall: '2016',
     };
     dispatch(createRequest(request));
-  }, [dispatch, file]);
+  }, [dispatch, file, isInternal]);
 
   const setEquivalenceMode = useCallback((equivalenceMode) => {
     setIsInternal(equivalenceMode);

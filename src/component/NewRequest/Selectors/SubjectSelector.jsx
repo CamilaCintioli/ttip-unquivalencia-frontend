@@ -2,10 +2,10 @@ import React, { useState, useCallback, useEffect } from 'react';
 import {
   ErrorMessage, getIn,
 } from 'formik';
-import './NewRequest.css';
+import '../NewRequest/NewRequest.css';
 import { makeStyles } from '@material-ui/core/styles';
 import { MultiSelector, Selector, createOptions } from './Selector';
-import API from '../../service/SearchService';
+import API from '../../../service/SearchService';
 
 function createSubjectOptions(subjects) {
   return subjects.map((subject) => (
