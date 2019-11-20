@@ -7,54 +7,84 @@ import HomeIcon from '@material-ui/icons/Home';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import { Link } from 'react-router-dom';
+import SearchIcon from '@material-ui/icons/Search';
 import { isAdmin } from '../../UserView/userRole';
 
-export const mainListItems = (cerrar, userRole) => (
-  <div onClick={() => cerrar()}>
-    <Link to="/home">
-      <ListItem button>
-        <ListItemIcon>
-          <HomeIcon />
-        </ListItemIcon>
-        <ListItemText primary="Home" />
-      </ListItem>
-    </Link>
-    <Link to="/expediente">
-      <ListItem button>
-        <ListItemIcon>
-          <ArchiveIcon />
-        </ListItemIcon>
-        <ListItemText primary="Expedientes" />
-      </ListItem>
-    </Link>
-    <Link to="/buscador/solicitudes">
-      <ListItem button>
-        <ListItemIcon>
-          <ArchiveIcon />
-        </ListItemIcon>
-        <ListItemText primary="Solicitudes" />
-      </ListItem>
-    </Link>
-    { isAdmin(userRole)
-    && (
-      <>
-        <Link to="/new/solicitud">
-          <ListItem button>
-            <ListItemIcon>
-              <AttachFileIcon />
-            </ListItemIcon>
-            <ListItemText primary="Crear Expediente" />
-          </ListItem>
-        </Link>
-        <Link to="/usuarios">
-          <ListItem button>
-            <ListItemIcon>
-              <AssignmentIndIcon />
-            </ListItemIcon>
-            <ListItemText primary="Usuarios" />
-          </ListItem>
-        </Link>
-      </>
-    )}
-  </div>
+export const mainListItems = (cerrar, userRole) => ( <
+    div onClick = {
+        () => cerrar() } >
+    <
+    Link to = "/home" >
+    <
+    ListItem button >
+    <
+    ListItemIcon >
+    <
+    HomeIcon / >
+    <
+    /ListItemIcon> <
+    ListItemText primary = "Home" / >
+    <
+    /ListItem> <
+    /Link> <
+    Link to = "/expediente" >
+    <
+    ListItem button >
+    <
+    ListItemIcon >
+    <
+    ArchiveIcon / >
+    <
+    /ListItemIcon> <
+    ListItemText primary = "Expedientes" / >
+    <
+    /ListItem> <
+    /Link> {
+        isAdmin(userRole) &&
+            ( <
+                >
+                <
+                Link to = "/buscador/solicitudes" >
+                <
+                ListItem button >
+                <
+                ListItemIcon >
+                <
+                SearchIcon / >
+                <
+                /ListItemIcon> <
+                ListItemText primary = "Buscador Solicitudes" / >
+                <
+                /ListItem> <
+                /Link> <
+                Link to = "/new/solicitud" >
+                <
+                ListItem button >
+                <
+                ListItemIcon >
+                <
+                AttachFileIcon / >
+                <
+                /ListItemIcon> <
+                ListItemText primary = "Crear Expediente" / >
+                <
+                /ListItem> <
+                /Link> <
+                Link to = "/usuarios" >
+                <
+                ListItem button >
+                <
+                ListItemIcon >
+                <
+                AssignmentIndIcon / >
+                <
+                /ListItemIcon> <
+                ListItemText primary = "Usuarios" / >
+                <
+                /ListItem> <
+                /Link> <
+                />
+            )
+    } <
+    /div>
 );

@@ -3,7 +3,7 @@
 import React from 'react';
 
 
-const Search = ({ form, handleChange }) => (
+const Search = ({ form, handleChange, onClick }) => (
   <div>
     <form>
       <div className="form-group">
@@ -50,6 +50,7 @@ const Search = ({ form, handleChange }) => (
         </div>
       </fieldset>
     </form>
+    <button className="btn btn-outline-success btn-block " onClick={onClick}>Buscar</button>
   </div>
 
 );

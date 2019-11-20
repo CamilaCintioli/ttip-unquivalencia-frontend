@@ -4,9 +4,9 @@ import MaterialTable from 'material-table';
 import TableSubject from '../shared/TableSubject';
 
 const columnsRequest = [
-  { title: 'M.Unq', field: 'unqSubject.subject' },
-  { title: 'Carreta Unq', field: 'unqSubject.career' },
-  { title: 'Asignacion', field: 'signature' },
+  { title: 'Materia UNQ', field: 'unqSubject.subject' },
+  { title: 'Carrera UNQ', field: 'unqSubject.career' },
+  { title: 'Firma', field: 'signature' },
   { title: 'Observacion', field: 'observations' },
   { title: 'Estado', field: 'equivalence' },
 ];
@@ -20,7 +20,7 @@ const Requests = ({
     data={requests}
     options={{
       search: false,
-      pageSize,
+      paging: false,
     }}
     detailPanel={(rowData) => (
       <TableSubject isSearch={isSearch} row={rowData} handleSearchRequest={handleSearchRequest} />

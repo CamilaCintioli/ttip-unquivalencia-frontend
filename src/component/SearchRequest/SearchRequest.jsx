@@ -1,22 +1,22 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { withRouter, useHistory } from 'react-router-dom';
 import { pickBy, isEmpty } from 'lodash';
-import Pagination from 'semantic-ui-react-button-pagination';
 import { isNumber } from 'util';
+import { Pagination } from 'semantic-ui-react';
 import Search from './Search';
 import Requests from './Requests';
 import api from '../../redux/api/index';
-
 
 function SearchRequest() {
   const history = useHistory();
   const [rowsRequest, setRowsRequest] = useState([]);
 
   const [controlPage, setControlPage] = useState({
-    total_pages: 3,
+    total_pages: 0,
     offset: '',
   });
+
 
   const [search, setSearch] = useState({
     universityOrigin: '',
@@ -27,31 +27,37 @@ function SearchRequest() {
     subjectUnq: '',
     type: '',
     page: 1,
-    limit: 5,
-
+    limit: 8,
   });
 
-  const handleSearchRequests = React.useCallback((query = {}) => {
+  const handleSearchRequests = useCallback((query = {}) => {
     const data = { ...pickBy(search, (x) => !isEmpty(x) || isNumber(x)), ...query };
     api('/requests', null, null, 'GET', data).then(({ data: { requests, total_pages } }) => {
       setRowsRequest(requests);
-      const offset = (search.page - 1) * search.limit;
-      setControlPage({ ...controlPage, total_pages, offset });
+      setControlPage({ ...controlPage, total_pages });
       return data;
     });
   }, [controlPage, search]);
 
   const handleChange = ({ target: { name, value } }) => {
+    console.log(`name:${name}-value:${value}`);
     setSearch({ ...search, [name]: value });
-    return handleSearchRequests();
+    console.log(search);
+  };
+
+  const onClickSearch = () => {
+    const page = 1;
+    setSearch({ ...search, page });
+    console.log(search);
+    handleSearchRequests({ page });
   };
   const handleSearchRequest = (requestId, subjectId) => history.push(`/solicitud/${requestId}/materia/${subjectId}`);
-  const handleClick = (offset) => {
-    const { limit } = search;
-    const page = offset / limit;
-    setControlPage({ ...controlPage, offset });
+
+  const onClick = (event, data) => {
+    const page = data.activePage;
     setSearch({ ...search, page });
-    handleSearchRequests({ limit, page });
+    console.log(search);
+    handleSearchRequests({ page });
   };
 
   return (
@@ -61,7 +67,11 @@ function SearchRequest() {
             Buscador
         </h3>
         <hr />
-        <Search form={search} handleChange={handleChange} />
+        <Search
+          form={search}
+          handleChange={handleChange}
+          onClick={onClickSearch}
+        />
       </div>
       <div className="col-8">
         <h3>
@@ -72,17 +82,21 @@ function SearchRequest() {
           title="Solicitudes"
           isSearch={1}
           requests={rowsRequest}
-          handleSearchRequests={handleSearchRequests}
           handleSearchRequest={handleSearchRequest}
           pageSize={5}
         />
         <hr />
-        {/* <Pagination
-          limit={search.limit}
-          total={controlPage.total_pages}
-          offset={controlPage.offset}
-          onClick={(e, props, offset) => handleClick(offset)}
-        /> */}
+        <div className="row justify-content-md-center">
+          {!isEmpty(rowsRequest)
+            ? (
+              <Pagination
+                defaultActivePage={1}
+                totalPages={controlPage.total_pages}
+                onPageChange={onClick}
+              />
+            )
+            : null}
+        </div>
       </div>
     </div>
   );

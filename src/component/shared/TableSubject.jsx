@@ -13,11 +13,11 @@ const TableSubject = ({
       <table className="table table-sm">
         <thead className="thead-dark">
           <tr>
-            {isSearch ? <th scope="col">Actions</th> : null}
+            {isSearch ? <th scope="col">Aciones</th> : null}
             <th scope="col">Nombre</th>
             <th scope="col">Universidad</th>
-            <th scope="col">carrera</th>
-            <th scope="col">plan</th>
+            <th scope="col">Carrera</th>
+            <th scope="col">Plan</th>
           </tr>
         </thead>
         <tbody>
