@@ -50,7 +50,7 @@ export function* consultEquivalence({ payload }) {
 export function* delegateEquivalence({ payload }) {
   try {
     const { requestId, department } = payload;
-    const results = yield call(apiCall, `/request/${requestId}`, { equivalence: 'GIRADA' }, null, 'POST');
+    const results = yield call(apiCall, `/request/${requestId}`, { equivalence: 'GIRADA', coordination: department }, null, 'POST');
     openSnackbar(`La consulta ha sido delegada a ${department}`, 'success');
     yield put({ type: DELEGATE_EQUIVALENCE_COMPLETE, results });
     yield put({ type: SEARCH_REQUEST_START, payload });
