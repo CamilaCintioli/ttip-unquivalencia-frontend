@@ -13,18 +13,22 @@ import { userRole } from '../../redux/selectors';
 import { isAdmin, isProfessor } from '../UserView/userRole';
 
 export default function RequestPage({ request }) {
-  const { subjectId } = useParams();
+  const { requestId, subjectId } = useParams();
   const dispatch = useDispatch();
   const giveEquivalence = useCallback(() => {
     dispatch(approveEquivalence({
-      requestId: request.id,
+      requestId,
+      subjectId,
       fileId: request.fk_fileid,
     }));
   }, [dispatch]);
+  console.log('Request Test');
+  console.log(request);
 
   const denyEquivalence = useCallback((reason) => {
     dispatch(rejectEquivalence({
-      requestId: request.id,
+      requestId,
+      subjectId,
       fileId: request.fk_fileid,
       motive: reason,
     }));
@@ -32,16 +36,17 @@ export default function RequestPage({ request }) {
 
   const consultEquivalenceRequest = useCallback((email, message) => {
     dispatch(sendConsult({
-      requestId: request.id,
+      requestId,
+      subjectId,
       email,
       message,
-      subjectId,
     }));
   }, [dispatch]);
 
   const delegateEquivalenceRequest = useCallback((department) => {
     dispatch(delegateEquivalence({
-      requestId: request.id,
+      requestId,
+      subjectId,
       department,
     }));
   }, [dispatch]);
