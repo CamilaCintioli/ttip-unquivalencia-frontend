@@ -48,8 +48,7 @@ function ViewRequest() {
 
   return (
     <>
-      {!isAuthorized ? <Error401 history={history} /> : null}
-      {data ? (
+      {isAuthorized ? data ? (
         <Requests
           activeStepSets={activeStepSets}
           changeStepSets={changeStepSets}
@@ -61,7 +60,8 @@ function ViewRequest() {
           checkProfessor={checkProfessor}
 
         />
-      ) : null}
+      ) : null :  <Error401 history={history} /> }
+      
     </>
   );
 }
