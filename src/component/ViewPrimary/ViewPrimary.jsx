@@ -18,6 +18,7 @@ function ViewPrimary() {
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector((state) => userRole(state));
+  const [fileIdSelected, setFileIdSelected] = useState();
 
   const [rowsFile, setRowsFile] = useState([]);
   const [isRequest, setIsRequest] = useState(false);
@@ -65,6 +66,7 @@ function ViewPrimary() {
 
 
   const handleSearchRequests = React.useCallback((id) => {
+    setFileIdSelected(id);
     dispatch(searchRequest({ fileId: id }));
     setIsRequest(true);
   }, [dispatch]);
@@ -149,6 +151,7 @@ function ViewPrimary() {
                 handleSearchRequest={handleSearchRequest}
                 checkAdmin={checkAdmin}
                 pageSize={5}
+                fileSelected={fileIdSelected}
               />
             </>
           )
