@@ -12,7 +12,8 @@ import { isAdmin } from '../../UserView/userRole';
 
 export const mainListItems = (cerrar, userRole) => ( <
     div onClick = {
-        () => cerrar() } >
+        () => cerrar()
+    } >
     <
     Link to = "/home" >
     <
@@ -25,8 +26,8 @@ export const mainListItems = (cerrar, userRole) => ( <
     /ListItemIcon> <
     ListItemText primary = "Home" / >
     <
-    /ListItem> <
-    /Link> <
+    /ListItem> < /
+    Link > <
     Link to = "/expediente" >
     <
     ListItem button >
@@ -38,53 +39,53 @@ export const mainListItems = (cerrar, userRole) => ( <
     /ListItemIcon> <
     ListItemText primary = "Expedientes" / >
     <
-    /ListItem> <
-    /Link> {
+    /ListItem> < /
+    Link > {
         isAdmin(userRole) &&
-            ( <
-                >
-                <
-                Link to = "/buscador/solicitudes" >
-                <
-                ListItem button >
-                <
-                ListItemIcon >
-                <
-                SearchIcon / >
-                <
-                /ListItemIcon> <
-                ListItemText primary = "Buscador Solicitudes" / >
-                <
-                /ListItem> <
-                /Link> <
-                Link to = "/new/solicitud" >
-                <
-                ListItem button >
-                <
-                ListItemIcon >
-                <
-                AttachFileIcon / >
-                <
-                /ListItemIcon> <
-                ListItemText primary = "Crear Expediente" / >
-                <
-                /ListItem> <
-                /Link> <
-                Link to = "/usuarios" >
-                <
-                ListItem button >
-                <
-                ListItemIcon >
-                <
-                AssignmentIndIcon / >
-                <
-                /ListItemIcon> <
-                ListItemText primary = "Usuarios" / >
-                <
-                /ListItem> <
-                /Link> <
-                />
-            )
+        ( <
+            >
+            <
+            Link to = "/buscador/solicitudes" >
+            <
+            ListItem button >
+            <
+            ListItemIcon >
+            <
+            SearchIcon / >
+            <
+            /ListItemIcon> <
+            ListItemText primary = "Buscador Solicitudes" / >
+            <
+            /ListItem> < /
+            Link > <
+            Link to = "/crear/expediente" >
+            <
+            ListItem button >
+            <
+            ListItemIcon >
+            <
+            AttachFileIcon / >
+            <
+            /ListItemIcon> <
+            ListItemText primary = "Crear Expediente" / >
+            <
+            /ListItem> < /
+            Link > <
+            Link to = "/usuarios" >
+            <
+            ListItem button >
+            <
+            ListItemIcon >
+            <
+            AssignmentIndIcon / >
+            <
+            /ListItemIcon> <
+            ListItemText primary = "Usuarios" / >
+            <
+            /ListItem> < /
+            Link > <
+            />
+        )
     } <
     /div>
 );

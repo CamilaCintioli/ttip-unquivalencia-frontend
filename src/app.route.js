@@ -8,14 +8,14 @@ import UpdatePasswordForm from './component/Dashboard/Navbar/UpdatePasswordForm'
 import SearchRequest from './component/SearchRequest/SearchRequest';
 
 const ROUTES = [
-  { path: '/home', _component: Home },
-  { path: '/expediente', _component: ViewPrimary },
-  { path: '/solicitud/:requestId/materia/:subjectId', _component: VieweRequests },
-  { path: '/new/solicitud', _component: NewFilePage },
-  { path: '/usuarios', _component: User },
-  { path: '/file/:fileId/request/new', _component: NewRequestPage },
-  { path: '/password', _component: UpdatePasswordForm },
-  { path: '/buscador/solicitudes', _component: SearchRequest },
+    { path: '/home', _component: Home },
+    { path: '/expediente', _component: ViewPrimary },
+    { path: '/solicitud/:requestId/materia/:subjectId', _component: VieweRequests },
+    { path: '/crear/expediente', _component: NewFilePage },
+    { path: '/usuarios', _component: User },
+    { path: '/file/:fileId/request/new', _component: NewRequestPage },
+    { path: '/password', _component: UpdatePasswordForm },
+    { path: '/buscador/solicitudes', _component: SearchRequest },
 
 ];
 

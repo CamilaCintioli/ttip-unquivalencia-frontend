@@ -30,7 +30,7 @@ const Requests = ({
           : (
             <>
               <p>
-                <a className="btn btn-primary btn-lg" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Historial</a>
+                <a className="btn btn-outline-success btn-lg btn-block" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Historial</a>
               </p>
               <div className="row">
                 <div className="col">
