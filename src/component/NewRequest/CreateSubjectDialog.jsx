@@ -51,7 +51,7 @@ export default function CreateSubjectDialog({ onSubmit }) {
         onClick={handleOpen}
         className={classes.consultButton}
       >
-        CARGAR MATERIA
+        NUEVA MATERIA
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" fullWidth maxWidth="md">
         <DialogTitle id="form-dialog-title">Cargar materia</DialogTitle>

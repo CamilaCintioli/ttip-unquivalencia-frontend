@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-indent-props */
 import React, { useState } from 'react';
 import {
-  Button, Grid, Container,
+  Button,
 } from '@material-ui/core';
 import { shape, string, func } from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,13 +11,14 @@ import MenuItem from '@material-ui/core/MenuItem';
 import UniversitySubjectData from './UniversitySubjectData';
 import Dialogo from './dialogo';
 import RejectDialog from './RejectDialog';
-import SubjectInformationDisplay from './SubjectInformationDisplay';
 
 const subjectPdfSrcDestination = 'http://clp.web.unq.edu.ar/wp-content/uploads/sites/110/2019/09/apuntes.pdf';
 const subjectPdfSrcOrigin = 'http://clp.web.unq.edu.ar/wp-content/uploads/sites/110/2019/09/practica4y5.pdf';
 
 export default function RequestDisplay({
-  request, onEquivalenceGiven, onEquivalenceDenied, onEquivalenceConsulted, showConsultAndDelegateButton, showActionButtons, onEquivalenceDelegated,
+  request, onEquivalenceGiven, onEquivalenceDenied,
+  onEquivalenceConsulted, showConsultAndDelegateButton,
+  showActionButtons, onEquivalenceDelegated,
 }) {
   const { unqSubject, originSubject } = request;
   const classes = useStyles();

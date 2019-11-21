@@ -39,7 +39,7 @@ const ListFile = ({
         data={files}
         options={{
           search: false,
-          pageSize: 10,
+          paging: false,
         }}
 
         actions={[
