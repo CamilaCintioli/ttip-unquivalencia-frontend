@@ -9,12 +9,12 @@ const ListFile = ({
 }) => (
 
   <MaterialTable
-    title="Expedientes"
+    title="Listado"
     columns={columnsFile}
     data={files}
     options={{
       search: false,
-      pageSize: 10,
+      paging: false,
     }}
 
     actions={[

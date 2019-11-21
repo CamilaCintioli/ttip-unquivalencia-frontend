@@ -7,7 +7,7 @@ import columnsRequest from '../shared/columnsRequest';
 import TableSubject from '../shared/TableSubject';
 
 const ListRequest = ({
-  title, requests, handleSearchRequest, checkAdmin, isSearch, pageSize,
+  title, requests, handleSearchRequest, checkAdmin, isSearch, pageSize, goFile,
 }) => (
 
   <MaterialTable

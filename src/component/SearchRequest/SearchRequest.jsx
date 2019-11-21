@@ -14,7 +14,6 @@ function SearchRequest() {
 
   const [controlPage, setControlPage] = useState({
     total_pages: 0,
-    offset: '',
   });
 
 
