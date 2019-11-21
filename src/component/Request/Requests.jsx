@@ -21,9 +21,11 @@ const Requests = ({
           sets={sets}
           changeStep={changeStep}
           requestsStepper={requestsStepper}
+          equivalence={request.equivalence}
         />
       )
       : null}
+    <hr />
     {requestsMatch ? (
       <div className="row justify-content-md-center col 1">
         { isEmpty(requestsMatch.requestsMatch) ? <Match requestMatch={requestsMatch} />
