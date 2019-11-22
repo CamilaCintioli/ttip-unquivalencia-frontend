@@ -17,9 +17,11 @@ export default function SubjectSelector({
   field: { name, value },
   form: { setFieldValue, values },
 }) {
-  const career = getIn(values, 'unq.career');
-  const year = getIn(values, 'unq.year');
-  const options = createSubjectOptions(useSelector((state) => subjects(state, 'UNQ', career, year)));
+  const fieldName = name.includes('origin') ? 'origin' : 'unq';
+  const career = getIn(values, `${fieldName}.career`);
+  const year = getIn(values, `${fieldName}.year`);
+  const university = getIn(values, `${fieldName}.university`);
+  const options = createSubjectOptions(useSelector((state) => subjects(state, university, career, year)));
 
   const handleChange = useCallback((subject) => {
     setFieldValue(name, subject);

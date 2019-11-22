@@ -36,10 +36,9 @@ export default function NewRequestPage(props) {
   const submitRequest = useCallback((subjectOriginId, subjectUnqId) => {
     const request = {
       fileNumber: file.fileNumber,
-      subjectOriginIds: subjectOriginId,
+      subjectOrigins: subjectOriginId,
       subjectUnqId,
       type: isInternal ? 'interna' : 'externa',
-      yearOfApprovall: '2016',
     };
     dispatch(createRequest(request));
   }, [dispatch, file, isInternal]);
