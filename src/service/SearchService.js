@@ -15,6 +15,8 @@ const getConfig = () => ({
 const API = {
   searchMailsFromUsers: () => axios.get(`${port}/mails`, getConfig())
     .catch((error) => { if (error.response.status === 450) { logout(); } throw error; }),
+  getLetter: (fileId) => axios.get(`${port}/letter/${fileId}`, getConfig())
+    .catch((error) => { if (error.response.status === 450) { logout(); } throw error; }),
 };
 
 export default API;

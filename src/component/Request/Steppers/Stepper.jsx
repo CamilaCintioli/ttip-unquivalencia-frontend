@@ -39,6 +39,8 @@ export default function HorizontalNonLinearStepper({
         return <CloseIcon color="error" />;
       case 'CONSULTA':
         return <SupervisedUserCircleIcon color="secondary" />;
+      case 'GIRADA':
+        return <CheckCircleIcon color="primary" />;
       default:
         return <CheckBoxOutlineBlankIcon color="primary" />;
     }
@@ -49,16 +51,14 @@ export default function HorizontalNonLinearStepper({
   const getId = (request) => (level === 1 ? request.requestId : request.subjectId);
 
   return (
-    <div className={classes.root}>
-      <Stepper nonLinear activeStep={activeStep}>
-        {map(requests, (request, index) => (
-          <Step key={index}>
-            <StepButton onClick={handleStep(getId(request))} completed icon={getIcon(request.equivalence)}>
-              {getName(request)}
-            </StepButton>
-          </Step>
-        ))}
-      </Stepper>
-    </div>
+    <Stepper className="border border-success" nonLinear activeStep={activeStep}>
+      {map(requests, (request, index) => (
+        <Step key={index}>
+          <StepButton onClick={handleStep(getId(request))} completed icon={getIcon(request.equivalence)}>
+            {getName(request)}
+          </StepButton>
+        </Step>
+      ))}
+    </Stepper>
   );
 }

@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-indent-props */
 import React, { useState } from 'react';
 import {
-  Button, Grid, Container,
+  Button,
 } from '@material-ui/core';
 import { shape, string, func } from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,11 +11,12 @@ import MenuItem from '@material-ui/core/MenuItem';
 import UniversitySubjectData from './UniversitySubjectData';
 import Dialogo from './dialogo';
 import RejectDialog from './RejectDialog';
-import SubjectInformationDisplay from './SubjectInformationDisplay';
 
 
 export default function RequestDisplay({
-  request, onEquivalenceGiven, onEquivalenceDenied, onEquivalenceConsulted, showConsultAndDelegateButton, showActionButtons, onEquivalenceDelegated,
+  request, onEquivalenceGiven, onEquivalenceDenied,
+  onEquivalenceConsulted, showConsultAndDelegateButton,
+  showActionButtons, onEquivalenceDelegated,
 }) {
   const { unqSubject, originSubject } = request;
   const classes = useStyles();
@@ -119,9 +121,9 @@ function DelegateButton({ delegateEquivalence }) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={() => handleClickItem('Idiomas')}>Idiomas</MenuItem>
-        <MenuItem onClick={() => handleClickItem('Matemáticas')}> Matemáticas</MenuItem>
-        <MenuItem onClick={() => handleClickItem('Sociales')}> Sociales</MenuItem>
+        <MenuItem onClick={() => handleClickItem('Gira a la Coordinación de Idiomas')}>Idiomas</MenuItem>
+        <MenuItem onClick={() => handleClickItem('Gira a la Coordinación de Ciclo Introductorio')}>Ciclo Introductorio</MenuItem>
+        <MenuItem onClick={() => handleClickItem('Gira a la Coordinación del Área Matemática')}>Área Matemática</MenuItem>
 
       </Menu>
     </div>

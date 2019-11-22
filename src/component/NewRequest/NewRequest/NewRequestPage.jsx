@@ -53,9 +53,14 @@ export default function NewRequestPage(props) {
   }, [dispatch]);
 
   return (
-    <>
-      <div className={classes.studentData}>
-        {file
+    <div className="row">
+      <div className="col-4">
+        <h3>
+            Datos adicionales
+        </h3>
+        <hr />
+        <div className={classes.studentData}>
+          {file
 
       && (
       <StudentDataDisplay
@@ -67,25 +72,31 @@ export default function NewRequestPage(props) {
         yearNote={file.yearNote}
       />
       )}
+        </div>
       </div>
-      <div className={classes.studentData}>
-        <Selector
-          options={[{ label: 'Interna', value: true }, { label: 'Externa', value: false }]}
-          placeholder="Seleccione una forma de equivalencia"
-          onChange={setEquivalenceMode}
-        />
-      </div>
+      <div className="col-8">
+        <h3>
+            Nueva solicitud
+        </h3>
+        <hr />
+        <div className={classes.studentData}>
+          <Selector
+            options={[{ label: 'Interna', value: true }, { label: 'Externa', value: false }]}
+            placeholder="Seleccione una forma de equivalencia"
+            onChange={setEquivalenceMode}
+          />
+        </div>
 
-      { showForm
+        { showForm
       && (
         <>
-          {isInternal ? <InternalRequestForm onSubmit={submitRequest} /> : <ExternalRequestForm onSubmit={submitRequest} />}
-          <CreateSubjectDialog onSubmit={submitSubject} />
+          {isInternal ? <InternalRequestForm onSubmit={submitRequest} onSubmit2={submitSubject} /> : <ExternalRequestForm onSubmit={submitRequest} onSubmit2={submitSubject} />}
         </>
       )}
-
+      </div>
+      <CreateSubjectDialog onSubmit={submitSubject} />
       <FeedbackBar />
-    </>
+    </div>
   );
 }
 
@@ -95,8 +106,41 @@ function StudentDataDisplay({
 }) {
   const classes = useStyles();
   return (
-    <>
-      <Paper className={classes.root}>
+
+    <div className="card w-100">
+      <ul className="list-group list-group-flush">
+        <li className="list-group-item">
+          <b>Numero de expediente: </b>
+          {fileNumber}
+          {' '}
+        </li>
+        <li className="list-group-item">
+          <b>Nombre: </b>
+          {name}
+          {' '}
+        </li>
+        <li className="list-group-item">
+          <b>Apellido: </b>
+          {surname}
+        </li>
+        {mail && (
+          <li className="list-group-item">
+            <b>Mail: </b>
+            {mail}
+          </li>
+        )}
+        {dni && (
+          <li className="list-group-item">
+            <b>DNI: </b>
+            {dni}
+          </li>
+        )}
+        <li className="list-group-item">
+          <b>Año de nota:</b>
+          {yearNote}
+        </li>
+      </ul>
+      {/* <Paper className={classes.root}>
         <Typography variant="h6" gutterBottom>
                     Numero de expediente:
           {fileNumber}
@@ -125,7 +169,7 @@ function StudentDataDisplay({
                     Año de nota:
           {yearNote}
         </Typography>
-      </Paper>
-    </>
+      </Paper> */}
+    </div>
   );
 }

@@ -8,20 +8,21 @@ import { map, isEmpty } from 'lodash';
 const resolution = ({ subjectsToApprove, requestsTotalMatchApproved }) => (
   isEmpty(subjectsToApprove) ? isEmpty(requestsTotalMatchApproved)
     ? (
-      <h1><span className="badge badge-pill badge-info">No coincide los planes</span></h1>
+      <h1><span className="badge badge-pill badge-info">Match Parcial</span></h1>
     ) : (
-      <h1><span className="badge badge-pill badge-success">Coincide</span></h1>
+      <h1><span className="badge badge-pill badge-success">Match Total</span></h1>
     )
     : (
       <div className="card text-white bg-danger mb-3">
         <div className="card-body">
-          <h4><b>Falta:</b></h4>
+          <h4><b>Requiere estas materias</b></h4>
+          <hr />
           {map(subjectsToApprove, (name) => (
-            <p className="card-text">
+            <h6 className="card-text text-center">
               <b>
                 {name}
               </b>
-            </p>
+            </h6>
           ))}
         </div>
       </div>

@@ -12,6 +12,7 @@ import SubjectUnqSelector from './NewRequestFormFields/SubjectUnqSelector';
 import ExternalSubjectsFieldArray from './NewRequestFormFields/SubjectsFieldArray';
 import FieldDependency from './NewRequestFormFields/FieldDependency';
 import useStyles from './style';
+import CreateSubjectDialog from '../CreateSubjectDialog';
 
 const validateExternalForm = Yup.object().shape({
   origin: Yup.object().shape({
@@ -26,7 +27,7 @@ const validateExternalForm = Yup.object().shape({
   }),
 });
 
-export default function ExternalForm({ onSubmit }) {
+export default function ExternalForm({ onSubmit, onSubmit2 }) {
   const classes = useStyles();
   const handleSubmit = useCallback((values) => {
     const originIds = values.origin.subjects.map((subject) => ({ ...subject, id: subject.id.id }));
@@ -57,6 +58,7 @@ export default function ExternalForm({ onSubmit }) {
         <Field name="unq" component={SubjectUnqSelector} />
 
         <Button className={classes.button} color="primary" variant="contained" type="submit">Crear solicitud</Button>
+        
       </Form>
     </Formik>
   );
