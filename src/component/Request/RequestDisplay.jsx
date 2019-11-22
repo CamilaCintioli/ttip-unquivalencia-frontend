@@ -123,9 +123,9 @@ function DelegateButton({ delegateEquivalence }) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={() => handleClickItem('Idiomas')}>Idiomas</MenuItem>
-        <MenuItem onClick={() => handleClickItem('Matemáticas')}> Matemáticas</MenuItem>
-        <MenuItem onClick={() => handleClickItem('Sociales')}> Sociales</MenuItem>
+        <MenuItem onClick={() => handleClickItem('Gira a la Coordinación de Idiomas')}>Idiomas</MenuItem>
+        <MenuItem onClick={() => handleClickItem('Gira a la Coordinación de Ciclo Introductorio')}>Ciclo Introductorio</MenuItem>
+        <MenuItem onClick={() => handleClickItem('Gira a la Coordinación del Área Matemática')}>Área Matemática</MenuItem>
 
       </Menu>
     </div>
