@@ -40,30 +40,37 @@ export default function NewFilePage() {
   });
 
   return (
-    <Formik
-      initialValues={{
-        file: {
-          fileNumber: '',
-          name: '',
-          surname: '',
-          mail: '',
-          dni: '',
-          universityOrigin: '',
-          yearNote: '',
-          requests: [],
-        },
-      }}
-      onSubmit={({ file }) => submitFile(file)}
-      validationSchema={validateFile}
-    >
-
-      <Form>
+    <div className="card text-center">
+      <div className="card-body">
         <Typography variant="h4">Nuevo expediente</Typography>
-        <Field name="file" component={StudentField} />
-        <Button color="primary" variant="contained" type="submit">Crear expediente</Button>
-        <FeedbackBar />
-      </Form>
-    </Formik>
+        <hr />
+        <Formik
+          initialValues={{
+            file: {
+              fileNumber: '',
+              name: '',
+              surname: '',
+              mail: '',
+              dni: '',
+              universityOrigin: '',
+              yearNote: '',
+              requests: [],
+            },
+          }}
+          onSubmit={({ file }) => submitFile(file)}
+          validationSchema={validateFile}
+          className="justify-content-md-center"
+        >
+
+          <Form className="form align-items-center">
+            <Field name="file" component={StudentField} />
+            <hr />
+            <Button color="primary" variant="contained" type="submit">Crear expediente</Button>
+            <FeedbackBar />
+          </Form>
+        </Formik>
+      </div>
+    </div>
   );
 }
 

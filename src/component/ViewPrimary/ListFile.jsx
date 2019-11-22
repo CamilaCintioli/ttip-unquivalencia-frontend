@@ -1,10 +1,15 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable max-len */
+/* eslint-disable react/prop-types */
 /* eslint-disable radix */
 /* eslint-disable jsx-a11y/iframe-has-title */
 /* eslint-disable react/react-in-jsx-scope */
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import MaterialTable from 'material-table';
 import JsPDF from 'jspdf';
 import columnsFile from './columnsFile';
+import DeleteFileDialog from '../Dialogs/DeleteFileDialog';
+import DuplicateFileDialog from '../Dialogs/DuplicateFileDialog';
 import 'jspdf-autotable';
 import Api from '../../service/SearchService';
 
@@ -298,16 +303,24 @@ const generateLetter = (rowData) => Api.getLetter(rowData.id).then(({ data: file
     columns: [{ header: 'Institución de origen', dataKey: 'universityOrigin' },
       { header: 'Asignatura de origen', dataKey: 'subjectOrigin' },
       { header: 'Año de aprobación', dataKey: 'yearOfApproval' },
-      { header: 'Plan de estudios', dataKey: 'yearPlanOrigin' },
       { header: 'Asignatura solicitada en UNQ', dataKey: 'subjectUnq' },
       { header: 'Carga horaria semanal', dataKey: 'semanalUnq' },
       { header: 'Carga horaria total', dataKey: 'totalUnq' },
       { header: 'Núcleo', dataKey: 'core' },
-      { header: 'Plan de estudios UNQ', dataKey: 'yearPlanUnq' },
-      { header: 'Core UNQ', dataKey: 'coreUnq' },
+      { header: 'Créditos', dataKey: 'creditsUnq' },
       { header: 'Resolución del Director', dataKey: 'equivalence' },
       { header: 'Observación', dataKey: 'observations' }],
     startY: 350,
+    theme: 'plain',
+    styles: {
+      lineWidth: 0.01,
+      lineColor: 0,
+      fillStyle: 'DF',
+      halign: 'center',
+      valign: 'middle',
+      columnWidth: 'auto',
+      overflow: 'linebreak',
+    },
     margin: { top: 110 },
     showHead: 'firstPage',
     rowPageBreak: 'avoid',
@@ -315,7 +328,7 @@ const generateLetter = (rowData) => Api.getLetter(rowData.id).then(({ data: file
     didDrawPage: (data) => {
       pdf.addImage(dataImgHeader, 'png', 40, 20, 500, 0);
       if (parseInt(data.pageNumber) === 1) {
-        pdf.text('Bernal, 17 de julio de 2019', 370, 118);
+        pdf.text(`Bernal, ${file.currentDate}`, 370, 118);
         pdf.text(`
         Al Director de la 
         Dirección de Alumnos de la
@@ -325,7 +338,7 @@ const generateLetter = (rowData) => Api.getLetter(rowData.id).then(({ data: file
           Me dirijo a usted por la presente en relación al expediente de equivalencias
           número ${file.fileNumber},
           solicitud del estudiante ${file.name} ${file.surname}, 
-          legajo ${file.dni}. 
+          legajo ${file.legajo}. 
           Es resolución de esta Dirección otorgar o rechazar las equivalencias de las 
           materias del área según el cuadro anexo al final del documento.  
           Sin ningún otro particular, me despido de usted atentamente.
@@ -334,59 +347,83 @@ const generateLetter = (rowData) => Api.getLetter(rowData.id).then(({ data: file
     },
   });
 
-  return pdf.save('test.pdf');
+  return pdf.save('test.odt');
 });
 
 const ListFile = ({
   files, handleSearch, addRequest, checkAdmin, checkLetter,
-}) => (
+}) => {
+  const [deletingFile, setDeletingFile] = useState();
 
-  <MaterialTable
-    title="Expedientes"
-    columns={columnsFile}
-    data={files}
-    options={{
-      search: false,
-      pageSize: 10,
-    }}
+  const openDeleteDialog = useCallback((_, file) => {
+    setDeletingFile(file);
+  }, []);
 
-    actions={[
-      {
-        icon: 'search',
-        tooltip: 'buscador solicitud',
-        onClick: (event, rowData) => {
-          handleSearch(rowData.id, rowData.fileNumber);
-        },
-      },
-      {
-        icon: 'add_circle',
-        hidden: !checkAdmin,
-        tooltip: 'agregar solicitud',
-        onClick: (event, rowData) => {
-          addRequest(rowData.fileNumber);
-        },
-      },
-      {
-        icon: 'file_copy',
-        hidden: !checkAdmin,
-        tooltip: 'Duplicar expediente',
-        onClick: (event, rowData) => { },
-      },
-      (rowData) => ({
-        icon: 'send',
-        hidden: !checkLetter(rowData.status),
-        tooltip: 'Crear carta',
-        onClick: () => generateLetter(rowData),
-      }),
-      (rowData) => ({
-        icon: 'delete',
-        tooltip: 'Delete User',
-        onClick: (event) => alert(`You want to delete ${rowData.name}`),
-        hidden: !checkAdmin,
-      }),
-    ]}
-  />
+  const onClose = useCallback(() => {
+    setDeletingFile(null);
+  }, []);
 
-);
+  const [duplicatingFile, setDuplicatingFile] = useState();
+
+  const openDuplicateDialog = useCallback((_, file) => {
+    setDuplicatingFile(file);
+  }, []);
+
+  const onCloseDuplicateDialog = useCallback(() => {
+    setDuplicatingFile(null);
+  }, []);
+
+  return (
+    <>
+      <DeleteFileDialog file={deletingFile} isOpen={!!deletingFile} onClose={onClose} />
+      <DuplicateFileDialog file={duplicatingFile} isOpen={!!duplicatingFile} onClose={onCloseDuplicateDialog} />
+      <MaterialTable
+        title="Expedientes"
+        columns={columnsFile}
+        data={files}
+        options={{
+          search: false,
+          paging: false,
+        }}
+
+        actions={[
+          {
+            icon: 'search',
+            tooltip: 'buscador solicitud',
+            onClick: (event, rowData) => {
+              handleSearch(rowData.id, rowData.fileNumber);
+            },
+          },
+          {
+            icon: 'add_circle',
+            hidden: !checkAdmin,
+            tooltip: 'agregar solicitud',
+            onClick: (event, rowData) => {
+              addRequest(rowData.fileNumber);
+            },
+          },
+          (rowData) => ({
+            icon: 'file_copy',
+            hidden: !checkAdmin,
+            tooltip: 'Duplicar expediente',
+            onClick: openDuplicateDialog,
+          }),
+          (rowData) => ({
+            icon: 'send',
+            hidden: !checkLetter(rowData.status),
+            tooltip: 'Crear carta',
+            onClick: () => generateLetter(rowData),
+          }),
+          (rowData) => ({
+            icon: 'delete',
+            tooltip: 'Borrar expediente',
+            onClick: openDeleteDialog,
+            hidden: !checkAdmin,
+          }),
+        ]}
+      />
+    </>
+  );
+};
 
 export default ListFile;

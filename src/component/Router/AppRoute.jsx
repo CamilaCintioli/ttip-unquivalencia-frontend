@@ -3,7 +3,7 @@ import React from 'react';
 import SignIn from '../SingIn/SignIn';
 import PrivateRoute from './PriavateRoute';
 import PublicRoute from './PublicRoute';
-import routes from './route';
+import routes from '../../app.route';
 
 const privates = (isAuthenticated) => (
   routes.map(({ path, _component }, i) => (

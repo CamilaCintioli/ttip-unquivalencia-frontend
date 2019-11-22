@@ -7,6 +7,8 @@ import Button from '@material-ui/core/Button';
 import * as Yup from 'yup';
 import { makeStyles } from '@material-ui/core/styles';
 import SubjectSelector from './SubjectSelector';
+import CreateSubjectDialog from './CreateSubjectDialog';
+
 
 const validateExternalRequest = Yup.object().shape({
   subjectOriginIds: Yup.string().required('Por favor ingrese una materia'),
@@ -23,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function ExternalRequestForm({ onSubmit }) {
+export default function ExternalRequestForm({ onSubmit, onSubmit2 }) {
   const classes = useStyles();
   return (
     <Formik
@@ -38,8 +40,14 @@ export default function ExternalRequestForm({ onSubmit }) {
         </div>
         <h5>Seleccione una materia de la Universidad Nacional de Quilmes</h5>
         <Field name="subjectUnqId" component={SubjectSelector} />
-        <div className={classes.button}>
-          <Button color="primary" variant="contained" type="submit"> Cargar solicitud</Button>
+        <hr />
+        <div className="row">
+          <div className="col-6">
+            <Button color="primary" variant="contained" type="submit"> Cargar solicitud</Button>
+          </div>
+          <div className="col-6">
+            <CreateSubjectDialog onSubmit={onSubmit2} />
+          </div>
         </div>
       </Form>
     </Formik>

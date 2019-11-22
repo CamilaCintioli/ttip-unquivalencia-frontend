@@ -21,16 +21,18 @@ const Requests = ({
           sets={sets}
           changeStep={changeStep}
           requestsStepper={requestsStepper}
+          equivalence={request.equivalence}
         />
       )
       : null}
+    <hr />
     {requestsMatch ? (
       <div className="row justify-content-md-center col 1">
         { isEmpty(requestsMatch.requestsMatch) ? <Match requestMatch={requestsMatch} />
           : (
             <>
               <p>
-                <a className="btn btn-primary btn-lg" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Historial</a>
+                <a className="btn btn-outline-success btn-lg btn-block" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Historial</a>
               </p>
               <div className="row">
                 <div className="col">
