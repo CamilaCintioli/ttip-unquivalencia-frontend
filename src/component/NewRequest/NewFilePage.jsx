@@ -23,6 +23,7 @@ const validateFile = Yup.object().shape({
     mail: Yup.string().email('El email debe ser válido'),
     dni: Yup.string().matches(/(0|1|2|3|4|5|6|7|8|9)/, { message: 'Solo números', excludeEmptyString: true }),
     yearNote: Yup.string().required('Por favor ingrese el año de la nota'),
+    legajo: Yup.string().required('Por favor introduzca el número de legajo'),
   }),
 });
 
@@ -49,6 +50,7 @@ export default function NewFilePage() {
           mail: '',
           dni: '',
           yearNote: '',
+          legajo: '',
         },
       }}
       onSubmit={({ file }) => submitFile(file)}
@@ -69,7 +71,7 @@ function StudentField({ field: { name } }) {
   return (
     <>
       <div className="studentForm">
-        <Field name={`${name}.fileNumber`} component={TextField} label="Nro de expediente" />
+        <Field name={`${name}.fileNumber`} component={TextField} label="Número de expediente" />
         <div className="error"><ErrorMessage name={`${name}.fileNumber`} /></div>
         <Field name={`${name}.name`} component={TextField} label="Nombre" />
         <div className="error"><ErrorMessage name={`${name}.name`} /></div>
@@ -81,6 +83,8 @@ function StudentField({ field: { name } }) {
         <div className="error"><ErrorMessage name={`${name}.dni`} /></div>
         <Field name={`${name}.yearNote`} component={TextField} label="Año de la nota" />
         <div className="error"><ErrorMessage name={`${name}.yearNote`} /></div>
+        <Field name={`${name}.legajo`} component={TextField} label="Número de legajo" />
+        <div className="error"><ErrorMessage name={`${name}.legajo`} /></div>
       </div>
     </>
   );
