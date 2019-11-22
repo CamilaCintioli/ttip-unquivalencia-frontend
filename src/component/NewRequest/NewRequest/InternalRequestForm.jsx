@@ -1,48 +1,39 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import {
-  Formik, Form, Field, getIn, connect, ErrorMessage,
+  Formik, Form, Field, FieldArray,
 } from 'formik';
 import { Button } from '@material-ui/core';
 import * as Yup from 'yup';
-import { makeStyles } from '@material-ui/core/styles';
-import UniversitySelector from './NewRequestFormSelectors/UniversitySelector';
 import { UnqCareerSelector } from './NewRequestFormSelectors/CareerSelector';
 import YearSelector from './NewRequestFormSelectors/YearSelector';
-import SubjectSelector from './NewRequestFormSelectors/SubjectSelector';
-import SubjectMultiSelector from './NewRequestFormSelectors/SubjectMultiSelector';
 import { Selector } from '../Selectors/Selector';
-
+import SubjectUnqSelector from './NewRequestFormFields/SubjectUnqSelector';
+import InternalSubjectsFieldArray from './NewRequestFormFields/SubjectsFieldArray';
+import FieldDependency from './NewRequestFormFields/FieldDependency';
+import useStyles from './style';
 
 const validateInternalForm = Yup.object().shape({
   origin: Yup.object().shape({
-    subjects: Yup.array().required('Por favor selecciona al menos una materia').nullable(),
+    subjects: Yup.array().of(Yup.object().shape({
+      id: Yup.object().required('Por favor selecciona una materia'),
+      yearOfApproval: Yup.string().required('Por favor complete el año de aprobación'),
+      mark: Yup.string().notRequired(),
+    })).required('Por favor agregue al menos una materia'),
   }),
   unq: Yup.object().shape({
     subject: Yup.object().required('Por favor selecciona una materia').nullable(),
   }),
 });
 
-const useStyles = makeStyles((theme) => ({
-  button: {
-    marginTop: theme.spacing(3),
-    marginButton: theme.spacing(3),
-  },
-  selector: {
-    marginBottom: theme.spacing(5),
-  },
-  error: {
-    color: 'red',
-  },
 
-}));
-
-export default function InternalForm({ onSubmit }) {
+export default function InternalForm() {
   const classes = useStyles();
   const handleSubmit = useCallback((values) => {
-    const originIds = values.origin.subjects.map((option) => option.value);
-    onSubmit(originIds, values.unq.subject.id);
-  }, [onSubmit]);
+    // const originIds = values.origin.subjects.map((option) => option.value);
+    // onSubmit(originIds, values.unq.subject.id);
+    console.log(values);
+  }, []);
   return (
     <Formik
       initialValues={{
@@ -51,6 +42,7 @@ export default function InternalForm({ onSubmit }) {
           career: '',
           year: '',
           subjects: [],
+          pepita: [],
         },
         unq: {
           university: 'UNQ', career: '', year: '', subject: '',
@@ -73,56 +65,16 @@ export default function InternalForm({ onSubmit }) {
   );
 }
 
-const FieldDependency = connect(({
-  formik: { values, setFieldValue },
-  field,
-  dependsOn,
-}) => {
-  const [isFirstRender, setFirstRender] = useState(true);
-
-  useEffect(() => {
-    if (isFirstRender) {
-      setFirstRender(false);
-    } else {
-      setFieldValue(field, null);
-    }
-  }, [setFieldValue, getIn(values, dependsOn), field, isFirstRender]);
-
-  return false;
-});
-
 function SubjectOriginSelector({ field: { name } }) {
-  const classes = useStyles();
   return (
     <>
       <Selector defaultOption={{ label: 'UNQ', value: 'UNQ' }} disable />
       <Field name={`${name}.career`} component={UnqCareerSelector} />
       <Field name={`${name}.year`} component={YearSelector} />
-      <Field name={`${name}.subjects`} component={SubjectMultiSelector} />
-      <div className={classes.error}>
-        <ErrorMessage name={`${name}.subjects`} />
-      </div>
+      <FieldArray name={`${name}.subjects`} component={InternalSubjectsFieldArray} />
       <FieldDependency field={`${name}.career`} dependsOn={`${name}.university`} />
       <FieldDependency field={`${name}.year`} dependsOn={`${name}.career`} />
       <FieldDependency field={`${name}.subjects`} dependsOn={`${name}.year`} />
-    </>
-  );
-}
-
-function SubjectUnqSelector({ field: { name } }) {
-  const classes = useStyles();
-  return (
-    <>
-      <Field name={`${name}.university`} component={UniversitySelector} />
-      <Field name={`${name}.career`} component={UnqCareerSelector} />
-      <Field name={`${name}.year`} component={YearSelector} />
-      <Field name={`${name}.subject`} component={SubjectSelector} />
-      <div className={classes.error}>
-        <ErrorMessage name={`${name}.subject`} />
-      </div>
-      <FieldDependency field={`${name}.career`} dependsOn={`${name}.university`} />
-      <FieldDependency field={`${name}.year`} dependsOn={`${name}.career`} />
-      <FieldDependency field={`${name}.subject`} dependsOn={`${name}.year`} />
     </>
   );
 }
