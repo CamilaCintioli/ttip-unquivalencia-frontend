@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 import TextField from '../Fields/TextField';
 import useStyles from './style';
 import { userError } from '../../redux/selectors';
+import { Link } from '@material-ui/core';
 
 
 const validateSignUp = Yup.object().shape({
@@ -77,6 +78,9 @@ export default function SignIn({ onLogin }) {
               >
               Sign In
               </Button>
+              <Link href="/recuperar-contraseña">
+                ¿Olvidaste tu contraseña?
+              </Link>
             </Form>
           </div>
         </Container>
