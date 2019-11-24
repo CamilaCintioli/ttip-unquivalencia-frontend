@@ -6,6 +6,9 @@ const useStyles = makeStyles(() => ({
     width: '100%',
     textAlign: 'center',
   },
+  error: {
+    color: 'red',
+  },
 }));
 
 export default useStyles;
