@@ -15,6 +15,7 @@ import TextField from '../Fields/TextField';
 import useStyles from './style';
 import { userError } from '../../redux/selectors';
 import ErrorMessage from '../Error/ErrorFormMessage';
+import PasswordField from '../Fields/PasswordField';
 
 
 const validateSignUp = Yup.object().shape({
@@ -68,7 +69,7 @@ export default function SignIn({ onLogin }) {
             <Form className={classes.form} noValidate>
               <Field name="email" component={TextField} label="Email" variant="outlined" fullWidth margin="normal" />
               {showMailErrorMessages()}
-              <Field name="password" component={TextField} label="Password" variant="outlined" type="password" fullWidth margin="normal" />
+              <Field name="password" component={PasswordField} label="Password" variant="outlined" fullWidth margin="normal" />
               {showPasswordErrorMessages()}
               <Button
                 fullWidth
