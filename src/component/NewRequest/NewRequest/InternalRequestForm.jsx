@@ -27,13 +27,12 @@ const validateInternalForm = Yup.object().shape({
 });
 
 
-export default function InternalForm() {
+export default function InternalForm({ onSubmit }) {
   const classes = useStyles();
   const handleSubmit = useCallback((values) => {
-    // const originIds = values.origin.subjects.map((option) => option.value);
-    // onSubmit(originIds, values.unq.subject.id);
-    console.log(values);
-  }, []);
+    const originIds = values.origin.subjects.map((subject) => ({ ...subject, id: subject.id.id }));
+    onSubmit(originIds, values.unq.subject.id);
+  }, [onSubmit]);
   return (
     <Formik
       initialValues={{
@@ -42,7 +41,6 @@ export default function InternalForm() {
           career: '',
           year: '',
           subjects: [],
-          pepita: [],
         },
         unq: {
           university: 'UNQ', career: '', year: '', subject: '',

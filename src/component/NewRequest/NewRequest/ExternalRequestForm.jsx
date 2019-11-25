@@ -32,7 +32,7 @@ export default function ExternalForm({ onSubmit, onSubmit2 }) {
   const handleSubmit = useCallback((values) => {
     const originIds = values.origin.subjects.map((subject) => ({ ...subject, id: subject.id.id }));
     onSubmit(originIds, values.unq.subject.id);
-  }, []);
+  }, [onSubmit]);
   return (
     <Formik
       initialValues={{
