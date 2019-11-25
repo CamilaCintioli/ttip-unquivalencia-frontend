@@ -15,7 +15,7 @@ const ROUTES = [
     { path: '/usuarios', _component: User },
     { path: '/file/:fileId/request/new', _component: NewRequestPage },
     { path: '/password', _component: UpdatePasswordForm },
-    { path: '/buscador/solicitudes', _component: SearchRequest },
+    { path: '/solicitudes', _component: SearchRequest },
 
 ];
 
