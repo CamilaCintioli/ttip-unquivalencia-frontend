@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { Formik, Form, Field } from 'formik';
 import Button from '@material-ui/core/Button';
 import * as Yup from 'yup';
+import { Typography, Link } from '@material-ui/core';
 import TextField from '../Fields/TextField';
 import useStyles from './style';
 import apiCall from '../../redux/api';
@@ -9,14 +10,14 @@ import ErrorMessage from '../Error/ErrorFormMessage';
 import FeedbackBar, { openSnackbar } from '../Dashboard/FeedbackBar';
 
 export default function ResetPasswordPage() {
-  const [showVerifyEmail, setShowVerifyEmail] = useState(true);
+  const [showVerifyEmail, setShowVerifyEmail] = useState(false);
   const nextForm = useCallback(() => {
     setShowVerifyEmail(false);
   }, []);
   return (
     <>
       {showVerifyEmail && <VerifyEmailForm next={nextForm} />}
-      {!showVerifyEmail && <ResetPassword />}
+      {!showVerifyEmail && <ResetPasswordForm />}
       <FeedbackBar />
     </>
   );
@@ -62,6 +63,8 @@ export function VerifyEmailForm({ next }) {
     >
       <Form>
         <div className={classes.paper}>
+          <Typography variant="h5">Reestablece tu contraseña</Typography>
+          <Typography variant="caption">Se te enviará un correo electronico con el código a ingresar</Typography>
           <Field
             component={TextField}
             name="email"
@@ -88,8 +91,9 @@ const validateResetPasswordForm = Yup.object().shape({
   code: Yup.string().required('Por favor ingrese el código'),
 });
 
-function ResetPassword() {
+function ResetPasswordForm() {
   const classes = useStyles();
+  const [showSuccessInfo, setShowSuccessInfo] = useState(false);
   return (
     <Formik
       initialValues={{ email: '', code: '' }}
@@ -97,7 +101,7 @@ function ResetPassword() {
       onSubmit={(values, setFieldError) => {
         const { email, code } = values;
         apiCall('/password/code', { email, code }, null, 'POST', null)
-          .then(() => openSnackbar('Se le ha enviado una nueva contraseña a su correo', 'success'))
+          .then(() => setShowSuccessInfo(true))
           .catch((error) => {
             handleErrors(error.response.data, setFieldError.setFieldError);
           });
@@ -105,6 +109,8 @@ function ResetPassword() {
     >
       <Form>
         <div className={classes.paper}>
+          <Typography variant="h5">Reestablece tu contraseña</Typography>
+          <Typography variant="caption">Ingresa el código que recibiste por correo.</Typography>
           <Field
             component={TextField}
             name="email"
@@ -121,7 +127,15 @@ function ResetPassword() {
             margin="normal"
           />
           <ErrorMessage name="code" />
-          <Button color="primary" variant="contained" type="submit">Ingresa</Button>
+          <Button color="primary" variant="contained" type="submit">Confirmar código</Button>
+          { showSuccessInfo
+          && (
+            <>
+              <Typography variant="caption">Te enviaremos una nueva contraseña para que puedas ingresar al sistema.</Typography>
+              <Typography variant="caption">Una vez en el sistema podés cambiarla.</Typography>
+              <Link href="/">Log in</Link>
+            </>
+          )}
         </div>
       </Form>
     </Formik>
