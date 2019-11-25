@@ -1,9 +1,13 @@
 /* eslint-disable react/react-in-jsx-scope */
 import React from 'react';
+import {
+  Route, Switch,
+} from 'react-router-dom';
 import SignIn from '../SingIn/SignIn';
 import PrivateRoute from './PriavateRoute';
 import PublicRoute from './PublicRoute';
-import routes from '../../app.route';
+import routes from '../../routes';
+import ResetPassword from '../SingIn/ResetPassword';
 
 const privates = (isAuthenticated) => (
   routes.map(({ path, _component }, i) => (
@@ -17,7 +21,8 @@ const privates = (isAuthenticated) => (
 );
 
 const AppRoute = ({ isAuthenticated, onLogin }) => (
-  <>
+  <Switch>
+    <Route path="/recuperar-contraseña" component={() => ResetPassword()} />
     {privates(isAuthenticated)}
     { !isAuthenticated ? (
       <PublicRoute
@@ -26,7 +31,7 @@ const AppRoute = ({ isAuthenticated, onLogin }) => (
         component={() => SignIn({ onLogin })}
       />
     ) : null}
-  </>
+  </Switch>
 );
 
 

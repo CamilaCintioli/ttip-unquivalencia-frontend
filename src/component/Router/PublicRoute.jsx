@@ -10,7 +10,7 @@ const PublicRoot = ({ component: Component, isAuthenticated, ...rest }) => (
     component={(props) => (!isAuthenticated ? (
       <Component {...props} />
     ) : (
-      <Redirect to="/" />
+      <Redirect to="/home" />
     ))}
   />
 );

@@ -3,9 +3,10 @@ import NewFilePage from './component/NewRequest/NewFilePage';
 import VieweRequests from './component/Request/ViewRequests';
 import Home from './component/Home/Home';
 import User from './component/UserView/User';
-import NewRequestPage from './component/NewRequest/NewRequestPage';
+import NewRequestPage from './component/NewRequest/NewRequest/NewRequestPage';
 import UpdatePasswordForm from './component/Dashboard/Navbar/UpdatePasswordForm';
 import SearchRequest from './component/SearchRequest/SearchRequest';
+
 
 const ROUTES = [
     { path: '/home', _component: Home },

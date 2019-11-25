@@ -4,40 +4,41 @@ import {
   Formik, Form, Field, ErrorMessage,
 } from 'formik';
 import Typography from '@material-ui/core/Typography';
-import './NewRequest.css';
+import './NewRequest/NewRequest.css';
 import Button from '@material-ui/core/Button';
 import * as Yup from 'yup';
+import { useHistory } from 'react-router-dom';
 import TextField from '../Fields/TextField';
 import API from '../../service/FileService';
 import FeedbackBar, { openSnackbar } from '../Dashboard/FeedbackBar';
 
-
 const validateFile = Yup.object().shape({
   file: Yup.object().shape({
     fileNumber: Yup.string()
-      .min(3, 'Too short')
-      .max(20, 'Too long')
-      .required('Required'),
-    name: Yup.string().required('Required'),
-    surname: Yup.string().required('Required'),
-    mail: Yup.string().email('Should be a valid email'),
-    dni: Yup.string().matches(/(0|1|2|3|4|5|6|7|8|9)/, { message: 'Numbers only', excludeEmptyString: true }),
-    universityOrigin: Yup.string().required('Required'),
-    yearNote: Yup.string().required('Required'),
+      .min(3, 'El número de expediente es muy corto')
+      .max(20, 'El número de expediente es muy largo')
+      .required('Por favor ingrese un número de expediente'),
+    name: Yup.string().required('Por favor ingrese el nombre'),
+    surname: Yup.string().required('Por favor ingrese el apellido'),
+    mail: Yup.string().email('El email debe ser válido'),
+    dni: Yup.string().matches(/(0|1|2|3|4|5|6|7|8|9)/, { message: 'Solo números', excludeEmptyString: true }),
+    yearNote: Yup.string().required('Por favor ingrese el año de la nota'),
+    legajo: Yup.string().required('Por favor introduzca el número de legajo'),
   }),
 });
 
 
 export default function NewFilePage() {
+  const history = useHistory();
   const submitFile = useCallback((file) => {
     API.newFile(file)
       .then(() => {
         const notification = { message: 'El expediente ha sido creado con exito', variant: 'success' };
         localStorage.setItem('notification', JSON.stringify(notification));
-        window.location.pathname = '/expediente';
+        history.push('/expediente');
       })
       .catch(() => openSnackbar('Hubo un problema. Intente cargar el expediente de nuevo', 'error'));
-  });
+  }, [history]);
 
   return (
     <div className="card text-center">
@@ -52,9 +53,8 @@ export default function NewFilePage() {
               surname: '',
               mail: '',
               dni: '',
-              universityOrigin: '',
               yearNote: '',
-              requests: [],
+              legajo: '',
             },
           }}
           onSubmit={({ file }) => submitFile(file)}
@@ -74,24 +74,24 @@ export default function NewFilePage() {
   );
 }
 
-function StudentField({ field: { name, value }, form: { setFieldValue } }) {
+function StudentField({ field: { name } }) {
   return (
     <>
       <div className="studentForm">
-        <Field name={`${name}.fileNumber`} component={TextField} label="Nro de expediente" />
-        <ErrorMessage name={`${name}.fileNumber`} />
+        <Field name={`${name}.fileNumber`} component={TextField} label="Número de expediente" />
+        <div className="error"><ErrorMessage name={`${name}.fileNumber`} /></div>
         <Field name={`${name}.name`} component={TextField} label="Nombre" />
-        <ErrorMessage name={`${name}.name`} />
+        <div className="error"><ErrorMessage name={`${name}.name`} /></div>
         <Field name={`${name}.surname`} component={TextField} label="Apellido" />
-        <ErrorMessage name={`${name}.surname`} />
+        <div className="error"><ErrorMessage name={`${name}.surname`} /></div>
         <Field name={`${name}.mail`} component={TextField} label="Mail" />
-        <ErrorMessage name={`${name}.mail`} />
+        <div className="error"><ErrorMessage name={`${name}.mail`} /></div>
         <Field name={`${name}.dni`} component={TextField} label="DNI" />
-        <ErrorMessage name={`${name}.dni`} />
-        <Field name={`${name}.universityOrigin`} component={TextField} label="Universidad de origen" />
-        <ErrorMessage name={`${name}.universityOrigin`} />
+        <div className="error"><ErrorMessage name={`${name}.dni`} /></div>
         <Field name={`${name}.yearNote`} component={TextField} label="Año de la nota" />
-        <ErrorMessage name={`${name}.yearNote`} />
+        <div className="error"><ErrorMessage name={`${name}.yearNote`} /></div>
+        <Field name={`${name}.legajo`} component={TextField} label="Número de legajo" />
+        <div className="error"><ErrorMessage name={`${name}.legajo`} /></div>
       </div>
     </>
   );
