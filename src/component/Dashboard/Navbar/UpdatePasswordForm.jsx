@@ -1,15 +1,15 @@
 import React, { useCallback } from 'react';
 import {
-  Formik, Form, Field, ErrorMessage,
+  Formik, Form, Field,
 } from 'formik';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
-import { useDispatch, useSelector } from 'react-redux';
-import { passwordError } from '../../../redux/selectors';
+import { useDispatch } from 'react-redux';
 import { changePassword } from '../../../redux/actions/user';
 import FeedbackBar from '../FeedbackBar';
 import PasswordField from '../../Fields/PasswordField';
+import ErrorMessage from '../../Error/ErrorFormMessage';
 
 function validateForm(form) {
   const errors = {};
@@ -45,23 +45,15 @@ const useStyles = makeStyles((theme) => ({
 export default function UpdatePasswordForm() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const errors = useSelector((state) => passwordError(state));
 
-  const updatePassword = useCallback((password, newPassword, confirmPassword) => {
+  const updatePassword = useCallback((password, newPassword, confirmPassword, setFieldError) => {
     dispatch(changePassword({
       password,
       newPassword,
       confirmPassword,
+      showError: setFieldError,
     }));
   }, [dispatch]);
-
-  const showPasswordErrorMessages = () => (
-    <div className={classes.error}>
-      {(errors.length !== 0 && errors.includes('Password incorrecto'))
-         && <Typography variant="body2">Contraseña incorrecta</Typography>}
-      <ErrorMessage name="password" />
-    </div>
-  );
 
   return (
     <>
@@ -69,7 +61,11 @@ export default function UpdatePasswordForm() {
       <Formik
         initialValues={{ password: '', newPassword: '', confirmPassword: '' }}
         validate={validateForm}
-        onSubmit={({ password, newPassword, confirmPassword }) => updatePassword(password, newPassword, confirmPassword)}
+        onSubmit={({
+          password,
+          newPassword,
+          confirmPassword,
+        }, setFieldError) => updatePassword(password, newPassword, confirmPassword, setFieldError.setFieldError)}
       >
         <Form className={classes.form}>
           <Field
@@ -77,19 +73,19 @@ export default function UpdatePasswordForm() {
             component={PasswordField}
             label="Contraseña"
           />
-          {showPasswordErrorMessages()}
+          <ErrorMessage name="password" />
           <Field
             name="newPassword"
             component={PasswordField}
             label="Nueva contraseña"
           />
-          <ErrorMessage name="newPassword" component="div" className={classes.error} />
+          <ErrorMessage name="newPassword" />
           <Field
             name="confirmPassword"
             component={PasswordField}
             label="Confirme su contraseña"
           />
-          <ErrorMessage name="confirmPassword" component="div" className={classes.error} />
+          <ErrorMessage name="confirmPassword" />
           <Button className={classes.submit} type="submit" color="primary" variant="contained">Cambiar contraseña</Button>
           <FeedbackBar />
         </Form>
