@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Formik, Form, Field, ErrorMessage,
+  Formik, Form, Field,
 } from 'formik';
 import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
@@ -10,19 +10,20 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import * as Yup from 'yup';
 import { useSelector } from 'react-redux';
+import { Link } from '@material-ui/core';
 import TextField from '../Fields/TextField';
 import useStyles from './style';
 import { userError } from '../../redux/selectors';
-import { Link } from '@material-ui/core';
+import ErrorMessage from '../Error/ErrorFormMessage';
 
 
 const validateSignUp = Yup.object().shape({
   email: Yup.string()
-    .email('Should be a valid email')
-    .required('Required'),
+    .email('Ingrese un email válido')
+    .required('Por favor ingrese un email'),
   password: Yup.string()
-    .min(8, 'Password must have al least 8 characters')
-    .required('Required'),
+    .min(8, 'La contraseña debe tener al menos 8 caracteres')
+    .required('Por favor ingrese su contraseña'),
 });
 
 
@@ -33,7 +34,7 @@ export default function SignIn({ onLogin }) {
   const showMailErrorMessages = () => (
     <div>
       {(loginErrors.length !== 0 && loginErrors[0].includes('inexistente'))
-         && <Typography variant="body2">Incorrect email</Typography>}
+         && <Typography variant="body2" color="error">El mail es incorrecto</Typography>}
       <ErrorMessage name="email" />
     </div>
   );
@@ -41,7 +42,7 @@ export default function SignIn({ onLogin }) {
   const showPasswordErrorMessages = () => (
     <div>
       {(loginErrors.length !== 0 && loginErrors[0].includes('Password'))
-         && <Typography variant="body2">Incorrect password</Typography>}
+         && <Typography variant="body2" color="error">La contraseña es incorrecta</Typography>}
       <ErrorMessage name="password" />
     </div>
   );
