@@ -9,11 +9,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import * as Yup from 'yup';
-import { useSelector } from 'react-redux';
 import { Link } from '@material-ui/core';
 import TextField from '../Fields/TextField';
 import useStyles from './style';
-import { userError } from '../../redux/selectors';
 import ErrorMessage from '../Error/ErrorFormMessage';
 import PasswordField from '../Fields/PasswordField';
 
@@ -29,34 +27,18 @@ const validateSignUp = Yup.object().shape({
 
 
 export default function SignIn({ onLogin }) {
-  const loginErrors = useSelector((state) => userError(state));
   const classes = useStyles();
-
-  const showMailErrorMessages = () => (
-    <div>
-      {(loginErrors.length !== 0 && loginErrors[0].includes('inexistente'))
-         && <Typography variant="body2" color="error">El mail es incorrecto</Typography>}
-      <ErrorMessage name="email" />
-    </div>
-  );
-
-  const showPasswordErrorMessages = () => (
-    <div>
-      {(loginErrors.length !== 0 && loginErrors[0].includes('Password'))
-         && <Typography variant="body2" color="error">La contraseña es incorrecta</Typography>}
-      <ErrorMessage name="password" />
-    </div>
-  );
 
   return (
     <Formik
       initialValues={{ email: '', password: '' }}
-      onSubmit={(values) => {
+      onSubmit={(values, setFieldError) => {
+        values.showError = setFieldError.setFieldError;
         onLogin(values);
       }}
       validationSchema={validateSignUp}
     >
-      {({ setFieldValue, values, errors }) => (
+      {() => (
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <div className={classes.paper}>
@@ -68,9 +50,9 @@ export default function SignIn({ onLogin }) {
             </Typography>
             <Form className={classes.form} noValidate>
               <Field name="email" component={TextField} label="Email" variant="outlined" fullWidth margin="normal" />
-              {showMailErrorMessages()}
+              <ErrorMessage name="email" />
               <Field name="password" component={PasswordField} label="Password" variant="outlined" fullWidth margin="normal" />
-              {showPasswordErrorMessages()}
+              <ErrorMessage name="password" />
               <Button
                 fullWidth
                 variant="contained"
