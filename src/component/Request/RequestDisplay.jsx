@@ -12,8 +12,6 @@ import UniversitySubjectData from './UniversitySubjectData';
 import Dialogo from './dialogo';
 import RejectDialog from './RejectDialog';
 
-const subjectPdfSrcDestination = 'http://clp.web.unq.edu.ar/wp-content/uploads/sites/110/2019/09/apuntes.pdf';
-const subjectPdfSrcOrigin = 'http://clp.web.unq.edu.ar/wp-content/uploads/sites/110/2019/09/practica4y5.pdf';
 
 export default function RequestDisplay({
   request, onEquivalenceGiven, onEquivalenceDenied,
@@ -31,14 +29,14 @@ export default function RequestDisplay({
               <UniversitySubjectData
                 university={originSubject.university}
                 subject={originSubject.subject}
-                subjectPdfSrc={subjectPdfSrcOrigin}
+                subjectPdfSrc={originSubject.url}
               />
             </div>
             <div className="col-12 ">
               <UniversitySubjectData
                 university={unqSubject.university}
                 subject={unqSubject.subject}
-                subjectPdfSrc={subjectPdfSrcDestination}
+                subjectPdfSrc={unqSubject.url}
               />
             </div>
           </div>

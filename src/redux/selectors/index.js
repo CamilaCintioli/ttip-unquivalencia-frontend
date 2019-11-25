@@ -23,3 +23,13 @@ export const stepper = (state) => get(state, 'stepper.stepperResult');
 export const userRole = (state) => get(state, 'user.userResult.user.role');
 
 export const passwordError = (state) => get(state, 'user.passwordError');
+
+export const universities = (state) => get(state, 'subject.universities');
+export const careers = (state) => get(state, 'subject.careers');
+export const yearPlans = (state) => get(state, 'subject.yearsPlan');
+
+export const subjects = (state, university, career, year) => {
+  const subjectsState = Object.values(get(state, 'subject.subjects'));
+  return subjectsState.filter((subject) => subject.university === university && subject.career === career
+  && subject.yearPlan === year);
+};

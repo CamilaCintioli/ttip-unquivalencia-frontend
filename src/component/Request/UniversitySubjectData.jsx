@@ -17,7 +17,7 @@ export default function UniversitySubjectData({ university, subject, subjectPdfS
           </p>
         </blockquote>
       </div>
-      <embed src={subjectPdfSrc} width="100%" height="500px" />
+      <embed src={subjectPdfSrc} width="640" height="480"></embed>
     </div>
 
 
