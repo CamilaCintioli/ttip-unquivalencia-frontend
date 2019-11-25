@@ -347,7 +347,7 @@ const generateLetter = (rowData) => Api.getLetter(rowData.id).then(({ data: file
     },
   });
 
-  return pdf.save('test.odt');
+  return pdf.save(`${file.yearNote}-EQV-${file.fileNumber}-${file.surname}-${file.name}.odt`);
 });
 
 const ListFile = ({
