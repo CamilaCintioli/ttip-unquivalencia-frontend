@@ -3,6 +3,7 @@ import { Formik, Form, Field } from 'formik';
 import Button from '@material-ui/core/Button';
 import * as Yup from 'yup';
 import { Typography, Link } from '@material-ui/core';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import TextField from '../Fields/TextField';
 import useStyles from './style';
 import apiCall from '../../redux/api';
@@ -47,18 +48,23 @@ const handleErrors = (errors, setFieldError) => {
 
 export function VerifyEmailForm({ next }) {
   const classes = useStyles();
+  const [loading, setLoading] = useState(false);
   return (
     <Formik
       initialValues={{ email: '' }}
       validationSchema={validateEmailForm}
       onSubmit={(values, setFieldError) => {
+        setLoading(true);
         const { email } = values;
         apiCall('/password/forgotten', { email }, null, 'POST', null)
           .then(() => {
+            setLoading(false);
             next();
           })
-
-          .catch((error) => handleErrors(error.response.data, setFieldError.setFieldError));
+          .catch((error) => {
+            setLoading(false);
+            handleErrors(error.response.data, setFieldError.setFieldError);
+          });
       }}
     >
       <Form>
@@ -77,8 +83,9 @@ export function VerifyEmailForm({ next }) {
             type="submit"
             color="primary"
             variant="contained"
+            disabled={loading}
           >
-Verificar email
+            {loading ? <CircularProgress size={24} /> : 'Verificar email'}
           </Button>
         </div>
       </Form>
@@ -94,15 +101,21 @@ const validateResetPasswordForm = Yup.object().shape({
 function ResetPasswordForm() {
   const classes = useStyles();
   const [showSuccessInfo, setShowSuccessInfo] = useState(false);
+  const [loading, setLoading] = useState(false);
   return (
     <Formik
       initialValues={{ email: '', code: '' }}
       validationSchema={validateResetPasswordForm}
       onSubmit={(values, setFieldError) => {
+        setLoading(true);
         const { email, code } = values;
         apiCall('/password/code', { email, code }, null, 'POST', null)
-          .then(() => setShowSuccessInfo(true))
+          .then(() => {
+            setLoading(false);
+            setShowSuccessInfo(true);
+          })
           .catch((error) => {
+            setLoading(false);
             handleErrors(error.response.data, setFieldError.setFieldError);
           });
       }}
@@ -127,7 +140,14 @@ function ResetPasswordForm() {
             margin="normal"
           />
           <ErrorMessage name="code" />
-          <Button color="primary" variant="contained" type="submit">Confirmar código</Button>
+          <Button
+            type="submit"
+            color="primary"
+            variant="contained"
+            disabled={loading}
+          >
+            {loading ? <CircularProgress size={24} /> : 'Confirmar código'}
+          </Button>
           { showSuccessInfo
           && (
             <>
