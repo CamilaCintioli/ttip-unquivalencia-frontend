@@ -13,6 +13,7 @@ import ExternalSubjectsFieldArray from './NewRequestFormFields/SubjectsFieldArra
 import FieldDependency from './NewRequestFormFields/FieldDependency';
 import useStyles from './style';
 import CreateSubjectDialog from '../CreateSubjectDialog';
+import ConnectSubjectsDetailDialog from '../SubjectsDetailDialog';
 
 const validateExternalForm = Yup.object().shape({
   origin: Yup.object().shape({
@@ -58,7 +59,7 @@ export default function ExternalForm({ onSubmit, onSubmit2 }) {
         <Field name="unq" component={SubjectUnqSelector} />
 
         <Button className={classes.button} color="primary" variant="contained" type="submit">Crear solicitud</Button>
-        
+        <ConnectSubjectsDetailDialog />
       </Form>
     </Formik>
   );
