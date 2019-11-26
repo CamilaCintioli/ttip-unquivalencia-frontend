@@ -11,7 +11,7 @@ import ErrorMessage from '../Error/ErrorFormMessage';
 import FeedbackBar, { openSnackbar } from '../Dashboard/FeedbackBar';
 
 export default function ResetPasswordPage() {
-  const [showVerifyEmail, setShowVerifyEmail] = useState(false);
+  const [showVerifyEmail, setShowVerifyEmail] = useState(true);
   const nextForm = useCallback(() => {
     setShowVerifyEmail(false);
   }, []);
