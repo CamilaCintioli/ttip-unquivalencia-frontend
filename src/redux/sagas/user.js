@@ -36,6 +36,7 @@ export function* getUser({ payload }) {
     yield payload.history.push(localStorage.location);
   } catch (error) {
     const errors = error.response.data;
+    handleFormErrors(payload.bodyUser.showError, errors);
     yield put({ type: GET_USER_ERROR, errors });
   }
 }
@@ -93,9 +94,7 @@ export function* changePassword({ payload }) {
   } catch (error) {
     const errors = error.response.data;
     yield put({ type: CHANGE_PASSWORD_ERROR, errors });
-    if (!errors.includes('Password incorrecto')) {
-      openSnackbar('Hubo un problema. Intente cambiar su contraseña más tarde', 'error');
-    }
+    handleFormErrors(payload.showError, errors);
   }
 }
 
@@ -108,3 +107,12 @@ export default function* user() {
   yield takeLatest(DELETE_USER_START, deleteUser);
   yield takeLatest(CHANGE_PASSWORD_START, changePassword);
 }
+
+const handleFormErrors = (showError, errors) => {
+  switch (errors[0]) {
+    case 'Email inexistente': showError('email', 'El mail ingresado es incorrecto'); break;
+    case 'Password incorrecto': showError('password', 'La contraseña ingresada es incorrecta'); break;
+    default:
+      openSnackbar('Hubo un problema. Intentelo más tarde');
+  }
+};
