@@ -4,7 +4,7 @@ import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 import { Pagination } from 'semantic-ui-react';
 import { pickBy, isEmpty } from 'lodash';
 import { isNumber } from 'util';
-import { searchFile, searchRequest } from '../../redux/actions/search';
+import { searchRequest } from '../../redux/actions/search';
 import { requestResult, userRole } from '../../redux/selectors';
 import { isAdmin, isAdminOrUser } from '../UserView/userRole';
 import FeedbackBar from '../Dashboard/FeedbackBar';
@@ -12,8 +12,11 @@ import ListRequest from './ListRequest';
 import ListFile from './ListFile';
 import api from '../../redux/api/index';
 import Search from './Search';
+import Messages, { useStyles } from '../shared/Messages';
+
 
 function ViewPrimary() {
+  const classes = useStyles();
   const rowsRequest = useSelector((state) => requestResult(state), shallowEqual);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -35,8 +38,7 @@ function ViewPrimary() {
     dni: '',
     yearNote: '',
     status: '',
-    field: '',
-    order: '',
+    legajo: '',
     page: 1,
     limit: 8,
   });
@@ -128,7 +130,13 @@ function ViewPrimary() {
                     </div>
                   </>
                 )
-                : null}
+                : (
+                  <Messages
+                    variant="info"
+                    className={classes.margin}
+                    message="No se encontraron expediente"
+                  />
+                )}
             </div>
           </>
         )

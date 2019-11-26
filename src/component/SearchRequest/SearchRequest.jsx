@@ -7,8 +7,10 @@ import { Pagination } from 'semantic-ui-react';
 import Search from './Search';
 import Requests from './Requests';
 import api from '../../redux/api/index';
+import Messages, { useStyles } from '../shared/Messages';
 
 function SearchRequest() {
+  const classes = useStyles();
   const history = useHistory();
   const [rowsRequest, setRowsRequest] = useState([]);
 
@@ -73,29 +75,38 @@ function SearchRequest() {
         />
       </div>
       <div className="col-8">
-        <h3>
+        {!isEmpty(rowsRequest)
+
+          ? (
+            <>
+              <h3>
             Solicitudes
-        </h3>
-        <hr />
-        <Requests
-          title="Solicitudes"
-          isSearch={1}
-          requests={rowsRequest}
-          handleSearchRequest={handleSearchRequest}
-          pageSize={5}
-        />
-        <hr />
-        <div className="row justify-content-md-center">
-          {!isEmpty(rowsRequest)
-            ? (
-              <Pagination
-                defaultActivePage={1}
-                totalPages={controlPage.total_pages}
-                onPageChange={onClick}
+              </h3>
+              <hr />
+              <Requests
+                title="Solicitudes"
+                isSearch={1}
+                requests={rowsRequest}
+                handleSearchRequest={handleSearchRequest}
+                pageSize={5}
               />
-            )
-            : null}
-        </div>
+              <hr />
+              <div className="row justify-content-md-center">
+                <Pagination
+                  defaultActivePage={1}
+                  totalPages={controlPage.total_pages}
+                  onPageChange={onClick}
+                />
+              </div>
+            </>
+          )
+          : (
+            <Messages
+              variant="info"
+              className={classes.margin}
+              message="No se encontro solicitudes"
+            />
+          )}
       </div>
     </div>
   );

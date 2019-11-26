@@ -45,7 +45,7 @@ export const mainListItems = (cerrar, userRole) => ( <
         ( <
             >
             <
-            Link to = "/buscador/solicitudes" >
+            Link to = "/solicitudes" >
             <
             ListItem button >
             <

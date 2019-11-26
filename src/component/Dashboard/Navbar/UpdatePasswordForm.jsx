@@ -58,6 +58,7 @@ export default function UpdatePasswordForm() {
   return (
     <>
       <Typography variant="h4">Cambia tu contraseña</Typography>
+      <hr />
       <Formik
         initialValues={{ password: '', newPassword: '', confirmPassword: '' }}
         validate={validateForm}

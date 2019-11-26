@@ -24,6 +24,7 @@ export const userRole = (state) => get(state, 'user.userResult.user.role');
 
 export const passwordError = (state) => get(state, 'user.passwordError');
 
+export const dataHome = (state) => get(state, 'home.homeResult');
 export const universities = (state) => get(state, 'subject.universities');
 export const careers = (state) => get(state, 'subject.careers');
 export const yearPlans = (state) => get(state, 'subject.yearsPlan');

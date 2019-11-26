@@ -5,16 +5,18 @@ import user from './user';
 import create from './create';
 import match from './match';
 import stepper from './stepper';
+import home from './home';
 import subject from './subject';
 
 const rootReducer = combineReducers({
-  user,
-  search,
-  updateEquivalence,
-  create,
-  match,
-  stepper,
-  subject,
+    user,
+    search,
+    updateEquivalence,
+    create,
+    match,
+    stepper,
+    subject,
+    home,
 });
 
 export default rootReducer;

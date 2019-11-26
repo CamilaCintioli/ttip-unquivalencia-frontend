@@ -6,7 +6,7 @@ import {
 import SignIn from '../SingIn/SignIn';
 import PrivateRoute from './PriavateRoute';
 import PublicRoute from './PublicRoute';
-import routes from '../../app.route';
+import routes from '../../routes';
 import ResetPassword from '../SingIn/ResetPassword';
 
 const privates = (isAuthenticated) => (

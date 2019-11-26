@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-equals-spacing */
+/* eslint-disable react/jsx-wrap-multilines */
 /* eslint-disable import/order */
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
@@ -6,7 +8,6 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import configureStore from './redux/store';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
 import dotenv from 'dotenv';
 
@@ -14,10 +15,17 @@ dotenv.config();
 
 const store = configureStore();
 
-const app = () => (
-  <Provider store={store}>
-    <App />
-  </Provider>
+const app = () => ( <
+    >
+    <
+    Provider store = { store } >
+    <
+    App / >
+    <
+    /Provider>  { ' ' } { ' ' }
+
+    <
+    />
 );
 
 ReactDOM.render(app(), document.getElementById('root'));
