@@ -33,3 +33,5 @@ export const subjects = (state, university, career, year) => {
   return subjectsState.filter((subject) => subject.university === university && subject.career === career
   && subject.yearPlan === year);
 };
+
+export const subjectById = (state, subjectId) => get(state, 'subject.subjects')[subjectId];

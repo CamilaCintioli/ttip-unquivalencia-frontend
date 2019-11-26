@@ -12,6 +12,7 @@ import SubjectUnqSelector from './NewRequestFormFields/SubjectUnqSelector';
 import InternalSubjectsFieldArray from './NewRequestFormFields/SubjectsFieldArray';
 import FieldDependency from './NewRequestFormFields/FieldDependency';
 import useStyles from './style';
+import ConnectSubjectsDetailDialog from '../SubjectsDetailDialog';
 
 const validateInternalForm = Yup.object().shape({
   origin: Yup.object().shape({
@@ -27,13 +28,12 @@ const validateInternalForm = Yup.object().shape({
 });
 
 
-export default function InternalForm() {
+export default function InternalForm({ onSubmit }) {
   const classes = useStyles();
   const handleSubmit = useCallback((values) => {
-    // const originIds = values.origin.subjects.map((option) => option.value);
-    // onSubmit(originIds, values.unq.subject.id);
-    console.log(values);
-  }, []);
+    const originIds = values.origin.subjects.map((subject) => ({ ...subject, id: subject.id.id }));
+    onSubmit(originIds, values.unq.subject.id);
+  }, [onSubmit]);
   return (
     <Formik
       initialValues={{
@@ -42,7 +42,6 @@ export default function InternalForm() {
           career: '',
           year: '',
           subjects: [],
-          pepita: [],
         },
         unq: {
           university: 'UNQ', career: '', year: '', subject: '',
@@ -58,7 +57,7 @@ export default function InternalForm() {
         </div>
         <h5>Selecciona una materia de la Universidad Nacional de Quilmes</h5>
         <Field name="unq" component={SubjectUnqSelector} />
-
+        <ConnectSubjectsDetailDialog />
         <Button className={classes.button} color="primary" variant="contained" type="submit">Crear solicitud</Button>
       </Form>
     </Formik>
