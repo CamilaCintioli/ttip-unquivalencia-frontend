@@ -306,7 +306,7 @@ const generateLetter = (rowData) => Api.getLetter(rowData.id).then(({ data: file
       { header: 'Asignatura solicitada en UNQ', dataKey: 'subjectUnq' },
       { header: 'Carga horaria semanal', dataKey: 'semanalUnq' },
       { header: 'Carga horaria total', dataKey: 'totalUnq' },
-      { header: 'Núcleo', dataKey: 'core' },
+      { header: 'Núcleo', dataKey: 'coreUnq' },
       { header: 'Créditos', dataKey: 'creditsUnq' },
       { header: 'Resolución del Director', dataKey: 'equivalence' },
       { header: 'Observación', dataKey: 'observations' }],
