@@ -12,20 +12,21 @@ import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '90%',
+    width: '10%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   button: {
+    marginTop: theme.spacing(1),
     marginRight: theme.spacing(1),
   },
-  completed: {
-    display: 'inline-block',
+  actionsContainer: {
+    marginBottom: theme.spacing(2),
   },
-  instructions: {
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
+  resetContainer: {
+    padding: theme.spacing(3),
   },
 }));
-
 
 export default function HorizontalNonLinearStepper({
   activeStep, changeStep, requests, level,
@@ -51,7 +52,12 @@ export default function HorizontalNonLinearStepper({
   const getId = (request) => (level === 1 ? request.requestId : request.subjectId);
 
   return (
-    <Stepper className="border border-success" nonLinear activeStep={activeStep}>
+    <Stepper
+      className={classes}
+      nonLinear
+      activeStep={activeStep}
+      color="blue"
+    >
       {map(requests, (request, index) => (
         <Step key={index}>
           <StepButton onClick={handleStep(getId(request))} completed icon={getIcon(request.equivalence)}>

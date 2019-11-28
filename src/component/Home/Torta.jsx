@@ -10,7 +10,7 @@ import {
   consulting,
   finished,
 } from '../../consts/stateRequest';
-import styleCard from './styleCard';
+import styleCard from '../shared/styleCard';
 
 const getData = (data) => ({
   labels: [

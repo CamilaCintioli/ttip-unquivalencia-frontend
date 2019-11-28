@@ -15,11 +15,9 @@ import { dataHome } from '../../redux/selectors/index';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
+    margin: 'auto',
+    width: '100%',
+
   },
 }));
 
@@ -42,33 +40,57 @@ const Home = () => {
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={3} className="animated fadeIn">
-        <Grid item xs={5}>
+      <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+        spacing={3}
+      >
+        <Grid item xs={4}>
           <Card
             title="Total de expediente"
             body={sizeFile()}
             type={1}
           />
         </Grid>
-        <Grid item xs={2}>
-          <Logo />
-        </Grid>
-        <Grid item xs={5}>
+        <Grid item xs={4}>
           <Card
             title="Total de solicitudes"
             body={sizeRequest()}
             type={0}
           />
         </Grid>
-        <Grid item xs={4} />
-
-        <Grid item xs={4} className="w-50 h-50">
+      </Grid>
+      <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="stretch"
+        spacing={3}
+        item
+        xs={12}
+      >
+        {/* <Grid item xs={4}>
+            <Card
+              title="Total de expediente"
+              body={sizeFile()}
+              type={1}
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <Card
+              title="Total de solicitudes"
+              body={sizeRequest()}
+              type={0}
+            />
+          </Grid> */}
+        <Grid item xs={12} sm={5}>
           <Torta
             title="Estado de solicitudes"
             data={getTorta()}
           />
         </Grid>
-        <Grid item xs={4} />
       </Grid>
     </div>
   );
