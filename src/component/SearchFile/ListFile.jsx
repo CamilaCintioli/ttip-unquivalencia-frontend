@@ -352,12 +352,14 @@ const generateLetter = (rowData) => Api.getLetter(rowData.id).then(({ data: file
 
 const ListFile = ({
   files, handleSearch, addRequest, checkAdmin, checkLetter,
+  handleSearchFile,
 }) => {
   const [deletingFile, setDeletingFile] = useState();
 
   const openDeleteDialog = useCallback((_, file) => {
     setDeletingFile(file);
-  }, []);
+    handleSearchFile();
+  }, [handleSearchFile]);
 
   const onClose = useCallback(() => {
     setDeletingFile(null);
@@ -375,8 +377,8 @@ const ListFile = ({
 
   return (
     <>
-      <DeleteFileDialog file={deletingFile} isOpen={!!deletingFile} onClose={onClose} />
-      <DuplicateFileDialog file={duplicatingFile} isOpen={!!duplicatingFile} onClose={onCloseDuplicateDialog} />
+      <DeleteFileDialog handleSearchFile={handleSearchFile} file={deletingFile} isOpen={!!deletingFile} onClose={onClose} />
+      <DuplicateFileDialog handleSearchFile={handleSearchFile} file={duplicatingFile} isOpen={!!duplicatingFile} onClose={onCloseDuplicateDialog} />
       <MaterialTable
         title="Expedientes"
         columns={columnsFile}

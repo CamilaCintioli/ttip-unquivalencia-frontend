@@ -10,17 +10,19 @@ import API from '../../service/FileService';
 import { searchFile } from '../../redux/actions/search';
 import { openSnackbar } from '../Dashboard/FeedbackBar';
 
-export default function DuplicateFileDialog({ file, onClose, isOpen }) {
+export default function DuplicateFileDialog({
+  handleSearchFile, file, onClose, isOpen,
+}) {
   const dispatch = useDispatch();
   const handleAccept = useCallback((fileId) => {
     API.duplicateFile(fileId)
       .then(() => {
         openSnackbar('El expediente ha sido duplicado exitosamente', 'success');
-        dispatch(searchFile());
+        handleSearchFile();
       })
       .catch(() => openSnackbar('Hubo un problema. Intente duplicar el expediente más tarde', 'error'));
     onClose();
-  }, [dispatch, onClose]);
+  }, [handleSearchFile, onClose]);
 
   return (
     <div>
