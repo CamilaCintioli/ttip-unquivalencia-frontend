@@ -33,7 +33,8 @@ export function* getUser({ payload }) {
   try {
     const results = yield call(apiCall, '/user/session', payload.bodyUser, null, 'POST');
     yield put({ type: GET_USER_COMPLETE, results });
-    yield payload.history.push(localStorage.location);
+    const location = localStorage.location.split('/')[1].toString() === 'solicitud' ? localStorage.location : '/home';
+    yield payload.history.push(location);
   } catch (error) {
     const errors = error.response.data;
     handleFormErrors(payload.bodyUser.showError, errors);
