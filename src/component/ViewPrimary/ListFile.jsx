@@ -296,7 +296,7 @@ const generateLetter = (rowData) => Api.getLetter(rowData.id).then(({ data: file
   amMVr1zuxrXf3Lx5/YarjoeWXb9ypqELzjt5J9Mq9ZK8zMkUg2KMgxhPzpjyeaoaAAAA53PavBMAAAC4KGxBBwAAQAl0JwAAAEqgOwEAAFAC3QkAAIAS6E4AAACUQHcCAACgBLoTAAAAJdCdAAAAKIHuBAAAQA
   l0JwAAAEqgOwEAAFAC3QkAAIAS/gAMThrjnicIIgAAAABJRU5ErkJggg==`;
 
-  pdf.setFontSize(14);
+  pdf.setFontSize(12);
 
   pdf.autoTable({
     body: file.requests,
@@ -310,7 +310,7 @@ const generateLetter = (rowData) => Api.getLetter(rowData.id).then(({ data: file
       { header: 'Créditos', dataKey: 'creditsUnq' },
       { header: 'Resolución del Director', dataKey: 'equivalence' },
       { header: 'Observación', dataKey: 'observations' }],
-    startY: 350,
+    startY: 320,
     theme: 'plain',
     styles: {
       lineWidth: 0.01,
@@ -320,6 +320,7 @@ const generateLetter = (rowData) => Api.getLetter(rowData.id).then(({ data: file
       valign: 'middle',
       columnWidth: 'auto',
       overflow: 'linebreak',
+      fontSize: 7,
     },
     margin: { top: 110 },
     showHead: 'firstPage',
@@ -328,7 +329,7 @@ const generateLetter = (rowData) => Api.getLetter(rowData.id).then(({ data: file
     didDrawPage: (data) => {
       pdf.addImage(dataImgHeader, 'png', 40, 20, 500, 0);
       if (parseInt(data.pageNumber) === 1) {
-        pdf.text(`Bernal, ${file.currentDate}`, 370, 118);
+        pdf.text(`Bernal, ${file.currentDate}`, 370, 122);
         pdf.text(`
         Al Director de la 
         Dirección de Alumnos de la
