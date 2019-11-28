@@ -1,12 +1,16 @@
 import React, { useCallback } from 'react';
-import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import PropTypes from 'prop-types';
-import Avatar from '@material-ui/core/Avatar';
+import Fab from '@material-ui/core/Fab';
+import { useSelector } from 'react-redux';
+import useStyles from '../Styles/style';
+import { getUserName } from '../../../redux/selectors';
 
 export default function SimpleMenu({ logout, changePassword }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const classes = useStyles();
+  const userInitial = useSelector((state) => getUserName(state))[0];
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -23,11 +27,7 @@ export default function SimpleMenu({ logout, changePassword }) {
 
   return (
     <div>
-      <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-        <Avatar
-          src="https://icon-library.net/images/user-icon-image/user-icon-image-20.jpg"
-        />
-      </Button>
+      <Fab className={classes.userMenuButton} size="medium" onClick={handleClick}>{userInitial}</Fab>
       <Menu
         id="simple-menu"
         anchorEl={anchorEl}
@@ -41,7 +41,6 @@ export default function SimpleMenu({ logout, changePassword }) {
     </div>
   );
 }
-
 
 SimpleMenu.propTypes = {
   logout: PropTypes.func.isRequired,
