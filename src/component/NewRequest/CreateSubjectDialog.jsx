@@ -9,6 +9,7 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import * as Yup from 'yup';
 import TextField from '../Fields/TextField';
+import YearSelectorField from '../Fields/YearSelectorField';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -101,7 +102,7 @@ function NewSubjectForm({ handleSubmit, handleClose }) {
         <ErrorMessage name="university" />
         <Field name="career" component={TextField} label="Carrera" />
         <ErrorMessage name="career" />
-        <Field name="yearPlan" component={TextField} label="Año del plan" />
+        <Field name="yearPlan" component={YearSelectorField} placeholder="Año del plan" />
         <ErrorMessage name="yearPlan" />
         <Field name="courseMode" component={TextField} label="Modalidad" />
         <Field name="subjectWeeklyHours" component={TextField} label="Horas semanales" />

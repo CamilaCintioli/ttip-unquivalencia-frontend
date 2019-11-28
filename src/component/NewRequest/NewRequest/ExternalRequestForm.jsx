@@ -18,12 +18,12 @@ const validateExternalForm = Yup.object().shape({
   origin: Yup.object().shape({
     subjects: Yup.array().of(Yup.object().shape({
       id: Yup.object().required('Por favor seleccione una materia'),
-      yearOfApproval: Yup.string().required('Por favor complete el año de aprobación'),
+      yearOfApproval: Yup.string().required('Por favor seleccione el año de aprobación'),
       mark: Yup.string().notRequired(),
     })).required('Por favor agregue al menos una materia'),
   }),
   unq: Yup.object().shape({
-    subject: Yup.object().required('Por favor selecciona una materia').nullable(),
+    subject: Yup.object().required('Por favor seleccione una materia').nullable(),
   }),
 });
 
