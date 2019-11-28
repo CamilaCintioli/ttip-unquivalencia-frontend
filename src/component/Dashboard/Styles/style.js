@@ -85,6 +85,9 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     height: '2.5rem',
   },
+  userName: {
+    marginRight: theme.spacing(2),
+  },
 }));
 
 export default useStyles;
