@@ -5,7 +5,10 @@ import { Pagination } from 'semantic-ui-react';
 import { pickBy, isEmpty } from 'lodash';
 import { isNumber } from 'util';
 import { searchRequest } from '../../redux/actions/search';
-import { requestResult, userRole } from '../../redux/selectors';
+import { getFile } from '../../redux/actions/file';
+import {
+  requestResult, userRole, files, totalPageFile,
+} from '../../redux/selectors';
 import { isAdmin, isAdminOrUser } from '../UserView/userRole';
 import FeedbackBar from '../Dashboard/FeedbackBar';
 import ListRequest from './ListRequest';
@@ -16,19 +19,18 @@ import Messages, { useStyles } from '../shared/Messages';
 
 
 function ViewPrimary() {
+  // Style
   const classes = useStyles();
+  // Selectors
   const rowsRequest = useSelector((state) => requestResult(state), shallowEqual);
+  const rowsFile = useSelector((state) => files(state));
+  const totalPage = useSelector((state) => totalPageFile(state));
+  const user = useSelector((state) => userRole(state));
+  // Hook Extra
   const dispatch = useDispatch();
   const history = useHistory();
-  const user = useSelector((state) => userRole(state));
   const [fileIdSelected, setFileIdSelected] = useState();
-
-  const [rowsFile, setRowsFile] = useState([]);
   const [isRequest, setIsRequest] = useState(false);
-
-  const [controlPage, setControlPage] = useState({
-    total_pages: 0,
-  });
 
   const [search, setSearch] = useState({
     fileNumber: '',
@@ -45,14 +47,8 @@ function ViewPrimary() {
 
   const handleSearchFile = useCallback((query = {}) => {
     const data = { ...pickBy(search, (x) => !isEmpty(x) || isNumber(x)), ...query };
-    api('/files', null, null, 'GET', data).then(({ data: { files, total_pages } }) => {
-      console.log(data);
-      setRowsFile(files);
-      setControlPage({ ...controlPage, total_pages });
-      return data;
-    });
-  }, [controlPage, search]);
-
+    dispatch(getFile({ query: data }));
+  }, [dispatch, search]);
 
   const onClick = (event, data) => {
     const page = data.activePage;
@@ -120,11 +116,12 @@ function ViewPrimary() {
                       addRequest={addRequest}
                       checkAdmin={checkAdmin}
                       checkLetter={checkLetter}
+                      handleSearchFile={handleSearchFile}
                     />
                     <div className="row justify-content-md-center">
                       <Pagination
                         defaultActivePage={1}
-                        totalPages={controlPage.total_pages}
+                        totalPages={1}
                         onPageChange={onClick}
                       />
                     </div>

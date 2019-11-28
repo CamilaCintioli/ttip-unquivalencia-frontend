@@ -7,21 +7,22 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import API from '../../service/FileService';
-import { searchFile } from '../../redux/actions/search';
 import { openSnackbar } from '../Dashboard/FeedbackBar';
 
-export default function DeleteFileDialog({ file, onClose, isOpen }) {
+export default function DeleteFileDialog({
+  handleSearchFile, file, onClose, isOpen,
+}) {
   const dispatch = useDispatch();
   const handleAccept = useCallback((fileId) => {
     API.deleteFile(fileId)
       .then(() => {
         openSnackbar('El expediente ha sido borrado exitosamente', 'success');
-        dispatch(searchFile());
+        handleSearchFile();
       })
       .catch(() => openSnackbar('Hubo un problema. Intente borrar el expediente más tarde', 'error'));
 
     onClose();
-  }, [dispatch, onClose]);
+  }, [handleSearchFile, onClose]);
 
   return (
     <div>

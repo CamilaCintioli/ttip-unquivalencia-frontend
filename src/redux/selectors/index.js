@@ -32,9 +32,11 @@ export const yearPlans = (state) => get(state, 'subject.yearsPlan');
 export const subjects = (state, university, career, year) => {
   const subjectsState = Object.values(get(state, 'subject.subjects'));
   return subjectsState.filter((subject) => subject.university === university && subject.career === career
-  && subject.yearPlan === year);
+        && subject.yearPlan === year);
 };
 
 export const subjectById = (state, subjectId) => get(state, 'subject.subjects')[subjectId];
 
+export const files = (state) => get(state, 'file.fileResult');
+export const totalPageFile = (state) => get(state, 'file.totalPageFile');
 export const getUserName = (state) => `${get(state, 'user.userResult.user.name')} ${get(state, 'user.userResult.user.lastName')}`;
