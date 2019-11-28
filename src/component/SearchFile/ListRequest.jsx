@@ -5,6 +5,7 @@ import React, { useState, useCallback } from 'react';
 import MaterialTable from 'material-table';
 import columnsRequest from '../shared/columnsRequest';
 import TableSubject from '../shared/TableSubject';
+import DeleteRequestDialog from '../Dialogs/DeleteRequestDialog';
 
 const ListRequest = ({
   title, requests, handleSearchRequest, checkAdmin, isSearch, pageSize, fileSelected,
@@ -21,6 +22,7 @@ const ListRequest = ({
 
   return (
     <>
+      <DeleteRequestDialog fileId={fileSelected} request={deletingRequest} isOpen={!!deletingRequest} onClose={onClose} />
       <MaterialTable
         title={title}
         columns={columnsRequest}
@@ -32,8 +34,8 @@ const ListRequest = ({
         actions={[
           (rowData) => ({
             icon: 'delete',
-            tooltip: 'Delete User',
-            onClick: (event, rowData) => alert(`You want to delete ${rowData.name}`),
+            tooltip: 'Eliminar solicitud',
+            onClick: openDeleteDialog,
             hidden: isSearch && !checkAdmin,
           }),
         ]}
