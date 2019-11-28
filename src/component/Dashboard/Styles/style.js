@@ -85,6 +85,18 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     height: '2.5rem',
   },
+  userName: {
+    marginRight: theme.spacing(2),
+    fontSize: '15px',
+  },
+  userMenuButton: {
+    color: 'white',
+    backgroundColor: '#038874',
+    fontSize: '20px',
+    '&:hover': {
+      backgroundColor: '#037060',
+    },
+  },
 }));
 
 export default useStyles;
