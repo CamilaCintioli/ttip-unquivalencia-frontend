@@ -57,8 +57,8 @@ export default function InternalForm({ onSubmit }) {
         </div>
         <h5>Selecciona una materia de la Universidad Nacional de Quilmes</h5>
         <Field name="unq" component={SubjectUnqSelector} />
-        <ConnectSubjectsDetailDialog />
         <Button className={classes.button} color="primary" variant="contained" type="submit">Crear solicitud</Button>
+        <ConnectSubjectsDetailDialog />
       </Form>
     </Formik>
   );

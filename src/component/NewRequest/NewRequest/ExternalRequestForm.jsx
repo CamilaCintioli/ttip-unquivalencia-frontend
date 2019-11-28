@@ -12,7 +12,6 @@ import SubjectUnqSelector from './NewRequestFormFields/SubjectUnqSelector';
 import ExternalSubjectsFieldArray from './NewRequestFormFields/SubjectsFieldArray';
 import FieldDependency from './NewRequestFormFields/FieldDependency';
 import useStyles from './style';
-import CreateSubjectDialog from '../CreateSubjectDialog';
 import ConnectSubjectsDetailDialog from '../SubjectsDetailDialog';
 
 const validateExternalForm = Yup.object().shape({

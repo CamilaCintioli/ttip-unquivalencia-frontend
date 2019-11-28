@@ -96,7 +96,7 @@ function ViewPrimary() {
         ? (
           <>
             <div className="col-2">
-              <h2>Buscador</h2>
+              <h3>Buscador de expedientes</h3>
               <hr />
               <Search
                 form={search}
@@ -108,7 +108,6 @@ function ViewPrimary() {
               {!isEmpty(rowsFile)
                 ? (
                   <>
-                    <h2>Expedientes</h2>
                     <hr />
                     <ListFile
                       files={rowsFile}
@@ -131,7 +130,7 @@ function ViewPrimary() {
                   <Messages
                     variant="info"
                     className={classes.margin}
-                    message="No se encontraron expediente"
+                    message="No se encontraron expedientes"
                   />
                 )}
             </div>

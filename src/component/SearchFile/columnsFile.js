@@ -3,9 +3,9 @@ const columnsFile = [
     { field: 'name', title: 'Nombre' },
     { field: 'surname', title: 'Apellido' },
     { field: 'mail', title: 'Mail' },
-    { field: 'dni', title: 'dni' },
+    { field: 'dni', title: 'DNI' },
     { field: 'yearNote', title: 'Creacion' },
-    { field: 'status', title: 'Estado' },
+    { field: 'status', title: 'Solicitudes sin resolver' },
 ];
 
 

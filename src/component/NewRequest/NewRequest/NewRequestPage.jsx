@@ -56,7 +56,7 @@ export default function NewRequestPage(props) {
     <div className="row">
       <div className="col-4">
         <h3>
-            Datos adicionales
+            Datos del expediente
         </h3>
         <hr />
         <div className={classes.studentData}>
