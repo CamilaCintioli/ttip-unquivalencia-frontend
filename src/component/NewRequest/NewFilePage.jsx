@@ -34,7 +34,7 @@ export default function NewFilePage() {
     API.newFile(file)
       .then(() => {
         const notification = { message: 'El expediente ha sido creado con exito', variant: 'success' };
-        localStorage.setItem('notification', JSON.stringify(notification));
+        localStorage.setItem('notificationFile', JSON.stringify(notification));
         history.push('/expediente');
       })
       .catch(() => openSnackbar('Hubo un problema. Intente cargar el expediente de nuevo', 'error'));

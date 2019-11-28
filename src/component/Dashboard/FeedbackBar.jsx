@@ -92,7 +92,7 @@ export default function FeedbackBar({ showNotification }) {
     setMessage(message);
   };
 
-  useEffect(() => { openFeedbackBarFn = handleClick; });
+  useEffect(() => { openFeedbackBarFn = handleClick; localStorage.removeItem('notificationFile'); });
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -112,7 +112,7 @@ export default function FeedbackBar({ showNotification }) {
           horizontal: 'center',
         }}
         open={open}
-        autoHideDuration={6000}
+        autoHideDuration={4000}
         onClose={handleClose}
       >
         <MySnackbarContentWrapper
