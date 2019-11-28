@@ -3,42 +3,45 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import { map } from 'lodash';
+import Typography from '@material-ui/core/Typography';
 
 const CardRequest = ({ requests, getClass }) => (
   <div className="card-columns">
     {map(requests, (request) => (
       <div className={getClass()}>
-        <h3 className="text-center">{request.subject}</h3>
+        <Typography className="text-center" variant="h3" gutterBottom>
+          <b>{request.subject}</b>
+        </Typography>
         <hr />
         <div className="card-body">
-          <p className="card-title">
+          <Typography className="card-title" variant="h5" gutterBottom>
             <b>Carrera:</b>
             {request.career}
-          </p>
-          <p className="card-text">
+          </Typography>
+          <Typography className="card-title" variant="h5" gutterBottom>
             <b>
         Plan:
             </b>
             {request.year_plan}
-          </p>
-          <p className="card-text">
+          </Typography>
+          <Typography className="card-title" variant="h5" gutterBottom>
             <b>
         Cursada:
             </b>
             {request.course_mode}
-          </p>
-          <p className="card-text">
+          </Typography>
+          <Typography className="card-title" variant="h5" gutterBottom>
             <b>
         Horas Semanales:
             </b>
             {request.subject_weekly_hours}
-          </p>
-          <p className="card-text">
+          </Typography>
+          <Typography className="card-title" variant="h5" gutterBottom>
             <b>
         Horas Total:
             </b>
             {request.subject_total_hours}
-          </p>
+          </Typography>
         </div>
       </div>
     ))}
