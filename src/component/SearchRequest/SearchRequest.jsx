@@ -65,7 +65,7 @@ function SearchRequest() {
     <div className="row">
       <div className="col-4">
         <h3>
-            Buscador
+            Buscador de solicitudes
         </h3>
         <hr />
         <Search
@@ -104,7 +104,7 @@ function SearchRequest() {
             <Messages
               variant="info"
               className={classes.margin}
-              message="No se encontro solicitudes"
+              message="No se encontraron solicitudes"
             />
           )}
       </div>

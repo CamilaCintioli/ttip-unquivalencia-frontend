@@ -133,19 +133,19 @@ function SubjectCardDisplay({ subjectId }) {
             {subject.career}
           </Typography>
           <Typography variant="body2" component="p">
-            Año de plan:
+            Año de plan:{' '}
             {subject.yearPlan}
             <br />
-            Modalidad:
+            Modalidad:{' '}
             {subject.courseMode}
             <br />
-            Horas semanales:
+            Horas semanales:{' '}
             {subject.subjectWeeklyHours}
             <br />
-            Horas totales:
+            Horas totales:{' '}
             {subject.subjectTotalHours}
             <br />
-            Creditos:
+            Creditos:{' '}
             {subject.credits}
             <br />
           </Typography>

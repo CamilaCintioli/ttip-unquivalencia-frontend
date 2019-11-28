@@ -64,12 +64,12 @@ export default function CreateSubjectDialog({ onSubmit }) {
 }
 
 const validationSchema = Yup.object().shape({
-  code: Yup.string().required('Required'),
-  university: Yup.string().required('Required'),
-  career: Yup.string().required('Required'),
-  yearPlan: Yup.string().required('Required'),
-  subject: Yup.string().required('Required'),
-  url: Yup.string().required('Required'),
+  code: Yup.string().required('Por favor ingrese el código de la materia'),
+  university: Yup.string().required('Por favor ingrese una universidad'),
+  career: Yup.string().required('Por favor ingrese una carrera'),
+  yearPlan: Yup.string().required('Por favor seleccione un año de plan'),
+  subject: Yup.string().required('Por favor ingrese una materia'),
+  url: Yup.string().url('Ingrese una dirección valida').required('Por favor ingrese el url del plan'),
 });
 
 function NewSubjectForm({ handleSubmit, handleClose }) {
