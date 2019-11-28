@@ -36,3 +36,5 @@ export const subjects = (state, university, career, year) => {
 };
 
 export const subjectById = (state, subjectId) => get(state, 'subject.subjects')[subjectId];
+
+export const getUserName = (state) => `${get(state, 'user.userResult.user.name')} ${get(state, 'user.userResult.user.lastName')}`;
