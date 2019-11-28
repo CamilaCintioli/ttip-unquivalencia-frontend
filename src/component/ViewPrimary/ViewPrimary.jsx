@@ -95,7 +95,7 @@ function ViewPrimary() {
 
   return (
     <div className="row">
-      <FeedbackBar showNotification={JSON.parse(localStorage.getItem('notification'))} />
+      <FeedbackBar showNotification={JSON.parse(localStorage.getItem('notificationFile'))} />
       {!isRequest
         ? (
           <>
