@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { find } from 'lodash';
-import Requests from './Requests';
+import Requests from './Request/Requests';
 
 import getStepper from '../../redux/actions/stepper';
 import getMatch from '../../redux/actions/match';
@@ -60,8 +60,8 @@ function ViewRequest() {
           checkProfessor={checkProfessor}
 
         />
-      ) : null :  <Error401 history={history} /> }
-      
+      ) : null : <Error401 history={history} /> }
+
     </>
   );
 }

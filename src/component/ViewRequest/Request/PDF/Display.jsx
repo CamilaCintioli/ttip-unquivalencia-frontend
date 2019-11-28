@@ -13,7 +13,7 @@ import Dialogo from './dialogo';
 import RejectDialog from './RejectDialog';
 
 
-export default function RequestDisplay({
+export default function Display({
   request, onEquivalenceGiven, onEquivalenceDenied,
   onEquivalenceConsulted, showConsultAndDelegateButton,
   showActionButtons, onEquivalenceDelegated,
@@ -70,8 +70,8 @@ export default function RequestDisplay({
   );
 }
 
-RequestDisplay.defaultProps = { request: undefined };
-RequestDisplay.propTypes = {
+Display.defaultProps = { request: undefined };
+Display.propTypes = {
   request: shape(
     {
       universityOrigin: string,

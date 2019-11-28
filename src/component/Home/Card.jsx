@@ -6,7 +6,7 @@ import {
 } from '@material-ui/core';
 import AttachmentIcon from '@material-ui/icons/Attachment';
 import NoteIcon from '@material-ui/icons/Note';
-import styleCard from './styleCard';
+import styleCard from '../shared/styleCard';
 
 const Budget = (props) => {
   const {

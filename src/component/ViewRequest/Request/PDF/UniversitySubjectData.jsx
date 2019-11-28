@@ -1,7 +1,14 @@
 
 import React from 'react';
+import { isEmpty } from 'lodash';
+import noImage from '../../../../img/noimage.png';
 
 export default function UniversitySubjectData({ university, subject, subjectPdfSrc }) {
+  console.log('URL');
+  console.log(subjectPdfSrc);
+
+  const getSrc = (url) => (isEmpty(url) || url === 'url' ? noImage : url);
+
   return (
 
     <div className="card">
@@ -17,7 +24,7 @@ export default function UniversitySubjectData({ university, subject, subjectPdfS
           </p>
         </blockquote>
       </div>
-      <embed src={subjectPdfSrc} width="640" height="480"></embed>
+      <embed src={getSrc(subjectPdfSrc)} width="550" height="650" />
     </div>
 
 

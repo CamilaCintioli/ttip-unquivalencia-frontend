@@ -9,19 +9,23 @@ const columnsRequest = [
   { title: 'Firma', field: 'signature' },
   { title: 'Observacion', field: 'observations' },
   { title: 'Estado', field: 'equivalence' },
+  { title: 'Año', field: 'yearOfEquivalence' },
+
 ];
 
 const Requests = ({
-  title, requests, handleSearchRequest, isSearch, pageSize,
+  title, requests, handleSearchRequest, isSearch,
 }) => (
   <MaterialTable
     title={title}
     columns={columnsRequest}
     data={requests}
-    options={{
-      search: false,
-      paging: false,
-    }}
+    options={
+      {
+        search: false,
+        paging: false,
+      }
+    }
     detailPanel={(rowData) => (
       <TableSubject isSearch={isSearch} row={rowData} handleSearchRequest={handleSearchRequest} />
     )}

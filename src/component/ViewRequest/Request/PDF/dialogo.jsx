@@ -8,9 +8,9 @@ import {
 } from 'formik';
 import { makeStyles } from '@material-ui/core/styles';
 import * as Yup from 'yup';
-import TextField from '../Fields/TextField';
-import { Selector, createOptions } from '../NewRequest/Selectors/Selector';
-import API from '../../service/SearchService';
+import TextField from '../../../Fields/TextField';
+import { Selector, createOptions } from '../../../NewRequest/Selectors/Selector';
+import API from '../../../../service/SearchService';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
   pepe: {
     zIndex: '100 !important',
-  }
+  },
 }));
 
 
@@ -89,7 +89,7 @@ function ConsultForm({ handleSubmit, handleClose, mails }) {
       {({ setFieldValue }) => (
         <Form className={classes.container}>
           <div className={classes.pepe}>
-          <Selector options={mails} onChange={(email) => setFieldValue('email', email)} placeholder="Seleccione un email" />
+            <Selector options={mails} onChange={(email) => setFieldValue('email', email)} placeholder="Seleccione un email" />
           </div>
           <div className={classes.error}>
             <ErrorMessage name="email" />
@@ -105,5 +105,5 @@ function ConsultForm({ handleSubmit, handleClose, mails }) {
   );
 }
 
-//http://localhost:8000/api/v1/consult/requests/2
+// http://localhost:8000/api/v1/consult/requests/2
 // ===> /consult/requests/1/subject/2
