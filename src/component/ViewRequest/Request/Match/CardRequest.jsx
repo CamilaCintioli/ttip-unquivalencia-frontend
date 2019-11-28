@@ -16,30 +16,38 @@ const CardRequest = ({ requests, getClass }) => (
         <div className="card-body">
           <Typography className="card-title" variant="h5" gutterBottom>
             <b>Carrera:</b>
+            {' '}
             {request.career}
           </Typography>
           <Typography className="card-title" variant="h5" gutterBottom>
             <b>
         Plan:
             </b>
+            {' '}
             {request.year_plan}
           </Typography>
           <Typography className="card-title" variant="h5" gutterBottom>
             <b>
         Cursada:
             </b>
+            {' '}
+
             {request.course_mode}
           </Typography>
           <Typography className="card-title" variant="h5" gutterBottom>
             <b>
         Horas Semanales:
             </b>
+            {' '}
+
             {request.subject_weekly_hours}
           </Typography>
           <Typography className="card-title" variant="h5" gutterBottom>
             <b>
         Horas Total:
             </b>
+            {' '}
+
             {request.subject_total_hours}
           </Typography>
         </div>

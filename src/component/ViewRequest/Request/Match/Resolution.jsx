@@ -4,17 +4,27 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import { map, isEmpty } from 'lodash';
+import {
+  Typography,
+} from '@material-ui/core';
 
 const resolution = ({ subjectsToApprove, requestsTotalMatchApproved }) => (
   isEmpty(subjectsToApprove) ? isEmpty(requestsTotalMatchApproved)
     ? (
-      <h1><span className="badge badge-pill badge-info">Match Parcial</span></h1>
+      <Typography display="block" align="center" variant="h3" gutterBottom>
+        <span className="badge badge-pill badge-info">Se encontró una solicitud que concide con la actual excepto el (plan de origen)</span>
+      </Typography>
     ) : (
-      <h1><span className="badge badge-pill badge-success">Match Total</span></h1>
+      <Typography display="block" align="center" variant="h3" gutterBottom>
+        <span className="badge badge-pill badge-success">Se encontró una solicitud que concide con la actual</span>
+      </Typography>
     )
     : (
       <div className="card text-white bg-danger mb-3">
         <div className="card-body">
+          <Typography variant="button" display="block" gutterBottom>
+          Se encontró una solicitud en el historial pero el estudiante requiere
+          </Typography>
           <h4><b>Requiere estas materias</b></h4>
           <hr />
           {map(subjectsToApprove, (name) => (

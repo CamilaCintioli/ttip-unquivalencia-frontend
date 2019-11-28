@@ -19,20 +19,13 @@ export default function Match({ requestMatch }) {
   } = requestMatch;
   const getClass = () => (isEmpty(requestsTotalMatchApproved) ? 'card p-3 text-white bg-warning mb-3' : 'card p-3 text-white bg-info mb-3');
   const requests = isEmpty(requestsTotalMatchApproved) ? requestsMatchWithoutYearPlanApproved : requestsTotalMatchApproved;
-  const getComentary = (isEmpty(requestsTotalMatchApproved) ? 'fuera del plan' : 'dentro del plan ');
-
   return (
     isEmpty(requestsTotalMatchApproved) && isEmpty(requestsMatchWithoutYearPlanApproved) ? null
       : (
         <div className={classes.paper}>
           <Typography className="text-center" variant="h3" gutterBottom>
-            Materias Origen
-            <span>
-              {' '}
-              {`(${getComentary})`}
-            </span>
+            Materias de origen en solicitud de historial positivo
           </Typography>
-
           <hr />
           <div className="contain row justify-content-around">
             <CardRequest requests={requests} getClass={getClass} />
