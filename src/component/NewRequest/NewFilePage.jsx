@@ -11,6 +11,7 @@ import { useHistory } from 'react-router-dom';
 import TextField from '../Fields/TextField';
 import API from '../../service/FileService';
 import FeedbackBar, { openSnackbar } from '../Dashboard/FeedbackBar';
+import YearSelectorField from '../Fields/YearSelectorField';
 
 const validateFile = Yup.object().shape({
   file: Yup.object().shape({
@@ -22,7 +23,7 @@ const validateFile = Yup.object().shape({
     surname: Yup.string().required('Por favor ingrese el apellido'),
     mail: Yup.string().email('El email debe ser válido'),
     dni: Yup.string().matches(/(0|1|2|3|4|5|6|7|8|9)/, { message: 'Solo números', excludeEmptyString: true }),
-    yearNote: Yup.string().required('Por favor ingrese el año de la nota'),
+    yearNote: Yup.string().required('Por favor seleccione el año de la nota'),
     legajo: Yup.string().required('Por favor introduzca el número de legajo'),
   }),
 });
@@ -88,7 +89,7 @@ function StudentField({ field: { name } }) {
         <div className="error"><ErrorMessage name={`${name}.mail`} /></div>
         <Field name={`${name}.dni`} component={TextField} label="DNI" />
         <div className="error"><ErrorMessage name={`${name}.dni`} /></div>
-        <Field name={`${name}.yearNote`} component={TextField} label="Año de la nota" />
+        <Field name={`${name}.yearNote`} component={YearSelectorField} placeholder="Año de la nota" />
         <div className="error"><ErrorMessage name={`${name}.yearNote`} /></div>
         <Field name={`${name}.legajo`} component={TextField} label="Número de legajo" />
         <div className="error"><ErrorMessage name={`${name}.legajo`} /></div>
