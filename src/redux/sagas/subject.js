@@ -7,6 +7,7 @@ import {
   CREATE_SUBJECT_COMPLETE, CREATE_SUBJECT_ERROR, CREATE_SUBJECT_START,
 } from '../../consts/actionTypes';
 import apiCall from '../api';
+import { openSnackbar } from '../../component/Dashboard/FeedbackBar';
 
 export function* getUniversities() {
   try {
@@ -53,9 +54,11 @@ export function* getSubjects() {
 export function* createSubject({ payload }) {
   try {
     const results = yield call(apiCall, '/subject', payload, null, 'POST');
+    openSnackbar('La materia ha sido cargada exitosamente', 'success');
     const subject = results.data;
     yield put({ type: CREATE_SUBJECT_COMPLETE, subject });
   } catch (error) {
+    openSnackbar('Hubo un problema. Intente cargar la materia más tarde', 'error');
     yield put({ type: CREATE_SUBJECT_ERROR, error });
   }
 }
