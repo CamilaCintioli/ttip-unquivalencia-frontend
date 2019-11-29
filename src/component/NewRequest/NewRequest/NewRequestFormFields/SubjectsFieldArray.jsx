@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import useStyles from '../style';
 import SubjectSelector from '../NewRequestFormSelectors/SubjectSelector';
 import TextField from '../../../Fields/TextField';
-
+import YearSelectorField from '../../../Fields/YearSelectorField';
 
 const emptySubject = {
   id: '',
@@ -52,7 +52,7 @@ function SubjectField({ field: { name } }) {
     <div className={classes.form}>
       <Field name={`${name}.id`} component={SubjectSelector} />
       <div className={classes.error}><ErrorMessage name={`${name}.id`} /></div>
-      <Field name={`${name}.yearOfApproval`} component={TextField} label="Año de aprobación" />
+      <Field name={`${name}.yearOfApproval`} component={YearSelectorField} placeholder="Año de aprobación" />
       <div className={classes.error}><ErrorMessage name={`${name}.yearOfApproval`} /></div>
       <Field name={`${name}.mark`} component={TextField} label="Nota de la materia" />
     </div>
