@@ -49,6 +49,11 @@ const useStyles = makeStyles((theme) => ({
   pos: {
     marginBottom: 12,
   },
+  title: {
+    marginBottom: theme.spacing(1),
+    fontSize: '16px',
+    fontWeight: 'bold',
+  },
 }));
 
 
@@ -69,7 +74,7 @@ function SubjectsDetailDialog({ subjectUnqId, subjectsIds, disabled }) {
         Ver detalles de materias
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" fullWidth maxWidth="md">
-        <DialogTitle id="form-dialog-title">Materias seleccionadas</DialogTitle>
+        <DialogTitle><Typography variant="h5">Materias seleccionadas</Typography></DialogTitle>
         <DialogContent className={classes.menu}>
           <SubjectsDisplay subjectUnqId={subjectUnqId} subjectsIds={subjectsIds} />
         </DialogContent>
@@ -95,14 +100,32 @@ SubjectsDetailDialog.defaultProps = {
 
 function SubjectsDisplay({ subjectUnqId, subjectsIds }) {
   const classes = useStyles();
+  const displayOriginSubjects = subjectsIds.length !== 0;
   return (
-    <div className={classes.row}>
-      {subjectUnqId && <SubjectCardDisplay subjectId={subjectUnqId} />}
-      { subjectsIds.map((subject) => (
-        <div>
-          <SubjectCardDisplay subjectId={subject} />
-        </div>
-      ))}
+    <div>
+      { displayOriginSubjects
+      && (
+        <>
+          <Typography variant="h6">Materias de origen</Typography>
+          <div className={classes.row}>
+            { subjectsIds.map((subject) => (
+              <div>
+                <SubjectCardDisplay subjectId={subject} />
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+
+      {subjectUnqId
+      && (
+        <>
+          <Typography variant="h6">Materia UNQ</Typography>
+          <div className={classes.row}>
+            <SubjectCardDisplay subjectId={subjectUnqId} />
+          </div>
+        </>
+      )}
     </div>
   );
 }
@@ -133,19 +156,24 @@ function SubjectCardDisplay({ subjectId }) {
             {subject.career}
           </Typography>
           <Typography variant="body2" component="p">
-            Año de plan:{' '}
+            Año de plan:
+            {' '}
             {subject.yearPlan}
             <br />
-            Modalidad:{' '}
+            Modalidad:
+            {' '}
             {subject.courseMode}
             <br />
-            Horas semanales:{' '}
+            Horas semanales:
+            {' '}
             {subject.subjectWeeklyHours}
             <br />
-            Horas totales:{' '}
+            Horas totales:
+            {' '}
             {subject.subjectTotalHours}
             <br />
-            Creditos:{' '}
+            Creditos:
+            {' '}
             {subject.credits}
             <br />
           </Typography>
