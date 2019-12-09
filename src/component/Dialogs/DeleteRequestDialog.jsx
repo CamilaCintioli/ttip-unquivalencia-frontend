@@ -11,7 +11,7 @@ import { searchRequest } from '../../redux/actions/search';
 import { openSnackbar } from '../Dashboard/FeedbackBar';
 
 export default function DeleteRequestDialog({
-  request, onClose, isOpen, fileId,
+  request, onClose, isOpen, fileId, update,
 }) {
   const dispatch = useDispatch();
   const handleAccept = useCallback((requestId) => {
@@ -19,10 +19,11 @@ export default function DeleteRequestDialog({
       .then(() => {
         openSnackbar('La solicitud ha sido borrada exitosamente', 'success');
         dispatch(searchRequest({ fileId }));
+        update();
       })
       .catch(() => openSnackbar('Hubo un problema. Intente borrar la solicitud más tarde', 'error'));
     onClose();
-  }, [dispatch, fileId, onClose]);
+  }, [dispatch, fileId, onClose, update]);
 
   return (
     <div>

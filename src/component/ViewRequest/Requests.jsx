@@ -2,8 +2,9 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
-import Steappers from '../Steppers/Steppers';
-import State from './State';
+import Steappers from './Steppers/Steppers';
+import State from './State/State';
+import Actions from './Actions/Actions';
 
 
 const Requests = ({
@@ -29,6 +30,8 @@ const Requests = ({
       requestsMatch={requestsMatch}
       checkProfessor={checkProfessor}
     />
+    <br />
+    <Actions request={request} />
   </>
 );
 

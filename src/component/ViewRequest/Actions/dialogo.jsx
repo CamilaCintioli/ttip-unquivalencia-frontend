@@ -8,9 +8,9 @@ import {
 } from 'formik';
 import { makeStyles } from '@material-ui/core/styles';
 import * as Yup from 'yup';
-import TextField from '../../../Fields/TextField';
-import { Selector, createOptions } from '../../../NewRequest/Selectors/Selector';
-import API from '../../../../service/SearchService';
+import TextField from '../../Fields/TextField';
+import { Selector, createOptions } from '../../NewRequest/Selectors/Selector';
+import API from '../../../service/SearchService';
 
 const useStyles = makeStyles((theme) => ({
   container: {

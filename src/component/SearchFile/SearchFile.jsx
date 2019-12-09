@@ -156,6 +156,7 @@ function ViewPrimary() {
                 checkAdmin={checkAdmin}
                 pageSize={5}
                 fileSelected={fileIdSelected}
+                update={handleSearchFile}
               />
             </>
           )
