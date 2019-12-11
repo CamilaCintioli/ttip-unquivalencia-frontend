@@ -10,6 +10,7 @@ import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import { useParams } from 'react-router-dom';
 import Badge from '@material-ui/core/Badge';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,39 +35,65 @@ export default function HorizontalNonLinearStepper({
 }) {
   const { requestId, subjectId } = useParams();
   const classes = useStyles();
-  const getIcon = (state, active) => {
+  const getIcon = (state, active, name) => {
     switch (state) {
       case 'APROBADA':
         return active ? (
-          <Badge color="primary" variant="dot">
+          <Button variant="contained" color="inherit" variant="outlined">
             <CheckCircleIcon color="primary" />
-          </Badge>
-        ) : <CheckCircleIcon color="primary" />;
+          </Button>
+        ) : (
+          <>
+            <CheckCircleIcon color="primary" />
+            {name}
+          </>
+        );
 
       case 'NEGADA':
         return active ? (
-          <Badge color="primary" variant="dot">
+          <Button variant="contained" color="inherit" variant="outlined">
             <CloseIcon color="error" />
-          </Badge>
-        ) : <CloseIcon color="error" />;
+          </Button>
+        ) : (
+          <>
+            <CloseIcon color="primary" />
+            {name}
+          </>
+        );
       case 'CONSULTA':
         return active ? (
-          <Badge color="primary" variant="dot">
+          <Button variant="contained" color="inherit" variant="outlined">
             <SupervisedUserCircleIcon color="secondary" />
-          </Badge>
-        ) : <SupervisedUserCircleIcon color="secondary" />;
+          </Button>
+        ) : (
+          <>
+            <SupervisedUserCircleIcon color="primary" />
+            {name}
+          </>
+        );
       case 'GIRADA':
         return active ? (
-          <Badge color="primary" variant="dot">
+          <Button variant="contained" color="inherit" variant="outlined">
             <CheckCircleIcon color="primary" />
-          </Badge>
-        ) : <CheckCircleIcon color="primary" />;
+          </Button>
+        ) : (
+          <>
+            <CheckCircleIcon color="primary" />
+            {name}
+          </>
+        );
       default:
         return active ? (
-          <Badge color="primary" variant="dot">
+          <Button variant="contained" color="inherit" variant="outlined">
             <CheckBoxOutlineBlankIcon color="primary" />
-          </Badge>
-        ) : <CheckBoxOutlineBlankIcon color="primary" />;
+            {name}
+          </Button>
+        ) : (
+          <>
+            <CheckBoxOutlineBlankIcon color="primary" />
+            {name}
+          </>
+        );
     }
   };
   const handleStep = (id) => () => changeStep(id);
@@ -83,9 +110,7 @@ export default function HorizontalNonLinearStepper({
     >
       {map(requests, (request, index) => (
         <Step key={index}>
-          <StepButton onClick={handleStep(getId(request))} completed icon={getIcon(request.equivalence, active(request))}>
-            {getName(request)}
-          </StepButton>
+          <StepButton onClick={handleStep(getId(request))} completed icon={getIcon(request.equivalence, active(request), getName(request))} />
         </Step>
       ))}
     </Stepper>
