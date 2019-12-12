@@ -3,14 +3,17 @@
 /* eslint-disable react/react-in-jsx-scope */
 import React, { useState, useCallback } from 'react';
 import MaterialTable from 'material-table';
+import { useHistory } from 'react-router-dom';
 import columnsRequest from '../shared/columnsRequest';
 import TableSubject from '../shared/TableSubject';
 import DeleteRequestDialog from '../Dialogs/DeleteRequestDialog';
 
+
 const ListRequest = ({
-  title, requests, handleSearchRequest, checkAdmin, isSearch, pageSize, fileSelected,
+  title, requests, handleSearchRequest, checkAdmin, isSearch, pageSize, fileSelected, update,
 }) => {
   const [deletingRequest, setDeletingRequest] = useState();
+  const history = useHistory();
 
   const openDeleteDialog = useCallback((_, request) => {
     setDeletingRequest(request);
@@ -22,7 +25,7 @@ const ListRequest = ({
 
   return (
     <>
-      <DeleteRequestDialog fileId={fileSelected} request={deletingRequest} isOpen={!!deletingRequest} onClose={onClose} />
+      <DeleteRequestDialog update={update} fileId={fileSelected} request={deletingRequest} isOpen={!!deletingRequest} onClose={onClose} />
       <MaterialTable
         title={title}
         columns={columnsRequest}

@@ -27,7 +27,7 @@ export default function State({ request, requestsMatch, checkProfessor }) {
           />
         );
       default:
-        return <PDF request={request} />;
+        return <RequestData request={request} />;
     }
   };
 

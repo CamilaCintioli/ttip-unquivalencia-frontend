@@ -11,11 +11,11 @@ import {
 const resolution = ({ subjectsToApprove, requestsTotalMatchApproved }) => (
   isEmpty(subjectsToApprove) ? isEmpty(requestsTotalMatchApproved)
     ? (
-      <Typography display="block" align="center" variant="h3" gutterBottom>
+      <Typography display="block" align="center" variant="h4" gutterBottom>
         <span className="badge badge-pill badge-info">Se encontró una solicitud que concide con la actual excepto el (plan de origen)</span>
       </Typography>
     ) : (
-      <Typography display="block" align="center" variant="h3" gutterBottom>
+      <Typography display="block" align="center" variant="h4" gutterBottom>
         <span className="badge badge-pill badge-success">Se encontró una solicitud que concide con la actual</span>
       </Typography>
     )

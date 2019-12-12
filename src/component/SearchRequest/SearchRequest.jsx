@@ -88,6 +88,7 @@ function SearchRequest() {
                 isSearch={1}
                 requests={rowsRequest}
                 handleSearchRequest={handleSearchRequest}
+                update={handleSearchRequests}
                 pageSize={5}
               />
               <hr />

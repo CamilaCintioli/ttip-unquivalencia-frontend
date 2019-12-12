@@ -7,8 +7,7 @@ import {
   Card, CardContent, Grid, Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import VerticalStepper from './VerticalStepper';
-import Steapper from './HorizontalStepper';
+import Steapper from './Stepper';
 
 
 const styleCard = makeStyles((theme) => ({
@@ -65,7 +64,6 @@ const Steppers = ({
               <Typography align="center" variant="h4" color="textPrimary">Materias UNQ solicitadas</Typography>
               <div className="row align-items-center justify-content-md-center col col-lg-12 ">
                 <Steapper
-                  activeStep={activeStepSets}
                   changeStep={changeStepSets}
                   requests={sets}
                   level={1}
@@ -77,11 +75,10 @@ const Steppers = ({
               <div className="col col-lg-6">
                 <Typography align="center" variant="h4" color="textPrimary">Materias origen</Typography>
                 <div className="row align-items-center justify-content-md-center col col-lg-12 ">
-                  <VerticalStepper
-                    activeStep={activeStep}
+                  <Steapper
                     changeStep={changeStep}
                     requests={requestsStepper}
-                    level={2}
+                    level={0}
                   />
                 </div>
               </div>
