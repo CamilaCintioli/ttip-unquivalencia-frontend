@@ -17,7 +17,7 @@
         "formik": "^2.0.4",
         "jspdf": "^1.5.3",
         "jspdf-autotable": "^3.2.11",
-        "lodash": "^4.17.15",
+        "lodash": "^4.17.19",
         "material-table": "^1.52.0",
         "prop-types": "^15.7.2",
         "react": "^16.10.2",
