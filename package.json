@@ -9,7 +9,7 @@
         "@stardust-ui/docs-components": "^0.38.2",
         "@trendmicro/react-sidenav": "^0.4.5",
         "axios": "^0.19.0",
-        "chart.js": "^2.9.3",
+        "chart.js": "^2.9.4",
         "clsx": "^1.0.4",
         "dotenv": "^8.2.0",
         "eslint-utils": "^1.4.2",
